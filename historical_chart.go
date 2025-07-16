@@ -1,0 +1,93 @@
+package go_fmp
+
+import (
+	"encoding/json"
+	"fmt"
+	"strconv"
+)
+
+// HistoricalChartParams represents the parameters for the Historical Chart APIs
+type HistoricalChartParams struct {
+	Symbol      string  `json:"symbol"`      // Required: Stock symbol (e.g., "AAPL")
+	From        *string `json:"from"`        // Optional: Start date (e.g., "2024-01-01")
+	To          *string `json:"to"`          // Optional: End date (e.g., "2024-03-01")
+	NonAdjusted *bool   `json:"nonAdjusted"` // Optional: Whether to use non-adjusted data (e.g., false)
+}
+
+// HistoricalChartResponse represents the response from the Historical Chart APIs
+type HistoricalChartResponse struct {
+	Date   string  `json:"date"`
+	Open   float64 `json:"open"`
+	Low    float64 `json:"low"`
+	High   float64 `json:"high"`
+	Close  float64 `json:"close"`
+	Volume int64   `json:"volume"`
+}
+
+// HistoricalChart1Min retrieves stock data in 1-minute intervals
+func (c *Client) HistoricalChart1Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	return c.getHistoricalChart("1min", params)
+}
+
+// HistoricalChart5Min retrieves stock data in 5-minute intervals
+func (c *Client) HistoricalChart5Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	return c.getHistoricalChart("5min", params)
+}
+
+// HistoricalChart15Min retrieves stock data in 15-minute intervals
+func (c *Client) HistoricalChart15Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	return c.getHistoricalChart("15min", params)
+}
+
+// HistoricalChart30Min retrieves stock data in 30-minute intervals
+func (c *Client) HistoricalChart30Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	return c.getHistoricalChart("30min", params)
+}
+
+// HistoricalChart1Hour retrieves stock data in 1-hour intervals
+func (c *Client) HistoricalChart1Hour(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	return c.getHistoricalChart("1hour", params)
+}
+
+// HistoricalChart4Hour retrieves stock data in 4-hour intervals
+func (c *Client) HistoricalChart4Hour(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	return c.getHistoricalChart("4hour", params)
+}
+
+// getHistoricalChart is a helper function to avoid code duplication for different intervals
+func (c *Client) getHistoricalChart(interval string, params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+	if params.Symbol == "" {
+		return nil, fmt.Errorf("symbol parameter is required")
+	}
+
+	urlParams := map[string]string{
+		"symbol": params.Symbol,
+	}
+
+	if params.From != nil {
+		urlParams["from"] = *params.From
+	}
+
+	if params.To != nil {
+		urlParams["to"] = *params.To
+	}
+
+	if params.NonAdjusted != nil {
+		urlParams["nonadjusted"] = strconv.FormatBool(*params.NonAdjusted)
+	}
+
+	endpoint := fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval)
+	resp, err := c.get(endpoint, urlParams)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var result []HistoricalChartResponse
+	err = json.NewDecoder(resp.Body).Decode(&result)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}

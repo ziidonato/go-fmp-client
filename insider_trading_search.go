@@ -1,0 +1,48 @@
+package go_fmp
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"strconv"
+)
+
+// InsiderTradingSearchResponse represents the response from the search insider trades API
+type InsiderTradingSearchResponse struct {
+	// Note: The exact structure will depend on the actual API response
+	// This is a placeholder structure that should be updated based on actual response
+	Symbol string `json:"symbol"`
+	// Add other fields as needed based on actual API response
+}
+
+// GetInsiderTradingSearch searches insider trading activity by company or symbol
+func (c *Client) GetInsiderTradingSearch(page, limit int) ([]InsiderTradingSearchResponse, error) {
+	if page < 0 {
+		return nil, fmt.Errorf("page must be non-negative")
+	}
+	if limit <= 0 {
+		return nil, fmt.Errorf("limit must be positive")
+	}
+
+	url := "https://financialmodelingprep.com/stable/insider-trading/search"
+
+	resp, err := c.get(url, map[string]string{
+		"page":  strconv.Itoa(page),
+		"limit": strconv.Itoa(limit),
+	})
+	if err != nil {
+		return nil, fmt.Errorf("error making request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
+	}
+
+	var result []InsiderTradingSearchResponse
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, fmt.Errorf("error decoding response: %w", err)
+	}
+
+	return result, nil
+}

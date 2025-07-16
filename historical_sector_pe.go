@@ -1,0 +1,55 @@
+package go_fmp
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+)
+
+// HistoricalSectorPEResponse represents the response from the historical sector PE API
+type HistoricalSectorPEResponse struct {
+	Date     string  `json:"date"`
+	Sector   string  `json:"sector"`
+	Exchange string  `json:"exchange"`
+	PE       float64 `json:"pe"`
+}
+
+// GetHistoricalSectorPE retrieves historical price-to-earnings (P/E) ratios for various sectors
+func (c *Client) GetHistoricalSectorPE(sector, from, to, exchange string) ([]HistoricalSectorPEResponse, error) {
+	if sector == "" {
+		return nil, fmt.Errorf("sector is required")
+	}
+
+	params := map[string]string{
+		"sector": sector,
+	}
+
+	if from != "" {
+		params["from"] = from
+	}
+	if to != "" {
+		params["to"] = to
+	}
+	if exchange != "" {
+		params["exchange"] = exchange
+	}
+
+	url := "https://financialmodelingprep.com/stable/historical-sector-pe"
+
+	resp, err := c.get(url, params)
+	if err != nil {
+		return nil, fmt.Errorf("error making request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
+	}
+
+	var result []HistoricalSectorPEResponse
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, fmt.Errorf("error decoding response: %w", err)
+	}
+
+	return result, nil
+}
