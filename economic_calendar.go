@@ -1,38 +1,23 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
-// EconomicCalendarResponse represents the response from the Economic Data Releases Calendar API
+// EconomicCalendarResponse represents the response from the Economic Calendar API
 type EconomicCalendarResponse struct {
-	Date      string   `json:"date"`
-	Time      string   `json:"time"`
-	Country   string   `json:"country"`
-	Event     string   `json:"event"`
-	Reference string   `json:"reference"`
-	Source    string   `json:"source"`
-	Actual    *float64 `json:"actual"`
-	Previous  *float64 `json:"previous"`
-	Forecast  *float64 `json:"forecast"`
-	Impact    string   `json:"impact"`
-	Currency  string   `json:"currency"`
-	Unit      string   `json:"unit"`
+	Event     string `json:"event"`
+	Date      string `json:"date"`
+	Country   string `json:"country"`
+	Actual    string `json:"actual"`
+	Previous  string `json:"previous"`
+	Estimate  string `json:"estimate"`
+	Impact    string `json:"impact"`
+	Currency  string `json:"currency"`
 }
 
-// EconomicCalendar retrieves a comprehensive calendar of upcoming economic data releases
+// EconomicCalendar retrieves upcoming economic events and their impact on the markets
 func (c *Client) EconomicCalendar() ([]EconomicCalendarResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/economic-calendar", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/economic-calendar"
 	var result []EconomicCalendarResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, nil, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

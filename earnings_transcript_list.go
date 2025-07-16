@@ -1,29 +1,17 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
 // EarningsTranscriptListResponse represents the response from the Earnings Transcript List API
 type EarningsTranscriptListResponse struct {
-	Symbol          string `json:"symbol"`
-	CompanyName     string `json:"companyName"`
-	NoOfTranscripts string `json:"noOfTranscripts"`
+	Symbol string `json:"symbol"`
+	Date   string `json:"date"`
 }
 
-// EarningsTranscriptList retrieves a list of companies with earnings transcripts and the number of transcripts available
+// EarningsTranscriptList retrieves earnings transcripts for all transcripts from a time period
 func (c *Client) EarningsTranscriptList() ([]EarningsTranscriptListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/earnings-transcript-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/earnings-transcript-list"
 	var result []EarningsTranscriptListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, nil, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

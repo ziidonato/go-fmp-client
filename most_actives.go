@@ -1,39 +1,20 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
-
-// MostActivesResponse represents the response from the top traded stocks API
+// MostActivesResponse represents the response from the most actives API
 type MostActivesResponse struct {
-	Symbol            string  `json:"symbol"`
-	Price             float64 `json:"price"`
-	Name              string  `json:"name"`
-	Change            float64 `json:"change"`
-	ChangesPercentage float64 `json:"changesPercentage"`
-	Exchange          string  `json:"exchange"`
+	Symbol           string  `json:"symbol"`
+	Name             string  `json:"name"`
+	Change           float64 `json:"change"`
+	Price            float64 `json:"price"`
+	ChangePercentage float64 `json:"changePercentage"`
 }
 
-// GetMostActives retrieves the most actively traded stocks
-func (c *Client) GetMostActives() ([]MostActivesResponse, error) {
-	url := "https://financialmodelingprep.com/stable/most-actives"
-
-	resp, err := c.get(url, map[string]string{})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
+// MostActives retrieves the stocks with the highest trading volume
+func (c *Client) MostActives() ([]MostActivesResponse, error) {
+	url := "https://financialmodelingprep.com/stable/stock-market/actives"
 	var result []MostActivesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, map[string]string{}, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

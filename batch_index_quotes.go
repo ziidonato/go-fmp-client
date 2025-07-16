@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -15,26 +13,13 @@ type BatchIndexQuoteResponse struct {
 	Volume int64   `json:"volume"`
 }
 
-// GetBatchIndexQuotes retrieves real-time quotes for a wide range of stock indexes
+// GetBatchIndexQuotes retrieves real-time quotes for multiple stock indices
 func (c *Client) GetBatchIndexQuotes(short bool) ([]BatchIndexQuoteResponse, error) {
 	url := "https://financialmodelingprep.com/stable/batch-index-quotes"
-
-	resp, err := c.get(url, map[string]string{
-		"short": strconv.FormatBool(short),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
+	params := map[string]string{"short": strconv.FormatBool(short)}
 	var result []BatchIndexQuoteResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

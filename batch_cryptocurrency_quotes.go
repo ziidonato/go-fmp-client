@@ -1,9 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
 // BatchCryptocurrencyQuotesResponse represents the response from the Batch Cryptocurrency Quotes API
 type BatchCryptocurrencyQuotesResponse struct {
 	Symbol           string  `json:"symbol"`
@@ -27,17 +23,10 @@ type BatchCryptocurrencyQuotesResponse struct {
 
 // BatchCryptocurrencyQuotes retrieves live price data for a wide range of cryptocurrencies in a single request
 func (c *Client) BatchCryptocurrencyQuotes() ([]BatchCryptocurrencyQuotesResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/batch-crypto-quotes", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/batch-crypto-quotes"
 	var result []BatchCryptocurrencyQuotesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, nil, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

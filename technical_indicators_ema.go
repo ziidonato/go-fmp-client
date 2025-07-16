@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -29,25 +27,14 @@ func (c *Client) GetTechnicalIndicatorEMA(symbol string, periodLength int, timef
 	}
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/ema"
-
-	resp, err := c.get(url, map[string]string{
+	params := map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
 		"timeframe":    timeframe,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
 	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []TechnicalIndicatorEMAResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

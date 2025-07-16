@@ -1,48 +1,32 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"strconv"
 )
 
-// InsiderTradingSearchResponse represents the response from the search insider trades API
+// InsiderTradingSearchResponse represents the response from the insider trading search API
 type InsiderTradingSearchResponse struct {
-	// Note: The exact structure will depend on the actual API response
-	// This is a placeholder structure that should be updated based on actual response
-	Symbol string `json:"symbol"`
-	// Add other fields as needed based on actual API response
+	Symbol         string  `json:"symbol"`
+	FilingDate     string  `json:"filingDate"`
+	TransactionDate string `json:"transactionDate"`
+	ReportingCik   string  `json:"reportingCik"`
+	TransactionType string `json:"transactionType"`
+	SecuritiesOwned float64 `json:"securitiesOwned"`
+	CompanyName    string  `json:"companyName"`
+	ReportingName  string  `json:"reportingName"`
 }
 
-// GetInsiderTradingSearch searches insider trading activity by company or symbol
-func (c *Client) GetInsiderTradingSearch(page, limit int) ([]InsiderTradingSearchResponse, error) {
-	if page < 0 {
-		return nil, fmt.Errorf("page must be non-negative")
-	}
-	if limit <= 0 {
-		return nil, fmt.Errorf("limit must be positive")
+// GetInsiderTradingSearch searches for insider trading transactions based on symbol
+func (c *Client) GetInsiderTradingSearch(symbol string) ([]InsiderTradingSearchResponse, error) {
+	if symbol == "" {
+		return nil, fmt.Errorf("symbol is required")
 	}
 
-	url := "https://financialmodelingprep.com/stable/insider-trading/search"
-
-	resp, err := c.get(url, map[string]string{
-		"page":  strconv.Itoa(page),
-		"limit": strconv.Itoa(limit),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
+	url := "https://financialmodelingprep.com/stable/insider-trading-search"
+	params := map[string]string{"symbol": symbol}
 	var result []InsiderTradingSearchResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

@@ -1,11 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
-
 // SP500ConstituentResponse represents the response from the S&P 500 index API
 type SP500ConstituentResponse struct {
 	Symbol         string `json:"symbol"`
@@ -21,21 +15,9 @@ type SP500ConstituentResponse struct {
 // GetSP500Constituent retrieves detailed data on the S&P 500 index
 func (c *Client) GetSP500Constituent() ([]SP500ConstituentResponse, error) {
 	url := "https://financialmodelingprep.com/stable/sp500-constituent"
-
-	resp, err := c.get(url, map[string]string{})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []SP500ConstituentResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, map[string]string{}, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

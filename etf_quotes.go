@@ -1,13 +1,11 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
-// ETFQuotesResponse represents the response from the ETF price quotes API
+// ETFQuotesResponse represents the response from the ETF quotes API
 type ETFQuotesResponse struct {
 	Symbol string  `json:"symbol"`
 	Price  float64 `json:"price"`
@@ -15,26 +13,13 @@ type ETFQuotesResponse struct {
 	Volume int64   `json:"volume"`
 }
 
-// GetETFQuotes retrieves real-time price quotes for exchange-traded funds (ETFs)
+// GetETFQuotes retrieves real-time quotes for exchange-traded funds
 func (c *Client) GetETFQuotes(short bool) ([]ETFQuotesResponse, error) {
 	url := "https://financialmodelingprep.com/stable/batch-etf-quotes"
-
-	resp, err := c.get(url, map[string]string{
-		"short": strconv.FormatBool(short),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
+	params := map[string]string{"short": strconv.FormatBool(short)}
 	var result []ETFQuotesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -41,17 +40,10 @@ func (c *Client) UnadjustedStockPrice(params UnadjustedStockPriceParams) ([]Unad
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-price-eod/non-split-adjusted", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/historical-price-eod/non-split-adjusted"
 	var result []UnadjustedStockPriceResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, urlParams, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

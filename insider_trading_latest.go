@@ -1,48 +1,32 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"strconv"
 )
 
 // InsiderTradingLatestResponse represents the response from the latest insider trading API
 type InsiderTradingLatestResponse struct {
-	// Note: The exact structure will depend on the actual API response
-	// This is a placeholder structure that should be updated based on actual response
-	Symbol string `json:"symbol"`
-	// Add other fields as needed based on actual API response
+	Symbol         string  `json:"symbol"`
+	FilingDate     string  `json:"filingDate"`
+	TransactionDate string `json:"transactionDate"`
+	ReportingCik   string  `json:"reportingCik"`
+	TransactionType string `json:"transactionType"`
+	SecuritiesOwned float64 `json:"securitiesOwned"`
+	CompanyName    string  `json:"companyName"`
+	ReportingName  string  `json:"reportingName"`
 }
 
-// GetInsiderTradingLatest retrieves the latest insider trading activity
-func (c *Client) GetInsiderTradingLatest(page, limit int) ([]InsiderTradingLatestResponse, error) {
-	if page < 0 {
-		return nil, fmt.Errorf("page must be non-negative")
-	}
-	if limit <= 0 {
-		return nil, fmt.Errorf("limit must be positive")
+// GetInsiderTradingLatest retrieves the most recent insider trading transactions for a specific symbol
+func (c *Client) GetInsiderTradingLatest(symbol string) ([]InsiderTradingLatestResponse, error) {
+	if symbol == "" {
+		return nil, fmt.Errorf("symbol is required")
 	}
 
-	url := "https://financialmodelingprep.com/stable/insider-trading/latest"
-
-	resp, err := c.get(url, map[string]string{
-		"page":  strconv.Itoa(page),
-		"limit": strconv.Itoa(limit),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
+	url := "https://financialmodelingprep.com/stable/insider-trading-latest"
+	params := map[string]string{"symbol": symbol}
 	var result []InsiderTradingLatestResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }
