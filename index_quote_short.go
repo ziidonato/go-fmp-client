@@ -1,43 +1,28 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
-// IndexShortQuoteResponse represents the response from the index short quote API
-type IndexShortQuoteResponse struct {
+// IndexQuoteShortResponse represents the response from the index quote short API
+type IndexQuoteShortResponse struct {
 	Symbol string  `json:"symbol"`
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
 }
 
-// GetIndexShortQuote retrieves concise stock index quotes
-func (c *Client) GetIndexShortQuote(symbol string) ([]IndexShortQuoteResponse, error) {
+// GetIndexQuoteShort retrieves quick snapshots of real-time index quotes
+func (c *Client) GetIndexQuoteShort(symbol string) ([]IndexQuoteShortResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
 
-	url := "https://financialmodelingprep.com/stable/quote-short"
-
-	resp, err := c.get(url, map[string]string{
-		"symbol": symbol,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
+	url := "https://financialmodelingprep.com/stable/index-quote-short"
+	params := map[string]string{"symbol": symbol}
+	var result []IndexQuoteShortResponse
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var result []IndexShortQuoteResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
 	return result, nil
 }

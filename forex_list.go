@@ -1,31 +1,20 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
-// ForexListResponse represents the response from the Forex Currency Pairs API
+// ForexListResponse represents the response from the Forex List API
 type ForexListResponse struct {
-	Symbol       string `json:"symbol"`
-	FromCurrency string `json:"fromCurrency"`
-	ToCurrency   string `json:"toCurrency"`
-	FromName     string `json:"fromName"`
-	ToName       string `json:"toName"`
+	Symbol     string  `json:"symbol"`
+	Name       string  `json:"name"`
+	Currency   string  `json:"currency"`
+	StockExchange string `json:"stockExchange"`
+	ExchangeShortName string `json:"exchangeShortName"`
 }
 
-// ForexList retrieves a comprehensive list of all currency pairs traded on the forex market
+// ForexList retrieves a comprehensive list of all forex trading pairs
 func (c *Client) ForexList() ([]ForexListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/forex-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/forex-list"
 	var result []ForexListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, nil, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

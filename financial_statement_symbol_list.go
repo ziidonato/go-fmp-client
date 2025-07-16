@@ -1,30 +1,16 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
-// FinancialStatementSymbolListResponse represents the response from the Financial Statement Symbols List API
+// FinancialStatementSymbolListResponse represents the response from the Financial Statement Symbol List API
 type FinancialStatementSymbolListResponse struct {
-	Symbol            string `json:"symbol"`
-	CompanyName       string `json:"companyName"`
-	TradingCurrency   string `json:"tradingCurrency"`
-	ReportingCurrency string `json:"reportingCurrency"`
+	Symbol string `json:"symbol"`
 }
 
-// FinancialStatementSymbolList retrieves a comprehensive list of companies with available financial statements
+// FinancialStatementSymbolList retrieves a comprehensive list of financial symbols that have statements available
 func (c *Client) FinancialStatementSymbolList() ([]FinancialStatementSymbolListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/financial-statement-symbol-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/financial-statement-symbol-list"
 	var result []FinancialStatementSymbolListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, nil, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

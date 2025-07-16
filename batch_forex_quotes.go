@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -20,21 +19,13 @@ type BatchForexQuotesResponse struct {
 
 // BatchForexQuotes retrieves real-time quotes for multiple forex pairs simultaneously
 func (c *Client) BatchForexQuotes(params BatchForexQuotesParams) ([]BatchForexQuotesResponse, error) {
+	url := "https://financialmodelingprep.com/stable/batch-forex-quotes"
 	urlParams := map[string]string{
 		"short": fmt.Sprintf("%t", params.Short),
 	}
-
-	resp, err := c.get("https://financialmodelingprep.com/stable/batch-forex-quotes", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []BatchForexQuotesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, urlParams, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

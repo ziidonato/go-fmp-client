@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // StockQuoteShortResponse represents the response from the stock quote short API
@@ -21,23 +19,10 @@ func (c *Client) GetStockQuoteShort(symbol string) ([]StockQuoteShortResponse, e
 	}
 
 	url := "https://financialmodelingprep.com/stable/quote-short"
-
-	resp, err := c.get(url, map[string]string{
-		"symbol": symbol,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
+	params := map[string]string{"symbol": symbol}
 	var result []StockQuoteShortResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

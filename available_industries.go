@@ -1,9 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
 // AvailableIndustriesResponse represents the response from the Available Industries API
 type AvailableIndustriesResponse struct {
 	Industry string `json:"industry"`
@@ -11,17 +7,10 @@ type AvailableIndustriesResponse struct {
 
 // AvailableIndustries retrieves a comprehensive list of industries where stock symbols are available
 func (c *Client) AvailableIndustries() ([]AvailableIndustriesResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/available-industries", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+	url := "https://financialmodelingprep.com/stable/available-industries"
 	var result []AvailableIndustriesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, nil, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
