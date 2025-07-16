@@ -30,17 +30,5 @@ func (c *Client) ESGBenchmark(params ESGBenchmarkParams) ([]ESGBenchmarkResponse
 		"year": params.Year,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/esg-benchmark", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ESGBenchmarkResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ESGBenchmarkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

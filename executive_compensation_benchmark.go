@@ -27,17 +27,5 @@ func (c *Client) ExecutiveCompensationBenchmark(params ExecutiveCompensationBenc
 		"year": *params.Year,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/executive-compensation-benchmark", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ExecutiveCompensationBenchmarkResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ExecutiveCompensationBenchmarkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

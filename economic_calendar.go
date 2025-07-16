@@ -22,17 +22,5 @@ type EconomicCalendarResponse struct {
 
 // EconomicCalendar retrieves a comprehensive calendar of upcoming economic data releases
 func (c *Client) EconomicCalendar() ([]EconomicCalendarResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/economic-calendar", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []EconomicCalendarResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]EconomicCalendarResponse](c, "https://financialmodelingprep.com/stable/economic-calendar", nil)
 }

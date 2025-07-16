@@ -68,17 +68,5 @@ func (c *Client) COTAnalysis(params COTAnalysisParams) ([]COTAnalysisResponse, e
 		urlParams["symbol"] = *params.Symbol
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-analysis", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []COTAnalysisResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]COTAnalysisResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

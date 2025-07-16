@@ -35,17 +35,5 @@ func (c *Client) FinancialScores(params FinancialScoresParams) ([]FinancialScore
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/financial-scores", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []FinancialScoresResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]FinancialScoresResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

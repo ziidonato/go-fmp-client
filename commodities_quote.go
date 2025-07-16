@@ -41,17 +41,5 @@ func (c *Client) CommoditiesQuote(params CommoditiesQuoteParams) ([]CommoditiesQ
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/quote", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CommoditiesQuoteResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CommoditiesQuoteResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

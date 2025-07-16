@@ -83,17 +83,5 @@ func (c *Client) RatiosTTM(params RatiosTTMParams) ([]RatiosTTMResponse, error) 
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratios-ttm", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []RatiosTTMResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]RatiosTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

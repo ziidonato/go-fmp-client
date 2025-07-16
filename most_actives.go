@@ -19,17 +19,5 @@ type MostActivesResponse struct {
 func (c *Client) GetMostActives() ([]MostActivesResponse, error) {
 	url := "https://financialmodelingprep.com/stable/most-actives"
 
-	resp, err := c.doRequest(url, map[string]string{})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []MostActivesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]MostActivesResponse](c, url, map[string]string{})
 }

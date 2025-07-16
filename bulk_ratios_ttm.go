@@ -71,19 +71,5 @@ type RatiosTTMBulkResponse struct {
 
 // GetRatiosTTMBulk retrieves trailing twelve months financial ratios for stocks
 func (c *Client) GetRatiosTTMBulk() ([]RatiosTTMBulkResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratios-ttm-bulk", nil)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-
-	// Parse the response
-	var result []RatiosTTMBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]RatiosTTMBulkResponse](c, "https://financialmodelingprep.com/stable/ratios-ttm-bulk", nil)
 }

@@ -40,17 +40,5 @@ func (c *Client) CryptocurrencyChart5Min(params CryptocurrencyChart5MinParams) (
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-chart/5min", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CryptocurrencyChart5MinResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CryptocurrencyChart5MinResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

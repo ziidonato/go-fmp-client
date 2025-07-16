@@ -28,17 +28,5 @@ func (c *Client) SearchCUSIP(params SearchCUSIPParams) ([]SearchCUSIPResponse, e
 		"cusip": params.CUSIP,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-cusip", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search CUSIP: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result []SearchCUSIPResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
-	}
-
-	return result, nil
+	return doRequest[[]SearchCUSIPResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -18,19 +18,6 @@ type BatchIndexQuoteResponse struct {
 func (c *Client) GetBatchIndexQuotes(short bool) ([]BatchIndexQuoteResponse, error) {
 	url := "https://financialmodelingprep.com/stable/batch-index-quotes"
 
-	resp, err := c.doRequest(url, map[string]string{
-		"short": strconv.FormatBool(short),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []BatchIndexQuoteResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]BatchIndexQuoteResponse](c, url, map[string]string{
+		"short": strconv.FormatBool(short)
 }

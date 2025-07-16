@@ -77,17 +77,5 @@ func (c *Client) HistoricalChart(interval string, params HistoricalChartParams) 
 	}
 
 	endpoint := fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval)
-	resp, err := c.doRequest(endpoint, urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []HistoricalChartResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]HistoricalChartResponse](c, endpoint, urlParams)
 }

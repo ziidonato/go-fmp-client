@@ -28,17 +28,5 @@ func (c *Client) LeveredDCF(params LeveredDCFParams) ([]LeveredDCFResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/levered-discounted-cash-flow", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []LeveredDCFResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]LeveredDCFResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

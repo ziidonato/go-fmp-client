@@ -92,17 +92,5 @@ func (c *Client) BalanceSheetStatementTTM(params BalanceSheetStatementTTMParams)
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/balance-sheet-statement-ttm", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []BalanceSheetStatementTTMResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]BalanceSheetStatementTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

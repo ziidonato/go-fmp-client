@@ -71,17 +71,5 @@ func (c *Client) IncomeStatementTTM(params IncomeStatementTTMParams) ([]IncomeSt
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/income-statement-ttm", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []IncomeStatementTTMResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]IncomeStatementTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

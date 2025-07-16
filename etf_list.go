@@ -12,17 +12,5 @@ type ETFListResponse struct {
 
 // ETFList retrieves ticker symbols and company names for Exchange Traded Funds (ETFs)
 func (c *Client) ETFList() ([]ETFListResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/etf-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ETFListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ETFListResponse](c, "https://financialmodelingprep.com/stable/etf-list", nil)
 }

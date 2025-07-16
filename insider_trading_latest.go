@@ -25,20 +25,6 @@ func (c *Client) GetInsiderTradingLatest(page, limit int) ([]InsiderTradingLates
 
 	url := "https://financialmodelingprep.com/stable/insider-trading/latest"
 
-	resp, err := c.doRequest(url, map[string]string{
-		"page":  strconv.Itoa(page),
-		"limit": strconv.Itoa(limit),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []InsiderTradingLatestResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]InsiderTradingLatestResponse](c, url, map[string]string{
+		"page":  strconv.Itoa(page)
 }

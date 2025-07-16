@@ -23,17 +23,5 @@ type TreasuryRatesResponse struct {
 
 // TreasuryRates retrieves real-time and historical Treasury rates for all maturities
 func (c *Client) TreasuryRates() ([]TreasuryRatesResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/treasury-rates", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []TreasuryRatesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]TreasuryRatesResponse](c, "https://financialmodelingprep.com/stable/treasury-rates", nil)
 }

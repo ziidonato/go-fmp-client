@@ -19,17 +19,5 @@ type BiggestGainersResponse struct {
 func (c *Client) BiggestGainers() ([]BiggestGainersResponse, error) {
 	url := "https://financialmodelingprep.com/stable/biggest-gainers"
 
-	resp, err := c.doRequest(url, map[string]string{})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []BiggestGainersResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]BiggestGainersResponse](c, url, map[string]string{})
 }

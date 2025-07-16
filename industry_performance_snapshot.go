@@ -23,26 +23,14 @@ func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([
 		"date": date,
 	}
 
-	if exchange != "" {
+	if exchange != " {
 		params["exchange"] = exchange
 	}
-	if industry != "" {
+	if industry != " {
 		params["industry"] = industry
 	}
 
 	url := "https://financialmodelingprep.com/stable/industry-performance-snapshot"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []IndustryPerformanceSnapshotResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]IndustryPerformanceSnapshotResponse](c, url, params)
 }

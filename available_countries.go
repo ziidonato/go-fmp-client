@@ -11,17 +11,5 @@ type AvailableCountriesResponse struct {
 
 // AvailableCountries retrieves a comprehensive list of countries where stock symbols are available
 func (c *Client) AvailableCountries() ([]AvailableCountriesResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/available-countries", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []AvailableCountriesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]AvailableCountriesResponse](c, "https://financialmodelingprep.com/stable/available-countries", nil)
 }

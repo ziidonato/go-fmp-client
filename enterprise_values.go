@@ -41,21 +41,9 @@ func (c *Client) EnterpriseValues(params EnterpriseValuesParams) ([]EnterpriseVa
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
+	if params.Period != " {
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/enterprise-values", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []EnterpriseValuesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]EnterpriseValuesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

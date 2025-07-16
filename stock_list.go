@@ -12,17 +12,5 @@ type StockListResponse struct {
 
 // StockList retrieves a comprehensive list of financial symbols from various global exchanges
 func (c *Client) StockList() ([]StockListResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/stock-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []StockListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]StockListResponse](c, "https://financialmodelingprep.com/stable/stock-list", nil)
 }

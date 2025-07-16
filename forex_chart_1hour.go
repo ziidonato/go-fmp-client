@@ -40,17 +40,5 @@ func (c *Client) ForexChart1Hour(params ForexChart1HourParams) ([]ForexChart1Hou
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-chart/1hour", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ForexChart1HourResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ForexChart1HourResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

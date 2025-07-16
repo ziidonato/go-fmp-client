@@ -49,17 +49,5 @@ func (c *Client) PriceTargetLatestNews(params PriceTargetLatestNewsParams) ([]Pr
 		"page":  fmt.Sprintf("%d", *params.Page),
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/price-target-latest-news", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []PriceTargetLatestNewsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]PriceTargetLatestNewsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -11,17 +11,5 @@ type AvailableSectorsResponse struct {
 
 // AvailableSectors retrieves a complete list of industry sectors
 func (c *Client) AvailableSectors() ([]AvailableSectorsResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/available-sectors", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []AvailableSectorsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]AvailableSectorsResponse](c, "https://financialmodelingprep.com/stable/available-sectors", nil)
 }

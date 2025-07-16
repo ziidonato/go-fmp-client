@@ -72,17 +72,5 @@ func (c *Client) CrowdfundingOfferings(params CrowdfundingOfferingsParams) ([]Cr
 		"cik": params.CIK,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/crowdfunding-offerings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CrowdfundingOfferingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CrowdfundingOfferingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

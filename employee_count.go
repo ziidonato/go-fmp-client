@@ -41,17 +41,5 @@ func (c *Client) EmployeeCount(params EmployeeCountParams) ([]EmployeeCountRespo
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/employee-count", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []EmployeeCountResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]EmployeeCountResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

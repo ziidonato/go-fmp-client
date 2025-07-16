@@ -34,17 +34,5 @@ func (c *Client) ETFHoldings(params ETFHoldingsParams) ([]ETFHoldingsResponse, e
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/etf/holdings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ETFHoldingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ETFHoldingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

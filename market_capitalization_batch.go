@@ -27,17 +27,5 @@ func (c *Client) MarketCapitalizationBatch(params MarketCapitalizationBatchParam
 		"symbols": params.Symbols,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/market-capitalization-batch", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []MarketCapitalizationBatchResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]MarketCapitalizationBatchResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

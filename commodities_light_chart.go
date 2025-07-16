@@ -38,17 +38,5 @@ func (c *Client) CommoditiesLightChart(params CommoditiesLightChartParams) ([]Co
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/light", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CommoditiesLightChartResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CommoditiesLightChartResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -62,17 +62,5 @@ func (c *Client) InstitutionalOwnershipHolderPerformanceSummary(params Instituti
 		urlParams["page"] = fmt.Sprintf("%d", *params.Page)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/holder-performance-summary", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []InstitutionalOwnershipHolderPerformanceSummaryResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]InstitutionalOwnershipHolderPerformanceSummaryResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

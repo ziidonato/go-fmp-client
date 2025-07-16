@@ -12,17 +12,5 @@ type COTListResponse struct {
 
 // COTList retrieves a comprehensive list of available Commitment of Traders (COT) reports
 func (c *Client) COTList() ([]COTListResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []COTListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]COTListResponse](c, "https://financialmodelingprep.com/stable/commitment-of-traders-list", nil)
 }

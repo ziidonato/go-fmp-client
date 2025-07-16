@@ -21,19 +21,7 @@ func (c *Client) HolidaysByExchange(exchange string) ([]HolidaysByExchangeRespon
 
 	url := "https://financialmodelingprep.com/stable/holidays-by-exchange"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]HolidaysByExchangeResponse](c, url, map[string]string{
 		"exchange": exchange,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []HolidaysByExchangeResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

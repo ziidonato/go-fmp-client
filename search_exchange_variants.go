@@ -60,17 +60,5 @@ func (c *Client) SearchExchangeVariants(params SearchExchangeVariantsParams) ([]
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-exchange-variants", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search exchange variants: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result []SearchExchangeVariantsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
-	}
-
-	return result, nil
+	return doRequest[[]SearchExchangeVariantsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -24,17 +24,5 @@ func (c *Client) BatchForexQuotes(params BatchForexQuotesParams) ([]BatchForexQu
 		"short": fmt.Sprintf("%t", params.Short),
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/batch-forex-quotes", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []BatchForexQuotesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]BatchForexQuotesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

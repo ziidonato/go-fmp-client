@@ -23,26 +23,14 @@ func (c *Client) GetIndustryPESnapshot(date, exchange, industry string) ([]Indus
 		"date": date,
 	}
 
-	if exchange != "" {
+	if exchange != " {
 		params["exchange"] = exchange
 	}
-	if industry != "" {
+	if industry != " {
 		params["industry"] = industry
 	}
 
 	url := "https://financialmodelingprep.com/stable/industry-pe-snapshot"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []IndustryPESnapshotResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]IndustryPESnapshotResponse](c, url, params)
 }

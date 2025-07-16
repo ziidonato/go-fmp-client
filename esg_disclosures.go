@@ -35,17 +35,5 @@ func (c *Client) ESGDisclosures(params ESGDisclosuresParams) ([]ESGDisclosuresRe
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/esg-disclosures", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ESGDisclosuresResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ESGDisclosuresResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

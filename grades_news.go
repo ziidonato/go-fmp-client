@@ -51,17 +51,5 @@ func (c *Client) GradesNews(params GradesNewsParams) ([]GradesNewsResponse, erro
 		"limit":  fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/grades-news", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []GradesNewsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]GradesNewsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

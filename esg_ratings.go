@@ -31,17 +31,5 @@ func (c *Client) ESGRatings(params ESGRatingsParams) ([]ESGRatingsResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/esg-ratings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ESGRatingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ESGRatingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

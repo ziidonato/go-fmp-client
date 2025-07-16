@@ -29,19 +29,7 @@ func (c *Client) GetStockPriceChange(symbol string) ([]StockPriceChangeResponse,
 
 	url := "https://financialmodelingprep.com/stable/stock-price-change"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]StockPriceChangeResponse](c, url, map[string]string{
 		"symbol": symbol,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []StockPriceChangeResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

@@ -72,17 +72,5 @@ func (c *Client) InstitutionalOwnershipSymbolPositionsSummary(params Institution
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/symbol-positions-summary", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []InstitutionalOwnershipSymbolPositionsSummaryResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]InstitutionalOwnershipSymbolPositionsSummaryResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

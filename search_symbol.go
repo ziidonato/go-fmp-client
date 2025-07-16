@@ -39,17 +39,5 @@ func (c *Client) SearchSymbol(params SearchSymbolParams) ([]SearchSymbolResponse
 		urlParams["exchange"] = *params.Exchange
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-symbol", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search symbol: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result []SearchSymbolResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
-	}
-
-	return result, nil
+	return doRequest[[]SearchSymbolResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -39,26 +39,14 @@ func (c *Client) SearchPressReleases(symbols string, page, limit int, from, to s
 		"limit":   strconv.Itoa(limit),
 	}
 
-	if from != "" {
+	if from != " {
 		params["from"] = from
 	}
-	if to != "" {
+	if to != " {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/press-releases"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []SearchPressReleasesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]SearchPressReleasesResponse](c, url, params)
 }

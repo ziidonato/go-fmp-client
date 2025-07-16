@@ -35,26 +35,14 @@ func (c *Client) GetForexNews(page, limit int, from, to string) ([]ForexNewsResp
 		"limit": strconv.Itoa(limit),
 	}
 
-	if from != "" {
+	if from != " {
 		params["from"] = from
 	}
-	if to != "" {
+	if to != " {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/forex-latest"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []ForexNewsResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]ForexNewsResponse](c, url, params)
 }

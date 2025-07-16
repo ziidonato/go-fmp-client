@@ -15,17 +15,5 @@ type MarketRiskPremiumResponse struct {
 
 // MarketRiskPremium retrieves the market risk premium for specific dates
 func (c *Client) MarketRiskPremium() ([]MarketRiskPremiumResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/market-risk-premium", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []MarketRiskPremiumResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]MarketRiskPremiumResponse](c, "https://financialmodelingprep.com/stable/market-risk-premium", nil)
 }

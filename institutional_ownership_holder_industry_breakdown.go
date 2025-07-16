@@ -48,17 +48,5 @@ func (c *Client) InstitutionalOwnershipHolderIndustryBreakdown(params Institutio
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/holder-industry-breakdown", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []InstitutionalOwnershipHolderIndustryBreakdownResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]InstitutionalOwnershipHolderIndustryBreakdownResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

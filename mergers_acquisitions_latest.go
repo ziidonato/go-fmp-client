@@ -43,17 +43,5 @@ func (c *Client) MergersAcquisitionsLatest(params MergersAcquisitionsLatestParam
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/mergers-acquisitions-latest", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []MergersAcquisitionsLatestResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]MergersAcquisitionsLatestResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

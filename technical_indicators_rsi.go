@@ -29,21 +29,7 @@ func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timef
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/rsi"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]TechnicalIndicatorRSIResponse](c, url, map[string]string{
 		"symbol":       symbol,
-		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []TechnicalIndicatorRSIResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+		"periodLength": strconv.Itoa(periodLength)
 }

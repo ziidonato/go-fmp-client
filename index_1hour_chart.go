@@ -25,26 +25,14 @@ func (c *Client) GetIndex1HourChart(symbol, from, to string) ([]Index1HourChartR
 		"symbol": symbol,
 	}
 
-	if from != "" {
+	if from != " {
 		params["from"] = from
 	}
-	if to != "" {
+	if to != " {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-chart/1hour"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []Index1HourChartResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]Index1HourChartResponse](c, url, params)
 }

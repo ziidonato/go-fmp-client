@@ -50,17 +50,5 @@ func (c *Client) InstitutionalOwnershipExtract(params InstitutionalOwnershipExtr
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/extract", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []InstitutionalOwnershipExtractResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]InstitutionalOwnershipExtractResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

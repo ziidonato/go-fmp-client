@@ -41,17 +41,5 @@ func (c *Client) UnadjustedStockPrice(params UnadjustedStockPriceParams) ([]Unad
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/non-split-adjusted", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []UnadjustedStockPriceResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]UnadjustedStockPriceResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

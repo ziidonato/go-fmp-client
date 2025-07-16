@@ -17,17 +17,5 @@ type AllExchangeMarketHoursResponse struct {
 func (c *Client) AllExchangeMarketHours() ([]AllExchangeMarketHoursResponse, error) {
 	url := "https://financialmodelingprep.com/stable/all-exchange-market-hours"
 
-	resp, err := c.doRequest(url, map[string]string{})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []AllExchangeMarketHoursResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]AllExchangeMarketHoursResponse](c, url, map[string]string{})
 }

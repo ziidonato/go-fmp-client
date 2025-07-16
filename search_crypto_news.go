@@ -39,26 +39,14 @@ func (c *Client) SearchCryptoNews(symbols string, page, limit int, from, to stri
 		"limit":   strconv.Itoa(limit),
 	}
 
-	if from != "" {
+	if from != " {
 		params["from"] = from
 	}
-	if to != "" {
+	if to != " {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/crypto"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []SearchCryptoNewsResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]SearchCryptoNewsResponse](c, url, params)
 }

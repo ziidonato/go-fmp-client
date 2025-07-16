@@ -80,21 +80,9 @@ func (c *Client) KeyMetrics(params KeyMetricsParams) ([]KeyMetricsResponse, erro
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
+	if params.Period != " {
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-metrics", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []KeyMetricsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]KeyMetricsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

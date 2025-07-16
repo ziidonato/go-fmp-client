@@ -128,17 +128,5 @@ func (c *Client) CompanyScreener(params CompanyScreenerParams) ([]CompanyScreene
 		urlParams["includeAllShareClasses"] = strconv.FormatBool(*params.IncludeAllShareClasses)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/company-screener", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get company screener: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result []CompanyScreenerResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
-	}
-
-	return result, nil
+	return doRequest[[]CompanyScreenerResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

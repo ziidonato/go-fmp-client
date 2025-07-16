@@ -29,21 +29,7 @@ func (c *Client) GetTechnicalIndicatorTEMA(symbol string, periodLength int, time
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/tema"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]TechnicalIndicatorTEMAResponse](c, url, map[string]string{
 		"symbol":       symbol,
-		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []TechnicalIndicatorTEMAResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+		"periodLength": strconv.Itoa(periodLength)
 }

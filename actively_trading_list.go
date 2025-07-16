@@ -12,17 +12,5 @@ type ActivelyTradingListResponse struct {
 
 // ActivelyTradingList retrieves all actively trading companies and financial instruments
 func (c *Client) ActivelyTradingList() ([]ActivelyTradingListResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/actively-trading-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ActivelyTradingListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ActivelyTradingListResponse](c, "https://financialmodelingprep.com/stable/actively-trading-list", nil)
 }

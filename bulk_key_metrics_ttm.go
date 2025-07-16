@@ -54,19 +54,5 @@ type KeyMetricsTTMBulkResponse struct {
 
 // GetKeyMetricsTTMBulk retrieves trailing twelve months data for all companies
 func (c *Client) GetKeyMetricsTTMBulk() ([]KeyMetricsTTMBulkResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-metrics-ttm-bulk", nil)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-
-	// Parse the response
-	var result []KeyMetricsTTMBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]KeyMetricsTTMBulkResponse](c, "https://financialmodelingprep.com/stable/key-metrics-ttm-bulk", nil)
 }

@@ -24,19 +24,7 @@ func (c *Client) GetAftermarketQuote(symbol string) ([]AftermarketQuoteResponse,
 
 	url := "https://financialmodelingprep.com/stable/aftermarket-quote"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]AftermarketQuoteResponse](c, url, map[string]string{
 		"symbol": symbol,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []AftermarketQuoteResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

@@ -30,19 +30,5 @@ func (c *Client) GetEarningsSurprisesBulk(params EarningsSurprisesBulkParams) ([
 		"year": params.Year,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/earnings-surprises-bulk", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-
-	// Parse the response
-	var result []EarningsSurprisesBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]EarningsSurprisesBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

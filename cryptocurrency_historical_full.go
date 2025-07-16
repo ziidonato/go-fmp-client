@@ -44,17 +44,5 @@ func (c *Client) CryptocurrencyHistoricalFull(params CryptocurrencyHistoricalFul
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/full", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CryptocurrencyHistoricalFullResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CryptocurrencyHistoricalFullResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

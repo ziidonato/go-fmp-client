@@ -39,17 +39,5 @@ func (c *Client) DelistedCompanies(params DelistedCompaniesParams) ([]DelistedCo
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/delisted-companies", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []DelistedCompaniesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]DelistedCompaniesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

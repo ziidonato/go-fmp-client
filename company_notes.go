@@ -28,17 +28,5 @@ func (c *Client) CompanyNotes(params CompanyNotesParams) ([]CompanyNotesResponse
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/company-notes", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CompanyNotesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CompanyNotesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

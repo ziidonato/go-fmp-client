@@ -37,17 +37,5 @@ func (c *Client) CompanyExecutives(params CompanyExecutivesParams) ([]CompanyExe
 		"active": *params.Active,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-executives", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CompanyExecutivesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CompanyExecutivesResponse](c, "https://financialmodelingprep.com/stable/key-executives", urlParams)
 }

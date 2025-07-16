@@ -15,17 +15,5 @@ type CryptocurrencyListResponse struct {
 
 // CryptocurrencyList retrieves a comprehensive list of all cryptocurrencies traded on exchanges worldwide
 func (c *Client) CryptocurrencyList() ([]CryptocurrencyListResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/cryptocurrency-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CryptocurrencyListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CryptocurrencyListResponse](c, "https://financialmodelingprep.com/stable/cryptocurrency-list", nil)
 }

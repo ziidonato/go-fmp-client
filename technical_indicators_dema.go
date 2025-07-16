@@ -29,21 +29,7 @@ func (c *Client) GetTechnicalIndicatorDEMA(symbol string, periodLength int, time
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/dema"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]TechnicalIndicatorDEMAResponse](c, url, map[string]string{
 		"symbol":       symbol,
-		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []TechnicalIndicatorDEMAResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+		"periodLength": strconv.Itoa(periodLength)
 }

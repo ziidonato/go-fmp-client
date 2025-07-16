@@ -38,17 +38,5 @@ func (c *Client) StockChartLight(params StockChartLightParams) ([]StockChartLigh
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/light", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []StockChartLightResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]StockChartLightResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

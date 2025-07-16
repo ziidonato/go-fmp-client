@@ -16,17 +16,5 @@ type AvailableExchangesResponse struct {
 
 // AvailableExchanges retrieves a complete list of supported stock exchanges
 func (c *Client) AvailableExchanges() ([]AvailableExchangesResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/available-exchanges", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []AvailableExchangesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]AvailableExchangesResponse](c, "https://financialmodelingprep.com/stable/available-exchanges", nil)
 }

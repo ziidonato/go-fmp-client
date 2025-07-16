@@ -96,21 +96,9 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
+	if params.Period != " {
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratios", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []RatiosResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]RatiosResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

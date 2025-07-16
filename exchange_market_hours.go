@@ -21,19 +21,7 @@ func (c *Client) GetExchangeMarketHours(exchange string) ([]ExchangeMarketHoursR
 
 	url := "https://financialmodelingprep.com/stable/exchange-market-hours"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]ExchangeMarketHoursResponse](c, url, map[string]string{
 		"exchange": exchange,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []ExchangeMarketHoursResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

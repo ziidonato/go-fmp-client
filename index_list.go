@@ -17,17 +17,5 @@ type IndexListResponse struct {
 func (c *Client) GetIndexList() ([]IndexListResponse, error) {
 	url := "https://financialmodelingprep.com/stable/index-list"
 
-	resp, err := c.doRequest(url, map[string]string{})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []IndexListResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]IndexListResponse](c, url, map[string]string{})
 }

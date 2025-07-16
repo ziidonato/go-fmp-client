@@ -39,17 +39,5 @@ func (c *Client) SearchName(params SearchNameParams) ([]SearchNameResponse, erro
 		urlParams["exchange"] = *params.Exchange
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-name", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search name: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result []SearchNameResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
-	}
-
-	return result, nil
+	return doRequest[[]SearchNameResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

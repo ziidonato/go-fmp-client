@@ -37,31 +37,26 @@ func NewClient(httpClient HTTPClient, apiKey string) (*Client, error) {
 }
 
 func testClient(client *Client) error {
-	testResp, err := client.doRequest("https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{})
+	body, err := doRequest[[]map[string]any](client, "https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{})
 	if err != nil {
 		return fmt.Errorf("failed to perform test request: %v", err)
 	}
 
-	defer testResp.Body.Close()
-	var body map[string]any
-	err = json.NewDecoder(testResp.Body).Decode(&body)
-
-	if err != nil {
-		return fmt.Errorf("failed to decode test response body: %v", err)
-	}
-
-	if body["error"] != nil {
-		return fmt.Errorf("failed to perform test request: %v", body["error"])
+	if len(body) > 0 && body[0]["error"] != nil {
+		return fmt.Errorf("failed to perform test request: %v", body[0]["error"])
 	}
 
 	return nil
 }
 
 // doRequest is a unified method for making HTTP requests to the Financial Modeling Prep API
-func (c *Client) doRequest(url string, params map[string]string) (*http.Response, error) {
+// It handles the complete request-response cycle including JSON unmarshaling
+func doRequest[T any](c *Client, url string, params map[string]string) (T, error) {
+	var result T
+	
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %v", err)
+		return result, fmt.Errorf("failed to create request: %v", err)
 	}
 
 	// Add API key to parameters
@@ -84,16 +79,21 @@ func (c *Client) doRequest(url string, params map[string]string) (*http.Response
 	// Make the request
 	resp, err := c.HTTPClient.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
+		return result, fmt.Errorf("error making request: %w", err)
 	}
+	defer resp.Body.Close()
 
 	// Check response status
 	if resp.StatusCode != http.StatusOK {
-		resp.Body.Close()
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
+		return result, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
 	}
 
-	return resp, nil
+	// Unmarshal the response
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return result, fmt.Errorf("error decoding response: %w", err)
+	}
+
+	return result, nil
 }
 
 func editQueryParams(req *http.Request, params map[string]string) {

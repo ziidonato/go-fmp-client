@@ -40,17 +40,5 @@ func (c *Client) ForexChart1Min(params ForexChart1MinParams) ([]ForexChart1MinRe
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-chart/1min", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ForexChart1MinResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ForexChart1MinResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

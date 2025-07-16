@@ -145,17 +145,5 @@ func (c *Client) CustomDCFAdvanced(params CustomDCFAdvancedParams) ([]CustomDCFA
 		urlParams["riskFreeRate"] = fmt.Sprintf("%f", *params.RiskFreeRate)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/custom-discounted-cash-flow", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []CustomDCFAdvancedResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]CustomDCFAdvancedResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -41,17 +41,5 @@ func (c *Client) ForexQuote(params ForexQuoteParams) ([]ForexQuoteResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/quote", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ForexQuoteResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ForexQuoteResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

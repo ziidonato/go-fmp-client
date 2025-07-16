@@ -21,19 +21,7 @@ func (c *Client) GetStockQuoteShort(symbol string) ([]StockQuoteShortResponse, e
 
 	url := "https://financialmodelingprep.com/stable/quote-short"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]StockQuoteShortResponse](c, url, map[string]string{
 		"symbol": symbol,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []StockQuoteShortResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

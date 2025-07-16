@@ -32,25 +32,13 @@ func (c *Client) RevenueProductSegmentation(params RevenueProductSegmentationPar
 		"symbol": params.Symbol,
 	}
 
-	if params.Period != "" {
+	if params.Period != " {
 		urlParams["period"] = params.Period
 	}
 
-	if params.Structure != "" {
+	if params.Structure != " {
 		urlParams["structure"] = params.Structure
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/revenue-product-segmentation", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []RevenueProductSegmentationResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]RevenueProductSegmentationResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

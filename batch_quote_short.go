@@ -21,19 +21,7 @@ func (c *Client) GetBatchQuoteShort(symbols string) ([]BatchQuoteShortResponse, 
 
 	url := "https://financialmodelingprep.com/stable/batch-quote-short"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]BatchQuoteShortResponse](c, url, map[string]string{
 		"symbols": symbols,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []BatchQuoteShortResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

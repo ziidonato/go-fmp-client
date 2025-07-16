@@ -54,17 +54,5 @@ func (c *Client) KeyMetricsTTM(params KeyMetricsTTMParams) ([]KeyMetricsTTMRespo
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-metrics-ttm", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []KeyMetricsTTMResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]KeyMetricsTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

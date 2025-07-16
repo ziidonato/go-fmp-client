@@ -29,26 +29,14 @@ func (c *Client) HistoricalIndexFull(symbol, from, to string) ([]HistoricalIndex
 		"symbol": symbol,
 	}
 
-	if from != "" {
+	if from != " {
 		params["from"] = from
 	}
-	if to != "" {
+	if to != " {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-price-eod/full"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []HistoricalIndexFullResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]HistoricalIndexFullResponse](c, url, params)
 }

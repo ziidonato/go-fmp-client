@@ -32,20 +32,7 @@ func (c *Client) GetStockQuote(symbol string) ([]StockQuoteResponse, error) {
 		return nil, fmt.Errorf("symbol is required")
 	}
 
-	url := "https://financialmodelingprep.com/stable/quote"
-
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]StockQuoteResponse](c, "https://financialmodelingprep.com/stable/quote", map[string]string{
 		"symbol": symbol,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	var result []StockQuoteResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

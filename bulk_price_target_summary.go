@@ -21,19 +21,5 @@ type PriceTargetSummaryBulkResponse struct {
 
 // GetPriceTargetSummaryBulk retrieves comprehensive overview of price targets for all listed symbols
 func (c *Client) GetPriceTargetSummaryBulk() ([]PriceTargetSummaryBulkResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/price-target-summary-bulk", nil)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-
-	// Parse the response
-	var result []PriceTargetSummaryBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]PriceTargetSummaryBulkResponse](c, "https://financialmodelingprep.com/stable/price-target-summary-bulk", nil)
 }

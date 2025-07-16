@@ -64,17 +64,5 @@ func (c *Client) FundDisclosure(params FundDisclosureParams) ([]FundDisclosureRe
 		urlParams["cik"] = *params.CIK
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/funds/disclosure", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []FundDisclosureResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]FundDisclosureResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

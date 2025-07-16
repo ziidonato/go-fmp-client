@@ -29,20 +29,6 @@ func (c *Client) GetFMPArticles(page, limit int) ([]FMPArticlesResponse, error) 
 
 	url := "https://financialmodelingprep.com/stable/fmp-articles"
 
-	resp, err := c.doRequest(url, map[string]string{
-		"page":  strconv.Itoa(page),
-		"limit": strconv.Itoa(limit),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []FMPArticlesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]FMPArticlesResponse](c, url, map[string]string{
+		"page":  strconv.Itoa(page)
 }

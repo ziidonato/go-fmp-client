@@ -77,19 +77,5 @@ func (c *Client) GetCashFlowStatementBulk(params CashFlowStatementBulkParams) ([
 		"period": params.Period,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/cash-flow-statement-bulk", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-
-	// Parse the response
-	var result []CashFlowStatementBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]CashFlowStatementBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

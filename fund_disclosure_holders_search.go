@@ -37,17 +37,5 @@ func (c *Client) FundDisclosureHoldersSearch(params FundDisclosureHoldersSearchP
 		"name": params.Name,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/funds/disclosure-holders-search", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []FundDisclosureHoldersSearchResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]FundDisclosureHoldersSearchResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

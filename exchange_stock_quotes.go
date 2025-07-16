@@ -22,20 +22,7 @@ func (c *Client) ExchangeStockQuotes(exchange string, short bool) ([]ExchangeSto
 
 	url := "https://financialmodelingprep.com/stable/batch-exchange-quote"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]ExchangeStockQuotesResponse](c, url, map[string]string{
 		"exchange": exchange,
-		"short":    strconv.FormatBool(short),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []ExchangeStockQuotesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+		"short":    strconv.FormatBool(short)
 }

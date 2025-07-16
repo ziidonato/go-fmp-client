@@ -33,19 +33,5 @@ func (c *Client) GetEODBulk(params EODBulkParams) ([]EODBulkResponse, error) {
 		"date": params.Date,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/eod-bulk", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-
-	// Parse the response
-	var result []EODBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]EODBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

@@ -28,17 +28,5 @@ func (c *Client) DCFValuation(params DCFValuationParams) ([]DCFValuationResponse
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/discounted-cash-flow", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []DCFValuationResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]DCFValuationResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

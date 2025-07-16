@@ -13,17 +13,5 @@ type EarningsTranscriptListResponse struct {
 
 // EarningsTranscriptList retrieves a list of companies with earnings transcripts and the number of transcripts available
 func (c *Client) EarningsTranscriptList() ([]EarningsTranscriptListResponse, error) {
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/earnings-transcript-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []EarningsTranscriptListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]EarningsTranscriptListResponse](c, "https://financialmodelingprep.com/stable/earnings-transcript-list", nil)
 }

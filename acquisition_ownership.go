@@ -19,21 +19,7 @@ func (c *Client) AcquisitionOwnership(symbol string) ([]AcquisitionOwnershipResp
 		return nil, fmt.Errorf("symbol is required")
 	}
 
-	url := "https://financialmodelingprep.com/stable/acquisition-of-beneficial-ownership"
-
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]AcquisitionOwnershipResponse](c, "https://financialmodelingprep.com/stable/acquisition-of-beneficial-ownership", map[string]string{
 		"symbol": symbol,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []AcquisitionOwnershipResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

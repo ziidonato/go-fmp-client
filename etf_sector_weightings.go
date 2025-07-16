@@ -27,17 +27,5 @@ func (c *Client) ETFSectorWeightings(params ETFSectorWeightingsParams) ([]ETFSec
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/etf/sector-weightings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []ETFSectorWeightingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]ETFSectorWeightingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

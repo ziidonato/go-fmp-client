@@ -69,17 +69,5 @@ func (c *Client) GetIncomeStatementBulk(params IncomeStatementBulkParams) ([]Inc
 		"period": params.Period,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/income-statement-bulk", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Parse the response
-	var result []IncomeStatementBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]IncomeStatementBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

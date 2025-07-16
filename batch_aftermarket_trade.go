@@ -21,19 +21,7 @@ func (c *Client) GetBatchAftermarketTrade(symbols string) ([]BatchAftermarketTra
 
 	url := "https://financialmodelingprep.com/stable/batch-aftermarket-trade"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]BatchAftermarketTradeResponse](c, url, map[string]string{
 		"symbols": symbols,
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []BatchAftermarketTradeResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
 }

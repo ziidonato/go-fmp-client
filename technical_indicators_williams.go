@@ -29,21 +29,7 @@ func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, 
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/williams"
 
-	resp, err := c.doRequest(url, map[string]string{
+	return doRequest[[]TechnicalIndicatorWilliamsResponse](c, url, map[string]string{
 		"symbol":       symbol,
-		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []TechnicalIndicatorWilliamsResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+		"periodLength": strconv.Itoa(periodLength)
 }

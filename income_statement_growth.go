@@ -67,21 +67,9 @@ func (c *Client) IncomeStatementGrowth(params IncomeStatementGrowthParams) ([]In
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
+	if params.Period != " {
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/income-statement-growth", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []IncomeStatementGrowthResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]IncomeStatementGrowthResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

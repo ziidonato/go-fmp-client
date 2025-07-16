@@ -23,29 +23,17 @@ func (c *Client) GetHistoricalSectorPE(sector, from, to, exchange string) ([]His
 		"sector": sector,
 	}
 
-	if from != "" {
+	if from != " {
 		params["from"] = from
 	}
-	if to != "" {
+	if to != " {
 		params["to"] = to
 	}
-	if exchange != "" {
+	if exchange != " {
 		params["exchange"] = exchange
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-sector-pe"
 
-	resp, err := c.doRequest(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-
-	var result []HistoricalSectorPEResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return doRequest[[]HistoricalSectorPEResponse](c, url, params)
 }

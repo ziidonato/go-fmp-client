@@ -38,17 +38,5 @@ func (c *Client) RatingsSnapshot(params RatingsSnapshotParams) ([]RatingsSnapsho
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratings-snapshot", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []RatingsSnapshotResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]RatingsSnapshotResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

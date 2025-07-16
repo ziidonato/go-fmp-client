@@ -163,17 +163,5 @@ func (c *Client) COTReport(params COTReportParams) ([]COTReportResponse, error) 
 		urlParams["symbol"] = *params.Symbol
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-report", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []COTReportResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]COTReportResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }

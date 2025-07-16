@@ -29,17 +29,5 @@ func (c *Client) PriceTargetConsensus(params PriceTargetConsensusParams) ([]Pric
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.doRequest("https://financialmodelingprep.com/stable/price-target-consensus", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var result []PriceTargetConsensusResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return doRequest[[]PriceTargetConsensusResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 }
