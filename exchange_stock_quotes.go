@@ -15,8 +15,8 @@ type ExchangeStockQuotesResponse struct {
 	Volume int64   `json:"volume"`
 }
 
-// GetExchangeStockQuotes retrieves real-time stock quotes for all listed stocks on a specific exchange
-func (c *Client) GetExchangeStockQuotes(exchange string, short bool) ([]ExchangeStockQuotesResponse, error) {
+// ExchangeStockQuotes retrieves real-time stock quotes for all listed stocks on a specific exchange
+func (c *Client) ExchangeStockQuotes(exchange string, short bool) ([]ExchangeStockQuotesResponse, error) {
 	if exchange == "" {
 		return nil, fmt.Errorf("exchange is required")
 	}

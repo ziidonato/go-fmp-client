@@ -17,7 +17,7 @@ type BiggestLosersResponse struct {
 }
 
 // GetBiggestLosers retrieves the stocks with the largest price drops
-func (c *Client) GetBiggestLosers() ([]BiggestLosersResponse, error) {
+func (c *Client) BiggestLosers() ([]BiggestLosersResponse, error) {
 	url := "https://financialmodelingprep.com/stable/biggest-losers"
 
 	resp, err := c.get(url, map[string]string{})

@@ -14,8 +14,8 @@ type AcquisitionOwnershipResponse struct {
 	// Add other fields as needed based on actual API response
 }
 
-// GetAcquisitionOwnership tracks changes in stock ownership during acquisitions
-func (c *Client) GetAcquisitionOwnership(symbol string) ([]AcquisitionOwnershipResponse, error) {
+// AcquisitionOwnership tracks changes in stock ownership during acquisitions
+func (c *Client) AcquisitionOwnership(symbol string) ([]AcquisitionOwnershipResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

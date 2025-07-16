@@ -15,8 +15,8 @@ type CryptoQuotesResponse struct {
 	Volume int64   `json:"volume"`
 }
 
-// GetCryptoQuotes retrieves real-time cryptocurrency quotes
-func (c *Client) GetCryptoQuotes(short bool) ([]CryptoQuotesResponse, error) {
+// CryptoQuotes retrieves real-time cryptocurrency quotes
+func (c *Client) CryptoQuotes(short bool) ([]CryptoQuotesResponse, error) {
 	url := "https://financialmodelingprep.com/stable/batch-crypto-quotes"
 
 	resp, err := c.get(url, map[string]string{

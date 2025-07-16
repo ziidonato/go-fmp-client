@@ -26,36 +26,36 @@ type HistoricalChartResponse struct {
 
 // HistoricalChart1Min retrieves stock data in 1-minute intervals
 func (c *Client) HistoricalChart1Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
-	return c.getHistoricalChart("1min", params)
+	return c.HistoricalChart("1min", params)
 }
 
 // HistoricalChart5Min retrieves stock data in 5-minute intervals
 func (c *Client) HistoricalChart5Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
-	return c.getHistoricalChart("5min", params)
+	return c.HistoricalChart("5min", params)
 }
 
 // HistoricalChart15Min retrieves stock data in 15-minute intervals
 func (c *Client) HistoricalChart15Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
-	return c.getHistoricalChart("15min", params)
+	return c.HistoricalChart("15min", params)
 }
 
 // HistoricalChart30Min retrieves stock data in 30-minute intervals
 func (c *Client) HistoricalChart30Min(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
-	return c.getHistoricalChart("30min", params)
+	return c.HistoricalChart("30min", params)
 }
 
 // HistoricalChart1Hour retrieves stock data in 1-hour intervals
 func (c *Client) HistoricalChart1Hour(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
-	return c.getHistoricalChart("1hour", params)
+	return c.HistoricalChart("1hour", params)
 }
 
 // HistoricalChart4Hour retrieves stock data in 4-hour intervals
 func (c *Client) HistoricalChart4Hour(params HistoricalChartParams) ([]HistoricalChartResponse, error) {
-	return c.getHistoricalChart("4hour", params)
+	return c.HistoricalChart("4hour", params)
 }
 
-// getHistoricalChart is a helper function to avoid code duplication for different intervals
-func (c *Client) getHistoricalChart(interval string, params HistoricalChartParams) ([]HistoricalChartResponse, error) {
+// HistoricalChart is a helper function to avoid code duplication for different intervals
+func (c *Client) HistoricalChart(interval string, params HistoricalChartParams) ([]HistoricalChartResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}

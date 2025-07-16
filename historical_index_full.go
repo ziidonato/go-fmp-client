@@ -20,8 +20,8 @@ type HistoricalIndexFullResponse struct {
 	VWAP          float64 `json:"vwap"`
 }
 
-// GetHistoricalIndexFull retrieves full historical end-of-day prices for stock indexes
-func (c *Client) GetHistoricalIndexFull(symbol, from, to string) ([]HistoricalIndexFullResponse, error) {
+// HistoricalIndexFull retrieves full historical end-of-day prices for stock indexes
+func (c *Client) HistoricalIndexFull(symbol, from, to string) ([]HistoricalIndexFullResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

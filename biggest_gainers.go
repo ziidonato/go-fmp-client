@@ -17,7 +17,7 @@ type BiggestGainersResponse struct {
 }
 
 // GetBiggestGainers retrieves the stocks with the largest price increases
-func (c *Client) GetBiggestGainers() ([]BiggestGainersResponse, error) {
+func (c *Client) BiggestGainers() ([]BiggestGainersResponse, error) {
 	url := "https://financialmodelingprep.com/stable/biggest-gainers"
 
 	resp, err := c.get(url, map[string]string{})

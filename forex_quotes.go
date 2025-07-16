@@ -15,8 +15,8 @@ type ForexQuotesResponse struct {
 	Volume int64   `json:"volume"`
 }
 
-// GetForexQuotes retrieves real-time quotes for multiple forex currency pairs
-func (c *Client) GetForexQuotes(short bool) ([]ForexQuotesResponse, error) {
+// ForexQuotes retrieves real-time quotes for multiple forex currency pairs
+func (c *Client) ForexQuotes(short bool) ([]ForexQuotesResponse, error) {
 	url := "https://financialmodelingprep.com/stable/batch-forex-quotes"
 
 	resp, err := c.get(url, map[string]string{

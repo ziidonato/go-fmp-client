@@ -18,8 +18,8 @@ type UpgradesDowngradesConsensusBulkResponse struct {
 	Consensus  string `json:"consensus"`
 }
 
-// GetUpgradesDowngradesConsensusBulk retrieves analyst ratings across all symbols
-func (c *Client) GetUpgradesDowngradesConsensusBulk() ([]UpgradesDowngradesConsensusBulkResponse, error) {
+// UpgradesDowngradesConsensusBulk retrieves analyst ratings across all symbols
+func (c *Client) UpgradesDowngradesConsensusBulk() ([]UpgradesDowngradesConsensusBulkResponse, error) {
 	// Build the URL
 	baseURL := "https://financialmodelingprep.com/stable/upgrades-downgrades-consensus-bulk"
 	u, err := url.Parse(baseURL)

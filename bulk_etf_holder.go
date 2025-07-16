@@ -25,8 +25,8 @@ type ETFHolderBulkResponse struct {
 	LastUpdated      string `json:"lastUpdated"`
 }
 
-// GetETFHolderBulk retrieves detailed information about assets and shares held by ETFs
-func (c *Client) GetETFHolderBulk(params ETFHolderBulkParams) ([]ETFHolderBulkResponse, error) {
+// ETFHolderBulk retrieves detailed information about assets and shares held by ETFs
+func (c *Client) ETFHolderBulk(params ETFHolderBulkParams) ([]ETFHolderBulkResponse, error) {
 	// Validate required parameters
 	if params.Part == "" {
 		return nil, fmt.Errorf("part parameter is required")

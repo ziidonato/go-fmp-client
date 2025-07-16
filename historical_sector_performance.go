@@ -14,8 +14,8 @@ type HistoricalSectorPerformanceResponse struct {
 	AverageChange float64 `json:"averageChange"`
 }
 
-// GetHistoricalSectorPerformance retrieves historical sector performance data
-func (c *Client) GetHistoricalSectorPerformance(sector, from, to, exchange string) ([]HistoricalSectorPerformanceResponse, error) {
+// HistoricalSectorPerformance retrieves historical sector performance data
+func (c *Client) HistoricalSectorPerformance(sector, from, to, exchange string) ([]HistoricalSectorPerformanceResponse, error) {
 	if sector == "" {
 		return nil, fmt.Errorf("sector is required")
 	}

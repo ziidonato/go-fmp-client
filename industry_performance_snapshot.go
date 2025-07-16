@@ -14,8 +14,8 @@ type IndustryPerformanceSnapshotResponse struct {
 	AverageChange float64 `json:"averageChange"`
 }
 
-// GetIndustryPerformanceSnapshot retrieves detailed performance data by industry
-func (c *Client) GetIndustryPerformanceSnapshot(date, exchange, industry string) ([]IndustryPerformanceSnapshotResponse, error) {
+// IndustryPerformanceSnapshot retrieves detailed performance data by industry
+func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([]IndustryPerformanceSnapshotResponse, error) {
 	if date == "" {
 		return nil, fmt.Errorf("date is required")
 	}

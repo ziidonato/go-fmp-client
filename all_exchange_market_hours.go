@@ -14,8 +14,8 @@ type AllExchangeMarketHoursResponse struct {
 	// Add other fields as needed based on actual API response
 }
 
-// GetAllExchangeMarketHours retrieves market hours for all exchanges
-func (c *Client) GetAllExchangeMarketHours() ([]AllExchangeMarketHoursResponse, error) {
+// AllExchangeMarketHours retrieves market hours for all exchanges
+func (c *Client) AllExchangeMarketHours() ([]AllExchangeMarketHoursResponse, error) {
 	url := "https://financialmodelingprep.com/stable/all-exchange-market-hours"
 
 	resp, err := c.get(url, map[string]string{})

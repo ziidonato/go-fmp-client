@@ -78,8 +78,8 @@ type BalanceSheetBulkResponse struct {
 	NetDebt                                 string `json:"netDebt"`
 }
 
-// GetBalanceSheetBulk retrieves comprehensive balance sheet data across multiple companies
-func (c *Client) GetBalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheetBulkResponse, error) {
+// BalanceSheetBulk retrieves comprehensive balance sheet data across multiple companies
+func (c *Client) BalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheetBulkResponse, error) {
 	// Validate required parameters
 	if params.Year == "" {
 		return nil, fmt.Errorf("year parameter is required")

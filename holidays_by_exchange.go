@@ -14,8 +14,8 @@ type HolidaysByExchangeResponse struct {
 	// Add other fields as needed based on actual API response
 }
 
-// GetHolidaysByExchange retrieves holidays for specific stock exchanges
-func (c *Client) GetHolidaysByExchange(exchange string) ([]HolidaysByExchangeResponse, error) {
+// HolidaysByExchange retrieves holidays for specific stock exchanges
+func (c *Client) HolidaysByExchange(exchange string) ([]HolidaysByExchangeResponse, error) {
 	if exchange == "" {
 		return nil, fmt.Errorf("exchange is required")
 	}

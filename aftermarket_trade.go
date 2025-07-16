@@ -14,8 +14,8 @@ type AftermarketTradeResponse struct {
 	Timestamp int64   `json:"timestamp"`
 }
 
-// GetAftermarketTrade retrieves real-time aftermarket trading activity
-func (c *Client) GetAftermarketTrade(symbol string) ([]AftermarketTradeResponse, error) {
+// AftermarketTrade retrieves real-time aftermarket trading activity
+func (c *Client) AftermarketTrade(symbol string) ([]AftermarketTradeResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

@@ -22,8 +22,8 @@ type ScoresBulkResponse struct {
 	Revenue          string `json:"revenue"`
 }
 
-// GetScoresBulk retrieves key financial scores and metrics for multiple symbols
-func (c *Client) GetScoresBulk() ([]ScoresBulkResponse, error) {
+// ScoresBulk retrieves key financial scores and metrics for multiple symbols
+func (c *Client) ScoresBulk() ([]ScoresBulkResponse, error) {
 	// Build the URL
 	baseURL := "https://financialmodelingprep.com/stable/scores-bulk"
 	u, err := url.Parse(baseURL)

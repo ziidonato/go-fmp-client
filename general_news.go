@@ -19,8 +19,8 @@ type GeneralNewsResponse struct {
 	URL           string  `json:"url"`
 }
 
-// GetGeneralNews retrieves the latest general news articles from various sources
-func (c *Client) GetGeneralNews(page, limit int, from, to string) ([]GeneralNewsResponse, error) {
+// GeneralNews retrieves the latest general news articles from various sources
+func (c *Client) GeneralNews(page, limit int, from, to string) ([]GeneralNewsResponse, error) {
 	if page < 0 {
 		return nil, fmt.Errorf("page must be non-negative")
 	}

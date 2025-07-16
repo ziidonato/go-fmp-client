@@ -14,8 +14,8 @@ type InsiderTradingReportingNameResponse struct {
 	// Add other fields as needed based on actual API response
 }
 
-// GetInsiderTradingReportingName searches for insider trading activity by reporting name
-func (c *Client) GetInsiderTradingReportingName(name string) ([]InsiderTradingReportingNameResponse, error) {
+// InsiderTradingReportingName searches for insider trading activity by reporting name
+func (c *Client) InsiderTradingReportingName(name string) ([]InsiderTradingReportingNameResponse, error) {
 	if name == "" {
 		return nil, fmt.Errorf("name is required")
 	}
