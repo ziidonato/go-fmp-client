@@ -33,7 +33,7 @@ func (c *Client) MergersAcquisitionsSearch(params MergersAcquisitionsSearchParam
 		"name": params.Name,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/mergers-acquisitions-search", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/mergers-acquisitions-search", urlParams)
 	if err != nil {
 		return nil, err
 	}

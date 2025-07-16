@@ -28,7 +28,7 @@ func (c *Client) SearchISIN(params SearchISINParams) ([]SearchISINResponse, erro
 		"isin": params.ISIN,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-isin", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-isin", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to search ISIN: %v", err)
 	}

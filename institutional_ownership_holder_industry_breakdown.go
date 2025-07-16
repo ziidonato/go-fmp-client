@@ -48,7 +48,7 @@ func (c *Client) InstitutionalOwnershipHolderIndustryBreakdown(params Institutio
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/institutional-ownership/holder-industry-breakdown", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/holder-industry-breakdown", urlParams)
 	if err != nil {
 		return nil, err
 	}

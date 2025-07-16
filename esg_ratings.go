@@ -31,7 +31,7 @@ func (c *Client) ESGRatings(params ESGRatingsParams) ([]ESGRatingsResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/esg-ratings", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/esg-ratings", urlParams)
 	if err != nil {
 		return nil, err
 	}

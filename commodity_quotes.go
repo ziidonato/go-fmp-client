@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -19,7 +18,7 @@ type CommodityQuotesResponse struct {
 func (c *Client) GetCommodityQuotes(short bool) ([]CommodityQuotesResponse, error) {
 	url := "https://financialmodelingprep.com/stable/batch-commodity-quotes"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"short": strconv.FormatBool(short),
 	})
 	if err != nil {
@@ -27,9 +26,6 @@ func (c *Client) GetCommodityQuotes(short bool) ([]CommodityQuotesResponse, erro
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []CommodityQuotesResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

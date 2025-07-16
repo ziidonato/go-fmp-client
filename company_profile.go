@@ -60,7 +60,7 @@ func (c *Client) CompanyProfile(params CompanyProfileParams) ([]CompanyProfileRe
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/profile", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/profile", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -132,7 +132,7 @@ func (c *Client) CustomDCFLevered(params CustomDCFLeveredParams) ([]CustomDCFLev
 		urlParams["riskFreeRate"] = fmt.Sprintf("%f", *params.RiskFreeRate)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/custom-levered-discounted-cash-flow", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/custom-levered-discounted-cash-flow", urlParams)
 	if err != nil {
 		return nil, err
 	}

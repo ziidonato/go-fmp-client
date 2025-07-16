@@ -45,7 +45,7 @@ func (c *Client) HistoricalMarketCapitalization(params HistoricalMarketCapitaliz
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-market-capitalization", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-market-capitalization", urlParams)
 	if err != nil {
 		return nil, err
 	}

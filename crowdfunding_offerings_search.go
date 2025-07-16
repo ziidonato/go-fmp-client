@@ -27,7 +27,7 @@ func (c *Client) CrowdfundingOfferingsSearch(params CrowdfundingOfferingsSearchP
 		"name": params.Name,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/crowdfunding-offerings-search", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/crowdfunding-offerings-search", urlParams)
 	if err != nil {
 		return nil, err
 	}

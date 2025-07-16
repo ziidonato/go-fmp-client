@@ -28,7 +28,7 @@ func (c *Client) CommoditiesQuoteShort(params CommoditiesQuoteShortParams) ([]Co
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/quote-short", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/quote-short", urlParams)
 	if err != nil {
 		return nil, err
 	}

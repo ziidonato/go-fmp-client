@@ -30,7 +30,7 @@ func (c *Client) FundDisclosureHoldersLatest(params FundDisclosureHoldersLatestP
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/funds/disclosure-holders-latest", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/funds/disclosure-holders-latest", urlParams)
 	if err != nil {
 		return nil, err
 	}

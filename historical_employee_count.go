@@ -41,7 +41,7 @@ func (c *Client) HistoricalEmployeeCount(params HistoricalEmployeeCountParams) (
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-employee-count", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-employee-count", urlParams)
 	if err != nil {
 		return nil, err
 	}

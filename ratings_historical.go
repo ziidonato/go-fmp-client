@@ -42,7 +42,7 @@ func (c *Client) RatingsHistorical(params RatingsHistoricalParams) ([]RatingsHis
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/ratings-historical", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratings-historical", urlParams)
 	if err != nil {
 		return nil, err
 	}

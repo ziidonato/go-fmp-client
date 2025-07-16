@@ -35,7 +35,7 @@ func (c *Client) LatestFinancialStatements(params LatestFinancialStatementsParam
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/latest-financial-statements", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/latest-financial-statements", urlParams)
 	if err != nil {
 		return nil, err
 	}

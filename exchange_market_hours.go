@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // ExchangeMarketHoursResponse represents the response from the global exchange market hours API
@@ -22,7 +21,7 @@ func (c *Client) GetExchangeMarketHours(exchange string) ([]ExchangeMarketHoursR
 
 	url := "https://financialmodelingprep.com/stable/exchange-market-hours"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"exchange": exchange,
 	})
 	if err != nil {
@@ -30,9 +29,6 @@ func (c *Client) GetExchangeMarketHours(exchange string) ([]ExchangeMarketHoursR
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []ExchangeMarketHoursResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

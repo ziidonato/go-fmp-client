@@ -37,7 +37,7 @@ func (c *Client) FundDisclosureHoldersSearch(params FundDisclosureHoldersSearchP
 		"name": params.Name,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/funds/disclosure-holders-search", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/funds/disclosure-holders-search", urlParams)
 	if err != nil {
 		return nil, err
 	}

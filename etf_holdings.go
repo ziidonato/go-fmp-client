@@ -34,7 +34,7 @@ func (c *Client) ETFHoldings(params ETFHoldingsParams) ([]ETFHoldingsResponse, e
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/etf/holdings", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/etf/holdings", urlParams)
 	if err != nil {
 		return nil, err
 	}

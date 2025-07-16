@@ -35,7 +35,7 @@ func (c *Client) FinancialScores(params FinancialScoresParams) ([]FinancialScore
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/financial-scores", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/financial-scores", urlParams)
 	if err != nil {
 		return nil, err
 	}

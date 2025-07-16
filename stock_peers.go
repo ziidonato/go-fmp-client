@@ -28,7 +28,7 @@ func (c *Client) StockPeers(params StockPeersParams) ([]StockPeersResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/stock-peers", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/stock-peers", urlParams)
 	if err != nil {
 		return nil, err
 	}

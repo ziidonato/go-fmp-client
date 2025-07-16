@@ -49,7 +49,7 @@ func (c *Client) GradesLatestNews(params GradesLatestNewsParams) ([]GradesLatest
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/grades-latest-news", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/grades-latest-news", urlParams)
 	if err != nil {
 		return nil, err
 	}

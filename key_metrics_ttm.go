@@ -54,7 +54,7 @@ func (c *Client) KeyMetricsTTM(params KeyMetricsTTMParams) ([]KeyMetricsTTMRespo
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/key-metrics-ttm", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-metrics-ttm", urlParams)
 	if err != nil {
 		return nil, err
 	}

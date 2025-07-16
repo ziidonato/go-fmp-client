@@ -47,7 +47,7 @@ func (c *Client) PriceTargetNews(params PriceTargetNewsParams) ([]PriceTargetNew
 		"page":   fmt.Sprintf("%d", *params.Page),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/price-target-news", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/price-target-news", urlParams)
 	if err != nil {
 		return nil, err
 	}

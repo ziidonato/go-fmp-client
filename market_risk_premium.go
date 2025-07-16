@@ -15,7 +15,7 @@ type MarketRiskPremiumResponse struct {
 
 // MarketRiskPremium retrieves the market risk premium for specific dates
 func (c *Client) MarketRiskPremium() ([]MarketRiskPremiumResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/market-risk-premium", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/market-risk-premium", nil)
 	if err != nil {
 		return nil, err
 	}

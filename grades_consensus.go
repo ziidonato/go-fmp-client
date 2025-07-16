@@ -31,7 +31,7 @@ func (c *Client) GradesConsensus(params GradesConsensusParams) ([]GradesConsensu
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/grades-consensus", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/grades-consensus", urlParams)
 	if err != nil {
 		return nil, err
 	}

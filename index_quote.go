@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // IndexQuoteResponse represents the response from the index quote API
@@ -35,7 +34,7 @@ func (c *Client) GetIndexQuote(symbol string) ([]IndexQuoteResponse, error) {
 
 	url := "https://financialmodelingprep.com/stable/quote"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"symbol": symbol,
 	})
 	if err != nil {
@@ -43,9 +42,6 @@ func (c *Client) GetIndexQuote(symbol string) ([]IndexQuoteResponse, error) {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []IndexQuoteResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

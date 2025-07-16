@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -26,7 +25,7 @@ func (c *Client) GetInsiderTradingLatest(page, limit int) ([]InsiderTradingLates
 
 	url := "https://financialmodelingprep.com/stable/insider-trading/latest"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"page":  strconv.Itoa(page),
 		"limit": strconv.Itoa(limit),
 	})
@@ -35,9 +34,6 @@ func (c *Client) GetInsiderTradingLatest(page, limit int) ([]InsiderTradingLates
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []InsiderTradingLatestResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

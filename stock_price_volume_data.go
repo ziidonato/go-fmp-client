@@ -44,7 +44,7 @@ func (c *Client) StockPriceVolumeData(params StockPriceVolumeDataParams) ([]Stoc
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-price-eod/full", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/full", urlParams)
 	if err != nil {
 		return nil, err
 	}

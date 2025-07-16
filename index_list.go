@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // IndexListResponse represents the response from the index list API
@@ -18,15 +17,12 @@ type IndexListResponse struct {
 func (c *Client) GetIndexList() ([]IndexListResponse, error) {
 	url := "https://financialmodelingprep.com/stable/index-list"
 
-	resp, err := c.get(url, map[string]string{})
+	resp, err := c.doRequest(url, map[string]string{})
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []IndexListResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

@@ -28,7 +28,7 @@ func (c *Client) SearchCUSIP(params SearchCUSIPParams) ([]SearchCUSIPResponse, e
 		"cusip": params.CUSIP,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-cusip", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-cusip", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to search CUSIP: %v", err)
 	}

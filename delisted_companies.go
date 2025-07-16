@@ -39,7 +39,7 @@ func (c *Client) DelistedCompanies(params DelistedCompaniesParams) ([]DelistedCo
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/delisted-companies", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/delisted-companies", urlParams)
 	if err != nil {
 		return nil, err
 	}

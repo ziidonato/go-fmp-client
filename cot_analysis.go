@@ -68,7 +68,7 @@ func (c *Client) COTAnalysis(params COTAnalysisParams) ([]COTAnalysisResponse, e
 		urlParams["symbol"] = *params.Symbol
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/commitment-of-traders-analysis", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-analysis", urlParams)
 	if err != nil {
 		return nil, err
 	}

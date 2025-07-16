@@ -84,7 +84,7 @@ func (c *Client) CashFlowStatementAsReported(params CashFlowStatementAsReportedP
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/cash-flow-statement-as-reported", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/cash-flow-statement-as-reported", urlParams)
 	if err != nil {
 		return nil, err
 	}

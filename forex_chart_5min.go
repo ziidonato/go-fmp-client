@@ -40,7 +40,7 @@ func (c *Client) ForexChart5Min(params ForexChart5MinParams) ([]ForexChart5MinRe
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-chart/5min", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-chart/5min", urlParams)
 	if err != nil {
 		return nil, err
 	}

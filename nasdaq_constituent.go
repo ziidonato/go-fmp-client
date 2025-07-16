@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // NasdaqConstituentResponse represents the response from the Nasdaq index API
@@ -22,15 +21,12 @@ type NasdaqConstituentResponse struct {
 func (c *Client) GetNasdaqConstituent() ([]NasdaqConstituentResponse, error) {
 	url := "https://financialmodelingprep.com/stable/nasdaq-constituent"
 
-	resp, err := c.get(url, map[string]string{})
+	resp, err := c.doRequest(url, map[string]string{})
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []NasdaqConstituentResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

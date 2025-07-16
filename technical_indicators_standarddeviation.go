@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -30,7 +29,7 @@ func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLen
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/standarddeviation"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
 		"timeframe":    timeframe,
@@ -40,9 +39,6 @@ func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLen
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []TechnicalIndicatorStandardDeviationResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

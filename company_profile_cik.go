@@ -60,7 +60,7 @@ func (c *Client) CompanyProfileCIK(params CompanyProfileCIKParams) ([]CompanyPro
 		"cik": params.CIK,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/profile-cik", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/profile-cik", urlParams)
 	if err != nil {
 		return nil, err
 	}

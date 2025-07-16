@@ -35,7 +35,7 @@ func (c *Client) ESGDisclosures(params ESGDisclosuresParams) ([]ESGDisclosuresRe
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/esg-disclosures", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/esg-disclosures", urlParams)
 	if err != nil {
 		return nil, err
 	}

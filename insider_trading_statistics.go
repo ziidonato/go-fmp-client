@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // InsiderTradingStatisticsResponse represents the response from the insider trade statistics API
@@ -22,7 +21,7 @@ func (c *Client) GetInsiderTradingStatistics(symbol string) ([]InsiderTradingSta
 
 	url := "https://financialmodelingprep.com/stable/insider-trading/statistics"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"symbol": symbol,
 	})
 	if err != nil {
@@ -30,9 +29,6 @@ func (c *Client) GetInsiderTradingStatistics(symbol string) ([]InsiderTradingSta
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []InsiderTradingStatisticsResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

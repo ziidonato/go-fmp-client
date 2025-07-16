@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -30,7 +29,7 @@ func (c *Client) GetFMPArticles(page, limit int) ([]FMPArticlesResponse, error) 
 
 	url := "https://financialmodelingprep.com/stable/fmp-articles"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"page":  strconv.Itoa(page),
 		"limit": strconv.Itoa(limit),
 	})
@@ -39,9 +38,6 @@ func (c *Client) GetFMPArticles(page, limit int) ([]FMPArticlesResponse, error) 
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []FMPArticlesResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

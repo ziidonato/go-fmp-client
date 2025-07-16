@@ -11,7 +11,7 @@ type AvailableIndustriesResponse struct {
 
 // AvailableIndustries retrieves a comprehensive list of industries where stock symbols are available
 func (c *Client) AvailableIndustries() ([]AvailableIndustriesResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/available-industries", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/available-industries", nil)
 	if err != nil {
 		return nil, err
 	}

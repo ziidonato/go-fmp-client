@@ -27,7 +27,7 @@ func (c *Client) InstitutionalOwnershipDates(params InstitutionalOwnershipDatesP
 		"cik": params.CIK,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/institutional-ownership/dates", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/dates", urlParams)
 	if err != nil {
 		return nil, err
 	}

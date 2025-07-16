@@ -27,7 +27,7 @@ type BatchCryptocurrencyQuotesResponse struct {
 
 // BatchCryptocurrencyQuotes retrieves live price data for a wide range of cryptocurrencies in a single request
 func (c *Client) BatchCryptocurrencyQuotes() ([]BatchCryptocurrencyQuotesResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/batch-crypto-quotes", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/batch-crypto-quotes", nil)
 	if err != nil {
 		return nil, err
 	}

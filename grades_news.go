@@ -51,7 +51,7 @@ func (c *Client) GradesNews(params GradesNewsParams) ([]GradesNewsResponse, erro
 		"limit":  fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/grades-news", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/grades-news", urlParams)
 	if err != nil {
 		return nil, err
 	}

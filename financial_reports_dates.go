@@ -29,7 +29,7 @@ func (c *Client) FinancialReportsDates(params FinancialReportsDatesParams) ([]Fi
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/financial-reports-dates", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/financial-reports-dates", urlParams)
 	if err != nil {
 		return nil, err
 	}

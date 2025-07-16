@@ -24,7 +24,7 @@ func (c *Client) BatchCommodityQuotes(params BatchCommodityQuotesParams) ([]Batc
 		"short": fmt.Sprintf("%t", params.Short),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/batch-commodity-quotes", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/batch-commodity-quotes", urlParams)
 	if err != nil {
 		return nil, err
 	}

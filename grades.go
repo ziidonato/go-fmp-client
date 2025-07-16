@@ -30,7 +30,7 @@ func (c *Client) Grades(params GradesParams) ([]GradesResponse, error) {
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/grades", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/grades", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -39,7 +39,7 @@ func (c *Client) SearchName(params SearchNameParams) ([]SearchNameResponse, erro
 		urlParams["exchange"] = *params.Exchange
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-name", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-name", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to search name: %v", err)
 	}

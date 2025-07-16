@@ -28,7 +28,7 @@ func (c *Client) LeveredDCF(params LeveredDCFParams) ([]LeveredDCFResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/levered-discounted-cash-flow", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/levered-discounted-cash-flow", urlParams)
 	if err != nil {
 		return nil, err
 	}

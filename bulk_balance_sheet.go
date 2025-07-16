@@ -3,8 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
 )
 
 // BalanceSheetBulkParams represents the parameters for the Bulk Balance Sheet Statement API
@@ -88,46 +86,18 @@ func (c *Client) BalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheet
 		return nil, fmt.Errorf("period parameter is required")
 	}
 
-	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/balance-sheet-statement-bulk"
-	u, err := url.Parse(baseURL)
-	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
+	urlParams := map[string]string{
+		"year":   params.Year,
+		"period": params.Period,
 	}
 
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/balance-sheet-statement-bulk", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
+
 
 	// Parse the response
 	var result []BalanceSheetBulkResponse

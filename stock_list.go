@@ -12,7 +12,7 @@ type StockListResponse struct {
 
 // StockList retrieves a comprehensive list of financial symbols from various global exchanges
 func (c *Client) StockList() ([]StockListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/stock-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/stock-list", nil)
 	if err != nil {
 		return nil, err
 	}

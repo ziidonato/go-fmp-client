@@ -15,7 +15,7 @@ type ForexListResponse struct {
 
 // ForexList retrieves a comprehensive list of all currency pairs traded on the forex market
 func (c *Client) ForexList() ([]ForexListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/forex-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/forex-list", nil)
 	if err != nil {
 		return nil, err
 	}

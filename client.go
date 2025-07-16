@@ -37,7 +37,7 @@ func NewClient(httpClient HTTPClient, apiKey string) (*Client, error) {
 }
 
 func testClient(client *Client) error {
-	testResp, err := client.get("https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{"apikey": client.APIKey})
+	testResp, err := client.doRequest("https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{})
 	if err != nil {
 		return fmt.Errorf("failed to perform test request: %v", err)
 	}
@@ -55,6 +55,45 @@ func testClient(client *Client) error {
 	}
 
 	return nil
+}
+
+// doRequest is a unified method for making HTTP requests to the Financial Modeling Prep API
+func (c *Client) doRequest(url string, params map[string]string) (*http.Response, error) {
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %v", err)
+	}
+
+	// Add API key to parameters
+	if params == nil {
+		params = make(map[string]string)
+	}
+	params["apikey"] = c.APIKey
+
+	// Add query parameters
+	query := req.URL.Query()
+	for key, value := range params {
+		query.Set(key, value)
+	}
+	req.URL.RawQuery = query.Encode()
+
+	// Set standard headers
+	req.Header.Set("User-Agent", "fmp-go-client")
+	req.Header.Set("Accept", "application/json")
+
+	// Make the request
+	resp, err := c.HTTPClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error making request: %w", err)
+	}
+
+	// Check response status
+	if resp.StatusCode != http.StatusOK {
+		resp.Body.Close()
+		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
+	}
+
+	return resp, nil
 }
 
 func editQueryParams(req *http.Request, params map[string]string) {

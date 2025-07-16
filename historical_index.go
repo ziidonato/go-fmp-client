@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // HistoricalIndexResponse represents the response from the historical index constituent change APIs
@@ -21,14 +20,11 @@ type HistoricalIndexResponse struct {
 // HistoricalSP500 retrieves historical data for the S&P 500 index
 func (c *Client) HistoricalSP500() ([]HistoricalIndexResponse, error) {
 	url := "https://financialmodelingprep.com/stable/historical-sp500-constituent"
-	resp, err := c.get(url, map[string]string{})
+	resp, err := c.doRequest(url, map[string]string{})
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 	var result []HistoricalIndexResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("error decoding response: %w", err)
@@ -39,14 +35,11 @@ func (c *Client) HistoricalSP500() ([]HistoricalIndexResponse, error) {
 // HistoricalNasdaq retrieves historical data for the Nasdaq index
 func (c *Client) HistoricalNasdaq() ([]HistoricalIndexResponse, error) {
 	url := "https://financialmodelingprep.com/stable/historical-nasdaq-constituent"
-	resp, err := c.get(url, map[string]string{})
+	resp, err := c.doRequest(url, map[string]string{})
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 	var result []HistoricalIndexResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("error decoding response: %w", err)
@@ -57,14 +50,11 @@ func (c *Client) HistoricalNasdaq() ([]HistoricalIndexResponse, error) {
 // HistoricalDowJones retrieves historical data for the Dow Jones Industrial Average
 func (c *Client) HistoricalDowJones() ([]HistoricalIndexResponse, error) {
 	url := "https://financialmodelingprep.com/stable/historical-dowjones-constituent"
-	resp, err := c.get(url, map[string]string{})
+	resp, err := c.doRequest(url, map[string]string{})
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 	var result []HistoricalIndexResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("error decoding response: %w", err)

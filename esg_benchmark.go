@@ -30,7 +30,7 @@ func (c *Client) ESGBenchmark(params ESGBenchmarkParams) ([]ESGBenchmarkResponse
 		"year": params.Year,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/esg-benchmark", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/esg-benchmark", urlParams)
 	if err != nil {
 		return nil, err
 	}

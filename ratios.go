@@ -100,7 +100,7 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/ratios", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratios", urlParams)
 	if err != nil {
 		return nil, err
 	}

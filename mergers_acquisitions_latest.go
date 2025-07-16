@@ -43,7 +43,7 @@ func (c *Client) MergersAcquisitionsLatest(params MergersAcquisitionsLatestParam
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/mergers-acquisitions-latest", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/mergers-acquisitions-latest", urlParams)
 	if err != nil {
 		return nil, err
 	}

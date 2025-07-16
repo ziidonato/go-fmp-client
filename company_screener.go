@@ -128,7 +128,7 @@ func (c *Client) CompanyScreener(params CompanyScreenerParams) ([]CompanyScreene
 		urlParams["includeAllShareClasses"] = strconv.FormatBool(*params.IncludeAllShareClasses)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/company-screener", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/company-screener", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get company screener: %v", err)
 	}

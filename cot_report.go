@@ -163,7 +163,7 @@ func (c *Client) COTReport(params COTReportParams) ([]COTReportResponse, error) 
 		urlParams["symbol"] = *params.Symbol
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/commitment-of-traders-report", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-report", urlParams)
 	if err != nil {
 		return nil, err
 	}

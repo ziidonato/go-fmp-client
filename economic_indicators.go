@@ -31,7 +31,7 @@ func (c *Client) EconomicIndicators(params EconomicIndicatorsParams) ([]Economic
 		"name": params.Name,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/economic-indicators", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/economic-indicators", urlParams)
 	if err != nil {
 		return nil, err
 	}

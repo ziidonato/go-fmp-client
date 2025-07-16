@@ -12,7 +12,7 @@ type COTListResponse struct {
 
 // COTList retrieves a comprehensive list of available Commitment of Traders (COT) reports
 func (c *Client) COTList() ([]COTListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/commitment-of-traders-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-list", nil)
 	if err != nil {
 		return nil, err
 	}

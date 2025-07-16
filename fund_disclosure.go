@@ -64,7 +64,7 @@ func (c *Client) FundDisclosure(params FundDisclosureParams) ([]FundDisclosureRe
 		urlParams["cik"] = *params.CIK
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/funds/disclosure", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/funds/disclosure", urlParams)
 	if err != nil {
 		return nil, err
 	}

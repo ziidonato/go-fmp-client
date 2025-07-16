@@ -39,7 +39,7 @@ func (c *Client) SearchSymbol(params SearchSymbolParams) ([]SearchSymbolResponse
 		urlParams["exchange"] = *params.Exchange
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-symbol", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-symbol", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to search symbol: %v", err)
 	}

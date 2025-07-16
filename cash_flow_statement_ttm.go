@@ -79,7 +79,7 @@ func (c *Client) CashFlowStatementTTM(params CashFlowStatementTTMParams) ([]Cash
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/cash-flow-statement-ttm", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/cash-flow-statement-ttm", urlParams)
 	if err != nil {
 		return nil, err
 	}

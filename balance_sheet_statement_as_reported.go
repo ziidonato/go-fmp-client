@@ -97,7 +97,7 @@ func (c *Client) BalanceSheetStatementAsReported(params BalanceSheetStatementAsR
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/balance-sheet-statement-as-reported", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/balance-sheet-statement-as-reported", urlParams)
 	if err != nil {
 		return nil, err
 	}

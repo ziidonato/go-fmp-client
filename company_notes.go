@@ -28,7 +28,7 @@ func (c *Client) CompanyNotes(params CompanyNotesParams) ([]CompanyNotesResponse
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/company-notes", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/company-notes", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -78,7 +78,7 @@ func (c *Client) CrowdfundingOfferingsLatest(params CrowdfundingOfferingsLatestP
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/crowdfunding-offerings-latest", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/crowdfunding-offerings-latest", urlParams)
 	if err != nil {
 		return nil, err
 	}

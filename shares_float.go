@@ -29,7 +29,7 @@ func (c *Client) SharesFloat(params SharesFloatParams) ([]SharesFloatResponse, e
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/shares-float", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/shares-float", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -76,7 +76,7 @@ func (c *Client) IncomeStatement(params IncomeStatementParams) ([]IncomeStatemen
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/income-statement", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/income-statement", urlParams)
 	if err != nil {
 		return nil, err
 	}

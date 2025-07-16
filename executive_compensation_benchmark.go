@@ -27,7 +27,7 @@ func (c *Client) ExecutiveCompensationBenchmark(params ExecutiveCompensationBenc
 		"year": *params.Year,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/executive-compensation-benchmark", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/executive-compensation-benchmark", urlParams)
 	if err != nil {
 		return nil, err
 	}

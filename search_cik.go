@@ -35,7 +35,7 @@ func (c *Client) SearchCIK(params SearchCIKParams) ([]SearchCIKResponse, error) 
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-cik", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-cik", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to search CIK: %v", err)
 	}

@@ -41,7 +41,7 @@ func (c *Client) UnadjustedStockPrice(params UnadjustedStockPriceParams) ([]Unad
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-price-eod/non-split-adjusted", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/non-split-adjusted", urlParams)
 	if err != nil {
 		return nil, err
 	}

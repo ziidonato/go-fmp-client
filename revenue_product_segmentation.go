@@ -40,7 +40,7 @@ func (c *Client) RevenueProductSegmentation(params RevenueProductSegmentationPar
 		urlParams["structure"] = params.Structure
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/revenue-product-segmentation", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/revenue-product-segmentation", urlParams)
 	if err != nil {
 		return nil, err
 	}

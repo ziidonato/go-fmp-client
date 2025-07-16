@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // BatchQuoteResponse represents the response from the stock batch quote API
@@ -35,7 +34,7 @@ func (c *Client) GetBatchQuote(symbols string) ([]BatchQuoteResponse, error) {
 
 	url := "https://financialmodelingprep.com/stable/batch-quote"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"symbols": symbols,
 	})
 	if err != nil {
@@ -43,9 +42,6 @@ func (c *Client) GetBatchQuote(symbols string) ([]BatchQuoteResponse, error) {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []BatchQuoteResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

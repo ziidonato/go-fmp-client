@@ -24,7 +24,7 @@ func (c *Client) BatchForexQuotes(params BatchForexQuotesParams) ([]BatchForexQu
 		"short": fmt.Sprintf("%t", params.Short),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/batch-forex-quotes", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/batch-forex-quotes", urlParams)
 	if err != nil {
 		return nil, err
 	}

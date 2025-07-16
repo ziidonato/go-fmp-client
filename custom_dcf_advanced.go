@@ -145,7 +145,7 @@ func (c *Client) CustomDCFAdvanced(params CustomDCFAdvancedParams) ([]CustomDCFA
 		urlParams["riskFreeRate"] = fmt.Sprintf("%f", *params.RiskFreeRate)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/custom-discounted-cash-flow", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/custom-discounted-cash-flow", urlParams)
 	if err != nil {
 		return nil, err
 	}

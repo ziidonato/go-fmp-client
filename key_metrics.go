@@ -84,7 +84,7 @@ func (c *Client) KeyMetrics(params KeyMetricsParams) ([]KeyMetricsResponse, erro
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/key-metrics", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-metrics", urlParams)
 	if err != nil {
 		return nil, err
 	}

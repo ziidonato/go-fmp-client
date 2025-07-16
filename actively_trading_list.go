@@ -12,7 +12,7 @@ type ActivelyTradingListResponse struct {
 
 // ActivelyTradingList retrieves all actively trading companies and financial instruments
 func (c *Client) ActivelyTradingList() ([]ActivelyTradingListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/actively-trading-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/actively-trading-list", nil)
 	if err != nil {
 		return nil, err
 	}

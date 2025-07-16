@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -49,15 +48,12 @@ func (c *Client) SearchPressReleases(symbols string, page, limit int, from, to s
 
 	url := "https://financialmodelingprep.com/stable/news/press-releases"
 
-	resp, err := c.get(url, params)
+	resp, err := c.doRequest(url, params)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []SearchPressReleasesResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

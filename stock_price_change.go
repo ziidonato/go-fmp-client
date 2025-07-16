@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // StockPriceChangeResponse represents the response from the stock price change API
@@ -30,7 +29,7 @@ func (c *Client) GetStockPriceChange(symbol string) ([]StockPriceChangeResponse,
 
 	url := "https://financialmodelingprep.com/stable/stock-price-change"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"symbol": symbol,
 	})
 	if err != nil {
@@ -38,9 +37,6 @@ func (c *Client) GetStockPriceChange(symbol string) ([]StockPriceChangeResponse,
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []StockPriceChangeResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

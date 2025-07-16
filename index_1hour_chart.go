@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // Index1HourChartResponse represents the response from the 1-hour interval index price API
@@ -35,15 +34,12 @@ func (c *Client) GetIndex1HourChart(symbol, from, to string) ([]Index1HourChartR
 
 	url := "https://financialmodelingprep.com/stable/historical-chart/1hour"
 
-	resp, err := c.get(url, params)
+	resp, err := c.doRequest(url, params)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []Index1HourChartResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

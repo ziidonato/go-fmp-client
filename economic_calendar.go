@@ -22,7 +22,7 @@ type EconomicCalendarResponse struct {
 
 // EconomicCalendar retrieves a comprehensive calendar of upcoming economic data releases
 func (c *Client) EconomicCalendar() ([]EconomicCalendarResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/economic-calendar", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/economic-calendar", nil)
 	if err != nil {
 		return nil, err
 	}

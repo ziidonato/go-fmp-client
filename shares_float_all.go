@@ -39,7 +39,7 @@ func (c *Client) SharesFloatAll(params SharesFloatAllParams) ([]SharesFloatAllRe
 		"page":  fmt.Sprintf("%d", *params.Page),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/shares-float-all", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/shares-float-all", urlParams)
 	if err != nil {
 		return nil, err
 	}

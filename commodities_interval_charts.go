@@ -40,7 +40,7 @@ func (c *Client) commoditiesIntervalChart(interval string, params CommoditiesInt
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get(fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval), urlParams)
+	resp, err := c.doRequest(fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval), urlParams)
 	if err != nil {
 		return nil, err
 	}

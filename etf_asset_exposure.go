@@ -29,7 +29,7 @@ func (c *Client) ETFAssetExposure(params ETFAssetExposureParams) ([]ETFAssetExpo
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/etf/asset-exposure", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/etf/asset-exposure", urlParams)
 	if err != nil {
 		return nil, err
 	}

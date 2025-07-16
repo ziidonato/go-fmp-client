@@ -50,7 +50,7 @@ func (c *Client) InstitutionalOwnershipExtract(params InstitutionalOwnershipExtr
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/institutional-ownership/extract", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/extract", urlParams)
 	if err != nil {
 		return nil, err
 	}

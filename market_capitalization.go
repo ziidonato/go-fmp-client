@@ -27,7 +27,7 @@ func (c *Client) MarketCapitalization(params MarketCapitalizationParams) ([]Mark
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/market-capitalization", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/market-capitalization", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // IndustryPerformanceSnapshotResponse represents the response from the industry performance snapshot API
@@ -33,15 +32,12 @@ func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([
 
 	url := "https://financialmodelingprep.com/stable/industry-performance-snapshot"
 
-	resp, err := c.get(url, params)
+	resp, err := c.doRequest(url, params)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []IndustryPerformanceSnapshotResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

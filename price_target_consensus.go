@@ -29,7 +29,7 @@ func (c *Client) PriceTargetConsensus(params PriceTargetConsensusParams) ([]Pric
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/price-target-consensus", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/price-target-consensus", urlParams)
 	if err != nil {
 		return nil, err
 	}

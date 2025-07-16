@@ -77,7 +77,7 @@ func (c *Client) HistoricalChart(interval string, params HistoricalChartParams) 
 	}
 
 	endpoint := fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval)
-	resp, err := c.get(endpoint, urlParams)
+	resp, err := c.doRequest(endpoint, urlParams)
 	if err != nil {
 		return nil, err
 	}

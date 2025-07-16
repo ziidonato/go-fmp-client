@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // AftermarketQuoteResponse represents the response from the aftermarket quote API
@@ -25,7 +24,7 @@ func (c *Client) GetAftermarketQuote(symbol string) ([]AftermarketQuoteResponse,
 
 	url := "https://financialmodelingprep.com/stable/aftermarket-quote"
 
-	resp, err := c.get(url, map[string]string{
+	resp, err := c.doRequest(url, map[string]string{
 		"symbol": symbol,
 	})
 	if err != nil {
@@ -33,9 +32,6 @@ func (c *Client) GetAftermarketQuote(symbol string) ([]AftermarketQuoteResponse,
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []AftermarketQuoteResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

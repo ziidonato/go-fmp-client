@@ -26,7 +26,7 @@ func (c *Client) ETFCountryWeightings(params ETFCountryWeightingsParams) ([]ETFC
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/etf/country-weightings", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/etf/country-weightings", urlParams)
 	if err != nil {
 		return nil, err
 	}

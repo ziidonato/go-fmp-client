@@ -62,7 +62,7 @@ func (c *Client) InstitutionalOwnershipHolderPerformanceSummary(params Instituti
 		urlParams["page"] = fmt.Sprintf("%d", *params.Page)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/institutional-ownership/holder-performance-summary", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/holder-performance-summary", urlParams)
 	if err != nil {
 		return nil, err
 	}

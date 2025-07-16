@@ -11,7 +11,7 @@ type AvailableSectorsResponse struct {
 
 // AvailableSectors retrieves a complete list of industry sectors
 func (c *Client) AvailableSectors() ([]AvailableSectorsResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/available-sectors", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/available-sectors", nil)
 	if err != nil {
 		return nil, err
 	}

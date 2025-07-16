@@ -37,7 +37,7 @@ func (c *Client) CompanyExecutives(params CompanyExecutivesParams) ([]CompanyExe
 		"active": *params.Active,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/key-executives", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/key-executives", urlParams)
 	if err != nil {
 		return nil, err
 	}

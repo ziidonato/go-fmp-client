@@ -3,7 +3,6 @@ package go_fmp
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // HistoricalSectorPEResponse represents the response from the historical sector PE API
@@ -36,15 +35,12 @@ func (c *Client) GetHistoricalSectorPE(sector, from, to, exchange string) ([]His
 
 	url := "https://financialmodelingprep.com/stable/historical-sector-pe"
 
-	resp, err := c.get(url, params)
+	resp, err := c.doRequest(url, params)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
 
 	var result []HistoricalSectorPEResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {

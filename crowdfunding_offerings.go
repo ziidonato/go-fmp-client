@@ -72,7 +72,7 @@ func (c *Client) CrowdfundingOfferings(params CrowdfundingOfferingsParams) ([]Cr
 		"cik": params.CIK,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/crowdfunding-offerings", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/crowdfunding-offerings", urlParams)
 	if err != nil {
 		return nil, err
 	}

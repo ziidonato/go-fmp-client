@@ -27,7 +27,7 @@ func (c *Client) MarketCapitalizationBatch(params MarketCapitalizationBatchParam
 		"symbols": params.Symbols,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/market-capitalization-batch", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/market-capitalization-batch", urlParams)
 	if err != nil {
 		return nil, err
 	}

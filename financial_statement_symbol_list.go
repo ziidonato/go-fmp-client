@@ -14,7 +14,7 @@ type FinancialStatementSymbolListResponse struct {
 
 // FinancialStatementSymbolList retrieves a comprehensive list of companies with available financial statements
 func (c *Client) FinancialStatementSymbolList() ([]FinancialStatementSymbolListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/financial-statement-symbol-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/financial-statement-symbol-list", nil)
 	if err != nil {
 		return nil, err
 	}

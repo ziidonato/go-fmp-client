@@ -45,7 +45,7 @@ func (c *Client) EnterpriseValues(params EnterpriseValuesParams) ([]EnterpriseVa
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/enterprise-values", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/enterprise-values", urlParams)
 	if err != nil {
 		return nil, err
 	}

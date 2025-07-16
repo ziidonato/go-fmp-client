@@ -60,7 +60,7 @@ func (c *Client) SearchExchangeVariants(params SearchExchangeVariantsParams) ([]
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-exchange-variants", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/search-exchange-variants", urlParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to search exchange variants: %v", err)
 	}

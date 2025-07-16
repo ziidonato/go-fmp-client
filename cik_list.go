@@ -30,7 +30,7 @@ func (c *Client) CIKList(params CIKListParams) ([]CIKListResponse, error) {
 		"limit": fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/cik-list", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/cik-list", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -15,7 +15,7 @@ type CommoditiesListResponse struct {
 
 // CommoditiesList retrieves an extensive list of tracked commodities across various sectors
 func (c *Client) CommoditiesList() ([]CommoditiesListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/commodities-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/commodities-list", nil)
 	if err != nil {
 		return nil, err
 	}

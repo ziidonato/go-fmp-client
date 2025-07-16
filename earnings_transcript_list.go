@@ -13,7 +13,7 @@ type EarningsTranscriptListResponse struct {
 
 // EarningsTranscriptList retrieves a list of companies with earnings transcripts and the number of transcripts available
 func (c *Client) EarningsTranscriptList() ([]EarningsTranscriptListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/earnings-transcript-list", nil)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/earnings-transcript-list", nil)
 	if err != nil {
 		return nil, err
 	}

@@ -34,7 +34,7 @@ func (c *Client) PriceTargetSummary(params PriceTargetSummaryParams) ([]PriceTar
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/price-target-summary", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/price-target-summary", urlParams)
 	if err != nil {
 		return nil, err
 	}

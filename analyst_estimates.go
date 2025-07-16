@@ -69,7 +69,7 @@ func (c *Client) AnalystEstimates(params AnalystEstimatesParams) ([]AnalystEstim
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
 	if err != nil {
 		return nil, err
 	}

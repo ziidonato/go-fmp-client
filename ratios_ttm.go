@@ -83,7 +83,7 @@ func (c *Client) RatiosTTM(params RatiosTTMParams) ([]RatiosTTMResponse, error) 
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/ratios-ttm", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/ratios-ttm", urlParams)
 	if err != nil {
 		return nil, err
 	}

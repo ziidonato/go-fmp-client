@@ -72,7 +72,7 @@ func (c *Client) InstitutionalOwnershipSymbolPositionsSummary(params Institution
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/institutional-ownership/symbol-positions-summary", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/symbol-positions-summary", urlParams)
 	if err != nil {
 		return nil, err
 	}

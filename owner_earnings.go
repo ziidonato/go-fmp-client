@@ -42,7 +42,7 @@ func (c *Client) OwnerEarnings(params OwnerEarningsParams) ([]OwnerEarningsRespo
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/owner-earnings", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/owner-earnings", urlParams)
 	if err != nil {
 		return nil, err
 	}

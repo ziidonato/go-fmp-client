@@ -40,7 +40,7 @@ func (c *Client) CryptocurrencyChart1Hour(params CryptocurrencyChart1HourParams)
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-chart/1hour", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/historical-chart/1hour", urlParams)
 	if err != nil {
 		return nil, err
 	}

@@ -39,7 +39,7 @@ func (c *Client) ExecutiveCompensation(params ExecutiveCompensationParams) ([]Ex
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/governance-executive-compensation", urlParams)
+	resp, err := c.doRequest("https://financialmodelingprep.com/stable/governance-executive-compensation", urlParams)
 	if err != nil {
 		return nil, err
 	}
