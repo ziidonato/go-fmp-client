@@ -18,7 +18,7 @@ type DCFBulkResponse struct {
 // GetDCFBulk retrieves discounted cash flow valuations for multiple symbols
 func (c *Client) GetDCFBulk() ([]DCFBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/dcf-bulk"
+	baseURL := c.BaseURL + "/dcf-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

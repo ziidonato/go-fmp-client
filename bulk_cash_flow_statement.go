@@ -75,7 +75,7 @@ func (c *Client) GetCashFlowStatementBulk(params CashFlowStatementBulkParams) ([
 	}
 
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/cash-flow-statement-bulk"
+	baseURL := c.BaseURL + "/cash-flow-statement-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

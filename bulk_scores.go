@@ -25,7 +25,7 @@ type ScoresBulkResponse struct {
 // ScoresBulk retrieves key financial scores and metrics for multiple symbols
 func (c *Client) ScoresBulk() ([]ScoresBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/scores-bulk"
+	baseURL := c.BaseURL + "/scores-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

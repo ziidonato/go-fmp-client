@@ -24,7 +24,7 @@ type PriceTargetSummaryBulkResponse struct {
 // GetPriceTargetSummaryBulk retrieves comprehensive overview of price targets for all listed symbols
 func (c *Client) GetPriceTargetSummaryBulk() ([]PriceTargetSummaryBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/price-target-summary-bulk"
+	baseURL := c.BaseURL + "/price-target-summary-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

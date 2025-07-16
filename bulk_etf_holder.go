@@ -33,7 +33,7 @@ func (c *Client) ETFHolderBulk(params ETFHolderBulkParams) ([]ETFHolderBulkRespo
 	}
 
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/etf-holder-bulk"
+	baseURL := c.BaseURL + "/etf-holder-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

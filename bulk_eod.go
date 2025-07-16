@@ -32,7 +32,7 @@ func (c *Client) GetEODBulk(params EODBulkParams) ([]EODBulkResponse, error) {
 	}
 
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/eod-bulk"
+	baseURL := c.BaseURL + "/eod-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

@@ -15,17 +15,21 @@ type HTTPClient interface {
 type Client struct {
 	HTTPClient HTTPClient
 	APIKey     string
+	BaseURL    string
 }
 
 // NewClient creates a new Client. If httpClient is nil, http.DefaultClient is used.
-func NewClient(httpClient HTTPClient, apiKey string) (*Client, error) {
+func NewClient(httpClient HTTPClient, apiKey string, baseURL string) (*Client, error) {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
 	}
-
+	if baseURL == "" {
+		baseURL = "https://financialmodelingprep.com/stable"
+	}
 	newClient := &Client{
 		HTTPClient: httpClient,
 		APIKey:     apiKey,
+		BaseURL:    baseURL,
 	}
 
 	err := testClient(newClient)

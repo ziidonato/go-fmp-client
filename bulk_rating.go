@@ -23,7 +23,7 @@ type RatingBulkResponse struct {
 // GetRatingBulk retrieves comprehensive rating data for multiple stocks
 func (c *Client) GetRatingBulk() ([]RatingBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/rating-bulk"
+	baseURL := c.BaseURL + "/rating-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

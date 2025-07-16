@@ -84,7 +84,7 @@ func (c *Client) GetBalanceSheetGrowthBulk(params BalanceSheetGrowthBulkParams) 
 	}
 
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/balance-sheet-statement-growth-bulk"
+	baseURL := c.BaseURL + "/balance-sheet-statement-growth-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

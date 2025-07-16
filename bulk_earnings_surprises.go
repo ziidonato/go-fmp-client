@@ -29,7 +29,7 @@ func (c *Client) GetEarningsSurprisesBulk(params EarningsSurprisesBulkParams) ([
 	}
 
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/earnings-surprises-bulk"
+	baseURL := c.BaseURL + "/earnings-surprises-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

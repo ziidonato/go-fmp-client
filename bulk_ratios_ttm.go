@@ -74,7 +74,7 @@ type RatiosTTMBulkResponse struct {
 // GetRatiosTTMBulk retrieves trailing twelve months financial ratios for stocks
 func (c *Client) GetRatiosTTMBulk() ([]RatiosTTMBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/ratios-ttm-bulk"
+	baseURL := c.BaseURL + "/ratios-ttm-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

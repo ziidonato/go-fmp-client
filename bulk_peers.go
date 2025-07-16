@@ -16,7 +16,7 @@ type PeersBulkResponse struct {
 // GetPeersBulk retrieves peer companies for all stocks in the database
 func (c *Client) GetPeersBulk() ([]PeersBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/peers-bulk"
+	baseURL := c.BaseURL + "/peers-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

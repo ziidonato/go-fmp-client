@@ -21,7 +21,7 @@ type UpgradesDowngradesConsensusBulkResponse struct {
 // UpgradesDowngradesConsensusBulk retrieves analyst ratings across all symbols
 func (c *Client) UpgradesDowngradesConsensusBulk() ([]UpgradesDowngradesConsensusBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/upgrades-downgrades-consensus-bulk"
+	baseURL := c.BaseURL + "/upgrades-downgrades-consensus-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)

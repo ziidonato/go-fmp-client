@@ -57,7 +57,7 @@ type KeyMetricsTTMBulkResponse struct {
 // GetKeyMetricsTTMBulk retrieves trailing twelve months data for all companies
 func (c *Client) GetKeyMetricsTTMBulk() ([]KeyMetricsTTMBulkResponse, error) {
 	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/key-metrics-ttm-bulk"
+	baseURL := c.BaseURL + "/key-metrics-ttm-bulk"
 	u, err := url.Parse(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("error parsing URL: %w", err)
