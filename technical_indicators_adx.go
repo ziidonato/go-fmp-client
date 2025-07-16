@@ -13,7 +13,6 @@ type TechnicalIndicatorADXResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorADX retrieves average directional index technical indicator
 func (c *Client) GetTechnicalIndicatorADX(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorADXResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorADX(symbol string, periodLength int, timef
 	return doRequest[[]TechnicalIndicatorADXResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

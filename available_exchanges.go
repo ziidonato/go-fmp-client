@@ -12,9 +12,7 @@ type AvailableExchangesResponse struct {
 	CountryCode  string `json:"countryCode"`
 	SymbolSuffix string `json:"symbolSuffix"`
 	Delay        string `json:"delay"`
-}
 
 // AvailableExchanges retrieves a complete list of supported stock exchanges
 func (c *Client) AvailableExchanges() ([]AvailableExchangesResponse, error) {
 	return doRequest[[]AvailableExchangesResponse](c, "https://financialmodelingprep.com/stable/available-exchanges", nil)
-}

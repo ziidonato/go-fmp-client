@@ -8,7 +8,6 @@ import (
 // ETFHolderBulkParams represents the parameters for the ETF Holder Bulk API
 type ETFHolderBulkParams struct {
 	Part string `json:"part"` // Required: part number (e.g., "1")
-}
 
 // ETFHolderBulkResponse represents the response from the ETF Holder Bulk API
 type ETFHolderBulkResponse struct {
@@ -21,7 +20,6 @@ type ETFHolderBulkResponse struct {
 	ISIN             string `json:"isin"`
 	MarketValue      string `json:"marketValue"`
 	LastUpdated      string `json:"lastUpdated"`
-}
 
 // ETFHolderBulk retrieves detailed information about assets and shares held by ETFs
 func (c *Client) ETFHolderBulk(params ETFHolderBulkParams) ([]ETFHolderBulkResponse, error) {
@@ -35,4 +33,3 @@ func (c *Client) ETFHolderBulk(params ETFHolderBulkParams) ([]ETFHolderBulkRespo
 	}
 
 	return doRequest[[]ETFHolderBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

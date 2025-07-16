@@ -8,7 +8,6 @@ import (
 // CryptocurrencyQuoteParams represents the parameters for the Cryptocurrency Quote API
 type CryptocurrencyQuoteParams struct {
 	Symbol string `json:"symbol"` // Required: Cryptocurrency symbol (e.g., "BTCUSD")
-}
 
 // CryptocurrencyQuoteResponse represents the response from the Cryptocurrency Quote API
 type CryptocurrencyQuoteResponse struct {
@@ -29,7 +28,6 @@ type CryptocurrencyQuoteResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // CryptocurrencyQuote retrieves real-time quotes for cryptocurrencies
 func (c *Client) CryptocurrencyQuote(params CryptocurrencyQuoteParams) ([]CryptocurrencyQuoteResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) CryptocurrencyQuote(params CryptocurrencyQuoteParams) ([]Crypto
 	}
 
 	return doRequest[[]CryptocurrencyQuoteResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

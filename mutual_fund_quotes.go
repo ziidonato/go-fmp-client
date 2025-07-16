@@ -12,7 +12,6 @@ type MutualFundQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // GetMutualFundQuotes retrieves real-time quotes for mutual funds
 func (c *Client) GetMutualFundQuotes(short bool) ([]MutualFundQuotesResponse, error) {
@@ -20,4 +19,4 @@ func (c *Client) GetMutualFundQuotes(short bool) ([]MutualFundQuotesResponse, er
 
 	return doRequest[[]MutualFundQuotesResponse](c, url, map[string]string{
 		"short": strconv.FormatBool(short)
-}
+	}

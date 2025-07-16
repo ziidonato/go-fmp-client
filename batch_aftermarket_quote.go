@@ -14,7 +14,6 @@ type BatchAftermarketQuoteResponse struct {
 	AskPrice  float64 `json:"askPrice"`
 	Volume    int64   `json:"volume"`
 	Timestamp int64   `json:"timestamp"`
-}
 
 // GetBatchAftermarketQuote retrieves real-time aftermarket quotes for multiple stocks
 func (c *Client) GetBatchAftermarketQuote(symbols string) ([]BatchAftermarketQuoteResponse, error) {
@@ -26,5 +25,4 @@ func (c *Client) GetBatchAftermarketQuote(symbols string) ([]BatchAftermarketQuo
 
 	return doRequest[[]BatchAftermarketQuoteResponse](c, url, map[string]string{
 		"symbols": symbols,
-	})
-}
+	}

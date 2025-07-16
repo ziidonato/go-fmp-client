@@ -10,7 +10,6 @@ type DividendAdjustedPriceParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
-}
 
 // DividendAdjustedPriceResponse represents the response from the Dividend Adjusted Price Chart API
 type DividendAdjustedPriceResponse struct {
@@ -21,7 +20,6 @@ type DividendAdjustedPriceResponse struct {
 	AdjLow   float64 `json:"adjLow"`
 	AdjClose float64 `json:"adjClose"`
 	Volume   int64   `json:"volume"`
-}
 
 // DividendAdjustedPrice retrieves stock price and volume data with dividend adjustments
 func (c *Client) DividendAdjustedPrice(params DividendAdjustedPriceParams) ([]DividendAdjustedPriceResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) DividendAdjustedPrice(params DividendAdjustedPriceParams) ([]Di
 	}
 
 	return doRequest[[]DividendAdjustedPriceResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

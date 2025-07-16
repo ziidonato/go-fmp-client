@@ -24,7 +24,6 @@ type BatchQuoteResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // GetBatchQuote retrieves multiple real-time stock quotes in a single request
 func (c *Client) GetBatchQuote(symbols string) ([]BatchQuoteResponse, error) {
@@ -36,5 +35,4 @@ func (c *Client) GetBatchQuote(symbols string) ([]BatchQuoteResponse, error) {
 
 	return doRequest[[]BatchQuoteResponse](c, url, map[string]string{
 		"symbols": symbols,
-	})
-}
+	}

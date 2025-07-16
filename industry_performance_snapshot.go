@@ -11,7 +11,6 @@ type IndustryPerformanceSnapshotResponse struct {
 	Industry      string  `json:"industry"`
 	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
-}
 
 // IndustryPerformanceSnapshot retrieves detailed performance data by industry
 func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([]IndustryPerformanceSnapshotResponse, error) {
@@ -23,14 +22,13 @@ func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([
 		"date": date,
 	}
 
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
-	if industry != " {
+	if industry != "" {
 		params["industry"] = industry
 	}
 
 	url := "https://financialmodelingprep.com/stable/industry-performance-snapshot"
 
 	return doRequest[[]IndustryPerformanceSnapshotResponse](c, url, params)
-}

@@ -10,7 +10,6 @@ type UnadjustedStockPriceParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
-}
 
 // UnadjustedStockPriceResponse represents the response from the Unadjusted Stock Price API
 type UnadjustedStockPriceResponse struct {
@@ -21,7 +20,6 @@ type UnadjustedStockPriceResponse struct {
 	AdjLow   float64 `json:"adjLow"`
 	AdjClose float64 `json:"adjClose"`
 	Volume   int64   `json:"volume"`
-}
 
 // UnadjustedStockPrice retrieves stock price and volume data without adjustments for stock splits
 func (c *Client) UnadjustedStockPrice(params UnadjustedStockPriceParams) ([]UnadjustedStockPriceResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) UnadjustedStockPrice(params UnadjustedStockPriceParams) ([]Unad
 	}
 
 	return doRequest[[]UnadjustedStockPriceResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

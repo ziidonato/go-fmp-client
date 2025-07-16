@@ -8,7 +8,6 @@ import (
 // PriceTargetConsensusParams represents the parameters for the Price Target Consensus API
 type PriceTargetConsensusParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // PriceTargetConsensusResponse represents the response from the Price Target Consensus API
 type PriceTargetConsensusResponse struct {
@@ -17,7 +16,6 @@ type PriceTargetConsensusResponse struct {
 	TargetLow       float64 `json:"targetLow"`
 	TargetConsensus float64 `json:"targetConsensus"`
 	TargetMedian    float64 `json:"targetMedian"`
-}
 
 // PriceTargetConsensus retrieves analysts' consensus price targets for stocks
 func (c *Client) PriceTargetConsensus(params PriceTargetConsensusParams) ([]PriceTargetConsensusResponse, error) {
@@ -30,4 +28,3 @@ func (c *Client) PriceTargetConsensus(params PriceTargetConsensusParams) ([]Pric
 	}
 
 	return doRequest[[]PriceTargetConsensusResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

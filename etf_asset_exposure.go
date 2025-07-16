@@ -8,7 +8,6 @@ import (
 // ETFAssetExposureParams represents the parameters for the ETF Asset Exposure API
 type ETFAssetExposureParams struct {
 	Symbol string `json:"symbol"` // Required: Asset symbol (e.g., "AAPL")
-}
 
 // ETFAssetExposureResponse represents the response from the ETF Asset Exposure API
 type ETFAssetExposureResponse struct {
@@ -17,7 +16,6 @@ type ETFAssetExposureResponse struct {
 	SharesNumber     int64   `json:"sharesNumber"`
 	WeightPercentage float64 `json:"weightPercentage"`
 	MarketValue      float64 `json:"marketValue"`
-}
 
 // ETFAssetExposure retrieves information about which ETFs hold specific stocks
 func (c *Client) ETFAssetExposure(params ETFAssetExposureParams) ([]ETFAssetExposureResponse, error) {
@@ -30,4 +28,3 @@ func (c *Client) ETFAssetExposure(params ETFAssetExposureParams) ([]ETFAssetExpo
 	}
 
 	return doRequest[[]ETFAssetExposureResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -11,9 +11,7 @@ type DCFBulkResponse struct {
 	Date       string `json:"date"`
 	DCF        string `json:"dcf"`
 	StockPrice string `json:"Stock Price"`
-}
 
 // GetDCFBulk retrieves discounted cash flow valuations for multiple symbols
 func (c *Client) GetDCFBulk() ([]DCFBulkResponse, error) {
 	return doRequest[[]DCFBulkResponse](c, "https://financialmodelingprep.com/stable/dcf-bulk", nil)
-}

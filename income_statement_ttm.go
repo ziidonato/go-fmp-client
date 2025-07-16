@@ -9,7 +9,6 @@ import (
 type IncomeStatementTTMParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-}
 
 // IncomeStatementTTMResponse represents the response from the Income Statement TTM API
 type IncomeStatementTTMResponse struct {
@@ -52,7 +51,6 @@ type IncomeStatementTTMResponse struct {
 	EPSDiluted                              float64 `json:"epsDiluted"`
 	WeightedAverageShsOut                   int64   `json:"weightedAverageShsOut"`
 	WeightedAverageShsOutDil                int64   `json:"weightedAverageShsOutDil"`
-}
 
 // IncomeStatementTTM retrieves trailing twelve months income statement data for a specific stock symbol
 func (c *Client) IncomeStatementTTM(params IncomeStatementTTMParams) ([]IncomeStatementTTMResponse, error) {
@@ -72,4 +70,3 @@ func (c *Client) IncomeStatementTTM(params IncomeStatementTTMParams) ([]IncomeSt
 	}
 
 	return doRequest[[]IncomeStatementTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

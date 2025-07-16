@@ -8,7 +8,6 @@ import (
 // RatiosTTMParams represents the parameters for the Financial Ratios TTM API
 type RatiosTTMParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // RatiosTTMResponse represents the response from the Financial Ratios TTM API
 type RatiosTTMResponse struct {
@@ -71,7 +70,6 @@ type RatiosTTMResponse struct {
 	DebtToMarketCapTTM                         float64 `json:"debtToMarketCapTTM"`
 	EffectiveTaxRateTTM                        float64 `json:"effectiveTaxRateTTM"`
 	EnterpriseValueMultipleTTM                 float64 `json:"enterpriseValueMultipleTTM"`
-}
 
 // RatiosTTM retrieves trailing twelve months financial ratios for a specific stock symbol
 func (c *Client) RatiosTTM(params RatiosTTMParams) ([]RatiosTTMResponse, error) {
@@ -84,4 +82,3 @@ func (c *Client) RatiosTTM(params RatiosTTMParams) ([]RatiosTTMResponse, error) 
 	}
 
 	return doRequest[[]RatiosTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -12,7 +12,6 @@ type ExchangeStockQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // ExchangeStockQuotes retrieves real-time stock quotes for all listed stocks on a specific exchange
 func (c *Client) ExchangeStockQuotes(exchange string, short bool) ([]ExchangeStockQuotesResponse, error) {
@@ -25,4 +24,4 @@ func (c *Client) ExchangeStockQuotes(exchange string, short bool) ([]ExchangeSto
 	return doRequest[[]ExchangeStockQuotesResponse](c, url, map[string]string{
 		"exchange": exchange,
 		"short":    strconv.FormatBool(short)
-}
+	}

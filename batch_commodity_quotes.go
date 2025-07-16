@@ -8,7 +8,6 @@ import (
 // BatchCommodityQuotesParams represents the parameters for the All Commodities Quotes API
 type BatchCommodityQuotesParams struct {
 	Short bool `json:"short"` // Required: Whether to return short format (true) or full format (false)
-}
 
 // BatchCommodityQuotesResponse represents the response from the All Commodities Quotes API
 type BatchCommodityQuotesResponse struct {
@@ -16,7 +15,6 @@ type BatchCommodityQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // BatchCommodityQuotes retrieves real-time quotes for multiple commodities at once
 func (c *Client) BatchCommodityQuotes(params BatchCommodityQuotesParams) ([]BatchCommodityQuotesResponse, error) {
@@ -25,4 +23,3 @@ func (c *Client) BatchCommodityQuotes(params BatchCommodityQuotesParams) ([]Batc
 	}
 
 	return doRequest[[]BatchCommodityQuotesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

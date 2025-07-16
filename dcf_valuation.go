@@ -8,7 +8,6 @@ import (
 // DCFValuationParams represents the parameters for the DCF Valuation API
 type DCFValuationParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // DCFValuationResponse represents the response from the DCF Valuation API
 type DCFValuationResponse struct {
@@ -16,7 +15,6 @@ type DCFValuationResponse struct {
 	Date       string  `json:"date"`
 	DCF        float64 `json:"dcf"`
 	StockPrice float64 `json:"Stock Price"`
-}
 
 // DCFValuation estimates the intrinsic value of a company using discounted cash flow analysis
 func (c *Client) DCFValuation(params DCFValuationParams) ([]DCFValuationResponse, error) {
@@ -29,4 +27,3 @@ func (c *Client) DCFValuation(params DCFValuationParams) ([]DCFValuationResponse
 	}
 
 	return doRequest[[]DCFValuationResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

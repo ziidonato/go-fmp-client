@@ -10,9 +10,7 @@ type FinancialStatementSymbolListResponse struct {
 	CompanyName       string `json:"companyName"`
 	TradingCurrency   string `json:"tradingCurrency"`
 	ReportingCurrency string `json:"reportingCurrency"`
-}
 
 // FinancialStatementSymbolList retrieves a comprehensive list of companies with available financial statements
 func (c *Client) FinancialStatementSymbolList() ([]FinancialStatementSymbolListResponse, error) {
 	return doRequest[[]FinancialStatementSymbolListResponse](c, "https://financialmodelingprep.com/stable/financial-statement-symbol-list", nil)
-}

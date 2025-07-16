@@ -9,7 +9,6 @@ import (
 type CrowdfundingOfferingsLatestParams struct {
 	Page  *int `json:"page"`  // Required: Page number (e.g., 0)
 	Limit *int `json:"limit"` // Required: Number of results (e.g., 100)
-}
 
 // CrowdfundingOfferingsLatestResponse represents the response from the Latest Crowdfunding Campaigns API
 type CrowdfundingOfferingsLatestResponse struct {
@@ -61,7 +60,6 @@ type CrowdfundingOfferingsLatestResponse struct {
 	TaxesPaidPriorFiscalYear                  int64   `json:"taxesPaidPriorFiscalYear"`
 	NetIncomeMostRecentFiscalYear             int64   `json:"netIncomeMostRecentFiscalYear"`
 	NetIncomePriorFiscalYear                  int64   `json:"netIncomePriorFiscalYear"`
-}
 
 // CrowdfundingOfferingsLatest retrieves the most recent crowdfunding campaigns
 func (c *Client) CrowdfundingOfferingsLatest(params CrowdfundingOfferingsLatestParams) ([]CrowdfundingOfferingsLatestResponse, error) {
@@ -79,4 +77,3 @@ func (c *Client) CrowdfundingOfferingsLatest(params CrowdfundingOfferingsLatestP
 	}
 
 	return doRequest[[]CrowdfundingOfferingsLatestResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

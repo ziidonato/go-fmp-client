@@ -27,7 +27,6 @@ type CompanyScreenerParams struct {
 	IsActivelyTrading      *bool    `json:"isActivelyTrading"`      // Optional: Actively trading filter
 	Limit                  *int     `json:"limit"`                  // Optional: Number of results (default: 1000)
 	IncludeAllShareClasses *bool    `json:"includeAllShareClasses"` // Optional: Include all share classes
-}
 
 // CompanyScreenerResponse represents the response from the Stock Screener API
 type CompanyScreenerResponse struct {
@@ -46,7 +45,6 @@ type CompanyScreenerResponse struct {
 	IsETF              bool    `json:"isEtf"`
 	IsFund             bool    `json:"isFund"`
 	IsActivelyTrading  bool    `json:"isActivelyTrading"`
-}
 
 // CompanyScreener discovers stocks that align with investment strategy using various filters
 func (c *Client) CompanyScreener(params CompanyScreenerParams) ([]CompanyScreenerResponse, error) {
@@ -129,4 +127,3 @@ func (c *Client) CompanyScreener(params CompanyScreenerParams) ([]CompanyScreene
 	}
 
 	return doRequest[[]CompanyScreenerResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

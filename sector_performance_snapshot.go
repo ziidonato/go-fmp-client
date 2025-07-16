@@ -11,7 +11,6 @@ type SectorPerformanceSnapshotResponse struct {
 	Sector        string  `json:"sector"`
 	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
-}
 
 // GetSectorPerformanceSnapshot retrieves a snapshot of sector performance
 func (c *Client) GetSectorPerformanceSnapshot(date, exchange, sector string) ([]SectorPerformanceSnapshotResponse, error) {
@@ -23,14 +22,13 @@ func (c *Client) GetSectorPerformanceSnapshot(date, exchange, sector string) ([]
 		"date": date,
 	}
 
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
-	if sector != " {
+	if sector != "" {
 		params["sector"] = sector
 	}
 
 	url := "https://financialmodelingprep.com/stable/sector-performance-snapshot"
 
 	return doRequest[[]SectorPerformanceSnapshotResponse](c, url, params)
-}

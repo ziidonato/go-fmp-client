@@ -8,7 +8,6 @@ import (
 // CompanyNotesParams represents the parameters for the Company Notes API
 type CompanyNotesParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // CompanyNotesResponse represents the response from the Company Notes API
 type CompanyNotesResponse struct {
@@ -16,7 +15,6 @@ type CompanyNotesResponse struct {
 	Symbol   string `json:"symbol"`
 	Title    string `json:"title"`
 	Exchange string `json:"exchange"`
-}
 
 // CompanyNotes retrieves detailed information about company-issued notes
 func (c *Client) CompanyNotes(params CompanyNotesParams) ([]CompanyNotesResponse, error) {
@@ -29,4 +27,3 @@ func (c *Client) CompanyNotes(params CompanyNotesParams) ([]CompanyNotesResponse
 	}
 
 	return doRequest[[]CompanyNotesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

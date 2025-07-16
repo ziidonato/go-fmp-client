@@ -13,7 +13,6 @@ type TechnicalIndicatorStandardDeviationResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorStandardDeviation retrieves standard deviation technical indicator
 func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorStandardDeviationResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLen
 	return doRequest[[]TechnicalIndicatorStandardDeviationResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

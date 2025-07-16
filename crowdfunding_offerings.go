@@ -8,7 +8,6 @@ import (
 // CrowdfundingOfferingsParams represents the parameters for the Crowdfunding By CIK API
 type CrowdfundingOfferingsParams struct {
 	CIK string `json:"cik"` // Required: CIK number (e.g., "0001916078")
-}
 
 // CrowdfundingOfferingsResponse represents the response from the Crowdfunding By CIK API
 type CrowdfundingOfferingsResponse struct {
@@ -60,7 +59,6 @@ type CrowdfundingOfferingsResponse struct {
 	TaxesPaidPriorFiscalYear                  int64   `json:"taxesPaidPriorFiscalYear"`
 	NetIncomeMostRecentFiscalYear             int64   `json:"netIncomeMostRecentFiscalYear"`
 	NetIncomePriorFiscalYear                  int64   `json:"netIncomePriorFiscalYear"`
-}
 
 // CrowdfundingOfferings retrieves detailed information on all crowdfunding campaigns launched by a specific company
 func (c *Client) CrowdfundingOfferings(params CrowdfundingOfferingsParams) ([]CrowdfundingOfferingsResponse, error) {
@@ -73,4 +71,3 @@ func (c *Client) CrowdfundingOfferings(params CrowdfundingOfferingsParams) ([]Cr
 	}
 
 	return doRequest[[]CrowdfundingOfferingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

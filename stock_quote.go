@@ -24,7 +24,6 @@ type StockQuoteResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // GetStockQuote retrieves real-time stock quotes
 func (c *Client) GetStockQuote(symbol string) ([]StockQuoteResponse, error) {
@@ -34,5 +33,4 @@ func (c *Client) GetStockQuote(symbol string) ([]StockQuoteResponse, error) {
 
 	return doRequest[[]StockQuoteResponse](c, "https://financialmodelingprep.com/stable/quote", map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

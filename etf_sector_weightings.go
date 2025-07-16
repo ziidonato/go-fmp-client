@@ -8,14 +8,12 @@ import (
 // ETFSectorWeightingsParams represents the parameters for the ETF Sector Weighting API
 type ETFSectorWeightingsParams struct {
 	Symbol string `json:"symbol"` // Required: ETF/Fund symbol (e.g., "SPY")
-}
 
 // ETFSectorWeightingsResponse represents the response from the ETF Sector Weighting API
 type ETFSectorWeightingsResponse struct {
 	Symbol           string  `json:"symbol"`
 	Sector           string  `json:"sector"`
 	WeightPercentage float64 `json:"weightPercentage"`
-}
 
 // ETFSectorWeightings retrieves sector weighting breakdown for ETFs
 func (c *Client) ETFSectorWeightings(params ETFSectorWeightingsParams) ([]ETFSectorWeightingsResponse, error) {
@@ -28,4 +26,3 @@ func (c *Client) ETFSectorWeightings(params ETFSectorWeightingsParams) ([]ETFSec
 	}
 
 	return doRequest[[]ETFSectorWeightingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

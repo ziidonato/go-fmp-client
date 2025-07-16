@@ -9,7 +9,6 @@ import (
 type IncomeStatementBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
 	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
-}
 
 // IncomeStatementBulkResponse represents the response from the Bulk Income Statement API
 type IncomeStatementBulkResponse struct {
@@ -52,7 +51,6 @@ type IncomeStatementBulkResponse struct {
 	EPSDiluted                              string `json:"epsDiluted"`
 	WeightedAverageShsOut                   string `json:"weightedAverageShsOut"`
 	WeightedAverageShsOutDil                string `json:"weightedAverageShsOutDil"`
-}
 
 // GetIncomeStatementBulk retrieves detailed income statement data in bulk
 func (c *Client) GetIncomeStatementBulk(params IncomeStatementBulkParams) ([]IncomeStatementBulkResponse, error) {
@@ -70,4 +68,3 @@ func (c *Client) GetIncomeStatementBulk(params IncomeStatementBulkParams) ([]Inc
 	}
 
 	return doRequest[[]IncomeStatementBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

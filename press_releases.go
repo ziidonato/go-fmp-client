@@ -16,7 +16,6 @@ type PressReleasesResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // GetPressReleases retrieves official company press releases
 func (c *Client) GetPressReleases(page, limit int, from, to string) ([]PressReleasesResponse, error) {
@@ -35,14 +34,13 @@ func (c *Client) GetPressReleases(page, limit int, from, to string) ([]PressRele
 		"limit": strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/press-releases-latest"
 
 	return doRequest[[]PressReleasesResponse](c, url, params)
-}

@@ -8,7 +8,6 @@ import (
 // GradesParams represents the parameters for the Stock Grades API
 type GradesParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // GradesResponse represents the response from the Stock Grades API
 type GradesResponse struct {
@@ -18,7 +17,6 @@ type GradesResponse struct {
 	PreviousGrade  string `json:"previousGrade"`
 	NewGrade       string `json:"newGrade"`
 	Action         string `json:"action"`
-}
 
 // Grades retrieves the latest stock grades from top analysts and financial institutions
 func (c *Client) Grades(params GradesParams) ([]GradesResponse, error) {
@@ -31,4 +29,3 @@ func (c *Client) Grades(params GradesParams) ([]GradesResponse, error) {
 	}
 
 	return doRequest[[]GradesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

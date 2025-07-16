@@ -16,7 +16,6 @@ type SearchForexNewsResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // SearchForexNews searches for foreign exchange news by symbol
 func (c *Client) SearchForexNews(symbols string, page, limit int, from, to string) ([]SearchForexNewsResponse, error) {
@@ -39,14 +38,13 @@ func (c *Client) SearchForexNews(symbols string, page, limit int, from, to strin
 		"limit":   strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/forex"
 
 	return doRequest[[]SearchForexNewsResponse](c, url, params)
-}

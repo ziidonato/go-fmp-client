@@ -8,13 +8,11 @@ import (
 // ETFCountryWeightingsParams represents the parameters for the ETF & Fund Country Allocation API
 type ETFCountryWeightingsParams struct {
 	Symbol string `json:"symbol"` // Required: ETF/Fund symbol (e.g., "SPY")
-}
 
 // ETFCountryWeightingsResponse represents the response from the ETF & Fund Country Allocation API
 type ETFCountryWeightingsResponse struct {
 	Country          string `json:"country"`
 	WeightPercentage string `json:"weightPercentage"`
-}
 
 // ETFCountryWeightings retrieves country allocation data for ETFs and mutual funds
 func (c *Client) ETFCountryWeightings(params ETFCountryWeightingsParams) ([]ETFCountryWeightingsResponse, error) {
@@ -27,4 +25,3 @@ func (c *Client) ETFCountryWeightings(params ETFCountryWeightingsParams) ([]ETFC
 	}
 
 	return doRequest[[]ETFCountryWeightingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

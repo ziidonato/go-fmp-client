@@ -16,7 +16,6 @@ type SearchCryptoNewsResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // SearchCryptoNews searches for cryptocurrency news by symbol
 func (c *Client) SearchCryptoNews(symbols string, page, limit int, from, to string) ([]SearchCryptoNewsResponse, error) {
@@ -39,14 +38,13 @@ func (c *Client) SearchCryptoNews(symbols string, page, limit int, from, to stri
 		"limit":   strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/crypto"
 
 	return doRequest[[]SearchCryptoNewsResponse](c, url, params)
-}

@@ -9,9 +9,7 @@ type EarningsTranscriptListResponse struct {
 	Symbol          string `json:"symbol"`
 	CompanyName     string `json:"companyName"`
 	NoOfTranscripts string `json:"noOfTranscripts"`
-}
 
 // EarningsTranscriptList retrieves a list of companies with earnings transcripts and the number of transcripts available
 func (c *Client) EarningsTranscriptList() ([]EarningsTranscriptListResponse, error) {
 	return doRequest[[]EarningsTranscriptListResponse](c, "https://financialmodelingprep.com/stable/earnings-transcript-list", nil)
-}

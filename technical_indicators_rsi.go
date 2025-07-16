@@ -13,7 +13,6 @@ type TechnicalIndicatorRSIResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorRSI retrieves relative strength index technical indicator
 func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorRSIResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timef
 	return doRequest[[]TechnicalIndicatorRSIResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

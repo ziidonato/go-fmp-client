@@ -9,7 +9,6 @@ import (
 type InstitutionalOwnershipHolderPerformanceSummaryParams struct {
 	CIK  string `json:"cik"`  // Required: CIK number (e.g., "0001067983")
 	Page *int   `json:"page"` // Optional: Page number (default: 0)
-}
 
 // InstitutionalOwnershipHolderPerformanceSummaryResponse represents the response from the Institutional Ownership Holder Performance Summary API
 type InstitutionalOwnershipHolderPerformanceSummaryResponse struct {
@@ -46,7 +45,6 @@ type InstitutionalOwnershipHolderPerformanceSummaryResponse struct {
 	Performance3yearRelativeToSP500Percentage          float64 `json:"performance3yearRelativeToSP500Percentage"`
 	Performance5yearRelativeToSP500Percentage          float64 `json:"performance5yearRelativeToSP500Percentage"`
 	PerformanceSinceInceptionRelativeToSP500Percentage float64 `json:"performanceSinceInceptionRelativeToSP500Percentage"`
-}
 
 // InstitutionalOwnershipHolderPerformanceSummary retrieves performance summary for institutional holders
 func (c *Client) InstitutionalOwnershipHolderPerformanceSummary(params InstitutionalOwnershipHolderPerformanceSummaryParams) ([]InstitutionalOwnershipHolderPerformanceSummaryResponse, error) {
@@ -63,4 +61,3 @@ func (c *Client) InstitutionalOwnershipHolderPerformanceSummary(params Instituti
 	}
 
 	return doRequest[[]InstitutionalOwnershipHolderPerformanceSummaryResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

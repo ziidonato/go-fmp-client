@@ -11,9 +11,7 @@ type MarketRiskPremiumResponse struct {
 	RiskFreeRate      float64 `json:"riskFreeRate"`
 	MarketReturn      float64 `json:"marketReturn"`
 	Description       string  `json:"description"`
-}
 
 // MarketRiskPremium retrieves the market risk premium for specific dates
 func (c *Client) MarketRiskPremium() ([]MarketRiskPremiumResponse, error) {
 	return doRequest[[]MarketRiskPremiumResponse](c, "https://financialmodelingprep.com/stable/market-risk-premium", nil)
-}

@@ -19,7 +19,7 @@ func (c *Client) AcquisitionOwnership(symbol string) ([]AcquisitionOwnershipResp
 		return nil, fmt.Errorf("symbol is required")
 	}
 
-	return doRequest[[]AcquisitionOwnershipResponse](c, "https://financialmodelingprep.com/stable/acquisition-of-beneficial-ownership", map[string]string{
+	return c.doRequest[[]AcquisitionOwnershipResponse]("https://financialmodelingprep.com/stable/acquisition-of-beneficial-ownership", map[string]string{
 		"symbol": symbol,
 	})
 }

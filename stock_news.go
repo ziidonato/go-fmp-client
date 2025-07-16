@@ -16,7 +16,6 @@ type StockNewsResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // GetStockNews retrieves the latest stock market news
 func (c *Client) GetStockNews(page, limit int, from, to string) ([]StockNewsResponse, error) {
@@ -35,14 +34,13 @@ func (c *Client) GetStockNews(page, limit int, from, to string) ([]StockNewsResp
 		"limit": strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/stock-latest"
 
 	return doRequest[[]StockNewsResponse](c, url, params)
-}

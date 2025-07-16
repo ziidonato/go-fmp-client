@@ -10,7 +10,6 @@ type InstitutionalOwnershipSymbolPositionsSummaryParams struct {
 	Symbol  string `json:"symbol"`  // Required: Stock symbol (e.g., "AAPL")
 	Year    string `json:"year"`    // Required: Year (e.g., "2023")
 	Quarter string `json:"quarter"` // Required: Quarter (e.g., "3")
-}
 
 // InstitutionalOwnershipSymbolPositionsSummaryResponse represents the response from the Institutional Ownership Symbol Positions Summary API
 type InstitutionalOwnershipSymbolPositionsSummaryResponse struct {
@@ -50,7 +49,6 @@ type InstitutionalOwnershipSymbolPositionsSummaryResponse struct {
 	PutCallRatio             float64 `json:"putCallRatio"`
 	LastPutCallRatio         float64 `json:"lastPutCallRatio"`
 	PutCallRatioChange       float64 `json:"putCallRatioChange"`
-}
 
 // InstitutionalOwnershipSymbolPositionsSummary retrieves positions summary for a specific stock symbol
 func (c *Client) InstitutionalOwnershipSymbolPositionsSummary(params InstitutionalOwnershipSymbolPositionsSummaryParams) ([]InstitutionalOwnershipSymbolPositionsSummaryResponse, error) {
@@ -73,4 +71,3 @@ func (c *Client) InstitutionalOwnershipSymbolPositionsSummary(params Institution
 	}
 
 	return doRequest[[]InstitutionalOwnershipSymbolPositionsSummaryResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

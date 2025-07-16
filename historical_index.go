@@ -15,22 +15,18 @@ type HistoricalIndexResponse struct {
 	Date            string `json:"date"`
 	Symbol          string `json:"symbol"`
 	Reason          string `json:"reason"`
-}
 
 // HistoricalSP500 retrieves historical data for the S&P 500 index
 func (c *Client) HistoricalSP500() ([]HistoricalIndexResponse, error) {
 	url := "https://financialmodelingprep.com/stable/historical-sp500-constituent"
-	return doRequest[[]HistoricalIndexResponse](c, url, map[string]string{})
-}
+	return doRequest[[]HistoricalIndexResponse](c, url, map[string]string{}
 
 // HistoricalNasdaq retrieves historical data for the Nasdaq index
 func (c *Client) HistoricalNasdaq() ([]HistoricalIndexResponse, error) {
 	url := "https://financialmodelingprep.com/stable/historical-nasdaq-constituent"
-	return doRequest[[]HistoricalIndexResponse](c, url, map[string]string{})
-}
+	return doRequest[[]HistoricalIndexResponse](c, url, map[string]string{}
 
 // HistoricalDowJones retrieves historical data for the Dow Jones Industrial Average
 func (c *Client) HistoricalDowJones() ([]HistoricalIndexResponse, error) {
 	url := "https://financialmodelingprep.com/stable/historical-dowjones-constituent"
-	return doRequest[[]HistoricalIndexResponse](c, url, map[string]string{})
-}
+	return doRequest[[]HistoricalIndexResponse](c, url, map[string]string{}

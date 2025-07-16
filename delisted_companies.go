@@ -9,7 +9,6 @@ import (
 type DelistedCompaniesParams struct {
 	Page  *int `json:"page"`  // Required: Page number (e.g., 0)
 	Limit *int `json:"limit"` // Required: Number of results (Maximum 100 records per request)
-}
 
 // DelistedCompaniesResponse represents the response from the Delisted Companies API
 type DelistedCompaniesResponse struct {
@@ -18,7 +17,6 @@ type DelistedCompaniesResponse struct {
 	Exchange     string `json:"exchange"`
 	IPODate      string `json:"ipoDate"`
 	DelistedDate string `json:"delistedDate"`
-}
 
 // DelistedCompanies retrieves a comprehensive list of companies that have been delisted from US exchanges
 func (c *Client) DelistedCompanies(params DelistedCompaniesParams) ([]DelistedCompaniesResponse, error) {
@@ -40,4 +38,3 @@ func (c *Client) DelistedCompanies(params DelistedCompaniesParams) ([]DelistedCo
 	}
 
 	return doRequest[[]DelistedCompaniesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

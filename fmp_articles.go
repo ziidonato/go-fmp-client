@@ -16,7 +16,6 @@ type FMPArticlesResponse struct {
 	Link    string `json:"link"`
 	Author  string `json:"author"`
 	Site    string `json:"site"`
-}
 
 // GetFMPArticles retrieves the latest articles from Financial Modeling Prep
 func (c *Client) GetFMPArticles(page, limit int) ([]FMPArticlesResponse, error) {
@@ -31,4 +30,4 @@ func (c *Client) GetFMPArticles(page, limit int) ([]FMPArticlesResponse, error) 
 
 	return doRequest[[]FMPArticlesResponse](c, url, map[string]string{
 		"page":  strconv.Itoa(page)
-}
+	}

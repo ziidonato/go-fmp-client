@@ -9,7 +9,6 @@ import (
 type InstitutionalOwnershipLatestParams struct {
 	Page  *int `json:"page"`  // Optional: Page number (default: 0)
 	Limit *int `json:"limit"` // Optional: Number of results (default: 100)
-}
 
 // InstitutionalOwnershipLatestResponse represents the response from the Institutional Ownership Latest API
 type InstitutionalOwnershipLatestResponse struct {
@@ -21,7 +20,6 @@ type InstitutionalOwnershipLatestResponse struct {
 	FormType     string `json:"formType"`
 	Link         string `json:"link"`
 	FinalLink    string `json:"finalLink"`
-}
 
 // InstitutionalOwnershipLatest retrieves the latest institutional ownership filings
 func (c *Client) InstitutionalOwnershipLatest(params InstitutionalOwnershipLatestParams) ([]InstitutionalOwnershipLatestResponse, error) {
@@ -36,4 +34,3 @@ func (c *Client) InstitutionalOwnershipLatest(params InstitutionalOwnershipLates
 	}
 
 	return doRequest[[]InstitutionalOwnershipLatestResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

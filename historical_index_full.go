@@ -17,7 +17,6 @@ type HistoricalIndexFullResponse struct {
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	VWAP          float64 `json:"vwap"`
-}
 
 // HistoricalIndexFull retrieves full historical end-of-day prices for stock indexes
 func (c *Client) HistoricalIndexFull(symbol, from, to string) ([]HistoricalIndexFullResponse, error) {
@@ -29,14 +28,13 @@ func (c *Client) HistoricalIndexFull(symbol, from, to string) ([]HistoricalIndex
 		"symbol": symbol,
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-price-eod/full"
 
 	return doRequest[[]HistoricalIndexFullResponse](c, url, params)
-}

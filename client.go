@@ -37,7 +37,7 @@ func NewClient(httpClient HTTPClient, apiKey string) (*Client, error) {
 }
 
 func testClient(client *Client) error {
-	body, err := doRequest[[]map[string]any](client, "https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{})
+	body, err := client.doRequest[[]map[string]any]("https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{})
 	if err != nil {
 		return fmt.Errorf("failed to perform test request: %v", err)
 	}
@@ -51,7 +51,7 @@ func testClient(client *Client) error {
 
 // doRequest is a unified method for making HTTP requests to the Financial Modeling Prep API
 // It handles the complete request-response cycle including JSON unmarshaling
-func doRequest[T any](c *Client, url string, params map[string]string) (T, error) {
+func (c *Client) doRequest[T any](url string, params map[string]string) (T, error) {
 	var result T
 	
 	req, err := http.NewRequest("GET", url, nil)

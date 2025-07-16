@@ -9,7 +9,6 @@ import (
 type BalanceSheetGrowthBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
 	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
-}
 
 // BalanceSheetGrowthBulkResponse represents the response from the Balance Sheet Growth Bulk API
 type BalanceSheetGrowthBulkResponse struct {
@@ -69,7 +68,6 @@ type BalanceSheetGrowthBulkResponse struct {
 	GrowthCapitalLeaseObligationsCurrent          string `json:"growthCapitalLeaseObligationsCurrent"`
 	GrowthAdditionalPaidInCapital                 string `json:"growthAdditionalPaidInCapital"`
 	GrowthTreasuryStock                           string `json:"growthTreasuryStock"`
-}
 
 // GetBalanceSheetGrowthBulk retrieves growth data across multiple companies' balance sheets
 func (c *Client) GetBalanceSheetGrowthBulk(params BalanceSheetGrowthBulkParams) ([]BalanceSheetGrowthBulkResponse, error) {
@@ -87,4 +85,3 @@ func (c *Client) GetBalanceSheetGrowthBulk(params BalanceSheetGrowthBulkParams) 
 	}
 
 	return doRequest[[]BalanceSheetGrowthBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

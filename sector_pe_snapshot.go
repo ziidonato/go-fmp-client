@@ -11,7 +11,6 @@ type SectorPESnapshotResponse struct {
 	Sector   string  `json:"sector"`
 	Exchange string  `json:"exchange"`
 	PE       float64 `json:"pe"`
-}
 
 // GetSectorPESnapshot retrieves the price-to-earnings (P/E) ratios for various sectors
 func (c *Client) GetSectorPESnapshot(date, exchange, sector string) ([]SectorPESnapshotResponse, error) {
@@ -23,14 +22,13 @@ func (c *Client) GetSectorPESnapshot(date, exchange, sector string) ([]SectorPES
 		"date": date,
 	}
 
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
-	if sector != " {
+	if sector != "" {
 		params["sector"] = sector
 	}
 
 	url := "https://financialmodelingprep.com/stable/sector-pe-snapshot"
 
 	return doRequest[[]SectorPESnapshotResponse](c, url, params)
-}

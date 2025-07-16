@@ -8,7 +8,6 @@ import (
 // ForexQuoteShortParams represents the parameters for the Forex Quote Short API
 type ForexQuoteShortParams struct {
 	Symbol string `json:"symbol"` // Required: Forex symbol (e.g., "EURUSD")
-}
 
 // ForexQuoteShortResponse represents the response from the Forex Quote Short API
 type ForexQuoteShortResponse struct {
@@ -16,7 +15,6 @@ type ForexQuoteShortResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // ForexQuoteShort retrieves concise forex pair quotes with live currency exchange rates
 func (c *Client) ForexQuoteShort(params ForexQuoteShortParams) ([]ForexQuoteShortResponse, error) {
@@ -29,4 +27,3 @@ func (c *Client) ForexQuoteShort(params ForexQuoteShortParams) ([]ForexQuoteShor
 	}
 
 	return doRequest[[]ForexQuoteShortResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

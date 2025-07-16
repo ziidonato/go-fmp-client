@@ -11,11 +11,9 @@ type AllExchangeMarketHoursResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Exchange string `json:"exchange"`
 	// Add other fields as needed based on actual API response
-}
 
 // AllExchangeMarketHours retrieves market hours for all exchanges
 func (c *Client) AllExchangeMarketHours() ([]AllExchangeMarketHoursResponse, error) {
 	url := "https://financialmodelingprep.com/stable/all-exchange-market-hours"
 
-	return doRequest[[]AllExchangeMarketHoursResponse](c, url, map[string]string{})
-}
+	return doRequest[[]AllExchangeMarketHoursResponse](c, url, map[string]string{}

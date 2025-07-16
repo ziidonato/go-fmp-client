@@ -10,7 +10,6 @@ type IncomeStatementAsReportedParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 	Period string `json:"period"` // Optional: Period type - "annual,quarter"
-}
 
 // IncomeStatementAsReportedResponse represents the response from the Income Statement As Reported API
 type IncomeStatementAsReportedResponse struct {
@@ -53,7 +52,6 @@ type IncomeStatementAsReportedResponse struct {
 	EPSDiluted                              float64 `json:"epsDiluted"`
 	WeightedAverageShsOut                   int64   `json:"weightedAverageShsOut"`
 	WeightedAverageShsOutDil                int64   `json:"weightedAverageShsOutDil"`
-}
 
 // IncomeStatementAsReported retrieves income statement as reported data for a specific stock symbol
 func (c *Client) IncomeStatementAsReported(params IncomeStatementAsReportedParams) ([]IncomeStatementAsReportedResponse, error) {
@@ -72,9 +70,8 @@ func (c *Client) IncomeStatementAsReported(params IncomeStatementAsReportedParam
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
 	return doRequest[[]IncomeStatementAsReportedResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

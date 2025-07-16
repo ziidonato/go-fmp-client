@@ -9,14 +9,12 @@ import (
 type FundDisclosureDatesParams struct {
 	Symbol string  `json:"symbol"` // Required: Fund/ETF symbol (e.g., "VWO")
 	CIK    *string `json:"cik"`    // Optional: CIK number
-}
 
 // FundDisclosureDatesResponse represents the response from the Fund & ETF Disclosures by Date API
 type FundDisclosureDatesResponse struct {
 	Date    string `json:"date"`
 	Year    int    `json:"year"`
 	Quarter int    `json:"quarter"`
-}
 
 // FundDisclosureDates retrieves disclosure dates for mutual funds and ETFs
 func (c *Client) FundDisclosureDates(params FundDisclosureDatesParams) ([]FundDisclosureDatesResponse, error) {
@@ -33,4 +31,3 @@ func (c *Client) FundDisclosureDates(params FundDisclosureDatesParams) ([]FundDi
 	}
 
 	return doRequest[[]FundDisclosureDatesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

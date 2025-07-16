@@ -8,7 +8,6 @@ import (
 // EODBulkParams represents the parameters for the EOD Bulk API
 type EODBulkParams struct {
 	Date string `json:"date"` // Required: date (e.g., "2024-10-22")
-}
 
 // EODBulkResponse represents the response from the EOD Bulk API
 type EODBulkResponse struct {
@@ -20,7 +19,6 @@ type EODBulkResponse struct {
 	Close    string `json:"close"`
 	AdjClose string `json:"adjClose"`
 	Volume   string `json:"volume"`
-}
 
 // GetEODBulk retrieves end-of-day stock price data for multiple symbols in bulk
 func (c *Client) GetEODBulk(params EODBulkParams) ([]EODBulkResponse, error) {
@@ -34,4 +32,3 @@ func (c *Client) GetEODBulk(params EODBulkParams) ([]EODBulkResponse, error) {
 	}
 
 	return doRequest[[]EODBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

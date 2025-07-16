@@ -12,7 +12,6 @@ type CryptoQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // CryptoQuotes retrieves real-time cryptocurrency quotes
 func (c *Client) CryptoQuotes(short bool) ([]CryptoQuotesResponse, error) {
@@ -20,4 +19,4 @@ func (c *Client) CryptoQuotes(short bool) ([]CryptoQuotesResponse, error) {
 
 	return doRequest[[]CryptoQuotesResponse](c, url, map[string]string{
 		"short": strconv.FormatBool(short)
-}
+	}

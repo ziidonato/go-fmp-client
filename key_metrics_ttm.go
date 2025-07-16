@@ -8,7 +8,6 @@ import (
 // KeyMetricsTTMParams represents the parameters for the Key Metrics TTM API
 type KeyMetricsTTMParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // KeyMetricsTTMResponse represents the response from the Key Metrics TTM API
 type KeyMetricsTTMResponse struct {
@@ -42,7 +41,6 @@ type KeyMetricsTTMResponse struct {
 	SalesGeneralAndAdministrativeToRevenueTTM float64 `json:"salesGeneralAndAdministrativeToRevenueTTM"`
 	ResearchAndDevelopementToRevenueTTM       float64 `json:"researchAndDevelopementToRevenueTTM"`
 	StockBasedCompensationToRevenueTTM        float64 `json:"stockBasedCompensationToRevenueTTM"`
-}
 
 // KeyMetricsTTM retrieves trailing twelve months key financial metrics for a specific stock symbol
 func (c *Client) KeyMetricsTTM(params KeyMetricsTTMParams) ([]KeyMetricsTTMResponse, error) {
@@ -55,4 +53,3 @@ func (c *Client) KeyMetricsTTM(params KeyMetricsTTMParams) ([]KeyMetricsTTMRespo
 	}
 
 	return doRequest[[]KeyMetricsTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

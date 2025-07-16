@@ -11,7 +11,6 @@ type ExchangeMarketHoursResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Exchange string `json:"exchange"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetExchangeMarketHours retrieves trading hours for specific stock exchanges
 func (c *Client) GetExchangeMarketHours(exchange string) ([]ExchangeMarketHoursResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) GetExchangeMarketHours(exchange string) ([]ExchangeMarketHoursR
 
 	return doRequest[[]ExchangeMarketHoursResponse](c, url, map[string]string{
 		"exchange": exchange,
-	})
-}
+	}

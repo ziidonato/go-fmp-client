@@ -8,7 +8,6 @@ import (
 // ETFHoldingsParams represents the parameters for the ETF & Fund Holdings API
 type ETFHoldingsParams struct {
 	Symbol string `json:"symbol"` // Required: ETF/Fund symbol (e.g., "SPY")
-}
 
 // ETFHoldingsResponse represents the response from the ETF & Fund Holdings API
 type ETFHoldingsResponse struct {
@@ -22,7 +21,6 @@ type ETFHoldingsResponse struct {
 	MarketValue      float64 `json:"marketValue"`
 	UpdatedAt        string  `json:"updatedAt"`
 	Updated          string  `json:"updated"`
-}
 
 // ETFHoldings retrieves a detailed breakdown of the assets held within ETFs and mutual funds
 func (c *Client) ETFHoldings(params ETFHoldingsParams) ([]ETFHoldingsResponse, error) {
@@ -35,4 +33,3 @@ func (c *Client) ETFHoldings(params ETFHoldingsParams) ([]ETFHoldingsResponse, e
 	}
 
 	return doRequest[[]ETFHoldingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

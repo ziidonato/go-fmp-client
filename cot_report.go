@@ -10,7 +10,6 @@ type COTReportParams struct {
 	Symbol *string `json:"symbol"` // Optional: Symbol (e.g., "AAPL")
 	From   *string `json:"from"`   // Required: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Required: End date (e.g., "2024-03-01")
-}
 
 // COTReportResponse represents the response from the COT Report API
 type COTReportResponse struct {
@@ -142,7 +141,6 @@ type COTReportResponse struct {
 	ConcNetLe8TdrLongOther      float64 `json:"concNetLe8TdrLongOther"`
 	ConcNetLe8TdrShortOther     float64 `json:"concNetLe8TdrShortOther"`
 	ContractUnits               string  `json:"contractUnits"`
-}
 
 // COTReport retrieves comprehensive Commitment of Traders (COT) reports
 func (c *Client) COTReport(params COTReportParams) ([]COTReportResponse, error) {
@@ -164,4 +162,3 @@ func (c *Client) COTReport(params COTReportParams) ([]COTReportResponse, error) 
 	}
 
 	return doRequest[[]COTReportResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

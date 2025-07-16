@@ -11,14 +11,12 @@ type HistoricalMarketCapitalizationParams struct {
 	Limit  *int    `json:"limit"`  // Optional: Number of results (Maximum 5000 records per request)
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
-}
 
 // HistoricalMarketCapitalizationResponse represents the response from the Historical Market Cap API
 type HistoricalMarketCapitalizationResponse struct {
 	Symbol    string `json:"symbol"`
 	Date      string `json:"date"`
 	MarketCap int64  `json:"marketCap"`
-}
 
 // HistoricalMarketCapitalization retrieves historical market capitalization data for a company
 func (c *Client) HistoricalMarketCapitalization(params HistoricalMarketCapitalizationParams) ([]HistoricalMarketCapitalizationResponse, error) {
@@ -46,4 +44,3 @@ func (c *Client) HistoricalMarketCapitalization(params HistoricalMarketCapitaliz
 	}
 
 	return doRequest[[]HistoricalMarketCapitalizationResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

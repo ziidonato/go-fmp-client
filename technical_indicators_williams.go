@@ -13,7 +13,6 @@ type TechnicalIndicatorWilliamsResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorWilliams retrieves Williams %R technical indicator
 func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorWilliamsResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, 
 	return doRequest[[]TechnicalIndicatorWilliamsResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

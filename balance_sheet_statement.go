@@ -10,7 +10,6 @@ type BalanceSheetStatementParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
-}
 
 // BalanceSheetStatementResponse represents the response from the Balance Sheet Statement API
 type BalanceSheetStatementResponse struct {
@@ -74,7 +73,6 @@ type BalanceSheetStatementResponse struct {
 	TotalInvestments                        int64  `json:"totalInvestments"`
 	TotalDebt                               int64  `json:"totalDebt"`
 	NetDebt                                 int64  `json:"netDebt"`
-}
 
 // BalanceSheetStatement retrieves balance sheet statement data for a specific stock symbol
 func (c *Client) BalanceSheetStatement(params BalanceSheetStatementParams) ([]BalanceSheetStatementResponse, error) {
@@ -93,9 +91,8 @@ func (c *Client) BalanceSheetStatement(params BalanceSheetStatementParams) ([]Ba
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
 	return doRequest[[]BalanceSheetStatementResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -12,7 +12,6 @@ type ForexQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // ForexQuotes retrieves real-time quotes for multiple forex currency pairs
 func (c *Client) ForexQuotes(short bool) ([]ForexQuotesResponse, error) {
@@ -20,4 +19,4 @@ func (c *Client) ForexQuotes(short bool) ([]ForexQuotesResponse, error) {
 
 	return doRequest[[]ForexQuotesResponse](c, url, map[string]string{
 		"short": strconv.FormatBool(short)
-}
+	}

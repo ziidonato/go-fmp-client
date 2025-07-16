@@ -9,7 +9,6 @@ import (
 type LatestFinancialStatementsParams struct {
 	Page  *int `json:"page"`  // Optional: Page number (default: 0)
 	Limit *int `json:"limit"` // Optional: Number of results (Maximum 250 records per request)
-}
 
 // LatestFinancialStatementsResponse represents the response from the Latest Financial Statements API
 type LatestFinancialStatementsResponse struct {
@@ -18,7 +17,6 @@ type LatestFinancialStatementsResponse struct {
 	Period       string `json:"period"`
 	Date         string `json:"date"`
 	DateAdded    string `json:"dateAdded"`
-}
 
 // LatestFinancialStatements retrieves the latest financial statements data
 func (c *Client) LatestFinancialStatements(params LatestFinancialStatementsParams) ([]LatestFinancialStatementsResponse, error) {
@@ -36,4 +34,3 @@ func (c *Client) LatestFinancialStatements(params LatestFinancialStatementsParam
 	}
 
 	return doRequest[[]LatestFinancialStatementsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

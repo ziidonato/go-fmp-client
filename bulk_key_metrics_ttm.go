@@ -50,9 +50,7 @@ type KeyMetricsTTMBulkResponse struct {
 	FreeCashFlowToFirmTTM                     string `json:"freeCashFlowToFirmTTM"`
 	TangibleAssetValueTTM                     string `json:"tangibleAssetValueTTM"`
 	NetCurrentAssetValueTTM                   string `json:"netCurrentAssetValueTTM"`
-}
 
 // GetKeyMetricsTTMBulk retrieves trailing twelve months data for all companies
 func (c *Client) GetKeyMetricsTTMBulk() ([]KeyMetricsTTMBulkResponse, error) {
 	return doRequest[[]KeyMetricsTTMBulkResponse](c, "https://financialmodelingprep.com/stable/key-metrics-ttm-bulk", nil)
-}

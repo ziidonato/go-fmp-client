@@ -11,7 +11,6 @@ type AnalystEstimatesParams struct {
 	Period string `json:"period"` // Required: Period type - "annual" or "quarter"
 	Page   *int   `json:"page"`   // Optional: Page number (default: 0)
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-}
 
 // AnalystEstimatesResponse represents the response from the Financial Estimates API
 type AnalystEstimatesResponse struct {
@@ -37,7 +36,6 @@ type AnalystEstimatesResponse struct {
 	EPSLow             float64 `json:"epsLow"`
 	NumAnalystsRevenue int     `json:"numAnalystsRevenue"`
 	NumAnalystsEPS     int     `json:"numAnalystsEps"`
-}
 
 // AnalystEstimates retrieves analyst financial estimates for stock symbols
 func (c *Client) AnalystEstimates(params AnalystEstimatesParams) ([]AnalystEstimatesResponse, error) {
@@ -70,4 +68,3 @@ func (c *Client) AnalystEstimates(params AnalystEstimatesParams) ([]AnalystEstim
 	}
 
 	return doRequest[[]AnalystEstimatesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

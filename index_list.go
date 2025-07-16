@@ -11,11 +11,9 @@ type IndexListResponse struct {
 	Name     string `json:"name"`
 	Exchange string `json:"exchange"`
 	Currency string `json:"currency"`
-}
 
 // GetIndexList retrieves a comprehensive list of stock market indexes across global exchanges
 func (c *Client) GetIndexList() ([]IndexListResponse, error) {
 	url := "https://financialmodelingprep.com/stable/index-list"
 
-	return doRequest[[]IndexListResponse](c, url, map[string]string{})
-}
+	return doRequest[[]IndexListResponse](c, url, map[string]string{}

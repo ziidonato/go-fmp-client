@@ -9,7 +9,6 @@ import (
 type SymbolChangeParams struct {
 	Invalid *string `json:"invalid"` // Required: Filter for invalid symbols (e.g., "false")
 	Limit   *int    `json:"limit"`   // Required: Number of results (e.g., 100)
-}
 
 // SymbolChangeResponse represents the response from the Symbol Changes List API
 type SymbolChangeResponse struct {
@@ -17,7 +16,6 @@ type SymbolChangeResponse struct {
 	CompanyName string `json:"companyName"`
 	OldSymbol   string `json:"oldSymbol"`
 	NewSymbol   string `json:"newSymbol"`
-}
 
 // SymbolChange retrieves information about stock symbol changes due to mergers, acquisitions, stock splits, and name changes
 func (c *Client) SymbolChange(params SymbolChangeParams) ([]SymbolChangeResponse, error) {
@@ -35,4 +33,3 @@ func (c *Client) SymbolChange(params SymbolChangeParams) ([]SymbolChangeResponse
 	}
 
 	return doRequest[[]SymbolChangeResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

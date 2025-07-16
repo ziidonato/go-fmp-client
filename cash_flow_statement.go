@@ -10,7 +10,6 @@ type CashFlowStatementParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
-}
 
 // CashFlowStatementResponse represents the response from the Cash Flow Statement API
 type CashFlowStatementResponse struct {
@@ -61,7 +60,6 @@ type CashFlowStatementResponse struct {
 	FreeCashFlow                           int64  `json:"freeCashFlow"`
 	IncomeTaxesPaid                        int64  `json:"incomeTaxesPaid"`
 	InterestPaid                           int64  `json:"interestPaid"`
-}
 
 // CashFlowStatement retrieves cash flow statement data for a specific stock symbol
 func (c *Client) CashFlowStatement(params CashFlowStatementParams) ([]CashFlowStatementResponse, error) {
@@ -80,9 +78,8 @@ func (c *Client) CashFlowStatement(params CashFlowStatementParams) ([]CashFlowSt
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
 	return doRequest[[]CashFlowStatementResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

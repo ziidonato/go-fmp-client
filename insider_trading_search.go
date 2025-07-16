@@ -12,7 +12,6 @@ type InsiderTradingSearchResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Symbol string `json:"symbol"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetInsiderTradingSearch searches insider trading activity by company or symbol
 func (c *Client) GetInsiderTradingSearch(page, limit int) ([]InsiderTradingSearchResponse, error) {
@@ -27,4 +26,4 @@ func (c *Client) GetInsiderTradingSearch(page, limit int) ([]InsiderTradingSearc
 
 	return doRequest[[]InsiderTradingSearchResponse](c, url, map[string]string{
 		"page":  strconv.Itoa(page)
-}
+	}

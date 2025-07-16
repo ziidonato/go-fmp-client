@@ -10,7 +10,6 @@ type CryptocurrencyChart5MinParams struct {
 	Symbol string  `json:"symbol"` // Required: Cryptocurrency symbol (e.g., "BTCUSD")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
-}
 
 // CryptocurrencyChart5MinResponse represents the response from the 5-Minute Cryptocurrency Chart API
 type CryptocurrencyChart5MinResponse struct {
@@ -20,7 +19,6 @@ type CryptocurrencyChart5MinResponse struct {
 	High   float64 `json:"high"`
 	Close  float64 `json:"close"`
 	Volume int64   `json:"volume"`
-}
 
 // CryptocurrencyChart5Min retrieves real-time, 5-minute interval price data for cryptocurrencies
 func (c *Client) CryptocurrencyChart5Min(params CryptocurrencyChart5MinParams) ([]CryptocurrencyChart5MinResponse, error) {
@@ -41,4 +39,3 @@ func (c *Client) CryptocurrencyChart5Min(params CryptocurrencyChart5MinParams) (
 	}
 
 	return doRequest[[]CryptocurrencyChart5MinResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

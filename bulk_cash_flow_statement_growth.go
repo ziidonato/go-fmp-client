@@ -9,7 +9,6 @@ import (
 type CashFlowStatementGrowthBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
 	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
-}
 
 // CashFlowStatementGrowthBulkResponse represents the response from the Cash Flow Statement Growth Bulk API
 type CashFlowStatementGrowthBulkResponse struct {
@@ -55,7 +54,6 @@ type CashFlowStatementGrowthBulkResponse struct {
 	GrowthPreferredDividendsPaid                   string `json:"growthPreferredDividendsPaid"`
 	GrowthIncomeTaxesPaid                          string `json:"growthIncomeTaxesPaid"`
 	GrowthInterestPaid                             string `json:"growthInterestPaid"`
-}
 
 // GetCashFlowStatementGrowthBulk retrieves bulk growth data for cash flow statements
 func (c *Client) GetCashFlowStatementGrowthBulk(params CashFlowStatementGrowthBulkParams) ([]CashFlowStatementGrowthBulkResponse, error) {
@@ -73,4 +71,3 @@ func (c *Client) GetCashFlowStatementGrowthBulk(params CashFlowStatementGrowthBu
 	}
 
 	return doRequest[[]CashFlowStatementGrowthBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

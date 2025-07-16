@@ -9,7 +9,6 @@ import (
 type CompanyExecutivesParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Active *string `json:"active"` // Required: Filter for active executives (e.g., "true")
-}
 
 // CompanyExecutivesResponse represents the response from the Company Executives API
 type CompanyExecutivesResponse struct {
@@ -20,7 +19,6 @@ type CompanyExecutivesResponse struct {
 	Gender      string `json:"gender"`
 	YearBorn    *int   `json:"yearBorn"`
 	Active      *bool  `json:"active"`
-}
 
 // CompanyExecutives retrieves detailed information on company executives
 func (c *Client) CompanyExecutives(params CompanyExecutivesParams) ([]CompanyExecutivesResponse, error) {
@@ -38,4 +36,3 @@ func (c *Client) CompanyExecutives(params CompanyExecutivesParams) ([]CompanyExe
 	}
 
 	return doRequest[[]CompanyExecutivesResponse](c, "https://financialmodelingprep.com/stable/key-executives", urlParams)
-}

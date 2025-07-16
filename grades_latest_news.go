@@ -9,7 +9,6 @@ import (
 type GradesLatestNewsParams struct {
 	Page  *int `json:"page"`  // Required: Page number (Page maxed at 100)
 	Limit *int `json:"limit"` // Required: Number of results (Maximum 1000 records per request)
-}
 
 // GradesLatestNewsResponse represents the response from the Stock Grade Latest News API
 type GradesLatestNewsResponse struct {
@@ -24,7 +23,6 @@ type GradesLatestNewsResponse struct {
 	GradingCompany  string  `json:"gradingCompany"`
 	Action          string  `json:"action"`
 	PriceWhenPosted float64 `json:"priceWhenPosted"`
-}
 
 // GradesLatestNews retrieves the most recent updates on analyst ratings for all stock symbols
 func (c *Client) GradesLatestNews(params GradesLatestNewsParams) ([]GradesLatestNewsResponse, error) {
@@ -50,4 +48,3 @@ func (c *Client) GradesLatestNews(params GradesLatestNewsParams) ([]GradesLatest
 	}
 
 	return doRequest[[]GradesLatestNewsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

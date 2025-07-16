@@ -8,9 +8,7 @@ import (
 type COTListResponse struct {
 	Symbol string `json:"symbol"`
 	Name   string `json:"name"`
-}
 
 // COTList retrieves a comprehensive list of available Commitment of Traders (COT) reports
 func (c *Client) COTList() ([]COTListResponse, error) {
 	return doRequest[[]COTListResponse](c, "https://financialmodelingprep.com/stable/commitment-of-traders-list", nil)
-}

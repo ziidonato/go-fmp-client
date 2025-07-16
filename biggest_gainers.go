@@ -13,11 +13,9 @@ type BiggestGainersResponse struct {
 	Change            float64 `json:"change"`
 	ChangesPercentage float64 `json:"changesPercentage"`
 	Exchange          string  `json:"exchange"`
-}
 
 // GetBiggestGainers retrieves the stocks with the largest price increases
 func (c *Client) BiggestGainers() ([]BiggestGainersResponse, error) {
 	url := "https://financialmodelingprep.com/stable/biggest-gainers"
 
-	return doRequest[[]BiggestGainersResponse](c, url, map[string]string{})
-}
+	return doRequest[[]BiggestGainersResponse](c, url, map[string]string{}

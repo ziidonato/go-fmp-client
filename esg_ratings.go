@@ -8,7 +8,6 @@ import (
 // ESGRatingsParams represents the parameters for the ESG Ratings API
 type ESGRatingsParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // ESGRatingsResponse represents the response from the ESG Ratings API
 type ESGRatingsResponse struct {
@@ -19,7 +18,6 @@ type ESGRatingsResponse struct {
 	FiscalYear    int    `json:"fiscalYear"`
 	ESGRiskRating string `json:"ESGRiskRating"`
 	IndustryRank  string `json:"industryRank"`
-}
 
 // ESGRatings retrieves comprehensive ESG ratings for companies and funds
 func (c *Client) ESGRatings(params ESGRatingsParams) ([]ESGRatingsResponse, error) {
@@ -32,4 +30,3 @@ func (c *Client) ESGRatings(params ESGRatingsParams) ([]ESGRatingsResponse, erro
 	}
 
 	return doRequest[[]ESGRatingsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

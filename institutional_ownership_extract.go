@@ -10,7 +10,6 @@ type InstitutionalOwnershipExtractParams struct {
 	CIK     string `json:"cik"`     // Required: CIK number (e.g., "0001388838")
 	Year    string `json:"year"`    // Required: Year (e.g., "2023")
 	Quarter string `json:"quarter"` // Required: Quarter (e.g., "3")
-}
 
 // InstitutionalOwnershipExtractResponse represents the response from the Institutional Ownership Extract API
 type InstitutionalOwnershipExtractResponse struct {
@@ -28,7 +27,6 @@ type InstitutionalOwnershipExtractResponse struct {
 	Value         int64  `json:"value"`
 	Link          string `json:"link"`
 	FinalLink     string `json:"finalLink"`
-}
 
 // InstitutionalOwnershipExtract retrieves detailed data from SEC filings for institutional ownership
 func (c *Client) InstitutionalOwnershipExtract(params InstitutionalOwnershipExtractParams) ([]InstitutionalOwnershipExtractResponse, error) {
@@ -51,4 +49,3 @@ func (c *Client) InstitutionalOwnershipExtract(params InstitutionalOwnershipExtr
 	}
 
 	return doRequest[[]InstitutionalOwnershipExtractResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

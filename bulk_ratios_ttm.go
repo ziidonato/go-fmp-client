@@ -67,9 +67,7 @@ type RatiosTTMBulkResponse struct {
 	EffectiveTaxRateTTM                        string `json:"effectiveTaxRateTTM"`
 	EnterpriseValueMultipleTTM                 string `json:"enterpriseValueMultipleTTM"`
 	DividendPerShareTTM                        string `json:"dividendPerShareTTM"`
-}
 
 // GetRatiosTTMBulk retrieves trailing twelve months financial ratios for stocks
 func (c *Client) GetRatiosTTMBulk() ([]RatiosTTMBulkResponse, error) {
 	return doRequest[[]RatiosTTMBulkResponse](c, "https://financialmodelingprep.com/stable/ratios-ttm-bulk", nil)
-}

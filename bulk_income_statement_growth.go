@@ -9,7 +9,6 @@ import (
 type IncomeStatementGrowthBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
 	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
-}
 
 // IncomeStatementGrowthBulkResponse represents the response from the Bulk Income Statement Growth API
 type IncomeStatementGrowthBulkResponse struct {
@@ -47,7 +46,6 @@ type IncomeStatementGrowthBulkResponse struct {
 	GrowthNetIncomeFromContinuingOperations   string `json:"growthNetIncomeFromContinuingOperations"`
 	GrowthOtherAdjustmentsToNetIncome         string `json:"growthOtherAdjustmentsToNetIncome"`
 	GrowthNetIncomeDeductions                 string `json:"growthNetIncomeDeductions"`
-}
 
 // GetIncomeStatementGrowthBulk retrieves growth data for income statements across multiple companies
 func (c *Client) GetIncomeStatementGrowthBulk(params IncomeStatementGrowthBulkParams) ([]IncomeStatementGrowthBulkResponse, error) {
@@ -65,4 +63,3 @@ func (c *Client) GetIncomeStatementGrowthBulk(params IncomeStatementGrowthBulkPa
 	}
 
 	return doRequest[[]IncomeStatementGrowthBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

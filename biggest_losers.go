@@ -13,11 +13,9 @@ type BiggestLosersResponse struct {
 	Change            float64 `json:"change"`
 	ChangesPercentage float64 `json:"changesPercentage"`
 	Exchange          string  `json:"exchange"`
-}
 
 // GetBiggestLosers retrieves the stocks with the largest price drops
 func (c *Client) BiggestLosers() ([]BiggestLosersResponse, error) {
 	url := "https://financialmodelingprep.com/stable/biggest-losers"
 
-	return doRequest[[]BiggestLosersResponse](c, url, map[string]string{})
-}
+	return doRequest[[]BiggestLosersResponse](c, url, map[string]string{}

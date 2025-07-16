@@ -13,7 +13,6 @@ type TechnicalIndicatorWMAResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorWMA retrieves weighted moving average technical indicator
 func (c *Client) GetTechnicalIndicatorWMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorWMAResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorWMA(symbol string, periodLength int, timef
 	return doRequest[[]TechnicalIndicatorWMAResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

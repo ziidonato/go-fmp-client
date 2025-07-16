@@ -19,9 +19,7 @@ type TreasuryRatesResponse struct {
 	BC_10YEAR float64 `json:"BC_10YEAR"`
 	BC_20YEAR float64 `json:"BC_20YEAR"`
 	BC_30YEAR float64 `json:"BC_30YEAR"`
-}
 
 // TreasuryRates retrieves real-time and historical Treasury rates for all maturities
 func (c *Client) TreasuryRates() ([]TreasuryRatesResponse, error) {
 	return doRequest[[]TreasuryRatesResponse](c, "https://financialmodelingprep.com/stable/treasury-rates", nil)
-}

@@ -12,7 +12,6 @@ type InsiderTradingLatestResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Symbol string `json:"symbol"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetInsiderTradingLatest retrieves the latest insider trading activity
 func (c *Client) GetInsiderTradingLatest(page, limit int) ([]InsiderTradingLatestResponse, error) {
@@ -27,4 +26,4 @@ func (c *Client) GetInsiderTradingLatest(page, limit int) ([]InsiderTradingLates
 
 	return doRequest[[]InsiderTradingLatestResponse](c, url, map[string]string{
 		"page":  strconv.Itoa(page)
-}
+	}

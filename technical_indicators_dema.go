@@ -13,7 +13,6 @@ type TechnicalIndicatorDEMAResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorDEMA retrieves double exponential moving average technical indicator
 func (c *Client) GetTechnicalIndicatorDEMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorDEMAResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorDEMA(symbol string, periodLength int, time
 	return doRequest[[]TechnicalIndicatorDEMAResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

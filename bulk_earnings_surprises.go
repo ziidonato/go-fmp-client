@@ -8,7 +8,6 @@ import (
 // EarningsSurprisesBulkParams represents the parameters for the Earnings Surprises Bulk API
 type EarningsSurprisesBulkParams struct {
 	Year string `json:"year"` // Required: year (e.g., "2024")
-}
 
 // EarningsSurprisesBulkResponse represents the response from the Earnings Surprises Bulk API
 type EarningsSurprisesBulkResponse struct {
@@ -17,7 +16,6 @@ type EarningsSurprisesBulkResponse struct {
 	EPSActual    string `json:"epsActual"`
 	EPSEstimated string `json:"epsEstimated"`
 	LastUpdated  string `json:"lastUpdated"`
-}
 
 // GetEarningsSurprisesBulk retrieves bulk data on annual earnings surprises
 func (c *Client) GetEarningsSurprisesBulk(params EarningsSurprisesBulkParams) ([]EarningsSurprisesBulkResponse, error) {
@@ -31,4 +29,3 @@ func (c *Client) GetEarningsSurprisesBulk(params EarningsSurprisesBulkParams) ([
 	}
 
 	return doRequest[[]EarningsSurprisesBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

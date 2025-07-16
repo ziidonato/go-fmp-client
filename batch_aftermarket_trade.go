@@ -11,7 +11,6 @@ type BatchAftermarketTradeResponse struct {
 	Price     float64 `json:"price"`
 	TradeSize int64   `json:"tradeSize"`
 	Timestamp int64   `json:"timestamp"`
-}
 
 // GetBatchAftermarketTrade retrieves real-time aftermarket trading data for multiple stocks
 func (c *Client) GetBatchAftermarketTrade(symbols string) ([]BatchAftermarketTradeResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) GetBatchAftermarketTrade(symbols string) ([]BatchAftermarketTra
 
 	return doRequest[[]BatchAftermarketTradeResponse](c, url, map[string]string{
 		"symbols": symbols,
-	})
-}
+	}

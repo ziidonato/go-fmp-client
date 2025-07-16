@@ -9,7 +9,6 @@ import (
 type BalanceSheetBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
 	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
-}
 
 // BalanceSheetBulkResponse represents the response from the Bulk Balance Sheet Statement API
 type BalanceSheetBulkResponse struct {
@@ -74,7 +73,6 @@ type BalanceSheetBulkResponse struct {
 	TotalInvestments                        string `json:"totalInvestments"`
 	TotalDebt                               string `json:"totalDebt"`
 	NetDebt                                 string `json:"netDebt"`
-}
 
 // BalanceSheetBulk retrieves comprehensive balance sheet data across multiple companies
 func (c *Client) BalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheetBulkResponse, error) {
@@ -92,4 +90,3 @@ func (c *Client) BalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheet
 	}
 
 	return doRequest[[]BalanceSheetBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

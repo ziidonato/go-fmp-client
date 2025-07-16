@@ -8,7 +8,6 @@ import (
 // PriceTargetSummaryParams represents the parameters for the Price Target Summary API
 type PriceTargetSummaryParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // PriceTargetSummaryResponse represents the response from the Price Target Summary API
 type PriceTargetSummaryResponse struct {
@@ -22,7 +21,6 @@ type PriceTargetSummaryResponse struct {
 	AllTimeCount              int     `json:"allTimeCount"`
 	AllTimeAvgPriceTarget     float64 `json:"allTimeAvgPriceTarget"`
 	Publishers                string  `json:"publishers"`
-}
 
 // PriceTargetSummary retrieves average price targets from analysts across various timeframes
 func (c *Client) PriceTargetSummary(params PriceTargetSummaryParams) ([]PriceTargetSummaryResponse, error) {
@@ -35,4 +33,3 @@ func (c *Client) PriceTargetSummary(params PriceTargetSummaryParams) ([]PriceTar
 	}
 
 	return doRequest[[]PriceTargetSummaryResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -9,7 +9,6 @@ import (
 type CashFlowStatementBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
 	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
-}
 
 // CashFlowStatementBulkResponse represents the response from the Cash Flow Statement Bulk API
 type CashFlowStatementBulkResponse struct {
@@ -60,7 +59,6 @@ type CashFlowStatementBulkResponse struct {
 	FreeCashFlow                           string `json:"freeCashFlow"`
 	IncomeTaxesPaid                        string `json:"incomeTaxesPaid"`
 	InterestPaid                           string `json:"interestPaid"`
-}
 
 // GetCashFlowStatementBulk retrieves detailed cash flow reports for a wide range of companies
 func (c *Client) GetCashFlowStatementBulk(params CashFlowStatementBulkParams) ([]CashFlowStatementBulkResponse, error) {
@@ -78,4 +76,3 @@ func (c *Client) GetCashFlowStatementBulk(params CashFlowStatementBulkParams) ([
 	}
 
 	return doRequest[[]CashFlowStatementBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

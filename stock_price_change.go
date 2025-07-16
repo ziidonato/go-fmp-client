@@ -19,7 +19,6 @@ type StockPriceChangeResponse struct {
 	FiveY  float64 `json:"5Y"`
 	TenY   float64 `json:"10Y"`
 	Max    float64 `json:"max"`
-}
 
 // GetStockPriceChange retrieves stock price fluctuations in real-time
 func (c *Client) GetStockPriceChange(symbol string) ([]StockPriceChangeResponse, error) {
@@ -31,5 +30,4 @@ func (c *Client) GetStockPriceChange(symbol string) ([]StockPriceChangeResponse,
 
 	return doRequest[[]StockPriceChangeResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

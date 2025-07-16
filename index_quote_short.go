@@ -11,7 +11,6 @@ type IndexShortQuoteResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // GetIndexShortQuote retrieves concise stock index quotes
 func (c *Client) GetIndexShortQuote(symbol string) ([]IndexShortQuoteResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) GetIndexShortQuote(symbol string) ([]IndexShortQuoteResponse, e
 
 	return doRequest[[]IndexShortQuoteResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

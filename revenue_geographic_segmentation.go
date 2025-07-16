@@ -10,7 +10,6 @@ type RevenueGeographicSegmentationParams struct {
 	Symbol    string `json:"symbol"`    // Required: Stock symbol (e.g., "AAPL")
 	Period    string `json:"period"`    // Optional: Period type - "annual,quarter"
 	Structure string `json:"structure"` // Optional: Structure type - "flat"
-}
 
 // RevenueGeographicSegmentationResponse represents the response from the Revenue Geographic Segmentation API
 type RevenueGeographicSegmentationResponse struct {
@@ -20,7 +19,6 @@ type RevenueGeographicSegmentationResponse struct {
 	ReportedCurrency *string                `json:"reportedCurrency"`
 	Date             string                 `json:"date"`
 	Data             map[string]interface{} `json:"data"`
-}
 
 // RevenueGeographicSegmentation retrieves revenue geographic segmentation data for a specific stock symbol
 func (c *Client) RevenueGeographicSegmentation(params RevenueGeographicSegmentationParams) ([]RevenueGeographicSegmentationResponse, error) {
@@ -32,13 +30,12 @@ func (c *Client) RevenueGeographicSegmentation(params RevenueGeographicSegmentat
 		"symbol": params.Symbol,
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
-	if params.Structure != " {
+	if params.Structure != "" {
 		urlParams["structure"] = params.Structure
 	}
 
 	return doRequest[[]RevenueGeographicSegmentationResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

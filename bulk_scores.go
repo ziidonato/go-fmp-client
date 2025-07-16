@@ -18,9 +18,7 @@ type ScoresBulkResponse struct {
 	MarketCap        string `json:"marketCap"`
 	TotalLiabilities string `json:"totalLiabilities"`
 	Revenue          string `json:"revenue"`
-}
 
 // ScoresBulk retrieves key financial scores and metrics for multiple symbols
 func (c *Client) ScoresBulk() ([]ScoresBulkResponse, error) {
 	return doRequest[[]ScoresBulkResponse](c, "https://financialmodelingprep.com/stable/scores-bulk", nil)
-}

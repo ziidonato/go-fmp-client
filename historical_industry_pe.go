@@ -11,7 +11,6 @@ type HistoricalIndustryPEResponse struct {
 	Industry string  `json:"industry"`
 	Exchange string  `json:"exchange"`
 	PE       float64 `json:"pe"`
-}
 
 // GetHistoricalIndustryPE retrieves historical price-to-earnings (P/E) ratios by industry
 func (c *Client) GetHistoricalIndustryPE(industry, from, to, exchange string) ([]HistoricalIndustryPEResponse, error) {
@@ -23,17 +22,16 @@ func (c *Client) GetHistoricalIndustryPE(industry, from, to, exchange string) ([
 		"industry": industry,
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-industry-pe"
 
 	return doRequest[[]HistoricalIndustryPEResponse](c, url, params)
-}

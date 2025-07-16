@@ -10,7 +10,6 @@ type ForexChart1MinParams struct {
 	Symbol string  `json:"symbol"` // Required: Forex symbol (e.g., "EURUSD")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
-}
 
 // ForexChart1MinResponse represents the response from the 1-Minute Forex Chart API
 type ForexChart1MinResponse struct {
@@ -20,7 +19,6 @@ type ForexChart1MinResponse struct {
 	High   float64 `json:"high"`
 	Close  float64 `json:"close"`
 	Volume int64   `json:"volume"`
-}
 
 // ForexChart1Min retrieves real-time, 1-minute intraday forex data for currency pairs
 func (c *Client) ForexChart1Min(params ForexChart1MinParams) ([]ForexChart1MinResponse, error) {
@@ -41,4 +39,3 @@ func (c *Client) ForexChart1Min(params ForexChart1MinParams) ([]ForexChart1MinRe
 	}
 
 	return doRequest[[]ForexChart1MinResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

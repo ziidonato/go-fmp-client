@@ -13,11 +13,9 @@ type MostActivesResponse struct {
 	Change            float64 `json:"change"`
 	ChangesPercentage float64 `json:"changesPercentage"`
 	Exchange          string  `json:"exchange"`
-}
 
 // GetMostActives retrieves the most actively traded stocks
 func (c *Client) GetMostActives() ([]MostActivesResponse, error) {
 	url := "https://financialmodelingprep.com/stable/most-actives"
 
-	return doRequest[[]MostActivesResponse](c, url, map[string]string{})
-}
+	return doRequest[[]MostActivesResponse](c, url, map[string]string{}

@@ -10,7 +10,6 @@ type StockChartLightParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
-}
 
 // StockChartLightResponse represents the response from the Stock Chart Light API
 type StockChartLightResponse struct {
@@ -18,7 +17,6 @@ type StockChartLightResponse struct {
 	Date   string  `json:"date"`
 	Price  float64 `json:"price"`
 	Volume int64   `json:"volume"`
-}
 
 // StockChartLight retrieves simplified stock chart data with essential charting information
 func (c *Client) StockChartLight(params StockChartLightParams) ([]StockChartLightResponse, error) {
@@ -39,4 +37,3 @@ func (c *Client) StockChartLight(params StockChartLightParams) ([]StockChartLigh
 	}
 
 	return doRequest[[]StockChartLightResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

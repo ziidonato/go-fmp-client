@@ -12,7 +12,6 @@ type CommodityQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // GetCommodityQuotes retrieves up-to-the-minute quotes for commodities
 func (c *Client) GetCommodityQuotes(short bool) ([]CommodityQuotesResponse, error) {
@@ -20,4 +19,4 @@ func (c *Client) GetCommodityQuotes(short bool) ([]CommodityQuotesResponse, erro
 
 	return doRequest[[]CommodityQuotesResponse](c, url, map[string]string{
 		"short": strconv.FormatBool(short)
-}
+	}

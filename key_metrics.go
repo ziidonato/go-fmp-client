@@ -10,7 +10,6 @@ type KeyMetricsParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
-}
 
 // KeyMetricsResponse represents the response from the Key Metrics API
 type KeyMetricsResponse struct {
@@ -61,7 +60,6 @@ type KeyMetricsResponse struct {
 	FreeCashFlowToFirm                     float64 `json:"freeCashFlowToFirm"`
 	TangibleAssetValue                     int64   `json:"tangibleAssetValue"`
 	NetCurrentAssetValue                   int64   `json:"netCurrentAssetValue"`
-}
 
 // KeyMetrics retrieves key financial metrics for a specific stock symbol
 func (c *Client) KeyMetrics(params KeyMetricsParams) ([]KeyMetricsResponse, error) {
@@ -80,9 +78,8 @@ func (c *Client) KeyMetrics(params KeyMetricsParams) ([]KeyMetricsResponse, erro
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
 	return doRequest[[]KeyMetricsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

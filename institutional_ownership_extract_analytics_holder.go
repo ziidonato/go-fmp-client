@@ -12,7 +12,6 @@ type InstitutionalOwnershipExtractAnalyticsHolderParams struct {
 	Quarter string `json:"quarter"` // Required: Quarter (e.g., "3")
 	Page    *int   `json:"page"`    // Optional: Page number (default: 0)
 	Limit   *int   `json:"limit"`   // Optional: Number of results (default: 10)
-}
 
 // InstitutionalOwnershipExtractAnalyticsHolderResponse represents the response from the Institutional Ownership Extract Analytics By Holder API
 type InstitutionalOwnershipExtractAnalyticsHolderResponse struct {
@@ -55,7 +54,6 @@ type InstitutionalOwnershipExtractAnalyticsHolderResponse struct {
 	LastPerformance                int64   `json:"lastPerformance"`
 	ChangeInPerformance            int64   `json:"changeInPerformance"`
 	IsCountedForPerformance        bool    `json:"isCountedForPerformance"`
-}
 
 // InstitutionalOwnershipExtractAnalyticsHolder retrieves analytical breakdown of institutional filings by holder
 func (c *Client) InstitutionalOwnershipExtractAnalyticsHolder(params InstitutionalOwnershipExtractAnalyticsHolderParams) ([]InstitutionalOwnershipExtractAnalyticsHolderResponse, error) {
@@ -86,4 +84,3 @@ func (c *Client) InstitutionalOwnershipExtractAnalyticsHolder(params Institution
 	}
 
 	return doRequest[[]InstitutionalOwnershipExtractAnalyticsHolderResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

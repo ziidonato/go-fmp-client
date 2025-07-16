@@ -11,7 +11,6 @@ type COTAnalysisParams struct {
 	Symbol *string `json:"symbol"` // Optional: Symbol (e.g., "AAPL")
 	From   *string `json:"from"`   // Required: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Required: End date (e.g., "2024-03-01")
-}
 
 // COTAnalysisResponse represents the response from the COT Analysis By Dates API
 type COTAnalysisResponse struct {
@@ -31,7 +30,6 @@ type COTAnalysisResponse struct {
 	ChangeInNetPosition          float64 `json:"changeInNetPosition"`
 	MarketSentiment              string  `json:"marketSentiment"`
 	ReversalTrend                bool    `json:"reversalTrend"`
-}
 
 // COTAnalysis retrieves in-depth insights into market sentiment with COT report analysis
 func (c *Client) COTAnalysis(params COTAnalysisParams) ([]COTAnalysisResponse, error) {
@@ -69,4 +67,3 @@ func (c *Client) COTAnalysis(params COTAnalysisParams) ([]COTAnalysisResponse, e
 	}
 
 	return doRequest[[]COTAnalysisResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

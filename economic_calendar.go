@@ -18,9 +18,7 @@ type EconomicCalendarResponse struct {
 	Impact    string   `json:"impact"`
 	Currency  string   `json:"currency"`
 	Unit      string   `json:"unit"`
-}
 
 // EconomicCalendar retrieves a comprehensive calendar of upcoming economic data releases
 func (c *Client) EconomicCalendar() ([]EconomicCalendarResponse, error) {
 	return doRequest[[]EconomicCalendarResponse](c, "https://financialmodelingprep.com/stable/economic-calendar", nil)
-}

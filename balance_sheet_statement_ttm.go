@@ -9,7 +9,6 @@ import (
 type BalanceSheetStatementTTMParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-}
 
 // BalanceSheetStatementTTMResponse represents the response from the Balance Sheet Statement TTM API
 type BalanceSheetStatementTTMResponse struct {
@@ -73,7 +72,6 @@ type BalanceSheetStatementTTMResponse struct {
 	TotalInvestments                        int64  `json:"totalInvestments"`
 	TotalDebt                               int64  `json:"totalDebt"`
 	NetDebt                                 int64  `json:"netDebt"`
-}
 
 // BalanceSheetStatementTTM retrieves trailing twelve months balance sheet statement data for a specific stock symbol
 func (c *Client) BalanceSheetStatementTTM(params BalanceSheetStatementTTMParams) ([]BalanceSheetStatementTTMResponse, error) {
@@ -93,4 +91,3 @@ func (c *Client) BalanceSheetStatementTTM(params BalanceSheetStatementTTMParams)
 	}
 
 	return doRequest[[]BalanceSheetStatementTTMResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

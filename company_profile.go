@@ -8,7 +8,6 @@ import (
 // CompanyProfileParams represents the parameters for the Company Profile Data API
 type CompanyProfileParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // CompanyProfileResponse represents the response from the Company Profile Data API
 type CompanyProfileResponse struct {
@@ -48,7 +47,6 @@ type CompanyProfileResponse struct {
 	IsActivelyTrading bool    `json:"isActivelyTrading"`
 	IsADR             bool    `json:"isAdr"`
 	IsFund            bool    `json:"isFund"`
-}
 
 // CompanyProfile retrieves detailed company profile data for a specific stock symbol
 func (c *Client) CompanyProfile(params CompanyProfileParams) ([]CompanyProfileResponse, error) {
@@ -61,4 +59,3 @@ func (c *Client) CompanyProfile(params CompanyProfileParams) ([]CompanyProfileRe
 	}
 
 	return doRequest[[]CompanyProfileResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

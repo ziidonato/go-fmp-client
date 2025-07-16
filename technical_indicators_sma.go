@@ -13,7 +13,6 @@ type TechnicalIndicatorSMAResponse struct {
 	Symbol string  `json:"symbol"`
 	Value  float64 `json:"value"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetTechnicalIndicatorSMA retrieves simple moving average technical indicator
 func (c *Client) GetTechnicalIndicatorSMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorSMAResponse, error) {
@@ -32,4 +31,4 @@ func (c *Client) GetTechnicalIndicatorSMA(symbol string, periodLength int, timef
 	return doRequest[[]TechnicalIndicatorSMAResponse](c, url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength)
-}
+	}

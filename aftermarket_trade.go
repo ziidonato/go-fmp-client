@@ -11,7 +11,6 @@ type AftermarketTradeResponse struct {
 	Price     float64 `json:"price"`
 	TradeSize int64   `json:"tradeSize"`
 	Timestamp int64   `json:"timestamp"`
-}
 
 // AftermarketTrade retrieves real-time aftermarket trading activity
 func (c *Client) AftermarketTrade(symbol string) ([]AftermarketTradeResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) AftermarketTrade(symbol string) ([]AftermarketTradeResponse, er
 
 	return doRequest[[]AftermarketTradeResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

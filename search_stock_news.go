@@ -16,7 +16,6 @@ type SearchStockNewsResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // SearchStockNews searches for stock-related news by symbol
 func (c *Client) SearchStockNews(symbols string, page, limit int, from, to string) ([]SearchStockNewsResponse, error) {
@@ -39,14 +38,13 @@ func (c *Client) SearchStockNews(symbols string, page, limit int, from, to strin
 		"limit":   strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/stock"
 
 	return doRequest[[]SearchStockNewsResponse](c, url, params)
-}

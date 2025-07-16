@@ -8,7 +8,6 @@ import (
 // FundDisclosureHoldersSearchParams represents the parameters for the Mutual Fund & ETF Disclosure Name Search API
 type FundDisclosureHoldersSearchParams struct {
 	Name string `json:"name"` // Required: Fund/ETF name (e.g., "Federated Hermes Government Income Securities, Inc.")
-}
 
 // FundDisclosureHoldersSearchResponse represents the response from the Mutual Fund & ETF Disclosure Name Search API
 type FundDisclosureHoldersSearchResponse struct {
@@ -25,7 +24,6 @@ type FundDisclosureHoldersSearchResponse struct {
 	City                string `json:"city"`
 	ZipCode             string `json:"zipCode"`
 	State               string `json:"state"`
-}
 
 // FundDisclosureHoldersSearch searches for mutual fund and ETF disclosures by name
 func (c *Client) FundDisclosureHoldersSearch(params FundDisclosureHoldersSearchParams) ([]FundDisclosureHoldersSearchResponse, error) {
@@ -38,4 +36,3 @@ func (c *Client) FundDisclosureHoldersSearch(params FundDisclosureHoldersSearchP
 	}
 
 	return doRequest[[]FundDisclosureHoldersSearchResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

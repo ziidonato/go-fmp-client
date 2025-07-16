@@ -13,7 +13,6 @@ type Index5MinChartResponse struct {
 	High   float64 `json:"high"`
 	Close  float64 `json:"close"`
 	Volume int64   `json:"volume"`
-}
 
 // GetIndex5MinChart retrieves 5-minute interval intraday price data for stock indexes
 func (c *Client) GetIndex5MinChart(symbol, from, to string) ([]Index5MinChartResponse, error) {
@@ -25,14 +24,13 @@ func (c *Client) GetIndex5MinChart(symbol, from, to string) ([]Index5MinChartRes
 		"symbol": symbol,
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-chart/5min"
 
 	return doRequest[[]Index5MinChartResponse](c, url, params)
-}

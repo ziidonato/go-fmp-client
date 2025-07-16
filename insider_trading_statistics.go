@@ -11,7 +11,6 @@ type InsiderTradingStatisticsResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Symbol string `json:"symbol"`
 	// Add other fields as needed based on actual API response
-}
 
 // GetInsiderTradingStatistics analyzes insider trading activity for a specific symbol
 func (c *Client) GetInsiderTradingStatistics(symbol string) ([]InsiderTradingStatisticsResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) GetInsiderTradingStatistics(symbol string) ([]InsiderTradingSta
 
 	return doRequest[[]InsiderTradingStatisticsResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

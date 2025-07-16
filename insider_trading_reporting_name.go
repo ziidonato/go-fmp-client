@@ -11,7 +11,6 @@ type InsiderTradingReportingNameResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Name string `json:"name"`
 	// Add other fields as needed based on actual API response
-}
 
 // InsiderTradingReportingName searches for insider trading activity by reporting name
 func (c *Client) InsiderTradingReportingName(name string) ([]InsiderTradingReportingNameResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) InsiderTradingReportingName(name string) ([]InsiderTradingRepor
 
 	return doRequest[[]InsiderTradingReportingNameResponse](c, url, map[string]string{
 		"name": name,
-	})
-}
+	}

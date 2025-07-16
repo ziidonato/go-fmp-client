@@ -11,7 +11,6 @@ type BatchQuoteShortResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // GetBatchQuoteShort retrieves real-time, short-form quotes for multiple stocks
 func (c *Client) GetBatchQuoteShort(symbols string) ([]BatchQuoteShortResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) GetBatchQuoteShort(symbols string) ([]BatchQuoteShortResponse, 
 
 	return doRequest[[]BatchQuoteShortResponse](c, url, map[string]string{
 		"symbols": symbols,
-	})
-}
+	}

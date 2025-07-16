@@ -23,9 +23,7 @@ type BatchCryptocurrencyQuotesResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // BatchCryptocurrencyQuotes retrieves live price data for a wide range of cryptocurrencies in a single request
 func (c *Client) BatchCryptocurrencyQuotes() ([]BatchCryptocurrencyQuotesResponse, error) {
 	return doRequest[[]BatchCryptocurrencyQuotesResponse](c, "https://financialmodelingprep.com/stable/batch-crypto-quotes", nil)
-}

@@ -10,7 +10,6 @@ type ForexHistoricalFullParams struct {
 	Symbol string  `json:"symbol"` // Required: Forex symbol (e.g., "EURUSD")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
-}
 
 // ForexHistoricalFullResponse represents the response from the Historical Forex Full Chart API
 type ForexHistoricalFullResponse struct {
@@ -24,7 +23,6 @@ type ForexHistoricalFullResponse struct {
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	Vwap          float64 `json:"vwap"`
-}
 
 // ForexHistoricalFull retrieves comprehensive historical end-of-day forex price data for currency pairs
 func (c *Client) ForexHistoricalFull(params ForexHistoricalFullParams) ([]ForexHistoricalFullResponse, error) {
@@ -45,4 +43,3 @@ func (c *Client) ForexHistoricalFull(params ForexHistoricalFullParams) ([]ForexH
 	}
 
 	return doRequest[[]ForexHistoricalFullResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

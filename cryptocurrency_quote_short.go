@@ -8,7 +8,6 @@ import (
 // CryptocurrencyQuoteShortParams represents the parameters for the Cryptocurrency Quote Short API
 type CryptocurrencyQuoteShortParams struct {
 	Symbol string `json:"symbol"` // Required: Cryptocurrency symbol (e.g., "BTCUSD")
-}
 
 // CryptocurrencyQuoteShortResponse represents the response from the Cryptocurrency Quote Short API
 type CryptocurrencyQuoteShortResponse struct {
@@ -16,7 +15,6 @@ type CryptocurrencyQuoteShortResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // CryptocurrencyQuoteShort retrieves concise cryptocurrency quotes with current prices, changes, and trading volume
 func (c *Client) CryptocurrencyQuoteShort(params CryptocurrencyQuoteShortParams) ([]CryptocurrencyQuoteShortResponse, error) {
@@ -29,4 +27,3 @@ func (c *Client) CryptocurrencyQuoteShort(params CryptocurrencyQuoteShortParams)
 	}
 
 	return doRequest[[]CryptocurrencyQuoteShortResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

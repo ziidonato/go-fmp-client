@@ -8,7 +8,6 @@ import (
 // ForexQuoteParams represents the parameters for the Forex Quote API
 type ForexQuoteParams struct {
 	Symbol string `json:"symbol"` // Required: Forex symbol (e.g., "EURUSD")
-}
 
 // ForexQuoteResponse represents the response from the Forex Quote API
 type ForexQuoteResponse struct {
@@ -29,7 +28,6 @@ type ForexQuoteResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // ForexQuote retrieves real-time forex quotes for currency pairs
 func (c *Client) ForexQuote(params ForexQuoteParams) ([]ForexQuoteResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) ForexQuote(params ForexQuoteParams) ([]ForexQuoteResponse, erro
 	}
 
 	return doRequest[[]ForexQuoteResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -9,7 +9,6 @@ import (
 type SharesFloatAllParams struct {
 	Limit *int `json:"limit"` // Required: Number of results (Maximum 5000 records per request)
 	Page  *int `json:"page"`  // Required: Page number (e.g., 0)
-}
 
 // SharesFloatAllResponse represents the response from the All Shares Float API
 type SharesFloatAllResponse struct {
@@ -18,7 +17,6 @@ type SharesFloatAllResponse struct {
 	FreeFloat         float64 `json:"freeFloat"`
 	FloatShares       int64   `json:"floatShares"`
 	OutstandingShares int64   `json:"outstandingShares"`
-}
 
 // SharesFloatAll retrieves comprehensive shares float data for all available companies
 func (c *Client) SharesFloatAll(params SharesFloatAllParams) ([]SharesFloatAllResponse, error) {
@@ -40,4 +38,3 @@ func (c *Client) SharesFloatAll(params SharesFloatAllParams) ([]SharesFloatAllRe
 	}
 
 	return doRequest[[]SharesFloatAllResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

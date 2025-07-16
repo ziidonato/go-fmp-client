@@ -9,7 +9,6 @@ import (
 type RatingsHistoricalParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 10000 records per request)
-}
 
 // RatingsHistoricalResponse represents the response from the Historical Ratings API
 type RatingsHistoricalResponse struct {
@@ -23,7 +22,6 @@ type RatingsHistoricalResponse struct {
 	DebtToEquityScore       int    `json:"debtToEquityScore"`
 	PriceToEarningsScore    int    `json:"priceToEarningsScore"`
 	PriceToBookScore        int    `json:"priceToBookScore"`
-}
 
 // RatingsHistorical retrieves historical financial ratings for stock symbols
 func (c *Client) RatingsHistorical(params RatingsHistoricalParams) ([]RatingsHistoricalResponse, error) {
@@ -43,4 +41,3 @@ func (c *Client) RatingsHistorical(params RatingsHistoricalParams) ([]RatingsHis
 	}
 
 	return doRequest[[]RatingsHistoricalResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

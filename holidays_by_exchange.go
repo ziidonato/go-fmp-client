@@ -11,7 +11,6 @@ type HolidaysByExchangeResponse struct {
 	// This is a placeholder structure that should be updated based on actual response
 	Exchange string `json:"exchange"`
 	// Add other fields as needed based on actual API response
-}
 
 // HolidaysByExchange retrieves holidays for specific stock exchanges
 func (c *Client) HolidaysByExchange(exchange string) ([]HolidaysByExchangeResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) HolidaysByExchange(exchange string) ([]HolidaysByExchangeRespon
 
 	return doRequest[[]HolidaysByExchangeResponse](c, url, map[string]string{
 		"exchange": exchange,
-	})
-}
+	}

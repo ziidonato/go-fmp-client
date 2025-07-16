@@ -10,7 +10,6 @@ type RatiosParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
-}
 
 // RatiosResponse represents the response from the Financial Ratios API
 type RatiosResponse struct {
@@ -77,7 +76,6 @@ type RatiosResponse struct {
 	DebtToMarketCap                         float64 `json:"debtToMarketCap"`
 	EffectiveTaxRate                        float64 `json:"effectiveTaxRate"`
 	EnterpriseValueMultiple                 float64 `json:"enterpriseValueMultiple"`
-}
 
 // Ratios retrieves financial ratios for a specific stock symbol
 func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
@@ -96,9 +94,8 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
 	return doRequest[[]RatiosResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

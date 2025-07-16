@@ -10,7 +10,6 @@ type InstitutionalOwnershipHolderIndustryBreakdownParams struct {
 	CIK     string `json:"cik"`     // Required: CIK number (e.g., "0001067983")
 	Year    string `json:"year"`    // Required: Year (e.g., "2023")
 	Quarter string `json:"quarter"` // Required: Quarter (e.g., "3")
-}
 
 // InstitutionalOwnershipHolderIndustryBreakdownResponse represents the response from the Institutional Ownership Holder Industry Breakdown API
 type InstitutionalOwnershipHolderIndustryBreakdownResponse struct {
@@ -26,7 +25,6 @@ type InstitutionalOwnershipHolderIndustryBreakdownResponse struct {
 	PerformancePercentage    float64 `json:"performancePercentage"`
 	LastPerformance          int64   `json:"lastPerformance"`
 	ChangeInPerformance      int64   `json:"changeInPerformance"`
-}
 
 // InstitutionalOwnershipHolderIndustryBreakdown retrieves industry breakdown for institutional holders
 func (c *Client) InstitutionalOwnershipHolderIndustryBreakdown(params InstitutionalOwnershipHolderIndustryBreakdownParams) ([]InstitutionalOwnershipHolderIndustryBreakdownResponse, error) {
@@ -49,4 +47,3 @@ func (c *Client) InstitutionalOwnershipHolderIndustryBreakdown(params Institutio
 	}
 
 	return doRequest[[]InstitutionalOwnershipHolderIndustryBreakdownResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

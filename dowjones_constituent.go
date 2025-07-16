@@ -15,11 +15,9 @@ type DowJonesConstituentResponse struct {
 	DateFirstAdded string `json:"dateFirstAdded"`
 	CIK            string `json:"cik"`
 	Founded        string `json:"founded"`
-}
 
 // GetDowJonesConstituent retrieves data on the Dow Jones Industrial Average
 func (c *Client) GetDowJonesConstituent() ([]DowJonesConstituentResponse, error) {
 	url := "https://financialmodelingprep.com/stable/dowjones-constituent"
 
-	return doRequest[[]DowJonesConstituentResponse](c, url, map[string]string{})
-}
+	return doRequest[[]DowJonesConstituentResponse](c, url, map[string]string{}

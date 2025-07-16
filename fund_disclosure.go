@@ -11,7 +11,6 @@ type FundDisclosureParams struct {
 	Year    string  `json:"year"`    // Required: Year (e.g., "2023")
 	Quarter string  `json:"quarter"` // Required: Quarter (e.g., "4")
 	CIK     *string `json:"cik"`     // Optional: CIK number
-}
 
 // FundDisclosureResponse represents the response from the Mutual Fund Disclosures API
 type FundDisclosureResponse struct {
@@ -38,7 +37,6 @@ type FundDisclosureResponse struct {
 	IsCashCollateral    string  `json:"isCashCollateral"`
 	IsNonCashCollateral string  `json:"isNonCashCollateral"`
 	IsLoanByFund        string  `json:"isLoanByFund"`
-}
 
 // FundDisclosure retrieves comprehensive disclosure data for mutual funds
 func (c *Client) FundDisclosure(params FundDisclosureParams) ([]FundDisclosureResponse, error) {
@@ -65,4 +63,3 @@ func (c *Client) FundDisclosure(params FundDisclosureParams) ([]FundDisclosureRe
 	}
 
 	return doRequest[[]FundDisclosureResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -10,7 +10,6 @@ type IncomeStatementGrowthParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
-}
 
 // IncomeStatementGrowthResponse represents the response from the Income Statement Growth API
 type IncomeStatementGrowthResponse struct {
@@ -48,7 +47,6 @@ type IncomeStatementGrowthResponse struct {
 	GrowthNetIncomeFromContinuingOperations   float64 `json:"growthNetIncomeFromContinuingOperations"`
 	GrowthOtherAdjustmentsToNetIncome         float64 `json:"growthOtherAdjustmentsToNetIncome"`
 	GrowthNetIncomeDeductions                 float64 `json:"growthNetIncomeDeductions"`
-}
 
 // IncomeStatementGrowth retrieves income statement growth data for a specific stock symbol
 func (c *Client) IncomeStatementGrowth(params IncomeStatementGrowthParams) ([]IncomeStatementGrowthResponse, error) {
@@ -67,9 +65,8 @@ func (c *Client) IncomeStatementGrowth(params IncomeStatementGrowthParams) ([]In
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != " {
+	if params.Period != "" {
 		urlParams["period"] = params.Period
 	}
 
 	return doRequest[[]IncomeStatementGrowthResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

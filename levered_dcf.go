@@ -8,7 +8,6 @@ import (
 // LeveredDCFParams represents the parameters for the Levered DCF API
 type LeveredDCFParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // LeveredDCFResponse represents the response from the Levered DCF API
 type LeveredDCFResponse struct {
@@ -16,7 +15,6 @@ type LeveredDCFResponse struct {
 	Date       string  `json:"date"`
 	DCF        float64 `json:"dcf"`
 	StockPrice float64 `json:"Stock Price"`
-}
 
 // LeveredDCF analyzes a company's value incorporating the impact of debt
 func (c *Client) LeveredDCF(params LeveredDCFParams) ([]LeveredDCFResponse, error) {
@@ -29,4 +27,3 @@ func (c *Client) LeveredDCF(params LeveredDCFParams) ([]LeveredDCFResponse, erro
 	}
 
 	return doRequest[[]LeveredDCFResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

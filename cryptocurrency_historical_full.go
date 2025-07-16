@@ -10,7 +10,6 @@ type CryptocurrencyHistoricalFullParams struct {
 	Symbol string  `json:"symbol"` // Required: Cryptocurrency symbol (e.g., "BTCUSD")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
-}
 
 // CryptocurrencyHistoricalFullResponse represents the response from the Historical Cryptocurrency Full Chart API
 type CryptocurrencyHistoricalFullResponse struct {
@@ -24,7 +23,6 @@ type CryptocurrencyHistoricalFullResponse struct {
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	Vwap          float64 `json:"vwap"`
-}
 
 // CryptocurrencyHistoricalFull retrieves comprehensive historical end-of-day data for cryptocurrencies
 func (c *Client) CryptocurrencyHistoricalFull(params CryptocurrencyHistoricalFullParams) ([]CryptocurrencyHistoricalFullResponse, error) {
@@ -45,4 +43,3 @@ func (c *Client) CryptocurrencyHistoricalFull(params CryptocurrencyHistoricalFul
 	}
 
 	return doRequest[[]CryptocurrencyHistoricalFullResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

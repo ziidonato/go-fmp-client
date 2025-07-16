@@ -8,7 +8,6 @@ import (
 // CommoditiesQuoteParams represents the parameters for the Commodities Quote API
 type CommoditiesQuoteParams struct {
 	Symbol string `json:"symbol"` // Required: Commodity symbol (e.g., "GCUSD")
-}
 
 // CommoditiesQuoteResponse represents the response from the Commodities Quote API
 type CommoditiesQuoteResponse struct {
@@ -29,7 +28,6 @@ type CommoditiesQuoteResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // CommoditiesQuote retrieves real-time price quotes for commodities traded worldwide
 func (c *Client) CommoditiesQuote(params CommoditiesQuoteParams) ([]CommoditiesQuoteResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) CommoditiesQuote(params CommoditiesQuoteParams) ([]CommoditiesQ
 	}
 
 	return doRequest[[]CommoditiesQuoteResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

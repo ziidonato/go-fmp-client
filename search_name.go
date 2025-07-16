@@ -10,7 +10,6 @@ type SearchNameParams struct {
 	Query    string  `json:"query"`    // Required: Search query (e.g., "AA")
 	Limit    *int    `json:"limit"`    // Optional: Number of results to return (default: 50)
 	Exchange *string `json:"exchange"` // Optional: Exchange filter (e.g., "NASDAQ")
-}
 
 // SearchNameResponse represents the response from the Company Name Search API
 type SearchNameResponse struct {
@@ -19,7 +18,6 @@ type SearchNameResponse struct {
 	Currency         string `json:"currency"`
 	ExchangeFullName string `json:"exchangeFullName"`
 	Exchange         string `json:"exchange"`
-}
 
 // SearchName searches for ticker symbols, company names, and exchange details for equity securities and ETFs
 func (c *Client) SearchName(params SearchNameParams) ([]SearchNameResponse, error) {
@@ -40,4 +38,3 @@ func (c *Client) SearchName(params SearchNameParams) ([]SearchNameResponse, erro
 	}
 
 	return doRequest[[]SearchNameResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

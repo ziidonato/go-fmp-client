@@ -11,7 +11,6 @@ type IndustryPESnapshotResponse struct {
 	Industry string  `json:"industry"`
 	Exchange string  `json:"exchange"`
 	PE       float64 `json:"pe"`
-}
 
 // GetIndustryPESnapshot retrieves price-to-earnings (P/E) ratios for different industries
 func (c *Client) GetIndustryPESnapshot(date, exchange, industry string) ([]IndustryPESnapshotResponse, error) {
@@ -23,14 +22,13 @@ func (c *Client) GetIndustryPESnapshot(date, exchange, industry string) ([]Indus
 		"date": date,
 	}
 
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
-	if industry != " {
+	if industry != "" {
 		params["industry"] = industry
 	}
 
 	url := "https://financialmodelingprep.com/stable/industry-pe-snapshot"
 
 	return doRequest[[]IndustryPESnapshotResponse](c, url, params)
-}

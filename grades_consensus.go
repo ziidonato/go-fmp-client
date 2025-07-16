@@ -8,7 +8,6 @@ import (
 // GradesConsensusParams represents the parameters for the Stock Grades Summary API
 type GradesConsensusParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // GradesConsensusResponse represents the response from the Stock Grades Summary API
 type GradesConsensusResponse struct {
@@ -19,7 +18,6 @@ type GradesConsensusResponse struct {
 	Sell       int    `json:"sell"`
 	StrongSell int    `json:"strongSell"`
 	Consensus  string `json:"consensus"`
-}
 
 // GradesConsensus retrieves an overall view of analyst ratings for individual stock symbols
 func (c *Client) GradesConsensus(params GradesConsensusParams) ([]GradesConsensusResponse, error) {
@@ -32,4 +30,3 @@ func (c *Client) GradesConsensus(params GradesConsensusParams) ([]GradesConsensu
 	}
 
 	return doRequest[[]GradesConsensusResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

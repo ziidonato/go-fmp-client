@@ -10,7 +10,6 @@ type CommoditiesFullChartParams struct {
 	Symbol string  `json:"symbol"` // Required: Commodity symbol (e.g., "GCUSD")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
-}
 
 // CommoditiesFullChartResponse represents the response from the Full Chart API
 type CommoditiesFullChartResponse struct {
@@ -24,7 +23,6 @@ type CommoditiesFullChartResponse struct {
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	VWAP          float64 `json:"vwap"`
-}
 
 // CommoditiesFullChart retrieves full historical end-of-day price data for commodities
 func (c *Client) CommoditiesFullChart(params CommoditiesFullChartParams) ([]CommoditiesFullChartResponse, error) {
@@ -45,4 +43,3 @@ func (c *Client) CommoditiesFullChart(params CommoditiesFullChartParams) ([]Comm
 	}
 
 	return doRequest[[]CommoditiesFullChartResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

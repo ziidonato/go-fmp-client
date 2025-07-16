@@ -16,7 +16,6 @@ type GeneralNewsResponse struct {
 	Site          string  `json:"site"`
 	Text          string  `json:"text"`
 	URL           string  `json:"url"`
-}
 
 // GeneralNews retrieves the latest general news articles from various sources
 func (c *Client) GeneralNews(page, limit int, from, to string) ([]GeneralNewsResponse, error) {
@@ -35,14 +34,13 @@ func (c *Client) GeneralNews(page, limit int, from, to string) ([]GeneralNewsRes
 		"limit": strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/general-latest"
 
 	return doRequest[[]GeneralNewsResponse](c, url, params)
-}

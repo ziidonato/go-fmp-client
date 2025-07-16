@@ -10,7 +10,6 @@ type StockPriceVolumeDataParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
-}
 
 // StockPriceVolumeDataResponse represents the response from the Stock Price and Volume Data API
 type StockPriceVolumeDataResponse struct {
@@ -24,7 +23,6 @@ type StockPriceVolumeDataResponse struct {
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	VWAP          float64 `json:"vwap"`
-}
 
 // StockPriceVolumeData retrieves full price and volume data for any stock symbol
 func (c *Client) StockPriceVolumeData(params StockPriceVolumeDataParams) ([]StockPriceVolumeDataResponse, error) {
@@ -45,4 +43,3 @@ func (c *Client) StockPriceVolumeData(params StockPriceVolumeDataParams) ([]Stoc
 	}
 
 	return doRequest[[]StockPriceVolumeDataResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

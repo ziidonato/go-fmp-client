@@ -9,7 +9,6 @@ import (
 type PriceTargetLatestNewsParams struct {
 	Limit *int `json:"limit"` // Required: Number of results (Maximum 1000 records per request)
 	Page  *int `json:"page"`  // Required: Page number (Page maxed at 100)
-}
 
 // PriceTargetLatestNewsResponse represents the response from the Price Target Latest News API
 type PriceTargetLatestNewsResponse struct {
@@ -24,7 +23,6 @@ type PriceTargetLatestNewsResponse struct {
 	NewsPublisher   string  `json:"newsPublisher"`
 	NewsBaseURL     string  `json:"newsBaseURL"`
 	AnalystCompany  string  `json:"analystCompany"`
-}
 
 // PriceTargetLatestNews retrieves the most recent analyst price target updates for all stock symbols
 func (c *Client) PriceTargetLatestNews(params PriceTargetLatestNewsParams) ([]PriceTargetLatestNewsResponse, error) {
@@ -50,4 +48,3 @@ func (c *Client) PriceTargetLatestNews(params PriceTargetLatestNewsParams) ([]Pr
 	}
 
 	return doRequest[[]PriceTargetLatestNewsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

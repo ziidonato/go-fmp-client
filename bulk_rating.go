@@ -16,9 +16,7 @@ type RatingBulkResponse struct {
 	DebtToEquityScore       string `json:"debtToEquityScore"`
 	PriceToEarningsScore    string `json:"priceToEarningsScore"`
 	PriceToBookScore        string `json:"priceToBookScore"`
-}
 
 // GetRatingBulk retrieves comprehensive rating data for multiple stocks
 func (c *Client) GetRatingBulk() ([]RatingBulkResponse, error) {
 	return doRequest[[]RatingBulkResponse](c, "https://financialmodelingprep.com/stable/rating-bulk", nil)
-}

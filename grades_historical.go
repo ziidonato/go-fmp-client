@@ -9,7 +9,6 @@ import (
 type GradesHistoricalParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-}
 
 // GradesHistoricalResponse represents the response from the Historical Stock Grades API
 type GradesHistoricalResponse struct {
@@ -19,7 +18,6 @@ type GradesHistoricalResponse struct {
 	AnalystRatingsHold       int    `json:"analystRatingsHold"`
 	AnalystRatingsSell       int    `json:"analystRatingsSell"`
 	AnalystRatingsStrongSell int    `json:"analystRatingsStrongSell"`
-}
 
 // GradesHistorical retrieves a comprehensive record of analyst grades for specific stock symbols
 func (c *Client) GradesHistorical(params GradesHistoricalParams) ([]GradesHistoricalResponse, error) {
@@ -39,4 +37,3 @@ func (c *Client) GradesHistorical(params GradesHistoricalParams) ([]GradesHistor
 	}
 
 	return doRequest[[]GradesHistoricalResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

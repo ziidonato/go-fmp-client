@@ -24,7 +24,6 @@ type IndexQuoteResponse struct {
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`
-}
 
 // GetIndexQuote retrieves real-time stock index quotes
 func (c *Client) GetIndexQuote(symbol string) ([]IndexQuoteResponse, error) {
@@ -36,5 +35,4 @@ func (c *Client) GetIndexQuote(symbol string) ([]IndexQuoteResponse, error) {
 
 	return doRequest[[]IndexQuoteResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

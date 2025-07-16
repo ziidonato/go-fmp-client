@@ -9,7 +9,6 @@ import (
 type RatingsSnapshotParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (default: 1)
-}
 
 // RatingsSnapshotResponse represents the response from the Ratings Snapshot API
 type RatingsSnapshotResponse struct {
@@ -22,7 +21,6 @@ type RatingsSnapshotResponse struct {
 	DebtToEquityScore       int    `json:"debtToEquityScore"`
 	PriceToEarningsScore    int    `json:"priceToEarningsScore"`
 	PriceToBookScore        int    `json:"priceToBookScore"`
-}
 
 // RatingsSnapshot retrieves a comprehensive snapshot of financial ratings for stock symbols
 func (c *Client) RatingsSnapshot(params RatingsSnapshotParams) ([]RatingsSnapshotResponse, error) {
@@ -39,4 +37,3 @@ func (c *Client) RatingsSnapshot(params RatingsSnapshotParams) ([]RatingsSnapsho
 	}
 
 	return doRequest[[]RatingsSnapshotResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

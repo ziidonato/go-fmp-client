@@ -12,7 +12,6 @@ type ETFQuotesResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // GetETFQuotes retrieves real-time price quotes for exchange-traded funds (ETFs)
 func (c *Client) GetETFQuotes(short bool) ([]ETFQuotesResponse, error) {
@@ -20,4 +19,4 @@ func (c *Client) GetETFQuotes(short bool) ([]ETFQuotesResponse, error) {
 
 	return doRequest[[]ETFQuotesResponse](c, url, map[string]string{
 		"short": strconv.FormatBool(short)
-}
+	}

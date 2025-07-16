@@ -26,7 +26,6 @@ type CustomDCFAdvancedParams struct {
 	MarketRiskPremium                          *float64 `json:"marketRiskPremium"`                          // Optional: Market risk premium
 	Beta                                       *float64 `json:"beta"`                                       // Optional: Beta
 	RiskFreeRate                               *float64 `json:"riskFreeRate"`                               // Optional: Risk-free rate
-}
 
 // CustomDCFAdvancedResponse represents the response from the Custom DCF Advanced API
 type CustomDCFAdvancedResponse struct {
@@ -77,7 +76,6 @@ type CustomDCFAdvancedResponse struct {
 	EquityValue                  int64   `json:"equityValue"`
 	EquityValuePerShare          float64 `json:"equityValuePerShare"`
 	FreeCashFlowT1               int64   `json:"freeCashFlowT1"`
-}
 
 // CustomDCFAdvanced runs a tailored Discounted Cash Flow analysis with detailed inputs
 func (c *Client) CustomDCFAdvanced(params CustomDCFAdvancedParams) ([]CustomDCFAdvancedResponse, error) {
@@ -146,4 +144,3 @@ func (c *Client) CustomDCFAdvanced(params CustomDCFAdvancedParams) ([]CustomDCFA
 	}
 
 	return doRequest[[]CustomDCFAdvancedResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -26,7 +26,6 @@ type CustomDCFLeveredParams struct {
 	MarketRiskPremium                          *float64 `json:"marketRiskPremium"`                          // Optional: Market risk premium
 	Beta                                       *float64 `json:"beta"`                                       // Optional: Beta
 	RiskFreeRate                               *float64 `json:"riskFreeRate"`                               // Optional: Risk-free rate
-}
 
 // CustomDCFLeveredResponse represents the response from the Custom DCF Levered API
 type CustomDCFLeveredResponse struct {
@@ -64,7 +63,6 @@ type CustomDCFLeveredResponse struct {
 	EquityValuePerShare          float64 `json:"equityValuePerShare"`
 	FreeCashFlowT1               int64   `json:"freeCashFlowT1"`
 	OperatingCashFlowPercentage  float64 `json:"operatingCashFlowPercentage"`
-}
 
 // CustomDCFLevered runs a tailored Levered Discounted Cash Flow analysis with detailed inputs
 func (c *Client) CustomDCFLevered(params CustomDCFLeveredParams) ([]CustomDCFLeveredResponse, error) {
@@ -133,4 +131,3 @@ func (c *Client) CustomDCFLevered(params CustomDCFLeveredParams) ([]CustomDCFLev
 	}
 
 	return doRequest[[]CustomDCFLeveredResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -8,13 +8,11 @@ import (
 // CIKListParams represents the parameters for the CIK List API
 type CIKListParams struct {
 	Limit *int `json:"limit"` // Required: Number of results (Maximum 10000 records per request)
-}
 
 // CIKListResponse represents the response from the CIK List API
 type CIKListResponse struct {
 	CIK         string `json:"cik"`
 	CompanyName string `json:"companyName"`
-}
 
 // CIKList retrieves a comprehensive database of CIK numbers for SEC-registered entities
 func (c *Client) CIKList(params CIKListParams) ([]CIKListResponse, error) {
@@ -31,4 +29,3 @@ func (c *Client) CIKList(params CIKListParams) ([]CIKListResponse, error) {
 	}
 
 	return doRequest[[]CIKListResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

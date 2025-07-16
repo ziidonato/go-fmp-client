@@ -9,7 +9,6 @@ import (
 type HistoricalEmployeeCountParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 10000 records per request)
-}
 
 // HistoricalEmployeeCountResponse represents the response from the Company Historical Employee Count API
 type HistoricalEmployeeCountResponse struct {
@@ -22,7 +21,6 @@ type HistoricalEmployeeCountResponse struct {
 	FilingDate     string `json:"filingDate"`
 	EmployeeCount  int    `json:"employeeCount"`
 	Source         string `json:"source"`
-}
 
 // HistoricalEmployeeCount retrieves historical employee count data for a company based on specific reporting periods
 func (c *Client) HistoricalEmployeeCount(params HistoricalEmployeeCountParams) ([]HistoricalEmployeeCountResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) HistoricalEmployeeCount(params HistoricalEmployeeCountParams) (
 	}
 
 	return doRequest[[]HistoricalEmployeeCountResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

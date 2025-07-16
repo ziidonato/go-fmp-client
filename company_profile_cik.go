@@ -8,7 +8,6 @@ import (
 // CompanyProfileCIKParams represents the parameters for the Company Profile by CIK API
 type CompanyProfileCIKParams struct {
 	CIK string `json:"cik"` // Required: Central Index Key (e.g., "320193")
-}
 
 // CompanyProfileCIKResponse represents the response from the Company Profile by CIK API
 type CompanyProfileCIKResponse struct {
@@ -48,7 +47,6 @@ type CompanyProfileCIKResponse struct {
 	IsActivelyTrading bool    `json:"isActivelyTrading"`
 	IsADR             bool    `json:"isAdr"`
 	IsFund            bool    `json:"isFund"`
-}
 
 // CompanyProfileCIK retrieves detailed company profile data by CIK (Central Index Key)
 func (c *Client) CompanyProfileCIK(params CompanyProfileCIKParams) ([]CompanyProfileCIKResponse, error) {
@@ -61,4 +59,3 @@ func (c *Client) CompanyProfileCIK(params CompanyProfileCIKParams) ([]CompanyPro
 	}
 
 	return doRequest[[]CompanyProfileCIKResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -10,7 +10,6 @@ type PriceTargetNewsParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Required: Number of results (e.g., 10)
 	Page   *int   `json:"page"`   // Required: Page number (e.g., 0)
-}
 
 // PriceTargetNewsResponse represents the response from the Price Target News API
 type PriceTargetNewsResponse struct {
@@ -25,7 +24,6 @@ type PriceTargetNewsResponse struct {
 	NewsPublisher   string  `json:"newsPublisher"`
 	NewsBaseURL     string  `json:"newsBaseURL"`
 	AnalystCompany  string  `json:"analystCompany"`
-}
 
 // PriceTargetNews retrieves real-time updates on analysts' price targets for stocks
 func (c *Client) PriceTargetNews(params PriceTargetNewsParams) ([]PriceTargetNewsResponse, error) {
@@ -48,4 +46,3 @@ func (c *Client) PriceTargetNews(params PriceTargetNewsParams) ([]PriceTargetNew
 	}
 
 	return doRequest[[]PriceTargetNewsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

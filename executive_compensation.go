@@ -8,7 +8,6 @@ import (
 // ExecutiveCompensationParams represents the parameters for the Executive Compensation API
 type ExecutiveCompensationParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // ExecutiveCompensationResponse represents the response from the Executive Compensation API
 type ExecutiveCompensationResponse struct {
@@ -27,7 +26,6 @@ type ExecutiveCompensationResponse struct {
 	AllOtherCompensation      int    `json:"allOtherCompensation"`
 	Total                     int    `json:"total"`
 	Link                      string `json:"link"`
-}
 
 // ExecutiveCompensation retrieves comprehensive compensation data for company executives
 func (c *Client) ExecutiveCompensation(params ExecutiveCompensationParams) ([]ExecutiveCompensationResponse, error) {
@@ -40,4 +38,3 @@ func (c *Client) ExecutiveCompensation(params ExecutiveCompensationParams) ([]Ex
 	}
 
 	return doRequest[[]ExecutiveCompensationResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

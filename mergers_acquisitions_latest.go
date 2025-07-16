@@ -9,7 +9,6 @@ import (
 type MergersAcquisitionsLatestParams struct {
 	Page  *int `json:"page"`  // Required: Page number (e.g., 0)
 	Limit *int `json:"limit"` // Required: Number of results (Maximum 1000 records per request)
-}
 
 // MergersAcquisitionsLatestResponse represents the response from the Latest Mergers & Acquisitions API
 type MergersAcquisitionsLatestResponse struct {
@@ -22,7 +21,6 @@ type MergersAcquisitionsLatestResponse struct {
 	TransactionDate     string `json:"transactionDate"`
 	AcceptedDate        string `json:"acceptedDate"`
 	Link                string `json:"link"`
-}
 
 // MergersAcquisitionsLatest retrieves real-time data on the latest mergers and acquisitions
 func (c *Client) MergersAcquisitionsLatest(params MergersAcquisitionsLatestParams) ([]MergersAcquisitionsLatestResponse, error) {
@@ -44,4 +42,3 @@ func (c *Client) MergersAcquisitionsLatest(params MergersAcquisitionsLatestParam
 	}
 
 	return doRequest[[]MergersAcquisitionsLatestResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -8,7 +8,6 @@ import (
 // ESGDisclosuresParams represents the parameters for the ESG Investment Search API
 type ESGDisclosuresParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // ESGDisclosuresResponse represents the response from the ESG Investment Search API
 type ESGDisclosuresResponse struct {
@@ -23,7 +22,6 @@ type ESGDisclosuresResponse struct {
 	GovernanceScore    float64 `json:"governanceScore"`
 	ESGScore           float64 `json:"ESGScore"`
 	URL                string  `json:"url"`
-}
 
 // ESGDisclosures retrieves ESG disclosures for companies and funds
 func (c *Client) ESGDisclosures(params ESGDisclosuresParams) ([]ESGDisclosuresResponse, error) {
@@ -36,4 +34,3 @@ func (c *Client) ESGDisclosures(params ESGDisclosuresParams) ([]ESGDisclosuresRe
 	}
 
 	return doRequest[[]ESGDisclosuresResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

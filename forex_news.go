@@ -16,7 +16,6 @@ type ForexNewsResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // GetForexNews retrieves the latest forex news articles
 func (c *Client) GetForexNews(page, limit int, from, to string) ([]ForexNewsResponse, error) {
@@ -35,14 +34,13 @@ func (c *Client) GetForexNews(page, limit int, from, to string) ([]ForexNewsResp
 		"limit": strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/forex-latest"
 
 	return doRequest[[]ForexNewsResponse](c, url, params)
-}

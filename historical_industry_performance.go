@@ -11,7 +11,6 @@ type HistoricalIndustryPerformanceResponse struct {
 	Industry      string  `json:"industry"`
 	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
-}
 
 // HistoricalIndustryPerformance retrieves historical performance data for industries
 func (c *Client) HistoricalIndustryPerformance(industry, from, to, exchange string) ([]HistoricalIndustryPerformanceResponse, error) {
@@ -23,17 +22,16 @@ func (c *Client) HistoricalIndustryPerformance(industry, from, to, exchange stri
 		"industry": industry,
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-industry-performance"
 
 	return doRequest[[]HistoricalIndustryPerformanceResponse](c, url, params)
-}

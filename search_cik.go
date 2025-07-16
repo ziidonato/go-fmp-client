@@ -9,7 +9,6 @@ import (
 type SearchCIKParams struct {
 	CIK   string `json:"cik"`   // Required: Central Index Key (e.g., "320193")
 	Limit *int   `json:"limit"` // Optional: Number of results to return (default: 50)
-}
 
 // SearchCIKResponse represents the response from the CIK Search API
 type SearchCIKResponse struct {
@@ -19,7 +18,6 @@ type SearchCIKResponse struct {
 	ExchangeFullName string `json:"exchangeFullName"`
 	Exchange         string `json:"exchange"`
 	Currency         string `json:"currency"`
-}
 
 // SearchCIK retrieves the Central Index Key (CIK) for publicly traded companies
 func (c *Client) SearchCIK(params SearchCIKParams) ([]SearchCIKResponse, error) {
@@ -36,4 +34,3 @@ func (c *Client) SearchCIK(params SearchCIKParams) ([]SearchCIKResponse, error) 
 	}
 
 	return doRequest[[]SearchCIKResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

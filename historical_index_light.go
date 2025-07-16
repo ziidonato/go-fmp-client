@@ -11,7 +11,6 @@ type HistoricalIndexLightResponse struct {
 	Date   string  `json:"date"`
 	Price  float64 `json:"price"`
 	Volume int64   `json:"volume"`
-}
 
 // GetHistoricalIndexLight retrieves end-of-day historical prices for stock indexes
 func (c *Client) GetHistoricalIndexLight(symbol, from, to string) ([]HistoricalIndexLightResponse, error) {
@@ -23,14 +22,13 @@ func (c *Client) GetHistoricalIndexLight(symbol, from, to string) ([]HistoricalI
 		"symbol": symbol,
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-price-eod/light"
 
 	return doRequest[[]HistoricalIndexLightResponse](c, url, params)
-}

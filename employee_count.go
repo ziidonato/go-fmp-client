@@ -9,7 +9,6 @@ import (
 type EmployeeCountParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 10000 records per request)
-}
 
 // EmployeeCountResponse represents the response from the Company Employee Count API
 type EmployeeCountResponse struct {
@@ -22,7 +21,6 @@ type EmployeeCountResponse struct {
 	FilingDate     string `json:"filingDate"`
 	EmployeeCount  int    `json:"employeeCount"`
 	Source         string `json:"source"`
-}
 
 // EmployeeCount retrieves detailed workforce information for companies
 func (c *Client) EmployeeCount(params EmployeeCountParams) ([]EmployeeCountResponse, error) {
@@ -42,4 +40,3 @@ func (c *Client) EmployeeCount(params EmployeeCountParams) ([]EmployeeCountRespo
 	}
 
 	return doRequest[[]EmployeeCountResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

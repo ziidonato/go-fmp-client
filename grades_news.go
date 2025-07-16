@@ -10,7 +10,6 @@ type GradesNewsParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Page   *int   `json:"page"`   // Required: Page number (e.g., 0)
 	Limit  *int   `json:"limit"`  // Required: Number of results (Maximum 100 records per request)
-}
 
 // GradesNewsResponse represents the response from the Stock Grade News API
 type GradesNewsResponse struct {
@@ -25,7 +24,6 @@ type GradesNewsResponse struct {
 	GradingCompany  string  `json:"gradingCompany"`
 	Action          string  `json:"action"`
 	PriceWhenPosted float64 `json:"priceWhenPosted"`
-}
 
 // GradesNews retrieves real-time updates on stock rating changes
 func (c *Client) GradesNews(params GradesNewsParams) ([]GradesNewsResponse, error) {
@@ -52,4 +50,3 @@ func (c *Client) GradesNews(params GradesNewsParams) ([]GradesNewsResponse, erro
 	}
 
 	return doRequest[[]GradesNewsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

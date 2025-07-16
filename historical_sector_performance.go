@@ -11,7 +11,6 @@ type HistoricalSectorPerformanceResponse struct {
 	Sector        string  `json:"sector"`
 	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
-}
 
 // HistoricalSectorPerformance retrieves historical sector performance data
 func (c *Client) HistoricalSectorPerformance(sector, from, to, exchange string) ([]HistoricalSectorPerformanceResponse, error) {
@@ -23,17 +22,16 @@ func (c *Client) HistoricalSectorPerformance(sector, from, to, exchange string) 
 		"sector": sector,
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
-	if exchange != " {
+	if exchange != "" {
 		params["exchange"] = exchange
 	}
 
 	url := "https://financialmodelingprep.com/stable/historical-sector-performance"
 
 	return doRequest[[]HistoricalSectorPerformanceResponse](c, url, params)
-}

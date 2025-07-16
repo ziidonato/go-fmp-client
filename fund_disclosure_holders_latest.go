@@ -8,7 +8,6 @@ import (
 // FundDisclosureHoldersLatestParams represents the parameters for the Mutual Fund & ETF Disclosure API
 type FundDisclosureHoldersLatestParams struct {
 	Symbol string `json:"symbol"` // Required: Symbol (e.g., "AAPL")
-}
 
 // FundDisclosureHoldersLatestResponse represents the response from the Mutual Fund & ETF Disclosure API
 type FundDisclosureHoldersLatestResponse struct {
@@ -18,7 +17,6 @@ type FundDisclosureHoldersLatestResponse struct {
 	DateReported  string  `json:"dateReported"`
 	Change        int64   `json:"change"`
 	WeightPercent float64 `json:"weightPercent"`
-}
 
 // FundDisclosureHoldersLatest retrieves the latest disclosures from mutual funds and ETFs
 func (c *Client) FundDisclosureHoldersLatest(params FundDisclosureHoldersLatestParams) ([]FundDisclosureHoldersLatestResponse, error) {
@@ -31,4 +29,3 @@ func (c *Client) FundDisclosureHoldersLatest(params FundDisclosureHoldersLatestP
 	}
 
 	return doRequest[[]FundDisclosureHoldersLatestResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

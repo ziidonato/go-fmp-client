@@ -8,7 +8,6 @@ import (
 // EconomicIndicatorsParams represents the parameters for the Economic Indicators API
 type EconomicIndicatorsParams struct {
 	Name string `json:"name"` // Required: Economic indicator name (e.g., "GDP")
-}
 
 // EconomicIndicatorsResponse represents the response from the Economic Indicators API
 type EconomicIndicatorsResponse struct {
@@ -19,7 +18,6 @@ type EconomicIndicatorsResponse struct {
 	Period      string  `json:"period"`
 	Source      string  `json:"source"`
 	Description string  `json:"description"`
-}
 
 // EconomicIndicators retrieves real-time and historical economic data for key indicators
 func (c *Client) EconomicIndicators(params EconomicIndicatorsParams) ([]EconomicIndicatorsResponse, error) {
@@ -32,4 +30,3 @@ func (c *Client) EconomicIndicators(params EconomicIndicatorsParams) ([]Economic
 	}
 
 	return doRequest[[]EconomicIndicatorsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

@@ -8,7 +8,6 @@ import (
 // ProfileBulkParams represents the parameters for the Profile Bulk API
 type ProfileBulkParams struct {
 	Part string `json:"part"` // Required: part number (e.g., "0")
-}
 
 // ProfileBulkResponse represents the response from the Profile Bulk API
 type ProfileBulkResponse struct {
@@ -48,7 +47,6 @@ type ProfileBulkResponse struct {
 	IsActivelyTrading string `json:"isActivelyTrading"`
 	IsADR             string `json:"isAdr"`
 	IsFund            string `json:"isFund"`
-}
 
 // GetProfileBulk retrieves comprehensive company profile data in bulk
 func (c *Client) GetProfileBulk(params ProfileBulkParams) ([]ProfileBulkResponse, error) {
@@ -62,4 +60,3 @@ func (c *Client) GetProfileBulk(params ProfileBulkParams) ([]ProfileBulkResponse
 	}
 
 	return doRequest[[]ProfileBulkResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

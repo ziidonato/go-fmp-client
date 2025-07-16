@@ -8,7 +8,6 @@ import (
 // FinancialScoresParams represents the parameters for the Financial Scores API
 type FinancialScoresParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // FinancialScoresResponse represents the response from the Financial Scores API
 type FinancialScoresResponse struct {
@@ -23,7 +22,6 @@ type FinancialScoresResponse struct {
 	MarketCap        int64   `json:"marketCap"`
 	TotalLiabilities int64   `json:"totalLiabilities"`
 	Revenue          int64   `json:"revenue"`
-}
 
 // FinancialScores retrieves financial health scores for a specific stock symbol
 func (c *Client) FinancialScores(params FinancialScoresParams) ([]FinancialScoresResponse, error) {
@@ -36,4 +34,3 @@ func (c *Client) FinancialScores(params FinancialScoresParams) ([]FinancialScore
 	}
 
 	return doRequest[[]FinancialScoresResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

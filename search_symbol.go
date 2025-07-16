@@ -10,7 +10,6 @@ type SearchSymbolParams struct {
 	Query    string  `json:"query"`    // Required: Search query (e.g., "AAPL")
 	Limit    *int    `json:"limit"`    // Optional: Number of results to return (default: 50)
 	Exchange *string `json:"exchange"` // Optional: Exchange filter (e.g., "NASDAQ")
-}
 
 // SearchSymbolResponse represents the response from the Stock Symbol Search API
 type SearchSymbolResponse struct {
@@ -19,7 +18,6 @@ type SearchSymbolResponse struct {
 	Currency         string `json:"currency"`
 	ExchangeFullName string `json:"exchangeFullName"`
 	Exchange         string `json:"exchange"`
-}
 
 // SearchSymbol searches for stock symbols by query across multiple global markets
 func (c *Client) SearchSymbol(params SearchSymbolParams) ([]SearchSymbolResponse, error) {
@@ -40,4 +38,3 @@ func (c *Client) SearchSymbol(params SearchSymbolParams) ([]SearchSymbolResponse
 	}
 
 	return doRequest[[]SearchSymbolResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

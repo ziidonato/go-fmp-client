@@ -11,7 +11,6 @@ type StockQuoteShortResponse struct {
 	Price  float64 `json:"price"`
 	Change float64 `json:"change"`
 	Volume int64   `json:"volume"`
-}
 
 // GetStockQuoteShort retrieves quick snapshots of real-time stock quotes
 func (c *Client) GetStockQuoteShort(symbol string) ([]StockQuoteShortResponse, error) {
@@ -23,5 +22,4 @@ func (c *Client) GetStockQuoteShort(symbol string) ([]StockQuoteShortResponse, e
 
 	return doRequest[[]StockQuoteShortResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

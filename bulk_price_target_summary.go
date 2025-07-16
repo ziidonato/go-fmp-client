@@ -17,9 +17,7 @@ type PriceTargetSummaryBulkResponse struct {
 	AllTimeCount              string `json:"allTimeCount"`
 	AllTimeAvgPriceTarget     string `json:"allTimeAvgPriceTarget"`
 	Publishers                string `json:"publishers"`
-}
 
 // GetPriceTargetSummaryBulk retrieves comprehensive overview of price targets for all listed symbols
 func (c *Client) GetPriceTargetSummaryBulk() ([]PriceTargetSummaryBulkResponse, error) {
 	return doRequest[[]PriceTargetSummaryBulkResponse](c, "https://financialmodelingprep.com/stable/price-target-summary-bulk", nil)
-}

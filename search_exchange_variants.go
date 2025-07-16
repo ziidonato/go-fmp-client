@@ -8,7 +8,6 @@ import (
 // SearchExchangeVariantsParams represents the parameters for the Exchange Variants Search API
 type SearchExchangeVariantsParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // SearchExchangeVariantsResponse represents the response from the Exchange Variants Search API
 type SearchExchangeVariantsResponse struct {
@@ -48,7 +47,6 @@ type SearchExchangeVariantsResponse struct {
 	IsActivelyTrading bool    `json:"isActivelyTrading"`
 	IsADR             bool    `json:"isAdr"`
 	IsFund            bool    `json:"isFund"`
-}
 
 // SearchExchangeVariants searches across multiple public exchanges to find where a given stock symbol is listed
 func (c *Client) SearchExchangeVariants(params SearchExchangeVariantsParams) ([]SearchExchangeVariantsResponse, error) {
@@ -61,4 +59,3 @@ func (c *Client) SearchExchangeVariants(params SearchExchangeVariantsParams) ([]
 	}
 
 	return doRequest[[]SearchExchangeVariantsResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

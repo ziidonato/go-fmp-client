@@ -8,7 +8,6 @@ import (
 // FinancialReportsDatesParams represents the parameters for the Financial Reports Dates API
 type FinancialReportsDatesParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-}
 
 // FinancialReportsDatesResponse represents the response from the Financial Reports Dates API
 type FinancialReportsDatesResponse struct {
@@ -17,7 +16,6 @@ type FinancialReportsDatesResponse struct {
 	Period     string `json:"period"`
 	LinkXlsx   string `json:"linkXlsx"`
 	LinkJson   string `json:"linkJson"`
-}
 
 // FinancialReportsDates retrieves financial reports dates for a specific stock symbol
 func (c *Client) FinancialReportsDates(params FinancialReportsDatesParams) ([]FinancialReportsDatesResponse, error) {
@@ -30,4 +28,3 @@ func (c *Client) FinancialReportsDates(params FinancialReportsDatesParams) ([]Fi
 	}
 
 	return doRequest[[]FinancialReportsDatesResponse](c, "https://financialmodelingprep.com/stable/analyst-estimates", urlParams)
-}

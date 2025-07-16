@@ -14,7 +14,6 @@ type AftermarketQuoteResponse struct {
 	AskPrice  float64 `json:"askPrice"`
 	Volume    int64   `json:"volume"`
 	Timestamp int64   `json:"timestamp"`
-}
 
 // GetAftermarketQuote retrieves real-time aftermarket quotes for stocks
 func (c *Client) GetAftermarketQuote(symbol string) ([]AftermarketQuoteResponse, error) {
@@ -26,5 +25,4 @@ func (c *Client) GetAftermarketQuote(symbol string) ([]AftermarketQuoteResponse,
 
 	return doRequest[[]AftermarketQuoteResponse](c, url, map[string]string{
 		"symbol": symbol,
-	})
-}
+	}

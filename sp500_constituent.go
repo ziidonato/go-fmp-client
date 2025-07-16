@@ -15,11 +15,9 @@ type SP500ConstituentResponse struct {
 	DateFirstAdded string `json:"dateFirstAdded"`
 	CIK            string `json:"cik"`
 	Founded        string `json:"founded"`
-}
 
 // GetSP500Constituent retrieves detailed data on the S&P 500 index
 func (c *Client) GetSP500Constituent() ([]SP500ConstituentResponse, error) {
 	url := "https://financialmodelingprep.com/stable/sp500-constituent"
 
-	return doRequest[[]SP500ConstituentResponse](c, url, map[string]string{})
-}
+	return doRequest[[]SP500ConstituentResponse](c, url, map[string]string{}

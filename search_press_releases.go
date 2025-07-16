@@ -16,7 +16,6 @@ type SearchPressReleasesResponse struct {
 	Site          string `json:"site"`
 	Text          string `json:"text"`
 	URL           string `json:"url"`
-}
 
 // SearchPressReleases searches for company press releases by symbol
 func (c *Client) SearchPressReleases(symbols string, page, limit int, from, to string) ([]SearchPressReleasesResponse, error) {
@@ -39,14 +38,13 @@ func (c *Client) SearchPressReleases(symbols string, page, limit int, from, to s
 		"limit":   strconv.Itoa(limit),
 	}
 
-	if from != " {
+	if from != "" {
 		params["from"] = from
 	}
-	if to != " {
+	if to != "" {
 		params["to"] = to
 	}
 
 	url := "https://financialmodelingprep.com/stable/news/press-releases"
 
 	return doRequest[[]SearchPressReleasesResponse](c, url, params)
-}
