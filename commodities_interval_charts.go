@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -40,14 +39,8 @@ func (c *Client) commoditiesIntervalChart(interval string, params CommoditiesInt
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get(fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval), urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CommoditiesIntervalChartResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest(fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval), urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

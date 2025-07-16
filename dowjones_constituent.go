@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // DowJonesConstituentResponse represents the response from the Dow Jones API
@@ -22,19 +20,10 @@ type DowJonesConstituentResponse struct {
 func (c *Client) GetDowJonesConstituent() ([]DowJonesConstituentResponse, error) {
 	url := "https://financialmodelingprep.com/stable/dowjones-constituent"
 
-	resp, err := c.get(url, map[string]string{})
+	var result []DowJonesConstituentResponse
+	err := c.doRequest(url, map[string]string{}, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var result []DowJonesConstituentResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
 	}
 
 	return result, nil

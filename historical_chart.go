@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 	"strconv"
 )
@@ -77,16 +76,10 @@ func (c *Client) HistoricalChart(interval string, params HistoricalChartParams) 
 	}
 
 	endpoint := fmt.Sprintf("https://financialmodelingprep.com/stable/historical-chart/%s", interval)
-	resp, err := c.get(endpoint, urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []HistoricalChartResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest(endpoint, urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

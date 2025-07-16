@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"fmt"
 	"strconv"
 )
 

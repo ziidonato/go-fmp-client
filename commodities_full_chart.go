@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -44,14 +43,8 @@ func (c *Client) CommoditiesFullChart(params CommoditiesFullChartParams) ([]Comm
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-price-eod/full", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CommoditiesFullChartResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/full", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

@@ -1,7 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
+	"fmt"
 )
 
 // ETFListResponse represents the response from the ETF Symbol Search API
@@ -12,16 +12,12 @@ type ETFListResponse struct {
 
 // ETFList retrieves ticker symbols and company names for Exchange Traded Funds (ETFs)
 func (c *Client) ETFList() ([]ETFListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/etf-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
+	url := "https://financialmodelingprep.com/stable/etf-list"
 
 	var result []ETFListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest(url, map[string]string{}, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

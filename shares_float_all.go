@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -39,17 +38,11 @@ func (c *Client) SharesFloatAll(params SharesFloatAllParams) ([]SharesFloatAllRe
 		"page":  fmt.Sprintf("%d", *params.Page),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/shares-float-all", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []SharesFloatAllResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/shares-float-all", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}
 
-	return result, nil
+	return result, err
 }

@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // HistoricalIndustryPEResponse represents the response from the historical industry PE API
@@ -36,19 +34,10 @@ func (c *Client) GetHistoricalIndustryPE(industry, from, to, exchange string) ([
 
 	url := "https://financialmodelingprep.com/stable/historical-industry-pe"
 
-	resp, err := c.get(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []HistoricalIndustryPEResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	err := c.doRequest(url, params, &result)
+	if err != nil {
+		return nil, err
 	}
 
 	return result, nil

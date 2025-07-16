@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 	"strconv"
 )
@@ -128,16 +127,10 @@ func (c *Client) CompanyScreener(params CompanyScreenerParams) ([]CompanyScreene
 		urlParams["includeAllShareClasses"] = strconv.FormatBool(*params.IncludeAllShareClasses)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/company-screener", urlParams)
+	var result []CompanyScreenerResponse
+	err := c.doRequest("https://financialmodelingprep.com/stable/company-screener", urlParams, &result)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get company screener: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result []CompanyScreenerResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
 	}
 
 	return result, nil

@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -132,16 +131,10 @@ func (c *Client) CustomDCFLevered(params CustomDCFLeveredParams) ([]CustomDCFLev
 		urlParams["riskFreeRate"] = fmt.Sprintf("%f", *params.RiskFreeRate)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/custom-levered-discounted-cash-flow", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CustomDCFLeveredResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/custom-levered-discounted-cash-flow", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

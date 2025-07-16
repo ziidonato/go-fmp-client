@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -34,16 +33,10 @@ func (c *Client) ETFHoldings(params ETFHoldingsParams) ([]ETFHoldingsResponse, e
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/etf/holdings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []ETFHoldingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/etf/holdings", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

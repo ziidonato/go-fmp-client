@@ -1,9 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
-
 // TreasuryRatesResponse represents the response from the Treasury Rates API
 type TreasuryRatesResponse struct {
 	Date      string  `json:"date"`
@@ -23,17 +19,11 @@ type TreasuryRatesResponse struct {
 
 // TreasuryRates retrieves real-time and historical Treasury rates for all maturities
 func (c *Client) TreasuryRates() ([]TreasuryRatesResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/treasury-rates", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []TreasuryRatesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/treasury-rates", map[string]string{}, &result)
 	if err != nil {
 		return nil, err
 	}
 
-	return result, nil
+	return result, err
 }

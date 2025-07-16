@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -50,16 +49,10 @@ func (c *Client) InstitutionalOwnershipExtract(params InstitutionalOwnershipExtr
 		"quarter": params.Quarter,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/institutional-ownership/extract", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []InstitutionalOwnershipExtractResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/institutional-ownership/extract", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

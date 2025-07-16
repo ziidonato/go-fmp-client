@@ -1,10 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
+import "fmt"
 
 // BatchAftermarketQuoteResponse represents the response from the batch aftermarket quote API
 type BatchAftermarketQuoteResponse struct {
@@ -25,21 +21,12 @@ func (c *Client) GetBatchAftermarketQuote(symbols string) ([]BatchAftermarketQuo
 
 	url := "https://financialmodelingprep.com/stable/batch-aftermarket-quote"
 
-	resp, err := c.get(url, map[string]string{
+	var result []BatchAftermarketQuoteResponse
+	err := c.doRequest(url, map[string]string{
 		"symbols": symbols,
-	})
+	}, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var result []BatchAftermarketQuoteResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
 	}
 
 	return result, nil

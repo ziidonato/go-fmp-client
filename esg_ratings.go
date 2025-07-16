@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -31,16 +30,10 @@ func (c *Client) ESGRatings(params ESGRatingsParams) ([]ESGRatingsResponse, erro
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/esg-ratings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []ESGRatingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/esg-ratings", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

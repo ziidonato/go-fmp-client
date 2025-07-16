@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -30,24 +28,15 @@ func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timef
 
 	url := "https://financialmodelingprep.com/stable/technical-indicators/rsi"
 
-	resp, err := c.get(url, map[string]string{
+	var result []TechnicalIndicatorRSIResponse
+	err := c.doRequest(url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
 		"timeframe":    timeframe,
-	})
+	}, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
-	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var result []TechnicalIndicatorRSIResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
-	}
-
-	return result, nil
+	return result, err
 }

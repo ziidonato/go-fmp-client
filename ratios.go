@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -100,17 +99,11 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/ratios", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []RatiosResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/ratios", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, nil
+	return result, err
 }

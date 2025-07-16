@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // HistoricalIndexFullResponse represents the response from the historical index full chart API
@@ -39,19 +37,10 @@ func (c *Client) HistoricalIndexFull(symbol, from, to string) ([]HistoricalIndex
 
 	url := "https://financialmodelingprep.com/stable/historical-price-eod/full"
 
-	resp, err := c.get(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []HistoricalIndexFullResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	err := c.doRequest(url, params, &result)
+	if err != nil {
+		return nil, err
 	}
 
 	return result, nil

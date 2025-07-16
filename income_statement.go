@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -76,16 +75,10 @@ func (c *Client) IncomeStatement(params IncomeStatementParams) ([]IncomeStatemen
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/income-statement", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []IncomeStatementResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/income-statement", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

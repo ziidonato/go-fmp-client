@@ -1,9 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
 // SymbolChangeParams represents the parameters for the Symbol Changes List API
 type SymbolChangeParams struct {
@@ -34,17 +31,11 @@ func (c *Client) SymbolChange(params SymbolChangeParams) ([]SymbolChangeResponse
 		"limit":   fmt.Sprintf("%d", *params.Limit),
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/symbol-change", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []SymbolChangeResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/symbol-change", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, nil
+	return result, err
 }

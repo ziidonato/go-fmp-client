@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -41,16 +40,10 @@ func (c *Client) DividendAdjustedPrice(params DividendAdjustedPriceParams) ([]Di
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-price-eod/dividend-adjusted", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []DividendAdjustedPriceResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/historical-price-eod/dividend-adjusted", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

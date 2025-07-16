@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -72,14 +71,8 @@ func (c *Client) CrowdfundingOfferings(params CrowdfundingOfferingsParams) ([]Cr
 		"cik": params.CIK,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/crowdfunding-offerings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CrowdfundingOfferingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/crowdfunding-offerings", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

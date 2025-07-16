@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -33,16 +32,10 @@ func (c *Client) MergersAcquisitionsSearch(params MergersAcquisitionsSearchParam
 		"name": params.Name,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/mergers-acquisitions-search", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []MergersAcquisitionsSearchResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/mergers-acquisitions-search", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

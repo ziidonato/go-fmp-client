@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -11,6 +10,10 @@ type ForexChart1MinParams struct {
 	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
 	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
 }
+
+type ForexChart5MinParams = ForexChart1MinParams
+
+type ForexChart1HourParams = ForexChart1MinParams
 
 // ForexChart1MinResponse represents the response from the 1-Minute Forex Chart API
 type ForexChart1MinResponse struct {
@@ -22,35 +25,43 @@ type ForexChart1MinResponse struct {
 	Volume int64   `json:"volume"`
 }
 
+type ForexChart5MinResponse = ForexChart1MinResponse
+
+type ForexChart1HourResponse = ForexChart1MinResponse
+
 // ForexChart1Min retrieves real-time, 1-minute intraday forex data for currency pairs
 func (c *Client) ForexChart1Min(params ForexChart1MinParams) ([]ForexChart1MinResponse, error) {
+	return c.getForexChartInterval(params, "1min")
+}
+
+// ForexChart5Min retrieves real-time, 5-minute intraday forex data for currency pairs
+func (c *Client) ForexChart5Min(params ForexChart5MinParams) ([]ForexChart5MinResponse, error) {
+	return c.getForexChartInterval(params, "5min")
+}
+
+// ForexChart1Hour retrieves real-time, 1-hour intraday forex data for currency pairs
+func (c *Client) ForexChart1Hour(params ForexChart1HourParams) ([]ForexChart1HourResponse, error) {
+	return c.getForexChartInterval(params, "1hour")
+}
+
+func (c *Client) getForexChartInterval(params ForexChart1MinParams, interval string) ([]ForexChart1MinResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
-
 	urlParams := map[string]string{
 		"symbol": params.Symbol,
 	}
-
 	if params.From != nil {
 		urlParams["from"] = *params.From
 	}
-
 	if params.To != nil {
 		urlParams["to"] = *params.To
 	}
-
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-chart/1min", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []ForexChart1MinResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	url := "https://financialmodelingprep.com/stable/historical-chart/" + interval
+	err := c.doRequest(url, urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
-
 	return result, nil
 }

@@ -1,9 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
 // BalanceSheetStatementAsReportedParams represents the parameters for the Balance Sheet Statement As Reported API
 type BalanceSheetStatementAsReportedParams struct {
@@ -97,14 +94,8 @@ func (c *Client) BalanceSheetStatementAsReported(params BalanceSheetStatementAsR
 		urlParams["period"] = params.Period
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/balance-sheet-statement-as-reported", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []BalanceSheetStatementAsReportedResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/balance-sheet-statement-as-reported", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

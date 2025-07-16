@@ -1,9 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
 // CashFlowStatementTTMParams represents the parameters for the Cash Flow Statement TTM API
 type CashFlowStatementTTMParams struct {
@@ -79,14 +76,8 @@ func (c *Client) CashFlowStatementTTM(params CashFlowStatementTTMParams) ([]Cash
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/cash-flow-statement-ttm", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CashFlowStatementTTMResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/cash-flow-statement-ttm", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

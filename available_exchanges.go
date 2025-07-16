@@ -1,8 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
+import "fmt"
 
 // AvailableExchangesResponse represents the response from the Available Exchanges API
 type AvailableExchangesResponse struct {
@@ -16,16 +14,10 @@ type AvailableExchangesResponse struct {
 
 // AvailableExchanges retrieves a complete list of supported stock exchanges
 func (c *Client) AvailableExchanges() ([]AvailableExchangesResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/available-exchanges", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []AvailableExchangesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/available-exchanges", map[string]string{}, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

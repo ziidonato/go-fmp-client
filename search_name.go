@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -39,17 +38,11 @@ func (c *Client) SearchName(params SearchNameParams) ([]SearchNameResponse, erro
 		urlParams["exchange"] = *params.Exchange
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-name", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search name: %v", err)
-	}
-	defer resp.Body.Close()
-
 	var result []SearchNameResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/search-name", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, nil
+	return result, err
 }

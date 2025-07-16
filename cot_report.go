@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -163,14 +162,8 @@ func (c *Client) COTReport(params COTReportParams) ([]COTReportResponse, error) 
 		urlParams["symbol"] = *params.Symbol
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/commitment-of-traders-report", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []COTReportResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/commitment-of-traders-report", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

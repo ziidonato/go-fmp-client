@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -30,16 +29,10 @@ func (c *Client) Grades(params GradesParams) ([]GradesResponse, error) {
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/grades", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []GradesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/grades", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

@@ -19,7 +19,7 @@ func (c *Client) GetETFQuotes(short bool) ([]ETFQuotesResponse, error) {
 	params := map[string]string{"short": strconv.FormatBool(short)}
 	var result []ETFQuotesResponse
 	if err := c.doRequest(url, params, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	return result, nil
 }

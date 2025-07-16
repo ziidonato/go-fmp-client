@@ -2,7 +2,6 @@ package go_fmp
 
 import (
 	"fmt"
-	"net/url"
 )
 
 // BalanceSheetBulkParams represents the parameters for the Bulk Balance Sheet Statement API
@@ -86,34 +85,15 @@ func (c *Client) BalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheet
 		return nil, fmt.Errorf("period parameter is required")
 	}
 
-	// Build the URL
-	baseURL := "https://financialmodelingprep.com/stable/balance-sheet-statement-bulk"
-	u, err := url.Parse(baseURL)
-	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
+	urlParams := map[string]string{
+		"year":   params.Year,
+		"period": params.Period,
 	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	resp, err := c.get(u.String(), params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
 
 	var result []BalanceSheetBulkResponse
-	if err := c.doRequest(u.String(), params, &result); err != nil {
-		return nil, err
+	err := c.doRequest("https://financialmodelingprep.com/stable/balance-sheet-statement-bulk", urlParams, &result)
+	if err != nil {
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 	return result, nil
 }

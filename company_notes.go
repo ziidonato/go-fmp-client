@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -28,14 +27,8 @@ func (c *Client) CompanyNotes(params CompanyNotesParams) ([]CompanyNotesResponse
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/company-notes", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CompanyNotesResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/company-notes", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}

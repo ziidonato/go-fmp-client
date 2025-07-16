@@ -1,10 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
+import "fmt"
 
 // BatchAftermarketTradeResponse represents the response from the batch aftermarket trade API
 type BatchAftermarketTradeResponse struct {
@@ -22,21 +18,12 @@ func (c *Client) GetBatchAftermarketTrade(symbols string) ([]BatchAftermarketTra
 
 	url := "https://financialmodelingprep.com/stable/batch-aftermarket-trade"
 
-	resp, err := c.get(url, map[string]string{
+	var result []BatchAftermarketTradeResponse
+	err := c.doRequest(url, map[string]string{
 		"symbols": symbols,
-	})
+	}, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var result []BatchAftermarketTradeResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
 	}
 
 	return result, nil

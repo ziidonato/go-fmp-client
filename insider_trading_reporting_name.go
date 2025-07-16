@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // InsiderTradingReportingNameResponse represents the response from the search insider trades by reporting name API
@@ -22,21 +20,12 @@ func (c *Client) InsiderTradingReportingName(name string) ([]InsiderTradingRepor
 
 	url := "https://financialmodelingprep.com/stable/insider-trading/reporting-name"
 
-	resp, err := c.get(url, map[string]string{
+	var result []InsiderTradingReportingNameResponse
+	err := c.doRequest(url, map[string]string{
 		"name": name,
-	})
+	}, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var result []InsiderTradingReportingNameResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
 	}
 
 	return result, nil

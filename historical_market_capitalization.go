@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -45,16 +44,10 @@ func (c *Client) HistoricalMarketCapitalization(params HistoricalMarketCapitaliz
 		urlParams["to"] = *params.To
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/historical-market-capitalization", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []HistoricalMarketCapitalizationResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/historical-market-capitalization", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

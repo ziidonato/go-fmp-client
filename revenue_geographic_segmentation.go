@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -40,17 +39,11 @@ func (c *Client) RevenueGeographicSegmentation(params RevenueGeographicSegmentat
 		urlParams["structure"] = params.Structure
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/revenue-geographic-segmentation", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []RevenueGeographicSegmentationResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/revenue-geographic-segmentation", urlParams, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, nil
+	return result, err
 }

@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -35,16 +34,10 @@ func (c *Client) SearchCIK(params SearchCIKParams) ([]SearchCIKResponse, error) 
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/search-cik", urlParams)
-	if err != nil {
-		return nil, fmt.Errorf("failed to search CIK: %v", err)
-	}
-	defer resp.Body.Close()
-
 	var result []SearchCIKResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/search-cik", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode response: %v", err)
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
 	return result, nil

@@ -1,8 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-)
+import "fmt"
 
 // StockListResponse represents the response from the Company Symbols List API
 type StockListResponse struct {
@@ -12,17 +10,11 @@ type StockListResponse struct {
 
 // StockList retrieves a comprehensive list of financial symbols from various global exchanges
 func (c *Client) StockList() ([]StockListResponse, error) {
-	resp, err := c.get("https://financialmodelingprep.com/stable/stock-list", nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []StockListResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/stock-list", map[string]string{}, &result)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, nil
+	return result, err
 }

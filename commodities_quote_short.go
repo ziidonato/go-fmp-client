@@ -1,9 +1,6 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
 // CommoditiesQuoteShortParams represents the parameters for the Commodities Quote Short API
 type CommoditiesQuoteShortParams struct {
@@ -28,14 +25,8 @@ func (c *Client) CommoditiesQuoteShort(params CommoditiesQuoteShortParams) ([]Co
 		"symbol": params.Symbol,
 	}
 
-	resp, err := c.get("https://financialmodelingprep.com/stable/quote-short", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
 	var result []CommoditiesQuoteShortResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
+	err := c.doRequest("https://financialmodelingprep.com/stable/quote-short", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}
