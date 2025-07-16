@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // IndustryPerformanceSnapshotResponse represents the response from the industry performance snapshot API
@@ -19,34 +17,22 @@ func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([
 	if date == "" {
 		return nil, fmt.Errorf("date is required")
 	}
-
-	params := map[string]string{
-		"date": date,
+	if exchange == "" {
+		return nil, fmt.Errorf("exchange is required")
 	}
-
-	if exchange != "" {
-		params["exchange"] = exchange
-	}
-	if industry != "" {
-		params["industry"] = industry
+	if industry == "" {
+		return nil, fmt.Errorf("industry is required")
 	}
 
 	url := "https://financialmodelingprep.com/stable/industry-performance-snapshot"
-
-	resp, err := c.get(url, params)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
+	params := map[string]string{
+		"date":     date,
+		"exchange": exchange,
+		"industry": industry,
 	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []IndustryPerformanceSnapshotResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

@@ -1,10 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // ETFCountryWeightingsParams represents the parameters for the ETF & Fund Country Allocation API
 type ETFCountryWeightingsParams struct {
 	Symbol string `json:"symbol"` // Required: ETF/Fund symbol (e.g., "SPY")
@@ -17,26 +12,12 @@ type ETFCountryWeightingsResponse struct {
 }
 
 // ETFCountryWeightings retrieves country allocation data for ETFs and mutual funds
-func (c *Client) ETFCountryWeightings(params ETFCountryWeightingsParams) ([]ETFCountryWeightingsResponse, error) {
-	if params.Symbol == "" {
-		return nil, fmt.Errorf("symbol parameter is required")
-	}
-
-	urlParams := map[string]string{
-		"symbol": params.Symbol,
-	}
-
-	resp, err := c.get("https://financialmodelingprep.com/stable/etf/country-weightings", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+func (c *Client) ETFCountryWeightings(symbol string) ([]ETFCountryWeightingsResponse, error) {
+	url := "https://financialmodelingprep.com/stable/etf/country-weightings"
+	params := map[string]string{"symbol": symbol}
 	var result []ETFCountryWeightingsResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, params, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

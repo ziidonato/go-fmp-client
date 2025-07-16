@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"strconv"
 )
 
@@ -21,25 +19,15 @@ func (c *Client) ExchangeStockQuotes(exchange string, short bool) ([]ExchangeSto
 		return nil, fmt.Errorf("exchange is required")
 	}
 
-	url := "https://financialmodelingprep.com/stable/batch-exchange-quote"
-
-	resp, err := c.get(url, map[string]string{
+	url := "https://financialmodelingprep.com/stable/exchange-stock-quotes"
+	params := map[string]string{
 		"exchange": exchange,
 		"short":    strconv.FormatBool(short),
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
 	}
 
 	var result []ExchangeStockQuotesResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, params, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

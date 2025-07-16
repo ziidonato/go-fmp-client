@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // AcquisitionOwnershipResponse represents the response from the acquisition ownership API
@@ -22,22 +20,9 @@ func (c *Client) AcquisitionOwnership(symbol string) ([]AcquisitionOwnershipResp
 
 	url := "https://financialmodelingprep.com/stable/acquisition-of-beneficial-ownership"
 
-	resp, err := c.get(url, map[string]string{
-		"symbol": symbol,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []AcquisitionOwnershipResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, map[string]string{"symbol": symbol}, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

@@ -1,10 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // CryptocurrencyQuoteParams represents the parameters for the Cryptocurrency Quote API
 type CryptocurrencyQuoteParams struct {
 	Symbol string `json:"symbol"` // Required: Cryptocurrency symbol (e.g., "BTCUSD")
@@ -32,26 +27,12 @@ type CryptocurrencyQuoteResponse struct {
 }
 
 // CryptocurrencyQuote retrieves real-time quotes for cryptocurrencies
-func (c *Client) CryptocurrencyQuote(params CryptocurrencyQuoteParams) ([]CryptocurrencyQuoteResponse, error) {
-	if params.Symbol == "" {
-		return nil, fmt.Errorf("symbol parameter is required")
-	}
-
-	urlParams := map[string]string{
-		"symbol": params.Symbol,
-	}
-
-	resp, err := c.get("https://financialmodelingprep.com/stable/quote", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+func (c *Client) CryptocurrencyQuote(symbol string) ([]CryptocurrencyQuoteResponse, error) {
+	url := "https://financialmodelingprep.com/stable/quote"
+	params := map[string]string{"symbol": symbol}
 	var result []CryptocurrencyQuoteResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, params, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }

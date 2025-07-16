@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 // HolidaysByExchangeResponse represents the response from the holidays by exchange API
@@ -22,22 +20,9 @@ func (c *Client) HolidaysByExchange(exchange string) ([]HolidaysByExchangeRespon
 
 	url := "https://financialmodelingprep.com/stable/holidays-by-exchange"
 
-	resp, err := c.get(url, map[string]string{
-		"exchange": exchange,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
 	var result []HolidaysByExchangeResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+	if err := c.doRequest(url, map[string]string{"exchange": exchange}, &result); err != nil {
+		return nil, err
 	}
-
 	return result, nil
 }

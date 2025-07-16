@@ -1,10 +1,5 @@
 package go_fmp
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // CommoditiesQuoteParams represents the parameters for the Commodities Quote API
 type CommoditiesQuoteParams struct {
 	Symbol string `json:"symbol"` // Required: Commodity symbol (e.g., "GCUSD")
@@ -32,26 +27,12 @@ type CommoditiesQuoteResponse struct {
 }
 
 // CommoditiesQuote retrieves real-time price quotes for commodities traded worldwide
-func (c *Client) CommoditiesQuote(params CommoditiesQuoteParams) ([]CommoditiesQuoteResponse, error) {
-	if params.Symbol == "" {
-		return nil, fmt.Errorf("symbol parameter is required")
-	}
-
-	urlParams := map[string]string{
-		"symbol": params.Symbol,
-	}
-
-	resp, err := c.get("https://financialmodelingprep.com/stable/quote", urlParams)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
+func (c *Client) CommoditiesQuote(symbol string) ([]CommoditiesQuoteResponse, error) {
+	url := "https://financialmodelingprep.com/stable/quote"
+	params := map[string]string{"symbol": symbol}
 	var result []CommoditiesQuoteResponse
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
+	if err := c.doRequest(url, params, &result); err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
