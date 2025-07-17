@@ -39,5 +39,5 @@ func (c *Client) PriceTargetSummary(params PriceTargetSummaryParams) ([]PriceTar
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

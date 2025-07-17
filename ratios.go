@@ -100,5 +100,5 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

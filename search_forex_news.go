@@ -54,5 +54,5 @@ func (c *Client) SearchForexNews(symbols string, page, limit int, from, to strin
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

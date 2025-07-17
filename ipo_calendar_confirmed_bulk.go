@@ -1,9 +1,7 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"time"
 )
 
@@ -30,31 +28,11 @@ func (c *Client) IPOCalendarConfirmedBulk(params IPOCalendarConfirmedBulkParams)
 		return nil, fmt.Errorf("year parameter is required")
 	}
 
-	// Using direct HTTP request since it returns a file
-	url := fmt.Sprintf("%s/ipo-calendar-confirmed-bulk/%s", c.BaseURL, params.Year)
+	url := fmt.Sprintf("ipo-calendar-confirmed-bulk/%s", params.Year)
 	
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Set("Accept", "application/json")
-	if c.APIKey != "" {
-		req.URL.Query().Add("apikey", c.APIKey)
-	}
-
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API returned status code: %d", resp.StatusCode)
-	}
-
 	var result []IPOCalendarConfirmedBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	err := c.doRequest(c.BaseURL+"/"+url, nil, &result)
+	if err != nil {
 		return nil, err
 	}
 

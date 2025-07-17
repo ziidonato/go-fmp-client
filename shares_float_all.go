@@ -46,5 +46,5 @@ func (c *Client) SharesFloatAll(params SharesFloatAllParams) ([]SharesFloatAllRe
 		return nil, err
 	}
 
-	return result, err
+	return result, nil
 }

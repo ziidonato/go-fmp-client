@@ -52,5 +52,5 @@ func (c *Client) PriceTargetNews(params PriceTargetNewsParams) ([]PriceTargetNew
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

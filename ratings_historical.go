@@ -47,5 +47,5 @@ func (c *Client) RatingsHistorical(params RatingsHistoricalParams) ([]RatingsHis
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

@@ -65,5 +65,5 @@ func (c *Client) SearchExchangeVariants(params SearchExchangeVariantsParams) ([]
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

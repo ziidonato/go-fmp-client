@@ -16,5 +16,5 @@ func (c *Client) StockList() ([]StockListResponse, error) {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

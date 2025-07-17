@@ -45,5 +45,5 @@ func (c *Client) RevenueProductSegmentation(params RevenueProductSegmentationPar
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

@@ -46,5 +46,8 @@ func (c *Client) GetPressReleases(page, limit int, from, to string) ([]PressRele
 
 	var result []PressReleasesResponse
 	err := c.doRequest(url, params, &result)
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
