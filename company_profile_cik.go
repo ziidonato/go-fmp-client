@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -22,18 +23,18 @@ type CompanyProfileCIKResponse struct {
 	Volume            int64   `json:"volume"`
 	AverageVolume     int64   `json:"averageVolume"`
 	CompanyName       string  `json:"companyName"`
-	Currency          string  `json:"currency"`
+	Currency Currency `json:"currency"`
 	CIK               string  `json:"cik"`
 	ISIN              string  `json:"isin"`
 	CUSIP             string  `json:"cusip"`
 	ExchangeFullName  string  `json:"exchangeFullName"`
-	Exchange          string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	Industry          string  `json:"industry"`
 	Website           string  `json:"website"`
 	Description       string  `json:"description"`
 	CEO               string  `json:"ceo"`
-	Sector            string  `json:"sector"`
-	Country           string  `json:"country"`
+	Sector Sector `json:"sector"`
+	Country Country `json:"country"`
 	FullTimeEmployees string  `json:"fullTimeEmployees"`
 	Phone             string  `json:"phone"`
 	Address           string  `json:"address"`
@@ -41,7 +42,7 @@ type CompanyProfileCIKResponse struct {
 	State             string  `json:"state"`
 	Zip               string  `json:"zip"`
 	Image             string  `json:"image"`
-	IPODate           string  `json:"ipoDate"`
+	IPODate time.Time `json:"ipoDate"`
 	DefaultImage      bool    `json:"defaultImage"`
 	IsETF             bool    `json:"isEtf"`
 	IsActivelyTrading bool    `json:"isActivelyTrading"`

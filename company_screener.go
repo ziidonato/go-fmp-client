@@ -20,7 +20,7 @@ type CompanyScreenerParams struct {
 	VolumeMoreThan         *int64   `json:"volumeMoreThan"`         // Optional: Minimum volume
 	VolumeLowerThan        *int64   `json:"volumeLowerThan"`        // Optional: Maximum volume
 	Exchange               *string  `json:"exchange"`               // Optional: Exchange filter (e.g., "NASDAQ")
-	Country                *string  `json:"country"`                // Optional: Country filter (e.g., "US")
+	Country *Country `json:"country"`                // Optional: Country filter (e.g., "US")
 	IsETF                  *bool    `json:"isEtf"`                  // Optional: ETF filter
 	IsFund                 *bool    `json:"isFund"`                 // Optional: Fund filter
 	IsActivelyTrading      *bool    `json:"isActivelyTrading"`      // Optional: Actively trading filter
@@ -41,7 +41,7 @@ type CompanyScreenerResponse struct {
 	Volume             int64   `json:"volume"`
 	Exchange           string  `json:"exchange"`
 	ExchangeShortName  string  `json:"exchangeShortName"`
-	Country            string  `json:"country"`
+	Country Country `json:"country"`
 	IsETF              bool    `json:"isEtf"`
 	IsFund             bool    `json:"isFund"`
 	IsActivelyTrading  bool    `json:"isActivelyTrading"`

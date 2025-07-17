@@ -6,7 +6,7 @@ type CommoditiesListResponse struct {
 	Name       string  `json:"name"`
 	Exchange   *string `json:"exchange"`
 	TradeMonth string  `json:"tradeMonth"`
-	Currency   string  `json:"currency"`
+	Currency Currency `json:"currency"`
 }
 
 // CommoditiesList retrieves an extensive list of tracked commodities across various sectors

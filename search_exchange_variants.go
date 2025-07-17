@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -24,14 +25,14 @@ type SearchExchangeVariantsResponse struct {
 	CIK               string  `json:"cik"`
 	ISIN              string  `json:"isin"`
 	CUSIP             string  `json:"cusip"`
-	Exchange          string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	ExchangeShortName string  `json:"exchangeShortName"`
 	Industry          string  `json:"industry"`
 	Website           string  `json:"website"`
 	Description       string  `json:"description"`
 	CEO               string  `json:"ceo"`
-	Sector            string  `json:"sector"`
-	Country           string  `json:"country"`
+	Sector Sector `json:"sector"`
+	Country Country `json:"country"`
 	FullTimeEmployees string  `json:"fullTimeEmployees"`
 	Phone             string  `json:"phone"`
 	Address           string  `json:"address"`
@@ -41,7 +42,7 @@ type SearchExchangeVariantsResponse struct {
 	DCFDiff           float64 `json:"dcfDiff"`
 	DCF               float64 `json:"dcf"`
 	Image             string  `json:"image"`
-	IPODate           string  `json:"ipoDate"`
+	IPODate time.Time `json:"ipoDate"`
 	DefaultImage      bool    `json:"defaultImage"`
 	IsETF             bool    `json:"isEtf"`
 	IsActivelyTrading bool    `json:"isActivelyTrading"`

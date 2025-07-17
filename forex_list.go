@@ -4,7 +4,7 @@ package go_fmp
 type ForexListResponse struct {
 	Symbol            string `json:"symbol"`
 	Name              string `json:"name"`
-	Currency          string `json:"currency"`
+	Currency Currency `json:"currency"`
 	StockExchange     string `json:"stockExchange"`
 	ExchangeShortName string `json:"exchangeShortName"`
 }

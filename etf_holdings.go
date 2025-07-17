@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -19,7 +20,7 @@ type ETFHoldingsResponse struct {
 	SharesNumber     int64   `json:"sharesNumber"`
 	WeightPercentage float64 `json:"weightPercentage"`
 	MarketValue      float64 `json:"marketValue"`
-	UpdatedAt        string  `json:"updatedAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 	Updated          string  `json:"updated"`
 }
 

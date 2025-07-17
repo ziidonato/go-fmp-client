@@ -4,7 +4,7 @@ package go_fmp
 type AllExchangeMarketHoursResponse struct {
 	// Note: The exact structure will depend on the actual API response
 	// This is a placeholder structure that should be updated based on actual response
-	Exchange string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	// Add other fields as needed based on actual API response
 }
 

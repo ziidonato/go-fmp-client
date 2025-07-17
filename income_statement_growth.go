@@ -9,7 +9,7 @@ import (
 type IncomeStatementGrowthParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
 }
 
 // IncomeStatementGrowthResponse represents the response from the Income Statement Growth API
@@ -17,7 +17,7 @@ type IncomeStatementGrowthResponse struct {
 	Symbol                                    string  `json:"symbol"`
 	Date time.Time `json:"date"`
 	FiscalYear                                string  `json:"fiscalYear"`
-	Period                                    string  `json:"period"`
+	Period Period `json:"period"`
 	ReportedCurrency                          string  `json:"reportedCurrency"`
 	GrowthRevenue                             float64 `json:"growthRevenue"`
 	GrowthCostOfRevenue                       float64 `json:"growthCostOfRevenue"`

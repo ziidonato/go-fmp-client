@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -15,7 +16,7 @@ type UpgradesDowngradesConsensusBulkResponse struct {
 	Hold       string `json:"hold"`
 	Sell       string `json:"sell"`
 	StrongSell string `json:"strongSell"`
-	Consensus  string `json:"consensus"`
+	Consensus GradeConsensus `json:"consensus"`
 }
 
 // UpgradesDowngradesConsensusBulk retrieves analyst ratings across all symbols

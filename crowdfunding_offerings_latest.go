@@ -18,7 +18,7 @@ type CrowdfundingOfferingsLatestResponse struct {
 	Date time.Time `json:"date"`
 	FilingDate                                string  `json:"filingDate"`
 	AcceptedDate                              string  `json:"acceptedDate"`
-	FormType                                  string  `json:"formType"`
+	FormType FormType `json:"formType"`
 	FormSignification                         string  `json:"formSignification"`
 	NameOfIssuer                              string  `json:"nameOfIssuer"`
 	LegalStatusForm                           string  `json:"legalStatusForm"`

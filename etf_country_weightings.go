@@ -7,7 +7,7 @@ type ETFCountryWeightingsParams struct {
 
 // ETFCountryWeightingsResponse represents the response from the ETF & Fund Country Allocation API
 type ETFCountryWeightingsResponse struct {
-	Country          string `json:"country"`
+	Country Country `json:"country"`
 	WeightPercentage string `json:"weightPercentage"`
 }
 

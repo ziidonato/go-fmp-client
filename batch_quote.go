@@ -17,7 +17,7 @@ type BatchQuoteResponse struct {
 	MarketCap        int64   `json:"marketCap"`
 	PriceAvg50       float64 `json:"priceAvg50"`
 	PriceAvg200      float64 `json:"priceAvg200"`
-	Exchange         string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	Open             float64 `json:"open"`
 	PreviousClose    float64 `json:"previousClose"`
 	Timestamp        int64   `json:"timestamp"`

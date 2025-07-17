@@ -4,7 +4,7 @@ import "fmt"
 
 // AvailableExchangesResponse represents the response from the Available Exchanges API
 type AvailableExchangesResponse struct {
-	Exchange     string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	Name         string `json:"name"`
 	CountryName  string `json:"countryName"`
 	CountryCode  string `json:"countryCode"`

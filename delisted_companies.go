@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -15,8 +16,8 @@ type DelistedCompaniesResponse struct {
 	Symbol       string `json:"symbol"`
 	CompanyName  string `json:"companyName"`
 	Exchange     string `json:"exchange"`
-	IPODate      string `json:"ipoDate"`
-	DelistedDate string `json:"delistedDate"`
+	IPODate time.Time `json:"ipoDate"`
+	DelistedDate time.Time `json:"delistedDate"`
 }
 
 // DelistedCompanies retrieves a comprehensive list of companies that have been delisted from US exchanges

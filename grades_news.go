@@ -22,7 +22,7 @@ type GradesNewsResponse struct {
 	NewGrade        string  `json:"newGrade"`
 	PreviousGrade   string  `json:"previousGrade"`
 	GradingCompany  string  `json:"gradingCompany"`
-	Action          string  `json:"action"`
+	Action GradeAction `json:"action"`
 	PriceWhenPosted float64 `json:"priceWhenPosted"`
 }
 

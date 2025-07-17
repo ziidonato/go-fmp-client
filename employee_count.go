@@ -16,7 +16,7 @@ type EmployeeCountResponse struct {
 	Symbol         string `json:"symbol"`
 	CIK            string `json:"cik"`
 	AcceptanceTime time.Time `json:"acceptanceTime"`
-	PeriodOfReport string `json:"periodOfReport"`
+	PeriodOfReport time.Time `json:"periodOfReport"`
 	CompanyName    string `json:"companyName"`
 	FormType FormType `json:"formType"`
 	FilingDate time.Time `json:"filingDate"`

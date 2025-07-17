@@ -17,7 +17,7 @@ type COTReportResponse struct {
 	Symbol                      string  `json:"symbol"`
 	Date time.Time `json:"date"`
 	Name                        string  `json:"name"`
-	Sector                      string  `json:"sector"`
+	Sector Sector `json:"sector"`
 	MarketAndExchangeNames      string  `json:"marketAndExchangeNames"`
 	CFTCContractMarketCode      string  `json:"cftcContractMarketCode"`
 	CFTCMarketCode              string  `json:"cftcMarketCode"`

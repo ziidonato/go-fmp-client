@@ -25,18 +25,18 @@ type ProfileBulkResponse struct {
 	Volume            string `json:"volume"`
 	AverageVolume     string `json:"averageVolume"`
 	CompanyName       string `json:"companyName"`
-	Currency          string `json:"currency"`
+	Currency Currency `json:"currency"`
 	CIK               string `json:"cik"`
 	ISIN              string `json:"isin"`
 	CUSIP             string `json:"cusip"`
 	ExchangeFullName  string `json:"exchangeFullName"`
-	Exchange          string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	Industry          string `json:"industry"`
 	Website           string `json:"website"`
 	Description       string `json:"description"`
 	CEO               string `json:"ceo"`
-	Sector            string `json:"sector"`
-	Country           string `json:"country"`
+	Sector Sector `json:"sector"`
+	Country Country `json:"country"`
 	FullTimeEmployees string `json:"fullTimeEmployees"`
 	Phone             string `json:"phone"`
 	Address           string `json:"address"`
