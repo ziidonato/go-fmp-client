@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // InstitutionalOwnershipExtractAnalyticsHolderParams represents the parameters for the Institutional Ownership Extract Analytics By Holder API
@@ -13,47 +14,45 @@ type InstitutionalOwnershipExtractAnalyticsHolderParams struct {
 	Limit   *int   `json:"limit"`   // Optional: Number of results (default: 10)
 }
 
-// InstitutionalOwnershipExtractAnalyticsHolderResponse represents the response from the Institutional Ownership Extract Analytics By Holder API
+// InstitutionalOwnershipExtractAnalyticsHolderResponse represents the response from the Institutional Ownership Extract Analytics Holder API
 type InstitutionalOwnershipExtractAnalyticsHolderResponse struct {
-	Date                           string  `json:"date"`
 	CIK                            string  `json:"cik"`
-	FilingDate                     string  `json:"filingDate"`
-	InvestorName                   string  `json:"investorName"`
+	EntityName                     string  `json:"entityName"`
 	Symbol                         string  `json:"symbol"`
-	SecurityName                   string  `json:"securityName"`
+	Date                           time.Time  `json:"date"`
+	InvestorCIK                    string  `json:"investorCik"`
+	FilingDate                     time.Time  `json:"filingDate"`
+	InvestorEntityName             string  `json:"investorEntityName"`
+	ReportedHolding                int64   `json:"reportedHolding"`
+	ReportedMarketValue            float64 `json:"reportedMarketValue"`
+	Change                         int64   `json:"change"`
+	ChangePercent                  float64 `json:"changePercent"`
 	TypeOfSecurity                 string  `json:"typeOfSecurity"`
-	SecurityCusip                  string  `json:"securityCusip"`
-	SharesType                     string  `json:"sharesType"`
+	SecurityCUSIP                  string  `json:"securityCusip"`
+	SharesType                     SharesType  `json:"sharesType"`
 	PutCallShare                   string  `json:"putCallShare"`
 	InvestmentDiscretion           string  `json:"investmentDiscretion"`
-	IndustryTitle                  string  `json:"industryTitle"`
+	OtherManager                   string  `json:"otherManager"`
+	Sole                           int64   `json:"sole"`
+	Shared                         int64   `json:"shared"`
+	None                           int64   `json:"none"`
 	Weight                         float64 `json:"weight"`
-	LastWeight                     float64 `json:"lastWeight"`
-	ChangeInWeight                 float64 `json:"changeInWeight"`
-	ChangeInWeightPercentage       float64 `json:"changeInWeightPercentage"`
-	MarketValue                    int64   `json:"marketValue"`
-	LastMarketValue                int64   `json:"lastMarketValue"`
-	ChangeInMarketValue            int64   `json:"changeInMarketValue"`
-	ChangeInMarketValuePercentage  float64 `json:"changeInMarketValuePercentage"`
-	SharesNumber                   int64   `json:"sharesNumber"`
-	LastSharesNumber               int64   `json:"lastSharesNumber"`
-	ChangeInSharesNumber           int64   `json:"changeInSharesNumber"`
-	ChangeInSharesNumberPercentage float64 `json:"changeInSharesNumberPercentage"`
-	QuarterEndPrice                float64 `json:"quarterEndPrice"`
-	AvgPricePaid                   float64 `json:"avgPricePaid"`
+	UpdateNotificationDate         string  `json:"updateNotificationDate"`
 	IsNew                          bool    `json:"isNew"`
 	IsSoldOut                      bool    `json:"isSoldOut"`
-	Ownership                      float64 `json:"ownership"`
-	LastOwnership                  float64 `json:"lastOwnership"`
-	ChangeInOwnership              float64 `json:"changeInOwnership"`
-	ChangeInOwnershipPercentage    float64 `json:"changeInOwnershipPercentage"`
 	HoldingPeriod                  int     `json:"holdingPeriod"`
-	FirstAdded                     string  `json:"firstAdded"`
-	Performance                    int64   `json:"performance"`
-	PerformancePercentage          float64 `json:"performancePercentage"`
-	LastPerformance                int64   `json:"lastPerformance"`
-	ChangeInPerformance            int64   `json:"changeInPerformance"`
-	IsCountedForPerformance        bool    `json:"isCountedForPerformance"`
+	HoldingTurnover                float64 `json:"holdingTurnover"`
+	LastReportedMarketValue        float64 `json:"lastReportedMarketValue"`
+	LastWeight                     float64 `json:"lastWeight"`
+	PercentOfPortfolio             float64 `json:"percentOfPortfolio"`
+	Rank                           int     `json:"rank"`
+	PercentOwnershipOfSharesOut    float64 `json:"percentOwnershipOfSharesOut"`
+	QuarterlyPercentChangeOwnership float64 `json:"quarterlyPercentChangeOwnership"`
+	SharesOut                      int64   `json:"sharesOut"`
+	MarketCap                      float64 `json:"marketCap"`
+	SharePrice                     float64 `json:"sharePrice"`
+	Quarter                        string  `json:"quarter"`
+	Source                         string  `json:"source"`
 }
 
 // InstitutionalOwnershipExtractAnalyticsHolder retrieves analytical breakdown of institutional filings by holder

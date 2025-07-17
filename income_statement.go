@@ -2,56 +2,56 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // IncomeStatementParams represents the parameters for the Income Statement API
 type IncomeStatementParams struct {
-	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Period *Period `json:"period"` // Optional: Period type (PeriodAnnual or PeriodQuarter)
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return
 }
 
 // IncomeStatementResponse represents the response from the Income Statement API
 type IncomeStatementResponse struct {
-	Date                                    string  `json:"date"`
+	Date                                    time.Time  `json:"date"`
 	Symbol                                  string  `json:"symbol"`
 	ReportedCurrency                        string  `json:"reportedCurrency"`
 	CIK                                     string  `json:"cik"`
-	FilingDate                              string  `json:"filingDate"`
-	AcceptedDate                            string  `json:"acceptedDate"`
-	FiscalYear                              string  `json:"fiscalYear"`
+	FilingDate                              time.Time  `json:"filingDate"`
+	AcceptedDate                            time.Time  `json:"acceptedDate"`
+	CalendarYear                            string  `json:"calendarYear"`
 	Period                                  string  `json:"period"`
-	Revenue                                 int64   `json:"revenue"`
-	CostOfRevenue                           int64   `json:"costOfRevenue"`
-	GrossProfit                             int64   `json:"grossProfit"`
-	ResearchAndDevelopmentExpenses          int64   `json:"researchAndDevelopmentExpenses"`
-	GeneralAndAdministrativeExpenses        int64   `json:"generalAndAdministrativeExpenses"`
-	SellingAndMarketingExpenses             int64   `json:"sellingAndMarketingExpenses"`
-	SellingGeneralAndAdministrativeExpenses int64   `json:"sellingGeneralAndAdministrativeExpenses"`
-	OtherExpenses                           int64   `json:"otherExpenses"`
-	OperatingExpenses                       int64   `json:"operatingExpenses"`
-	CostAndExpenses                         int64   `json:"costAndExpenses"`
-	NetInterestIncome                       int64   `json:"netInterestIncome"`
-	InterestIncome                          int64   `json:"interestIncome"`
-	InterestExpense                         int64   `json:"interestExpense"`
-	DepreciationAndAmortization             int64   `json:"depreciationAndAmortization"`
-	EBITDA                                  int64   `json:"ebitda"`
-	EBIT                                    int64   `json:"ebit"`
-	NonOperatingIncomeExcludingInterest     int64   `json:"nonOperatingIncomeExcludingInterest"`
-	OperatingIncome                         int64   `json:"operatingIncome"`
-	TotalOtherIncomeExpensesNet             int64   `json:"totalOtherIncomeExpensesNet"`
-	IncomeBeforeTax                         int64   `json:"incomeBeforeTax"`
-	IncomeTaxExpense                        int64   `json:"incomeTaxExpense"`
-	NetIncomeFromContinuingOperations       int64   `json:"netIncomeFromContinuingOperations"`
-	NetIncomeFromDiscontinuedOperations     int64   `json:"netIncomeFromDiscontinuedOperations"`
-	OtherAdjustmentsToNetIncome             int64   `json:"otherAdjustmentsToNetIncome"`
-	NetIncome                               int64   `json:"netIncome"`
-	NetIncomeDeductions                     int64   `json:"netIncomeDeductions"`
-	BottomLineNetIncome                     int64   `json:"bottomLineNetIncome"`
+	Revenue                                 float64 `json:"revenue"`
+	CostOfRevenue                           float64 `json:"costOfRevenue"`
+	GrossProfit                             float64 `json:"grossProfit"`
+	GrossProfitRatio                        float64 `json:"grossProfitRatio"`
+	ResearchAndDevelopmentExpenses          float64 `json:"researchAndDevelopmentExpenses"`
+	GeneralAndAdministrativeExpenses        float64 `json:"generalAndAdministrativeExpenses"`
+	SellingAndMarketingExpenses             float64 `json:"sellingAndMarketingExpenses"`
+	SellingGeneralAndAdministrativeExpenses float64 `json:"sellingGeneralAndAdministrativeExpenses"`
+	OtherExpenses                           float64 `json:"otherExpenses"`
+	OperatingExpenses                       float64 `json:"operatingExpenses"`
+	CostAndExpenses                         float64 `json:"costAndExpenses"`
+	InterestIncome                          float64 `json:"interestIncome"`
+	InterestExpense                         float64 `json:"interestExpense"`
+	DepreciationAndAmortization             float64 `json:"depreciationAndAmortization"`
+	EBITDA                                  float64 `json:"ebitda"`
+	EBITDARatio                             float64 `json:"ebitdaratio"`
+	OperatingIncome                         float64 `json:"operatingIncome"`
+	OperatingIncomeRatio                    float64 `json:"operatingIncomeRatio"`
+	TotalOtherIncomeExpensesNet             float64 `json:"totalOtherIncomeExpensesNet"`
+	IncomeBeforeTax                         float64 `json:"incomeBeforeTax"`
+	IncomeBeforeTaxRatio                    float64 `json:"incomeBeforeTaxRatio"`
+	IncomeTaxExpense                        float64 `json:"incomeTaxExpense"`
+	NetIncome                               float64 `json:"netIncome"`
+	NetIncomeRatio                          float64 `json:"netIncomeRatio"`
 	EPS                                     float64 `json:"eps"`
-	EPSDiluted                              float64 `json:"epsDiluted"`
-	WeightedAverageShsOut                   int64   `json:"weightedAverageShsOut"`
-	WeightedAverageShsOutDil                int64   `json:"weightedAverageShsOutDil"`
+	EPSDiluted                              float64 `json:"epsdiluted"`
+	WeightedAverageShsOut                   float64 `json:"weightedAverageShsOut"`
+	WeightedAverageShsOutDil                float64 `json:"weightedAverageShsOutDil"`
+	Link                                    string  `json:"link"`
+	FinalLink                               string  `json:"finalLink"`
 }
 
 // IncomeStatement retrieves income statement data for a specific stock symbol
@@ -65,20 +65,17 @@ func (c *Client) IncomeStatement(params IncomeStatementParams) ([]IncomeStatemen
 	}
 
 	if params.Limit != nil {
-		if *params.Limit > 1000 {
-			return nil, fmt.Errorf("limit cannot exceed 1000")
-		}
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
-		urlParams["period"] = params.Period
+	if params.Period != nil {
+		urlParams["period"] = string(*params.Period)
 	}
 
 	var result []IncomeStatementResponse
 	err := c.doRequest(c.BaseURL+"/income-statement", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
+		return nil, err
 	}
 
 	return result, nil

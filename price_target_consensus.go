@@ -34,5 +34,5 @@ func (c *Client) PriceTargetConsensus(params PriceTargetConsensusParams) ([]Pric
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

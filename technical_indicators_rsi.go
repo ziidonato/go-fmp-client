@@ -38,5 +38,5 @@ func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timef
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

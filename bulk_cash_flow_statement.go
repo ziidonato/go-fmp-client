@@ -1,124 +1,71 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// CashFlowStatementBulkParams represents the parameters for the Cash Flow Statement Bulk API
-type CashFlowStatementBulkParams struct {
-	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+// BulkCashFlowStatementParams represents the parameters for the Bulk Cash Flow Statement API
+type BulkCashFlowStatementParams struct {
+	Year   int    `json:"year"`   // Required: year (e.g., 2023)
+	Period string `json:"period"` // Required: period ("annual" or "quarterly")
 }
 
-// CashFlowStatementBulkResponse represents the response from the Cash Flow Statement Bulk API
-type CashFlowStatementBulkResponse struct {
-	Date                                   string `json:"date"`
-	Symbol                                 string `json:"symbol"`
-	ReportedCurrency                       string `json:"reportedCurrency"`
-	CIK                                    string `json:"cik"`
-	FilingDate                             string `json:"filingDate"`
-	AcceptedDate                           string `json:"acceptedDate"`
-	FiscalYear                             string `json:"fiscalYear"`
-	Period                                 string `json:"period"`
-	NetIncome                              string `json:"netIncome"`
-	DepreciationAndAmortization            string `json:"depreciationAndAmortization"`
-	DeferredIncomeTax                      string `json:"deferredIncomeTax"`
-	StockBasedCompensation                 string `json:"stockBasedCompensation"`
-	ChangeInWorkingCapital                 string `json:"changeInWorkingCapital"`
-	AccountsReceivables                    string `json:"accountsReceivables"`
-	Inventory                              string `json:"inventory"`
-	AccountsPayables                       string `json:"accountsPayables"`
-	OtherWorkingCapital                    string `json:"otherWorkingCapital"`
-	OtherNonCashItems                      string `json:"otherNonCashItems"`
-	NetCashProvidedByOperatingActivities   string `json:"netCashProvidedByOperatingActivities"`
-	InvestmentsInPropertyPlantAndEquipment string `json:"investmentsInPropertyPlantAndEquipment"`
-	AcquisitionsNet                        string `json:"acquisitionsNet"`
-	PurchasesOfInvestments                 string `json:"purchasesOfInvestments"`
-	SalesMaturitiesOfInvestments           string `json:"salesMaturitiesOfInvestments"`
-	OtherInvestingActivities               string `json:"otherInvestingActivities"`
-	NetCashProvidedByInvestingActivities   string `json:"netCashProvidedByInvestingActivities"`
-	NetDebtIssuance                        string `json:"netDebtIssuance"`
-	LongTermNetDebtIssuance                string `json:"longTermNetDebtIssuance"`
-	ShortTermNetDebtIssuance               string `json:"shortTermNetDebtIssuance"`
-	NetStockIssuance                       string `json:"netStockIssuance"`
-	NetCommonStockIssuance                 string `json:"netCommonStockIssuance"`
-	CommonStockIssuance                    string `json:"commonStockIssuance"`
-	CommonStockRepurchased                 string `json:"commonStockRepurchased"`
-	NetPreferredStockIssuance              string `json:"netPreferredStockIssuance"`
-	NetDividendsPaid                       string `json:"netDividendsPaid"`
-	CommonDividendsPaid                    string `json:"commonDividendsPaid"`
-	PreferredDividendsPaid                 string `json:"preferredDividendsPaid"`
-	OtherFinancingActivities               string `json:"otherFinancingActivities"`
-	NetCashProvidedByFinancingActivities   string `json:"netCashProvidedByFinancingActivities"`
-	EffectOfForexChangesOnCash             string `json:"effectOfForexChangesOnCash"`
-	NetChangeInCash                        string `json:"netChangeInCash"`
-	CashAtEndOfPeriod                      string `json:"cashAtEndOfPeriod"`
-	CashAtBeginningOfPeriod                string `json:"cashAtBeginningOfPeriod"`
-	OperatingCashFlow                      string `json:"operatingCashFlow"`
-	CapitalExpenditure                     string `json:"capitalExpenditure"`
-	FreeCashFlow                           string `json:"freeCashFlow"`
-	IncomeTaxesPaid                        string `json:"incomeTaxesPaid"`
-	InterestPaid                           string `json:"interestPaid"`
+// BulkCashFlowStatementResponse represents the response from the Bulk Cash Flow Statement API
+type BulkCashFlowStatementResponse struct {
+	Symbol                                       string    `json:"symbol"`
+	Date                                         time.Time `json:"date"`
+	ReportedCurrency                             string    `json:"reportedCurrency"`
+	CIK                                          string    `json:"cik"`
+	FilingDate                                   time.Time `json:"filingDate"`
+	AcceptedDate                                 time.Time `json:"acceptedDate"`
+	CalendarYear                                 string    `json:"calendarYear"`
+	Period                                       string    `json:"period"`
+	NetIncome                                    float64   `json:"netIncome"`
+	DepreciationAndAmortization                  float64   `json:"depreciationAndAmortization"`
+	DeferredIncomeTax                            float64   `json:"deferredIncomeTax"`
+	StockBasedCompensation                       float64   `json:"stockBasedCompensation"`
+	ChangeInWorkingCapital                       float64   `json:"changeInWorkingCapital"`
+	AccountsReceivables                          float64   `json:"accountsReceivables"`
+	Inventory                                    float64   `json:"inventory"`
+	AccountsPayables                             float64   `json:"accountsPayables"`
+	OtherWorkingCapital                          float64   `json:"otherWorkingCapital"`
+	OtherNonCashItems                            float64   `json:"otherNonCashItems"`
+	NetCashProvidedByOperatingActivities         float64   `json:"netCashProvidedByOperatingActivities"`
+	InvestmentsInPropertyPlantAndEquipment       float64   `json:"investmentsInPropertyPlantAndEquipment"`
+	AcquisitionsNet                              float64   `json:"acquisitionsNet"`
+	PurchasesOfInvestments                       float64   `json:"purchasesOfInvestments"`
+	SalesMaturitiesOfInvestments                 float64   `json:"salesMaturitiesOfInvestments"`
+	OtherInvestingActivites                      float64   `json:"otherInvestingActivites"`
+	NetCashUsedForInvestingActivites             float64   `json:"netCashUsedForInvestingActivites"`
+	DebtRepayment                                float64   `json:"debtRepayment"`
+	CommonStockIssued                            float64   `json:"commonStockIssued"`
+	CommonStockRepurchased                       float64   `json:"commonStockRepurchased"`
+	DividendsPaid                                float64   `json:"dividendsPaid"`
+	OtherFinancingActivites                      float64   `json:"otherFinancingActivites"`
+	NetCashUsedProvidedByFinancingActivities     float64   `json:"netCashUsedProvidedByFinancingActivities"`
+	EffectOfForexChangesOnCash                   float64   `json:"effectOfForexChangesOnCash"`
+	NetChangeInCash                              float64   `json:"netChangeInCash"`
+	CashAtEndOfPeriod                            float64   `json:"cashAtEndOfPeriod"`
+	CashAtBeginningOfPeriod                      float64   `json:"cashAtBeginningOfPeriod"`
+	OperatingCashFlow                            float64   `json:"operatingCashFlow"`
+	CapitalExpenditure                           float64   `json:"capitalExpenditure"`
+	FreeCashFlow                                 float64   `json:"freeCashFlow"`
+	Link                                         string    `json:"link"`
+	FinalLink                                    string    `json:"finalLink"`
 }
 
-// GetCashFlowStatementBulk retrieves detailed cash flow reports for a wide range of companies
-func (c *Client) GetCashFlowStatementBulk(params CashFlowStatementBulkParams) ([]CashFlowStatementBulkResponse, error) {
-	// Validate required parameters
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
-	}
-	if params.Period == "" {
-		return nil, fmt.Errorf("period parameter is required")
+// BulkCashFlowStatement retrieves cash flow statement data for multiple companies
+func (c *Client) BulkCashFlowStatement(params BulkCashFlowStatementParams) ([]BulkCashFlowStatementResponse, error) {
+	urlParams := map[string]string{
+		"year":   fmt.Sprintf("%d", params.Year),
+		"period": params.Period,
 	}
 
-	// Build the URL
-	baseURL := c.BaseURL + "/cash-flow-statement-bulk"
-	u, err := url.Parse(baseURL)
+	var result []BulkCashFlowStatementResponse
+	err := c.doRequest(c.BaseURL+"/bulk-cash-flow-statement", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []CashFlowStatementBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk cash flow statement: %w", err)
 	}
 
 	return result, nil

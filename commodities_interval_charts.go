@@ -2,18 +2,20 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// CommoditiesIntervalChartParams represents the parameters for the interval-based commodities chart APIs
-type CommoditiesIntervalChartParams struct {
-	Symbol string  `json:"symbol"` // Required: Commodity symbol (e.g., "GCUSD")
-	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
-	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
+// CommoditiesIntervalChartsParams represents the parameters for the Commodities Interval Charts API
+type CommoditiesIntervalChartsParams struct {
+	Symbol   string  `json:"symbol"`   // Required: Commodity symbol (e.g., "CLUSD")
+	Interval string  `json:"interval"` // Required: Time interval (1min, 5min, 15min, 30min, 1hour, 4hour)
+	From     *string `json:"from"`     // Optional: Start date (YYYY-MM-DD format)
+	To       *string `json:"to"`       // Optional: End date (YYYY-MM-DD format)
 }
 
-// CommoditiesIntervalChartResponse represents the response from the interval-based commodities chart APIs
-type CommoditiesIntervalChartResponse struct {
-	Date   string  `json:"date"`
+// CommoditiesIntervalChartsResponse represents the response from the Commodities Interval Charts API
+type CommoditiesIntervalChartsResponse struct {
+	Date   time.Time  `json:"date"`
 	Open   float64 `json:"open"`
 	Low    float64 `json:"low"`
 	High   float64 `json:"high"`
@@ -22,7 +24,7 @@ type CommoditiesIntervalChartResponse struct {
 }
 
 // commoditiesIntervalChart is a helper function to avoid code duplication for interval-based charts
-func (c *Client) commoditiesIntervalChart(interval string, params CommoditiesIntervalChartParams) ([]CommoditiesIntervalChartResponse, error) {
+func (c *Client) commoditiesIntervalChart(interval string, params CommoditiesIntervalChartsParams) ([]CommoditiesIntervalChartsResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
@@ -39,7 +41,7 @@ func (c *Client) commoditiesIntervalChart(interval string, params CommoditiesInt
 		urlParams["to"] = *params.To
 	}
 
-	var result []CommoditiesIntervalChartResponse
+	var result []CommoditiesIntervalChartsResponse
 	err := c.doRequest(fmt.Sprintf(c.BaseURL+"/historical-chart/%s", interval), urlParams, &result)
 	if err != nil {
 		return nil, err
@@ -49,16 +51,16 @@ func (c *Client) commoditiesIntervalChart(interval string, params CommoditiesInt
 }
 
 // CommoditiesChart1Min retrieves 1-minute interval data for commodities
-func (c *Client) CommoditiesChart1Min(params CommoditiesIntervalChartParams) ([]CommoditiesIntervalChartResponse, error) {
+func (c *Client) CommoditiesChart1Min(params CommoditiesIntervalChartsParams) ([]CommoditiesIntervalChartsResponse, error) {
 	return c.commoditiesIntervalChart("1min", params)
 }
 
 // CommoditiesChart5Min retrieves 5-minute interval data for commodities
-func (c *Client) CommoditiesChart5Min(params CommoditiesIntervalChartParams) ([]CommoditiesIntervalChartResponse, error) {
+func (c *Client) CommoditiesChart5Min(params CommoditiesIntervalChartsParams) ([]CommoditiesIntervalChartsResponse, error) {
 	return c.commoditiesIntervalChart("5min", params)
 }
 
 // CommoditiesChart1Hour retrieves 1-hour interval data for commodities
-func (c *Client) CommoditiesChart1Hour(params CommoditiesIntervalChartParams) ([]CommoditiesIntervalChartResponse, error) {
+func (c *Client) CommoditiesChart1Hour(params CommoditiesIntervalChartsParams) ([]CommoditiesIntervalChartsResponse, error) {
 	return c.commoditiesIntervalChart("1hour", params)
 }

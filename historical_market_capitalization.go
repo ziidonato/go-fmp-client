@@ -2,21 +2,22 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// HistoricalMarketCapitalizationParams represents the parameters for the Historical Market Cap API
+// HistoricalMarketCapitalizationParams represents the parameters for the Historical Market Capitalization API
 type HistoricalMarketCapitalizationParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int    `json:"limit"`  // Optional: Number of results (Maximum 5000 records per request)
-	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
-	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return
+	From   *string `json:"from"`   // Optional: Start date (YYYY-MM-DD format)
+	To     *string `json:"to"`     // Optional: End date (YYYY-MM-DD format)
 }
 
-// HistoricalMarketCapitalizationResponse represents the response from the Historical Market Cap API
+// HistoricalMarketCapitalizationResponse represents the response from the Historical Market Capitalization API
 type HistoricalMarketCapitalizationResponse struct {
-	Symbol    string `json:"symbol"`
-	Date      string `json:"date"`
-	MarketCap int64  `json:"marketCap"`
+	Symbol               string    `json:"symbol"`
+	Date                 time.Time `json:"date"`
+	MarketCap            int64     `json:"marketCap"`
 }
 
 // HistoricalMarketCapitalization retrieves historical market capitalization data for a company

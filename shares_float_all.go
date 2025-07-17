@@ -2,21 +2,23 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// SharesFloatAllParams represents the parameters for the All Shares Float API
+// SharesFloatAllParams represents the parameters for the Shares Float All API
 type SharesFloatAllParams struct {
-	Limit *int `json:"limit"` // Required: Number of results (Maximum 5000 records per request)
-	Page  *int `json:"page"`  // Required: Page number (e.g., 0)
+	Limit *int `json:"limit"` // Optional: Number of records to return
+	Page  *int `json:"page"`  // Optional: Page number (default: 0)
 }
 
-// SharesFloatAllResponse represents the response from the All Shares Float API
+// SharesFloatAllResponse represents the response from the Shares Float All API
 type SharesFloatAllResponse struct {
-	Symbol            string  `json:"symbol"`
-	Date              string  `json:"date"`
-	FreeFloat         float64 `json:"freeFloat"`
-	FloatShares       int64   `json:"floatShares"`
-	OutstandingShares int64   `json:"outstandingShares"`
+	Symbol            string    `json:"symbol"`
+	Date              time.Time `json:"date"`
+	FreeFloat         float64   `json:"freeFloat"`
+	FloatShares       float64   `json:"floatShares"`
+	OutstandingShares float64   `json:"outstandingShares"`
+	Source            string    `json:"source"`
 }
 
 // SharesFloatAll retrieves comprehensive shares float data for all available companies
@@ -44,5 +46,5 @@ func (c *Client) SharesFloatAll(params SharesFloatAllParams) ([]SharesFloatAllRe
 		return nil, err
 	}
 
-	return result, err
+	return result, nil
 }

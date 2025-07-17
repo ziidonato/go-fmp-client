@@ -2,27 +2,31 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// StockPriceVolumeDataParams represents the parameters for the Stock Price and Volume Data API
+// StockPriceVolumeDataParams represents the parameters for the Stock Price Volume Data API
 type StockPriceVolumeDataParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
-	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
+	From   *string `json:"from"`   // Optional: Start date (YYYY-MM-DD format)
+	To     *string `json:"to"`     // Optional: End date (YYYY-MM-DD format)
 }
 
-// StockPriceVolumeDataResponse represents the response from the Stock Price and Volume Data API
+// StockPriceVolumeDataResponse represents the response from the Stock Price Volume Data API
 type StockPriceVolumeDataResponse struct {
-	Symbol        string  `json:"symbol"`
-	Date          string  `json:"date"`
+	Date          time.Time  `json:"date"`
 	Open          float64 `json:"open"`
 	High          float64 `json:"high"`
 	Low           float64 `json:"low"`
 	Close         float64 `json:"close"`
+	AdjClose      float64 `json:"adjClose"`
 	Volume        int64   `json:"volume"`
+	UnadjustedVol int64   `json:"unadjustedVolume"`
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
-	VWAP          float64 `json:"vwap"`
+	Vwap          float64 `json:"vwap"`
+	Label         string  `json:"label"`
+	ChangeOverTime float64 `json:"changeOverTime"`
 }
 
 // StockPriceVolumeData retrieves full price and volume data for any stock symbol

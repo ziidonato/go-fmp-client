@@ -1,65 +1,35 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
 )
 
-// UpgradesDowngradesConsensusBulkResponse represents the response from the Upgrades Downgrades Consensus Bulk API
-type UpgradesDowngradesConsensusBulkResponse struct {
-	Symbol     string `json:"symbol"`
-	StrongBuy  string `json:"strongBuy"`
-	Buy        string `json:"buy"`
-	Hold       string `json:"hold"`
-	Sell       string `json:"sell"`
-	StrongSell string `json:"strongSell"`
-	Consensus  string `json:"consensus"`
+// BulkUpgradesDowngradesConsensusParams represents the parameters for the Bulk Upgrades Downgrades Consensus API
+type BulkUpgradesDowngradesConsensusParams struct {
+	Date string `json:"date"` // Required: date (e.g., "2024-10-22")
 }
 
-// UpgradesDowngradesConsensusBulk retrieves analyst ratings across all symbols
-func (c *Client) UpgradesDowngradesConsensusBulk() ([]UpgradesDowngradesConsensusBulkResponse, error) {
-	// Build the URL
-	baseURL := c.BaseURL + "/upgrades-downgrades-consensus-bulk"
-	u, err := url.Parse(baseURL)
+// BulkUpgradesDowngradesConsensusResponse represents the response from the Bulk Upgrades Downgrades Consensus API
+type BulkUpgradesDowngradesConsensusResponse struct {
+	Symbol              string  `json:"symbol"`
+	StrongBuy           float64 `json:"strongBuy"`
+	Buy                 float64 `json:"buy"`
+	Hold                float64 `json:"hold"`
+	Sell                float64 `json:"sell"`
+	StrongSell          float64 `json:"strongSell"`
+	Consensus           string  `json:"consensus"`
+}
+
+// BulkUpgradesDowngradesConsensus retrieves analyst consensus ratings for multiple stocks
+func (c *Client) BulkUpgradesDowngradesConsensus(params BulkUpgradesDowngradesConsensusParams) ([]BulkUpgradesDowngradesConsensusResponse, error) {
+	urlParams := map[string]string{
+		"date": params.Date,
+	}
+
+	var result []BulkUpgradesDowngradesConsensusResponse
+	err := c.doRequest(c.BaseURL+"/bulk-upgrades-downgrades-consensus", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q := u.Query()
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []UpgradesDowngradesConsensusBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk upgrades downgrades consensus: %w", err)
 	}
 
 	return result, nil

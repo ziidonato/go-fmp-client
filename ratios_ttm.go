@@ -88,5 +88,5 @@ func (c *Client) RatiosTTM(params RatiosTTMParams) ([]RatiosTTMResponse, error) 
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

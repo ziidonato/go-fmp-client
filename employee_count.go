@@ -2,25 +2,26 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// EmployeeCountParams represents the parameters for the Company Employee Count API
+// EmployeeCountParams represents the parameters for the Employee Count API
 type EmployeeCountParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 10000 records per request)
 }
 
-// EmployeeCountResponse represents the response from the Company Employee Count API
+// EmployeeCountResponse represents the response from the Employee Count API
 type EmployeeCountResponse struct {
-	Symbol         string `json:"symbol"`
-	CIK            string `json:"cik"`
-	AcceptanceTime string `json:"acceptanceTime"`
-	PeriodOfReport string `json:"periodOfReport"`
-	CompanyName    string `json:"companyName"`
-	FormType       string `json:"formType"`
-	FilingDate     string `json:"filingDate"`
-	EmployeeCount  int    `json:"employeeCount"`
-	Source         string `json:"source"`
+	Symbol               string    `json:"symbol"`
+	CIK                  string    `json:"cik"`
+	AcceptanceTime       string    `json:"acceptanceTime"`
+	Period               string    `json:"period"`
+	CompanyName          string    `json:"companyName"`
+	FormType             FormType  `json:"formType"`
+	FilingDate           time.Time `json:"filingDate"`
+	EmployeeCount        int       `json:"employeeCount"`
+	Source               string    `json:"source"`
 }
 
 // EmployeeCount retrieves detailed workforce information for companies

@@ -3,18 +3,19 @@ package go_fmp
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
 // GeneralNewsResponse represents the response from the general news API
 type GeneralNewsResponse struct {
-	Symbol        *string `json:"symbol"`
-	PublishedDate string  `json:"publishedDate"`
-	Publisher     string  `json:"publisher"`
-	Title         string  `json:"title"`
-	Image         string  `json:"image"`
-	Site          string  `json:"site"`
-	Text          string  `json:"text"`
-	URL           string  `json:"url"`
+	Symbol        string    `json:"symbol"`
+	PublishedDate time.Time `json:"publishedDate"`
+	Publisher     string    `json:"publisher"`
+	Title         string    `json:"title"`
+	Image         string    `json:"image"`
+	Site          string    `json:"site"`
+	Text          string    `json:"text"`
+	URL           string    `json:"url"`
 }
 
 // GeneralNews retrieves the latest general news articles from various sources

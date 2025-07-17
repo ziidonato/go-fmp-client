@@ -2,64 +2,58 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // CashFlowStatementParams represents the parameters for the Cash Flow Statement API
 type CashFlowStatementParams struct {
-	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Period *string `json:"period"` // Optional: Period type ("annual" or "quarter")
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return
 }
 
 // CashFlowStatementResponse represents the response from the Cash Flow Statement API
 type CashFlowStatementResponse struct {
-	Date                                   string `json:"date"`
+	Date                                   time.Time `json:"date"`
 	Symbol                                 string `json:"symbol"`
 	ReportedCurrency                       string `json:"reportedCurrency"`
 	CIK                                    string `json:"cik"`
-	FilingDate                             string `json:"filingDate"`
-	AcceptedDate                           string `json:"acceptedDate"`
-	FiscalYear                             string `json:"fiscalYear"`
+	FilingDate                             time.Time `json:"filingDate"`
+	AcceptedDate                           time.Time `json:"acceptedDate"`
+	CalendarYear                           string `json:"calendarYear"`
 	Period                                 string `json:"period"`
-	NetIncome                              int64  `json:"netIncome"`
-	DepreciationAndAmortization            int64  `json:"depreciationAndAmortization"`
-	DeferredIncomeTax                      int64  `json:"deferredIncomeTax"`
-	StockBasedCompensation                 int64  `json:"stockBasedCompensation"`
-	ChangeInWorkingCapital                 int64  `json:"changeInWorkingCapital"`
-	AccountsReceivables                    int64  `json:"accountsReceivables"`
-	Inventory                              int64  `json:"inventory"`
-	AccountsPayables                       int64  `json:"accountsPayables"`
-	OtherWorkingCapital                    int64  `json:"otherWorkingCapital"`
-	OtherNonCashItems                      int64  `json:"otherNonCashItems"`
-	NetCashProvidedByOperatingActivities   int64  `json:"netCashProvidedByOperatingActivities"`
-	InvestmentsInPropertyPlantAndEquipment int64  `json:"investmentsInPropertyPlantAndEquipment"`
-	AcquisitionsNet                        int64  `json:"acquisitionsNet"`
-	PurchasesOfInvestments                 int64  `json:"purchasesOfInvestments"`
-	SalesMaturitiesOfInvestments           int64  `json:"salesMaturitiesOfInvestments"`
-	OtherInvestingActivities               int64  `json:"otherInvestingActivities"`
-	NetCashProvidedByInvestingActivities   int64  `json:"netCashProvidedByInvestingActivities"`
-	NetDebtIssuance                        int64  `json:"netDebtIssuance"`
-	LongTermNetDebtIssuance                int64  `json:"longTermNetDebtIssuance"`
-	ShortTermNetDebtIssuance               int64  `json:"shortTermNetDebtIssuance"`
-	NetStockIssuance                       int64  `json:"netStockIssuance"`
-	NetCommonStockIssuance                 int64  `json:"netCommonStockIssuance"`
-	CommonStockIssuance                    int64  `json:"commonStockIssuance"`
-	CommonStockRepurchased                 int64  `json:"commonStockRepurchased"`
-	NetPreferredStockIssuance              int64  `json:"netPreferredStockIssuance"`
-	NetDividendsPaid                       int64  `json:"netDividendsPaid"`
-	CommonDividendsPaid                    int64  `json:"commonDividendsPaid"`
-	PreferredDividendsPaid                 int64  `json:"preferredDividendsPaid"`
-	OtherFinancingActivities               int64  `json:"otherFinancingActivities"`
-	NetCashProvidedByFinancingActivities   int64  `json:"netCashProvidedByFinancingActivities"`
-	EffectOfForexChangesOnCash             int64  `json:"effectOfForexChangesOnCash"`
-	NetChangeInCash                        int64  `json:"netChangeInCash"`
-	CashAtEndOfPeriod                      int64  `json:"cashAtEndOfPeriod"`
-	CashAtBeginningOfPeriod                int64  `json:"cashAtBeginningOfPeriod"`
-	OperatingCashFlow                      int64  `json:"operatingCashFlow"`
-	CapitalExpenditure                     int64  `json:"capitalExpenditure"`
-	FreeCashFlow                           int64  `json:"freeCashFlow"`
-	IncomeTaxesPaid                        int64  `json:"incomeTaxesPaid"`
-	InterestPaid                           int64  `json:"interestPaid"`
+	NetIncome                              float64 `json:"netIncome"`
+	DepreciationAndAmortization            float64 `json:"depreciationAndAmortization"`
+	DeferredIncomeTax                      float64 `json:"deferredIncomeTax"`
+	StockBasedCompensation                 float64 `json:"stockBasedCompensation"`
+	ChangeInWorkingCapital                 float64 `json:"changeInWorkingCapital"`
+	AccountsReceivables                    float64 `json:"accountsReceivables"`
+	Inventory                              float64 `json:"inventory"`
+	AccountsPayables                       float64 `json:"accountsPayables"`
+	OtherWorkingCapital                    float64 `json:"otherWorkingCapital"`
+	OtherNonCashItems                      float64 `json:"otherNonCashItems"`
+	NetCashProvidedByOperatingActivities   float64 `json:"netCashProvidedByOperatingActivities"`
+	InvestmentsInPropertyPlantAndEquipment float64 `json:"investmentsInPropertyPlantAndEquipment"`
+	AcquisitionsNet                        float64 `json:"acquisitionsNet"`
+	PurchasesOfInvestments                 float64 `json:"purchasesOfInvestments"`
+	SalesMaturitiesOfInvestments           float64 `json:"salesMaturitiesOfInvestments"`
+	OtherInvestingActivites                float64 `json:"otherInvestingActivites"`
+	NetCashUsedForInvestingActivites       float64 `json:"netCashUsedForInvestingActivites"`
+	DebtRepayment                          float64 `json:"debtRepayment"`
+	CommonStockIssued                      float64 `json:"commonStockIssued"`
+	CommonStockRepurchased                 float64 `json:"commonStockRepurchased"`
+	DividendsPaid                          float64 `json:"dividendsPaid"`
+	OtherFinancingActivites                float64 `json:"otherFinancingActivites"`
+	NetCashUsedProvidedByFinancingActivities float64 `json:"netCashUsedProvidedByFinancingActivities"`
+	EffectOfForexChangesOnCash             float64 `json:"effectOfForexChangesOnCash"`
+	NetChangeInCash                        float64 `json:"netChangeInCash"`
+	CashAtEndOfPeriod                      float64 `json:"cashAtEndOfPeriod"`
+	CashAtBeginningOfPeriod                float64 `json:"cashAtBeginningOfPeriod"`
+	OperatingCashFlow                      float64 `json:"operatingCashFlow"`
+	CapitalExpenditure                     float64 `json:"capitalExpenditure"`
+	FreeCashFlow                           float64 `json:"freeCashFlow"`
+	Link                                   string `json:"link"`
+	FinalLink                              string `json:"finalLink"`
 }
 
 // CashFlowStatement retrieves cash flow statement data for a specific stock symbol
@@ -79,8 +73,8 @@ func (c *Client) CashFlowStatement(params CashFlowStatementParams) ([]CashFlowSt
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
-		urlParams["period"] = params.Period
+	if params.Period != nil {
+		urlParams["period"] = *params.Period
 	}
 
 	var result []CashFlowStatementResponse

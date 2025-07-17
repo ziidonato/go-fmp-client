@@ -1,6 +1,9 @@
 package go_fmp
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // CashFlowStatementTTMParams represents the parameters for the Cash Flow Statement TTM API
 type CashFlowStatementTTMParams struct {
@@ -10,53 +13,46 @@ type CashFlowStatementTTMParams struct {
 
 // CashFlowStatementTTMResponse represents the response from the Cash Flow Statement TTM API
 type CashFlowStatementTTMResponse struct {
-	Date                                   string `json:"date"`
+	Date                                   time.Time `json:"date"`
 	Symbol                                 string `json:"symbol"`
 	ReportedCurrency                       string `json:"reportedCurrency"`
 	CIK                                    string `json:"cik"`
-	FilingDate                             string `json:"filingDate"`
-	AcceptedDate                           string `json:"acceptedDate"`
-	FiscalYear                             string `json:"fiscalYear"`
+	FilingDate                             time.Time `json:"filingDate"`
+	AcceptedDate                           time.Time `json:"acceptedDate"`
+	CalendarYear                           string `json:"calendarYear"`
 	Period                                 string `json:"period"`
-	NetIncome                              int64  `json:"netIncome"`
-	DepreciationAndAmortization            int64  `json:"depreciationAndAmortization"`
-	DeferredIncomeTax                      int64  `json:"deferredIncomeTax"`
-	StockBasedCompensation                 int64  `json:"stockBasedCompensation"`
-	ChangeInWorkingCapital                 int64  `json:"changeInWorkingCapital"`
-	AccountsReceivables                    int64  `json:"accountsReceivables"`
-	Inventory                              int64  `json:"inventory"`
-	AccountsPayables                       int64  `json:"accountsPayables"`
-	OtherWorkingCapital                    int64  `json:"otherWorkingCapital"`
-	OtherNonCashItems                      int64  `json:"otherNonCashItems"`
-	NetCashProvidedByOperatingActivities   int64  `json:"netCashProvidedByOperatingActivities"`
-	InvestmentsInPropertyPlantAndEquipment int64  `json:"investmentsInPropertyPlantAndEquipment"`
-	AcquisitionsNet                        int64  `json:"acquisitionsNet"`
-	PurchasesOfInvestments                 int64  `json:"purchasesOfInvestments"`
-	SalesMaturitiesOfInvestments           int64  `json:"salesMaturitiesOfInvestments"`
-	OtherInvestingActivities               int64  `json:"otherInvestingActivities"`
-	NetCashProvidedByInvestingActivities   int64  `json:"netCashProvidedByInvestingActivities"`
-	NetDebtIssuance                        int64  `json:"netDebtIssuance"`
-	LongTermNetDebtIssuance                int64  `json:"longTermNetDebtIssuance"`
-	ShortTermNetDebtIssuance               int64  `json:"shortTermNetDebtIssuance"`
-	NetStockIssuance                       int64  `json:"netStockIssuance"`
-	NetCommonStockIssuance                 int64  `json:"netCommonStockIssuance"`
-	CommonStockIssuance                    int64  `json:"commonStockIssuance"`
-	CommonStockRepurchased                 int64  `json:"commonStockRepurchased"`
-	NetPreferredStockIssuance              int64  `json:"netPreferredStockIssuance"`
-	NetDividendsPaid                       int64  `json:"netDividendsPaid"`
-	CommonDividendsPaid                    int64  `json:"commonDividendsPaid"`
-	PreferredDividendsPaid                 int64  `json:"preferredDividendsPaid"`
-	OtherFinancingActivities               int64  `json:"otherFinancingActivities"`
-	NetCashProvidedByFinancingActivities   int64  `json:"netCashProvidedByFinancingActivities"`
-	EffectOfForexChangesOnCash             int64  `json:"effectOfForexChangesOnCash"`
-	NetChangeInCash                        int64  `json:"netChangeInCash"`
-	CashAtEndOfPeriod                      int64  `json:"cashAtEndOfPeriod"`
-	CashAtBeginningOfPeriod                int64  `json:"cashAtBeginningOfPeriod"`
-	OperatingCashFlow                      int64  `json:"operatingCashFlow"`
-	CapitalExpenditure                     int64  `json:"capitalExpenditure"`
-	FreeCashFlow                           int64  `json:"freeCashFlow"`
-	IncomeTaxesPaid                        int64  `json:"incomeTaxesPaid"`
-	InterestPaid                           int64  `json:"interestPaid"`
+	NetIncomeTTM                           float64 `json:"netIncomeTTM"`
+	DepreciationAndAmortizationTTM         float64 `json:"depreciationAndAmortizationTTM"`
+	DeferredIncomeTaxTTM                   float64 `json:"deferredIncomeTaxTTM"`
+	StockBasedCompensationTTM              float64 `json:"stockBasedCompensationTTM"`
+	ChangeInWorkingCapitalTTM              float64 `json:"changeInWorkingCapitalTTM"`
+	AccountsReceivablesTTM                 float64 `json:"accountsReceivablesTTM"`
+	InventoryTTM                           float64 `json:"inventoryTTM"`
+	AccountsPayablesTTM                    float64 `json:"accountsPayablesTTM"`
+	OtherWorkingCapitalTTM                 float64 `json:"otherWorkingCapitalTTM"`
+	OtherNonCashItemsTTM                   float64 `json:"otherNonCashItemsTTM"`
+	NetCashProvidedByOperatingActivitiesTTM float64 `json:"netCashProvidedByOperatingActivitiesTTM"`
+	InvestmentsInPropertyPlantAndEquipmentTTM float64 `json:"investmentsInPropertyPlantAndEquipmentTTM"`
+	AcquisitionsNetTTM                     float64 `json:"acquisitionsNetTTM"`
+	PurchasesOfInvestmentsTTM              float64 `json:"purchasesOfInvestmentsTTM"`
+	SalesMaturitiesOfInvestmentsTTM        float64 `json:"salesMaturitiesOfInvestmentsTTM"`
+	OtherInvestingActivitesTTM             float64 `json:"otherInvestingActivitesTTM"`
+	NetCashUsedForInvestingActivitesTTM    float64 `json:"netCashUsedForInvestingActivitesTTM"`
+	DebtRepaymentTTM                       float64 `json:"debtRepaymentTTM"`
+	CommonStockIssuedTTM                   float64 `json:"commonStockIssuedTTM"`
+	CommonStockRepurchasedTTM              float64 `json:"commonStockRepurchasedTTM"`
+	DividendsPaidTTM                       float64 `json:"dividendsPaidTTM"`
+	OtherFinancingActivitesTTM             float64 `json:"otherFinancingActivitesTTM"`
+	NetCashUsedProvidedByFinancingActivitiesTTM float64 `json:"netCashUsedProvidedByFinancingActivitiesTTM"`
+	EffectOfForexChangesOnCashTTM          float64 `json:"effectOfForexChangesOnCashTTM"`
+	NetChangeInCashTTM                     float64 `json:"netChangeInCashTTM"`
+	CashAtEndOfPeriodTTM                   float64 `json:"cashAtEndOfPeriodTTM"`
+	CashAtBeginningOfPeriodTTM             float64 `json:"cashAtBeginningOfPeriodTTM"`
+	OperatingCashFlowTTM                   float64 `json:"operatingCashFlowTTM"`
+	CapitalExpenditureTTM                  float64 `json:"capitalExpenditureTTM"`
+	FreeCashFlowTTM                        float64 `json:"freeCashFlowTTM"`
+	Link                                   string `json:"link"`
+	FinalLink                              string `json:"finalLink"`
 }
 
 // CashFlowStatementTTM retrieves trailing twelve months cash flow statement data for a specific stock symbol

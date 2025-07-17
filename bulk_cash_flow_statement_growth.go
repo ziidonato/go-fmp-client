@@ -1,119 +1,65 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// CashFlowStatementGrowthBulkParams represents the parameters for the Cash Flow Statement Growth Bulk API
-type CashFlowStatementGrowthBulkParams struct {
-	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+// BulkCashFlowStatementGrowthParams represents the parameters for the Bulk Cash Flow Statement Growth API
+type BulkCashFlowStatementGrowthParams struct {
+	Year   int    `json:"year"`   // Required: year (e.g., 2023)
+	Period string `json:"period"` // Required: period ("annual" or "quarterly")
 }
 
-// CashFlowStatementGrowthBulkResponse represents the response from the Cash Flow Statement Growth Bulk API
-type CashFlowStatementGrowthBulkResponse struct {
-	Symbol                                         string `json:"symbol"`
-	Date                                           string `json:"date"`
-	FiscalYear                                     string `json:"fiscalYear"`
-	Period                                         string `json:"period"`
-	ReportedCurrency                               string `json:"reportedCurrency"`
-	GrowthNetIncome                                string `json:"growthNetIncome"`
-	GrowthDepreciationAndAmortization              string `json:"growthDepreciationAndAmortization"`
-	GrowthDeferredIncomeTax                        string `json:"growthDeferredIncomeTax"`
-	GrowthStockBasedCompensation                   string `json:"growthStockBasedCompensation"`
-	GrowthChangeInWorkingCapital                   string `json:"growthChangeInWorkingCapital"`
-	GrowthAccountsReceivables                      string `json:"growthAccountsReceivables"`
-	GrowthInventory                                string `json:"growthInventory"`
-	GrowthAccountsPayables                         string `json:"growthAccountsPayables"`
-	GrowthOtherWorkingCapital                      string `json:"growthOtherWorkingCapital"`
-	GrowthOtherNonCashItems                        string `json:"growthOtherNonCashItems"`
-	GrowthNetCashProvidedByOperatingActivites      string `json:"growthNetCashProvidedByOperatingActivites"`
-	GrowthInvestmentsInPropertyPlantAndEquipment   string `json:"growthInvestmentsInPropertyPlantAndEquipment"`
-	GrowthAcquisitionsNet                          string `json:"growthAcquisitionsNet"`
-	GrowthPurchasesOfInvestments                   string `json:"growthPurchasesOfInvestments"`
-	GrowthSalesMaturitiesOfInvestments             string `json:"growthSalesMaturitiesOfInvestments"`
-	GrowthOtherInvestingActivites                  string `json:"growthOtherInvestingActivites"`
-	GrowthNetCashUsedForInvestingActivites         string `json:"growthNetCashUsedForInvestingActivites"`
-	GrowthDebtRepayment                            string `json:"growthDebtRepayment"`
-	GrowthCommonStockIssued                        string `json:"growthCommonStockIssued"`
-	GrowthCommonStockRepurchased                   string `json:"growthCommonStockRepurchased"`
-	GrowthDividendsPaid                            string `json:"growthDividendsPaid"`
-	GrowthOtherFinancingActivites                  string `json:"growthOtherFinancingActivites"`
-	GrowthNetCashUsedProvidedByFinancingActivities string `json:"growthNetCashUsedProvidedByFinancingActivities"`
-	GrowthEffectOfForexChangesOnCash               string `json:"growthEffectOfForexChangesOnCash"`
-	GrowthNetChangeInCash                          string `json:"growthNetChangeInCash"`
-	GrowthCashAtEndOfPeriod                        string `json:"growthCashAtEndOfPeriod"`
-	GrowthCashAtBeginningOfPeriod                  string `json:"growthCashAtBeginningOfPeriod"`
-	GrowthOperatingCashFlow                        string `json:"growthOperatingCashFlow"`
-	GrowthCapitalExpenditure                       string `json:"growthCapitalExpenditure"`
-	GrowthFreeCashFlow                             string `json:"growthFreeCashFlow"`
-	GrowthNetDebtIssuance                          string `json:"growthNetDebtIssuance"`
-	GrowthLongTermNetDebtIssuance                  string `json:"growthLongTermNetDebtIssuance"`
-	GrowthShortTermNetDebtIssuance                 string `json:"growthShortTermNetDebtIssuance"`
-	GrowthNetStockIssuance                         string `json:"growthNetStockIssuance"`
-	GrowthPreferredDividendsPaid                   string `json:"growthPreferredDividendsPaid"`
-	GrowthIncomeTaxesPaid                          string `json:"growthIncomeTaxesPaid"`
-	GrowthInterestPaid                             string `json:"growthInterestPaid"`
+// BulkCashFlowStatementGrowthResponse represents the response from the Bulk Cash Flow Statement Growth API
+type BulkCashFlowStatementGrowthResponse struct {
+	Symbol                                              string    `json:"symbol"`
+	Date                                                time.Time `json:"date"`
+	CalendarYear                                        string    `json:"calendarYear"`
+	Period                                              string    `json:"period"`
+	GrowthNetIncome                                     float64   `json:"growthNetIncome"`
+	GrowthDepreciationAndAmortization                   float64   `json:"growthDepreciationAndAmortization"`
+	GrowthDeferredIncomeTax                             float64   `json:"growthDeferredIncomeTax"`
+	GrowthStockBasedCompensation                        float64   `json:"growthStockBasedCompensation"`
+	GrowthChangeInWorkingCapital                        float64   `json:"growthChangeInWorkingCapital"`
+	GrowthAccountsReceivables                           float64   `json:"growthAccountsReceivables"`
+	GrowthInventory                                     float64   `json:"growthInventory"`
+	GrowthAccountsPayables                              float64   `json:"growthAccountsPayables"`
+	GrowthOtherWorkingCapital                           float64   `json:"growthOtherWorkingCapital"`
+	GrowthOtherNonCashItems                             float64   `json:"growthOtherNonCashItems"`
+	GrowthNetCashProvidedByOperatingActivites           float64   `json:"growthNetCashProvidedByOperatingActivites"`
+	GrowthInvestmentsInPropertyPlantAndEquipment        float64   `json:"growthInvestmentsInPropertyPlantAndEquipment"`
+	GrowthAcquisitionsNet                               float64   `json:"growthAcquisitionsNet"`
+	GrowthPurchasesOfInvestments                        float64   `json:"growthPurchasesOfInvestments"`
+	GrowthSalesMaturitiesOfInvestments                  float64   `json:"growthSalesMaturitiesOfInvestments"`
+	GrowthOtherInvestingActivites                       float64   `json:"growthOtherInvestingActivites"`
+	GrowthNetCashUsedForInvestingActivites              float64   `json:"growthNetCashUsedForInvestingActivites"`
+	GrowthDebtRepayment                                 float64   `json:"growthDebtRepayment"`
+	GrowthCommonStockIssued                             float64   `json:"growthCommonStockIssued"`
+	GrowthCommonStockRepurchased                        float64   `json:"growthCommonStockRepurchased"`
+	GrowthDividendsPaid                                 float64   `json:"growthDividendsPaid"`
+	GrowthOtherFinancingActivites                       float64   `json:"growthOtherFinancingActivites"`
+	GrowthNetCashUsedProvidedByFinancingActivities      float64   `json:"growthNetCashUsedProvidedByFinancingActivities"`
+	GrowthEffectOfForexChangesOnCash                    float64   `json:"growthEffectOfForexChangesOnCash"`
+	GrowthNetChangeInCash                               float64   `json:"growthNetChangeInCash"`
+	GrowthCashAtEndOfPeriod                             float64   `json:"growthCashAtEndOfPeriod"`
+	GrowthCashAtBeginningOfPeriod                       float64   `json:"growthCashAtBeginningOfPeriod"`
+	GrowthOperatingCashFlow                             float64   `json:"growthOperatingCashFlow"`
+	GrowthCapitalExpenditure                            float64   `json:"growthCapitalExpenditure"`
+	GrowthFreeCashFlow                                  float64   `json:"growthFreeCashFlow"`
 }
 
-// GetCashFlowStatementGrowthBulk retrieves bulk growth data for cash flow statements
-func (c *Client) GetCashFlowStatementGrowthBulk(params CashFlowStatementGrowthBulkParams) ([]CashFlowStatementGrowthBulkResponse, error) {
-	// Validate required parameters
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
-	}
-	if params.Period == "" {
-		return nil, fmt.Errorf("period parameter is required")
+// BulkCashFlowStatementGrowth retrieves cash flow statement growth data for multiple companies
+func (c *Client) BulkCashFlowStatementGrowth(params BulkCashFlowStatementGrowthParams) ([]BulkCashFlowStatementGrowthResponse, error) {
+	urlParams := map[string]string{
+		"year":   fmt.Sprintf("%d", params.Year),
+		"period": params.Period,
 	}
 
-	// Build the URL
-	baseURL := c.BaseURL + "/cash-flow-statement-growth-bulk"
-	u, err := url.Parse(baseURL)
+	var result []BulkCashFlowStatementGrowthResponse
+	err := c.doRequest(c.BaseURL+"/bulk-cash-flow-statement-growth", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []CashFlowStatementGrowthBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk cash flow statement growth: %w", err)
 	}
 
 	return result, nil

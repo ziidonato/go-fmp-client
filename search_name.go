@@ -44,5 +44,5 @@ func (c *Client) SearchName(params SearchNameParams) ([]SearchNameResponse, erro
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

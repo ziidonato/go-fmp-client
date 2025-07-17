@@ -2,80 +2,75 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// RatiosParams represents the parameters for the Financial Ratios API
+// RatiosParams represents the parameters for the Ratios API
 type RatiosParams struct {
-	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Period *string `json:"period"` // Optional: Period type ("annual" or "quarter")
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return
 }
 
-// RatiosResponse represents the response from the Financial Ratios API
+// RatiosResponse represents the response from the Ratios API
 type RatiosResponse struct {
-	Symbol                                  string  `json:"symbol"`
-	Date                                    string  `json:"date"`
-	FiscalYear                              string  `json:"fiscalYear"`
-	Period                                  string  `json:"period"`
-	ReportedCurrency                        string  `json:"reportedCurrency"`
-	GrossProfitMargin                       float64 `json:"grossProfitMargin"`
-	EbitMargin                              float64 `json:"ebitMargin"`
-	EbitdaMargin                            float64 `json:"ebitdaMargin"`
-	OperatingProfitMargin                   float64 `json:"operatingProfitMargin"`
-	PretaxProfitMargin                      float64 `json:"pretaxProfitMargin"`
-	ContinuousOperationsProfitMargin        float64 `json:"continuousOperationsProfitMargin"`
-	NetProfitMargin                         float64 `json:"netProfitMargin"`
-	BottomLineProfitMargin                  float64 `json:"bottomLineProfitMargin"`
-	ReceivablesTurnover                     float64 `json:"receivablesTurnover"`
-	PayablesTurnover                        float64 `json:"payablesTurnover"`
-	InventoryTurnover                       float64 `json:"inventoryTurnover"`
-	FixedAssetTurnover                      float64 `json:"fixedAssetTurnover"`
-	AssetTurnover                           float64 `json:"assetTurnover"`
-	CurrentRatio                            float64 `json:"currentRatio"`
-	QuickRatio                              float64 `json:"quickRatio"`
-	SolvencyRatio                           float64 `json:"solvencyRatio"`
-	CashRatio                               float64 `json:"cashRatio"`
-	PriceToEarningsRatio                    float64 `json:"priceToEarningsRatio"`
-	PriceToEarningsGrowthRatio              float64 `json:"priceToEarningsGrowthRatio"`
-	ForwardPriceToEarningsGrowthRatio       float64 `json:"forwardPriceToEarningsGrowthRatio"`
-	PriceToBookRatio                        float64 `json:"priceToBookRatio"`
-	PriceToSalesRatio                       float64 `json:"priceToSalesRatio"`
-	PriceToFreeCashFlowRatio                float64 `json:"priceToFreeCashFlowRatio"`
-	PriceToOperatingCashFlowRatio           float64 `json:"priceToOperatingCashFlowRatio"`
-	DebtToAssetsRatio                       float64 `json:"debtToAssetsRatio"`
-	DebtToEquityRatio                       float64 `json:"debtToEquityRatio"`
-	DebtToCapitalRatio                      float64 `json:"debtToCapitalRatio"`
-	LongTermDebtToCapitalRatio              float64 `json:"longTermDebtToCapitalRatio"`
-	FinancialLeverageRatio                  float64 `json:"financialLeverageRatio"`
-	WorkingCapitalTurnoverRatio             float64 `json:"workingCapitalTurnoverRatio"`
-	OperatingCashFlowRatio                  float64 `json:"operatingCashFlowRatio"`
-	OperatingCashFlowSalesRatio             float64 `json:"operatingCashFlowSalesRatio"`
-	FreeCashFlowOperatingCashFlowRatio      float64 `json:"freeCashFlowOperatingCashFlowRatio"`
-	DebtServiceCoverageRatio                float64 `json:"debtServiceCoverageRatio"`
-	InterestCoverageRatio                   float64 `json:"interestCoverageRatio"`
-	ShortTermOperatingCashFlowCoverageRatio float64 `json:"shortTermOperatingCashFlowCoverageRatio"`
-	OperatingCashFlowCoverageRatio          float64 `json:"operatingCashFlowCoverageRatio"`
-	CapitalExpenditureCoverageRatio         float64 `json:"capitalExpenditureCoverageRatio"`
-	DividendPaidAndCapexCoverageRatio       float64 `json:"dividendPaidAndCapexCoverageRatio"`
-	DividendPayoutRatio                     float64 `json:"dividendPayoutRatio"`
-	DividendYield                           float64 `json:"dividendYield"`
-	DividendYieldPercentage                 float64 `json:"dividendYieldPercentage"`
-	RevenuePerShare                         float64 `json:"revenuePerShare"`
-	NetIncomePerShare                       float64 `json:"netIncomePerShare"`
-	InterestDebtPerShare                    float64 `json:"interestDebtPerShare"`
-	CashPerShare                            float64 `json:"cashPerShare"`
-	BookValuePerShare                       float64 `json:"bookValuePerShare"`
-	TangibleBookValuePerShare               float64 `json:"tangibleBookValuePerShare"`
-	ShareholdersEquityPerShare              float64 `json:"shareholdersEquityPerShare"`
-	OperatingCashFlowPerShare               float64 `json:"operatingCashFlowPerShare"`
-	CapexPerShare                           float64 `json:"capexPerShare"`
-	FreeCashFlowPerShare                    float64 `json:"freeCashFlowPerShare"`
-	NetIncomePerEBT                         float64 `json:"netIncomePerEBT"`
-	EbtPerEbit                              float64 `json:"ebtPerEbit"`
-	PriceToFairValue                        float64 `json:"priceToFairValue"`
-	DebtToMarketCap                         float64 `json:"debtToMarketCap"`
-	EffectiveTaxRate                        float64 `json:"effectiveTaxRate"`
-	EnterpriseValueMultiple                 float64 `json:"enterpriseValueMultiple"`
+	Symbol                  string    `json:"symbol"`
+	Date                    time.Time `json:"date"`
+	Period                  string    `json:"period"`
+	CurrentRatio            float64   `json:"currentRatio"`
+	QuickRatio              float64   `json:"quickRatio"`
+	CashRatio               float64   `json:"cashRatio"`
+	DaysOfSalesOutstanding  float64   `json:"daysOfSalesOutstanding"`
+	DaysOfInventoryOutstanding float64 `json:"daysOfInventoryOutstanding"`
+	OperatingCycle          float64   `json:"operatingCycle"`
+	DaysOfPayablesOutstanding float64 `json:"daysOfPayablesOutstanding"`
+	CashConversionCycle     float64   `json:"cashConversionCycle"`
+	GrossProfitMargin       float64   `json:"grossProfitMargin"`
+	OperatingProfitMargin   float64   `json:"operatingProfitMargin"`
+	PretaxProfitMargin      float64   `json:"pretaxProfitMargin"`
+	NetProfitMargin         float64   `json:"netProfitMargin"`
+	EffectiveTaxRate        float64   `json:"effectiveTaxRate"`
+	ReturnOnAssets          float64   `json:"returnOnAssets"`
+	ReturnOnEquity          float64   `json:"returnOnEquity"`
+	ReturnOnCapitalEmployed float64   `json:"returnOnCapitalEmployed"`
+	NetIncomePerEBT         float64   `json:"netIncomePerEBT"`
+	EBTPerEBIT              float64   `json:"ebtPerEbit"`
+	EBITPerRevenue          float64   `json:"ebitPerRevenue"`
+	DebtRatio               float64   `json:"debtRatio"`
+	DebtEquityRatio         float64   `json:"debtEquityRatio"`
+	LongTermDebtToCapitalization float64 `json:"longTermDebtToCapitalization"`
+	TotalDebtToCapitalization float64 `json:"totalDebtToCapitalization"`
+	InterestCoverage        float64   `json:"interestCoverage"`
+	CashFlowToDebtRatio     float64   `json:"cashFlowToDebtRatio"`
+	CompanyEquityMultiplier float64   `json:"companyEquityMultiplier"`
+	ReceivablesTurnover     float64   `json:"receivablesTurnover"`
+	PayablesTurnover        float64   `json:"payablesTurnover"`
+	InventoryTurnover       float64   `json:"inventoryTurnover"`
+	FixedAssetTurnover      float64   `json:"fixedAssetTurnover"`
+	AssetTurnover           float64   `json:"assetTurnover"`
+	OperatingCashFlowPerShare float64 `json:"operatingCashFlowPerShare"`
+	FreeCashFlowPerShare    float64   `json:"freeCashFlowPerShare"`
+	CashPerShare            float64   `json:"cashPerShare"`
+	PayoutRatio             float64   `json:"payoutRatio"`
+	OperatingCashFlowSalesRatio float64 `json:"operatingCashFlowSalesRatio"`
+	FreeCashFlowOperatingCashFlowRatio float64 `json:"freeCashFlowOperatingCashFlowRatio"`
+	CashFlowCoverageRatios  float64   `json:"cashFlowCoverageRatios"`
+	ShortTermCoverageRatios float64   `json:"shortTermCoverageRatios"`
+	CapitalExpenditureCoverageRatio float64 `json:"capitalExpenditureCoverageRatio"`
+	DividendPaidAndCapexCoverageRatio float64 `json:"dividendPaidAndCapexCoverageRatio"`
+	DividendPayoutRatio     float64   `json:"dividendPayoutRatio"`
+	PriceBookValueRatio     float64   `json:"priceBookValueRatio"`
+	PriceToBookRatio        float64   `json:"priceToBookRatio"`
+	PriceToSalesRatio       float64   `json:"priceToSalesRatio"`
+	PriceEarningsRatio      float64   `json:"priceEarningsRatio"`
+	PriceToFreeCashFlowsRatio float64 `json:"priceToFreeCashFlowsRatio"`
+	PriceToOperatingCashFlowsRatio float64 `json:"priceToOperatingCashFlowsRatio"`
+	PriceCashFlowRatio      float64   `json:"priceCashFlowRatio"`
+	PriceEarningsToGrowthRatio float64 `json:"priceEarningsToGrowthRatio"`
+	PriceSalesRatio         float64   `json:"priceSalesRatio"`
+	DividendYield           float64   `json:"dividendYield"`
+	EnterpriseValueMultiple float64   `json:"enterpriseValueMultiple"`
+	PriceFairValue          float64   `json:"priceFairValue"`
 }
 
 // Ratios retrieves financial ratios for a specific stock symbol
@@ -95,8 +90,8 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
-		urlParams["period"] = params.Period
+	if params.Period != nil {
+		urlParams["period"] = *params.Period
 	}
 
 	var result []RatiosResponse
@@ -105,5 +100,5 @@ func (c *Client) Ratios(params RatiosParams) ([]RatiosResponse, error) {
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

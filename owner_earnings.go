@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // OwnerEarningsParams represents the parameters for the Owner Earnings API
@@ -12,16 +13,20 @@ type OwnerEarningsParams struct {
 
 // OwnerEarningsResponse represents the response from the Owner Earnings API
 type OwnerEarningsResponse struct {
-	Symbol                 string  `json:"symbol"`
-	ReportedCurrency       string  `json:"reportedCurrency"`
-	FiscalYear             string  `json:"fiscalYear"`
-	Period                 string  `json:"period"`
-	Date                   string  `json:"date"`
-	AveragePPE             float64 `json:"averagePPE"`
-	MaintenanceCapex       int64   `json:"maintenanceCapex"`
-	OwnersEarnings         int64   `json:"ownersEarnings"`
-	GrowthCapex            int64   `json:"growthCapex"`
-	OwnersEarningsPerShare float64 `json:"ownersEarningsPerShare"`
+	Symbol                 string    `json:"symbol"`
+	Date                   time.Time `json:"date"`
+	AverageReceivables     float64   `json:"averageReceivables"`
+	AverageInventory       float64   `json:"averageInventory"`
+	AveragePayables        float64   `json:"averagePayables"`
+	DaysReceivablesOutstanding float64 `json:"daysReceivablesOutstanding"`
+	DaysInventoryOutstanding   float64 `json:"daysInventoryOutstanding"`
+	DaysPayablesOutstanding    float64 `json:"daysPayablesOutstanding"`
+	NetIncome              float64   `json:"netIncome"`
+	DepreciationAndAmortization float64 `json:"depreciationAndAmortization"`
+	MaintenanceCapex       float64   `json:"maintenanceCapex"`
+	OwnerEarnings          float64   `json:"ownerEarnings"`
+	GrowthCapex            float64   `json:"growthCapex"`
+	ChangeInWorkingCapital float64   `json:"changeInWorkingCapital"`
 }
 
 // OwnerEarnings retrieves owner earnings data for a specific stock symbol

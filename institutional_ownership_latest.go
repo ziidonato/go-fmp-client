@@ -2,24 +2,28 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // InstitutionalOwnershipLatestParams represents the parameters for the Institutional Ownership Latest API
 type InstitutionalOwnershipLatestParams struct {
-	Page  *int `json:"page"`  // Optional: Page number (default: 0)
-	Limit *int `json:"limit"` // Optional: Number of results (default: 100)
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Page   *int    `json:"page"`   // Optional: Page number (default: 0)
 }
 
 // InstitutionalOwnershipLatestResponse represents the response from the Institutional Ownership Latest API
 type InstitutionalOwnershipLatestResponse struct {
-	CIK          string `json:"cik"`
-	Name         string `json:"name"`
-	Date         string `json:"date"`
-	FilingDate   string `json:"filingDate"`
-	AcceptedDate string `json:"acceptedDate"`
-	FormType     string `json:"formType"`
-	Link         string `json:"link"`
-	FinalLink    string `json:"finalLink"`
+	Symbol       string    `json:"symbol"`
+	Date         time.Time `json:"date"`
+	FilingDate   time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
+	FormType     FormType  `json:"formType"`
+	CIK          string    `json:"cik"`
+	CUSIP        string    `json:"cusip"`
+	InvestorName string    `json:"investorName"`
+	Shares       int64     `json:"shares"`
+	Value        float64   `json:"value"`
+	Weight       float64   `json:"weight"`
 }
 
 // InstitutionalOwnershipLatest retrieves the latest institutional ownership filings
@@ -28,10 +32,6 @@ func (c *Client) InstitutionalOwnershipLatest(params InstitutionalOwnershipLates
 
 	if params.Page != nil {
 		urlParams["page"] = fmt.Sprintf("%d", *params.Page)
-	}
-
-	if params.Limit != nil {
-		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
 	var result []InstitutionalOwnershipLatestResponse

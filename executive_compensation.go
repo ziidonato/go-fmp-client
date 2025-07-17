@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // ExecutiveCompensationParams represents the parameters for the Executive Compensation API
@@ -11,21 +12,22 @@ type ExecutiveCompensationParams struct {
 
 // ExecutiveCompensationResponse represents the response from the Executive Compensation API
 type ExecutiveCompensationResponse struct {
-	CIK                       string `json:"cik"`
-	Symbol                    string `json:"symbol"`
-	CompanyName               string `json:"companyName"`
-	FilingDate                string `json:"filingDate"`
-	AcceptedDate              string `json:"acceptedDate"`
-	NameAndPosition           string `json:"nameAndPosition"`
-	Year                      int    `json:"year"`
-	Salary                    int    `json:"salary"`
-	Bonus                     int    `json:"bonus"`
-	StockAward                int    `json:"stockAward"`
-	OptionAward               int    `json:"optionAward"`
-	IncentivePlanCompensation int    `json:"incentivePlanCompensation"`
-	AllOtherCompensation      int    `json:"allOtherCompensation"`
-	Total                     int    `json:"total"`
-	Link                      string `json:"link"`
+	Symbol                string    `json:"symbol"`
+	CIK                   string    `json:"cik"`
+	CompanyName           string    `json:"companyName"`
+	FilingDate            time.Time `json:"filingDate"`
+	AcceptedDate          time.Time `json:"acceptedDate"`
+	Name                  string    `json:"name"`
+	Title                 string    `json:"title"`
+	Year                  int       `json:"year"`
+	Salary                float64   `json:"salary"`
+	Bonus                 float64   `json:"bonus"`
+	StockAward            float64   `json:"stockAward"`
+	IncentivePlanCompensation float64 `json:"incentivePlanCompensation"`
+	AllOtherCompensation  float64   `json:"allOtherCompensation"`
+	Total                 float64   `json:"total"`
+	NameAndPosition       string    `json:"nameAndPosition"`
+	URL                   string    `json:"url"`
 }
 
 // ExecutiveCompensation retrieves comprehensive compensation data for company executives

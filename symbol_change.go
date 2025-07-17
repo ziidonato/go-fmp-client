@@ -1,34 +1,31 @@
 package go_fmp
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-// SymbolChangeParams represents the parameters for the Symbol Changes List API
+// SymbolChangeParams represents the parameters for the Symbol Change API
 type SymbolChangeParams struct {
-	Invalid *string `json:"invalid"` // Required: Filter for invalid symbols (e.g., "false")
-	Limit   *int    `json:"limit"`   // Required: Number of results (e.g., 100)
+	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 }
 
-// SymbolChangeResponse represents the response from the Symbol Changes List API
+// SymbolChangeResponse represents the response from the Symbol Change API
 type SymbolChangeResponse struct {
-	Date        string `json:"date"`
-	CompanyName string `json:"companyName"`
-	OldSymbol   string `json:"oldSymbol"`
-	NewSymbol   string `json:"newSymbol"`
+	Date        time.Time `json:"date"`
+	Name        string    `json:"name"`
+	OldSymbol   string    `json:"oldSymbol"`
+	NewSymbol   string    `json:"newSymbol"`
 }
 
 // SymbolChange retrieves information about stock symbol changes due to mergers, acquisitions, stock splits, and name changes
 func (c *Client) SymbolChange(params SymbolChangeParams) ([]SymbolChangeResponse, error) {
-	if params.Invalid == nil {
-		return nil, fmt.Errorf("invalid parameter is required")
-	}
-
-	if params.Limit == nil {
-		return nil, fmt.Errorf("limit parameter is required")
+	if params.Symbol == "" {
+		return nil, fmt.Errorf("symbol parameter is required")
 	}
 
 	urlParams := map[string]string{
-		"invalid": *params.Invalid,
-		"limit":   fmt.Sprintf("%d", *params.Limit),
+		"symbol": params.Symbol,
 	}
 
 	var result []SymbolChangeResponse
@@ -37,5 +34,5 @@ func (c *Client) SymbolChange(params SymbolChangeParams) ([]SymbolChangeResponse
 		return nil, fmt.Errorf("error making request: %w", err)
 	}
 
-	return result, err
+	return result, nil
 }

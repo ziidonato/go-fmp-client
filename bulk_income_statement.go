@@ -1,116 +1,69 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// IncomeStatementBulkParams represents the parameters for the Bulk Income Statement API
-type IncomeStatementBulkParams struct {
-	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+// BulkIncomeStatementParams represents the parameters for the Bulk Income Statement API
+type BulkIncomeStatementParams struct {
+	Year   int    `json:"year"`   // Required: year (e.g., 2023)
+	Period string `json:"period"` // Required: period ("annual" or "quarterly")
 }
 
-// IncomeStatementBulkResponse represents the response from the Bulk Income Statement API
-type IncomeStatementBulkResponse struct {
-	Date                                    string `json:"date"`
-	Symbol                                  string `json:"symbol"`
-	ReportedCurrency                        string `json:"reportedCurrency"`
-	CIK                                     string `json:"cik"`
-	FilingDate                              string `json:"filingDate"`
-	AcceptedDate                            string `json:"acceptedDate"`
-	FiscalYear                              string `json:"fiscalYear"`
-	Period                                  string `json:"period"`
-	Revenue                                 string `json:"revenue"`
-	CostOfRevenue                           string `json:"costOfRevenue"`
-	GrossProfit                             string `json:"grossProfit"`
-	ResearchAndDevelopmentExpenses          string `json:"researchAndDevelopmentExpenses"`
-	GeneralAndAdministrativeExpenses        string `json:"generalAndAdministrativeExpenses"`
-	SellingAndMarketingExpenses             string `json:"sellingAndMarketingExpenses"`
-	SellingGeneralAndAdministrativeExpenses string `json:"sellingGeneralAndAdministrativeExpenses"`
-	OtherExpenses                           string `json:"otherExpenses"`
-	OperatingExpenses                       string `json:"operatingExpenses"`
-	CostAndExpenses                         string `json:"costAndExpenses"`
-	NetInterestIncome                       string `json:"netInterestIncome"`
-	InterestIncome                          string `json:"interestIncome"`
-	InterestExpense                         string `json:"interestExpense"`
-	DepreciationAndAmortization             string `json:"depreciationAndAmortization"`
-	EBITDA                                  string `json:"ebitda"`
-	EBIT                                    string `json:"ebit"`
-	NonOperatingIncomeExcludingInterest     string `json:"nonOperatingIncomeExcludingInterest"`
-	OperatingIncome                         string `json:"operatingIncome"`
-	TotalOtherIncomeExpensesNet             string `json:"totalOtherIncomeExpensesNet"`
-	IncomeBeforeTax                         string `json:"incomeBeforeTax"`
-	IncomeTaxExpense                        string `json:"incomeTaxExpense"`
-	NetIncomeFromContinuingOperations       string `json:"netIncomeFromContinuingOperations"`
-	NetIncomeFromDiscontinuedOperations     string `json:"netIncomeFromDiscontinuedOperations"`
-	OtherAdjustmentsToNetIncome             string `json:"otherAdjustmentsToNetIncome"`
-	NetIncome                               string `json:"netIncome"`
-	NetIncomeDeductions                     string `json:"netIncomeDeductions"`
-	BottomLineNetIncome                     string `json:"bottomLineNetIncome"`
-	EPS                                     string `json:"eps"`
-	EPSDiluted                              string `json:"epsDiluted"`
-	WeightedAverageShsOut                   string `json:"weightedAverageShsOut"`
-	WeightedAverageShsOutDil                string `json:"weightedAverageShsOutDil"`
+// BulkIncomeStatementResponse represents the response from the Bulk Income Statement API
+type BulkIncomeStatementResponse struct {
+	Symbol                                  string    `json:"symbol"`
+	Date                                    time.Time `json:"date"`
+	ReportedCurrency                        string    `json:"reportedCurrency"`
+	CIK                                     string    `json:"cik"`
+	FilingDate                              time.Time `json:"filingDate"`
+	AcceptedDate                            time.Time `json:"acceptedDate"`
+	CalendarYear                            string    `json:"calendarYear"`
+	Period                                  string    `json:"period"`
+	Revenue                                 float64   `json:"revenue"`
+	CostOfRevenue                           float64   `json:"costOfRevenue"`
+	GrossProfit                             float64   `json:"grossProfit"`
+	GrossProfitRatio                        float64   `json:"grossProfitRatio"`
+	ResearchAndDevelopmentExpenses          float64   `json:"researchAndDevelopmentExpenses"`
+	GeneralAndAdministrativeExpenses        float64   `json:"generalAndAdministrativeExpenses"`
+	SellingAndMarketingExpenses             float64   `json:"sellingAndMarketingExpenses"`
+	SellingGeneralAndAdministrativeExpenses float64   `json:"sellingGeneralAndAdministrativeExpenses"`
+	OtherExpenses                           float64   `json:"otherExpenses"`
+	OperatingExpenses                       float64   `json:"operatingExpenses"`
+	CostAndExpenses                         float64   `json:"costAndExpenses"`
+	InterestIncome                          float64   `json:"interestIncome"`
+	InterestExpense                         float64   `json:"interestExpense"`
+	DepreciationAndAmortization             float64   `json:"depreciationAndAmortization"`
+	EBITDA                                  float64   `json:"ebitda"`
+	EBITDARatio                             float64   `json:"ebitdaratio"`
+	OperatingIncome                         float64   `json:"operatingIncome"`
+	OperatingIncomeRatio                    float64   `json:"operatingIncomeRatio"`
+	TotalOtherIncomeExpensesNet             float64   `json:"totalOtherIncomeExpensesNet"`
+	IncomeBeforeTax                         float64   `json:"incomeBeforeTax"`
+	IncomeBeforeTaxRatio                    float64   `json:"incomeBeforeTaxRatio"`
+	IncomeTaxExpense                        float64   `json:"incomeTaxExpense"`
+	NetIncome                               float64   `json:"netIncome"`
+	NetIncomeRatio                          float64   `json:"netIncomeRatio"`
+	EPS                                     float64   `json:"eps"`
+	EPSDiluted                              float64   `json:"epsdiluted"`
+	WeightedAverageShsOut                   float64   `json:"weightedAverageShsOut"`
+	WeightedAverageShsOutDil                float64   `json:"weightedAverageShsOutDil"`
+	Link                                    string    `json:"link"`
+	FinalLink                               string    `json:"finalLink"`
 }
 
-// GetIncomeStatementBulk retrieves detailed income statement data in bulk
-func (c *Client) GetIncomeStatementBulk(params IncomeStatementBulkParams) ([]IncomeStatementBulkResponse, error) {
-	// Validate required parameters
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
-	}
-	if params.Period == "" {
-		return nil, fmt.Errorf("period parameter is required")
+// BulkIncomeStatement retrieves income statement data for multiple companies
+func (c *Client) BulkIncomeStatement(params BulkIncomeStatementParams) ([]BulkIncomeStatementResponse, error) {
+	urlParams := map[string]string{
+		"year":   fmt.Sprintf("%d", params.Year),
+		"period": params.Period,
 	}
 
-	// Build the URL
-	baseURL := c.BaseURL + "/income-statement-bulk"
-	u, err := url.Parse(baseURL)
+	var result []BulkIncomeStatementResponse
+	err := c.doRequest(c.BaseURL+"/bulk-income-statement", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []IncomeStatementBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk income statement: %w", err)
 	}
 
 	return result, nil

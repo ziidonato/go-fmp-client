@@ -2,51 +2,54 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // IncomeStatementGrowthParams represents the parameters for the Income Statement Growth API
 type IncomeStatementGrowthParams struct {
-	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Period *string `json:"period"` // Optional: Period type ("annual" or "quarter")
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return (default: 20)
 }
 
 // IncomeStatementGrowthResponse represents the response from the Income Statement Growth API
 type IncomeStatementGrowthResponse struct {
-	Symbol                                    string  `json:"symbol"`
-	Date                                      string  `json:"date"`
-	FiscalYear                                string  `json:"fiscalYear"`
-	Period                                    string  `json:"period"`
-	ReportedCurrency                          string  `json:"reportedCurrency"`
-	GrowthRevenue                             float64 `json:"growthRevenue"`
-	GrowthCostOfRevenue                       float64 `json:"growthCostOfRevenue"`
-	GrowthGrossProfit                         float64 `json:"growthGrossProfit"`
-	GrowthGrossProfitRatio                    float64 `json:"growthGrossProfitRatio"`
-	GrowthResearchAndDevelopmentExpenses      float64 `json:"growthResearchAndDevelopmentExpenses"`
-	GrowthGeneralAndAdministrativeExpenses    float64 `json:"growthGeneralAndAdministrativeExpenses"`
-	GrowthSellingAndMarketingExpenses         float64 `json:"growthSellingAndMarketingExpenses"`
-	GrowthOtherExpenses                       float64 `json:"growthOtherExpenses"`
-	GrowthOperatingExpenses                   float64 `json:"growthOperatingExpenses"`
-	GrowthCostAndExpenses                     float64 `json:"growthCostAndExpenses"`
-	GrowthInterestIncome                      float64 `json:"growthInterestIncome"`
-	GrowthInterestExpense                     float64 `json:"growthInterestExpense"`
-	GrowthDepreciationAndAmortization         float64 `json:"growthDepreciationAndAmortization"`
-	GrowthEBITDA                              float64 `json:"growthEBITDA"`
-	GrowthOperatingIncome                     float64 `json:"growthOperatingIncome"`
-	GrowthIncomeBeforeTax                     float64 `json:"growthIncomeBeforeTax"`
-	GrowthIncomeTaxExpense                    float64 `json:"growthIncomeTaxExpense"`
-	GrowthNetIncome                           float64 `json:"growthNetIncome"`
-	GrowthEPS                                 float64 `json:"growthEPS"`
-	GrowthEPSDiluted                          float64 `json:"growthEPSDiluted"`
-	GrowthWeightedAverageShsOut               float64 `json:"growthWeightedAverageShsOut"`
-	GrowthWeightedAverageShsOutDil            float64 `json:"growthWeightedAverageShsOutDil"`
-	GrowthEBIT                                float64 `json:"growthEBIT"`
-	GrowthNonOperatingIncomeExcludingInterest float64 `json:"growthNonOperatingIncomeExcludingInterest"`
-	GrowthNetInterestIncome                   float64 `json:"growthNetInterestIncome"`
-	GrowthTotalOtherIncomeExpensesNet         float64 `json:"growthTotalOtherIncomeExpensesNet"`
-	GrowthNetIncomeFromContinuingOperations   float64 `json:"growthNetIncomeFromContinuingOperations"`
-	GrowthOtherAdjustmentsToNetIncome         float64 `json:"growthOtherAdjustmentsToNetIncome"`
-	GrowthNetIncomeDeductions                 float64 `json:"growthNetIncomeDeductions"`
+	Date                                    string  `json:"date"`
+	Symbol                                  string  `json:"symbol"`
+	ReportedCurrency                        string  `json:"reportedCurrency"`
+	CIK                                     string  `json:"cik"`
+	FilingDate                              time.Time  `json:"filingDate"`
+	AcceptedDate                            time.Time  `json:"acceptedDate"`
+	CalendarYear                            string  `json:"calendarYear"`
+	Period                                  string  `json:"period"`
+	RevenueGrowth                           float64 `json:"revenueGrowth"`
+	CostOfRevenueGrowth                     float64 `json:"costOfRevenueGrowth"`
+	GrossProfitGrowth                       float64 `json:"grossProfitGrowth"`
+	GrossProfitRatioGrowth                  float64 `json:"grossProfitRatioGrowth"`
+	ResearchAndDevelopmentExpensesGrowth    float64 `json:"researchAndDevelopmentExpensesGrowth"`
+	GeneralAndAdministrativeExpensesGrowth  float64 `json:"generalAndAdministrativeExpensesGrowth"`
+	SellingAndMarketingExpensesGrowth       float64 `json:"sellingAndMarketingExpensesGrowth"`
+	OtherExpensesGrowth                     float64 `json:"otherExpensesGrowth"`
+	OperatingExpensesGrowth                 float64 `json:"operatingExpensesGrowth"`
+	CostAndExpensesGrowth                   float64 `json:"costAndExpensesGrowth"`
+	InterestExpenseGrowth                   float64 `json:"interestExpenseGrowth"`
+	DepreciationAndAmortizationGrowth       float64 `json:"depreciationAndAmortizationGrowth"`
+	EBITDAGrowth                            float64 `json:"ebitdaGrowth"`
+	EBITDARatioGrowth                       float64 `json:"ebitdaratioGrowth"`
+	OperatingIncomeGrowth                   float64 `json:"operatingIncomeGrowth"`
+	OperatingIncomeRatioGrowth              float64 `json:"operatingIncomeRatioGrowth"`
+	TotalOtherIncomeExpensesNetGrowth       float64 `json:"totalOtherIncomeExpensesNetGrowth"`
+	IncomeBeforeTaxGrowth                   float64 `json:"incomeBeforeTaxGrowth"`
+	IncomeBeforeTaxRatioGrowth              float64 `json:"incomeBeforeTaxRatioGrowth"`
+	IncomeTaxExpenseGrowth                  float64 `json:"incomeTaxExpenseGrowth"`
+	NetIncomeGrowth                         float64 `json:"netIncomeGrowth"`
+	NetIncomeRatioGrowth                    float64 `json:"netIncomeRatioGrowth"`
+	EPSGrowth                               float64 `json:"epsGrowth"`
+	EPSDilutedGrowth                        float64 `json:"epsdilutedGrowth"`
+	WeightedAverageShsOutGrowth             float64 `json:"weightedAverageShsOutGrowth"`
+	WeightedAverageShsOutDilGrowth          float64 `json:"weightedAverageShsOutDilGrowth"`
+	Link                                      string  `json:"link"`
+	FinalLink                                 string  `json:"finalLink"`
 }
 
 // IncomeStatementGrowth retrieves income statement growth data for a specific stock symbol
@@ -66,8 +69,8 @@ func (c *Client) IncomeStatementGrowth(params IncomeStatementGrowthParams) ([]In
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
-		urlParams["period"] = params.Period
+	if params.Period != nil {
+		urlParams["period"] = *params.Period
 	}
 
 	var result []IncomeStatementGrowthResponse

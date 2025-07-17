@@ -2,24 +2,25 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // IncomeStatementAsReportedParams represents the parameters for the Income Statement As Reported API
 type IncomeStatementAsReportedParams struct {
-	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "annual,quarter"
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Period *string `json:"period"` // Optional: Period type ("annual" or "quarter")
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return
 }
 
 // IncomeStatementAsReportedResponse represents the response from the Income Statement As Reported API
 type IncomeStatementAsReportedResponse struct {
-	Date                                    string  `json:"date"`
+	Date                                    time.Time  `json:"date"`
 	Symbol                                  string  `json:"symbol"`
 	ReportedCurrency                        string  `json:"reportedCurrency"`
 	CIK                                     string  `json:"cik"`
-	FilingDate                              string  `json:"filingDate"`
-	AcceptedDate                            string  `json:"acceptedDate"`
-	FiscalYear                              string  `json:"fiscalYear"`
+	FilingDate                              time.Time  `json:"filingDate"`
+	AcceptedDate                            time.Time  `json:"acceptedDate"`
+	CalendarYear                            string  `json:"calendarYear"`
 	Period                                  string  `json:"period"`
 	Revenue                                 int64   `json:"revenue"`
 	CostOfRevenue                           int64   `json:"costOfRevenue"`
@@ -71,8 +72,8 @@ func (c *Client) IncomeStatementAsReported(params IncomeStatementAsReportedParam
 		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
 	}
 
-	if params.Period != "" {
-		urlParams["period"] = params.Period
+	if params.Period != nil {
+		urlParams["period"] = *params.Period
 	}
 
 	var result []IncomeStatementAsReportedResponse

@@ -1,77 +1,38 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// EarningsSurprisesBulkParams represents the parameters for the Earnings Surprises Bulk API
-type EarningsSurprisesBulkParams struct {
-	Year string `json:"year"` // Required: year (e.g., "2024")
+// BulkEarningsSurprisesParams represents the parameters for the Bulk Earnings Surprises API
+type BulkEarningsSurprisesParams struct {
+	Date string `json:"date"` // Required: date (e.g., "2024-10-22")
 }
 
-// EarningsSurprisesBulkResponse represents the response from the Earnings Surprises Bulk API
-type EarningsSurprisesBulkResponse struct {
-	Symbol       string `json:"symbol"`
-	Date         string `json:"date"`
-	EPSActual    string `json:"epsActual"`
-	EPSEstimated string `json:"epsEstimated"`
-	LastUpdated  string `json:"lastUpdated"`
+// BulkEarningsSurprisesResponse represents the response from the Bulk Earnings Surprises API
+type BulkEarningsSurprisesResponse struct {
+	Symbol              string    `json:"symbol"`
+	Date                time.Time `json:"date"`
+	EstimatedEPS        float64   `json:"estimatedEPS"`
+	ActualEPS           float64   `json:"actualEPS"`
+	LastUpdated         time.Time `json:"lastUpdated"`
+	EPSSurprise         float64   `json:"epsSurprise"`
+	EstimatedRevenue    float64   `json:"estimatedRevenue"`
+	ActualRevenue       float64   `json:"actualRevenue"`
+	RevenueSurprise     float64   `json:"revenueSurprise"`
 }
 
-// GetEarningsSurprisesBulk retrieves bulk data on annual earnings surprises
-func (c *Client) GetEarningsSurprisesBulk(params EarningsSurprisesBulkParams) ([]EarningsSurprisesBulkResponse, error) {
-	// Validate required parameters
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
+// BulkEarningsSurprises retrieves earnings surprise data for multiple stocks
+func (c *Client) BulkEarningsSurprises(params BulkEarningsSurprisesParams) ([]BulkEarningsSurprisesResponse, error) {
+	urlParams := map[string]string{
+		"date": params.Date,
 	}
 
-	// Build the URL
-	baseURL := c.BaseURL + "/earnings-surprises-bulk"
-	u, err := url.Parse(baseURL)
+	var result []BulkEarningsSurprisesResponse
+	err := c.doRequest(c.BaseURL+"/bulk-earnings-surprises", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []EarningsSurprisesBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk earnings surprises: %w", err)
 	}
 
 	return result, nil

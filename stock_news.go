@@ -3,18 +3,19 @@ package go_fmp
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
-// StockNewsResponse represents the response from the stock news API
+// StockNewsResponse represents the response from the Stock News API
 type StockNewsResponse struct {
-	Symbol        string `json:"symbol"`
-	PublishedDate string `json:"publishedDate"`
-	Publisher     string `json:"publisher"`
-	Title         string `json:"title"`
-	Image         string `json:"image"`
-	Site          string `json:"site"`
-	Text          string `json:"text"`
-	URL           string `json:"url"`
+	Symbol        string    `json:"symbol"`
+	PublishedDate time.Time `json:"publishedDate"`
+	Publisher     string    `json:"publisher"`
+	Title         string    `json:"title"`
+	Image         string    `json:"image"`
+	Site          string    `json:"site"`
+	Text          string    `json:"text"`
+	URL           string    `json:"url"`
 }
 
 // GetStockNews retrieves the latest stock market news

@@ -2,26 +2,24 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// ESGDisclosuresParams represents the parameters for the ESG Investment Search API
+// ESGDisclosuresParams represents the parameters for the ESG Disclosures API
 type ESGDisclosuresParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 }
 
-// ESGDisclosuresResponse represents the response from the ESG Investment Search API
+// ESGDisclosuresResponse represents the response from the ESG Disclosures API
 type ESGDisclosuresResponse struct {
-	Date               string  `json:"date"`
-	AcceptedDate       string  `json:"acceptedDate"`
+	Date               time.Time  `json:"date"`
+	AcceptedDate       time.Time  `json:"acceptedDate"`
 	Symbol             string  `json:"symbol"`
 	CIK                string  `json:"cik"`
 	CompanyName        string  `json:"companyName"`
 	FormType           string  `json:"formType"`
-	EnvironmentalScore float64 `json:"environmentalScore"`
-	SocialScore        float64 `json:"socialScore"`
-	GovernanceScore    float64 `json:"governanceScore"`
-	ESGScore           float64 `json:"ESGScore"`
-	URL                string  `json:"url"`
+	Link               string  `json:"link"`
+	FinalLink          string  `json:"finalLink"`
 }
 
 // ESGDisclosures retrieves ESG disclosures for companies and funds

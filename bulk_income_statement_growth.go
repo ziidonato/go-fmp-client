@@ -1,111 +1,61 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// IncomeStatementGrowthBulkParams represents the parameters for the Bulk Income Statement Growth API
-type IncomeStatementGrowthBulkParams struct {
-	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+// BulkIncomeStatementGrowthParams represents the parameters for the Bulk Income Statement Growth API
+type BulkIncomeStatementGrowthParams struct {
+	Year   int    `json:"year"`   // Required: year (e.g., 2023)
+	Period string `json:"period"` // Required: period ("annual" or "quarterly")
 }
 
-// IncomeStatementGrowthBulkResponse represents the response from the Bulk Income Statement Growth API
-type IncomeStatementGrowthBulkResponse struct {
-	Symbol                                    string `json:"symbol"`
-	Date                                      string `json:"date"`
-	FiscalYear                                string `json:"fiscalYear"`
-	Period                                    string `json:"period"`
-	ReportedCurrency                          string `json:"reportedCurrency"`
-	GrowthRevenue                             string `json:"growthRevenue"`
-	GrowthCostOfRevenue                       string `json:"growthCostOfRevenue"`
-	GrowthGrossProfit                         string `json:"growthGrossProfit"`
-	GrowthGrossProfitRatio                    string `json:"growthGrossProfitRatio"`
-	GrowthResearchAndDevelopmentExpenses      string `json:"growthResearchAndDevelopmentExpenses"`
-	GrowthGeneralAndAdministrativeExpenses    string `json:"growthGeneralAndAdministrativeExpenses"`
-	GrowthSellingAndMarketingExpenses         string `json:"growthSellingAndMarketingExpenses"`
-	GrowthOtherExpenses                       string `json:"growthOtherExpenses"`
-	GrowthOperatingExpenses                   string `json:"growthOperatingExpenses"`
-	GrowthCostAndExpenses                     string `json:"growthCostAndExpenses"`
-	GrowthInterestIncome                      string `json:"growthInterestIncome"`
-	GrowthInterestExpense                     string `json:"growthInterestExpense"`
-	GrowthDepreciationAndAmortization         string `json:"growthDepreciationAndAmortization"`
-	GrowthEBITDA                              string `json:"growthEBITDA"`
-	GrowthOperatingIncome                     string `json:"growthOperatingIncome"`
-	GrowthIncomeBeforeTax                     string `json:"growthIncomeBeforeTax"`
-	GrowthIncomeTaxExpense                    string `json:"growthIncomeTaxExpense"`
-	GrowthNetIncome                           string `json:"growthNetIncome"`
-	GrowthEPS                                 string `json:"growthEPS"`
-	GrowthEPSDiluted                          string `json:"growthEPSDiluted"`
-	GrowthWeightedAverageShsOut               string `json:"growthWeightedAverageShsOut"`
-	GrowthWeightedAverageShsOutDil            string `json:"growthWeightedAverageShsOutDil"`
-	GrowthEBIT                                string `json:"growthEBIT"`
-	GrowthNonOperatingIncomeExcludingInterest string `json:"growthNonOperatingIncomeExcludingInterest"`
-	GrowthNetInterestIncome                   string `json:"growthNetInterestIncome"`
-	GrowthTotalOtherIncomeExpensesNet         string `json:"growthTotalOtherIncomeExpensesNet"`
-	GrowthNetIncomeFromContinuingOperations   string `json:"growthNetIncomeFromContinuingOperations"`
-	GrowthOtherAdjustmentsToNetIncome         string `json:"growthOtherAdjustmentsToNetIncome"`
-	GrowthNetIncomeDeductions                 string `json:"growthNetIncomeDeductions"`
+// BulkIncomeStatementGrowthResponse represents the response from the Bulk Income Statement Growth API
+type BulkIncomeStatementGrowthResponse struct {
+	Symbol                                  string    `json:"symbol"`
+	Date                                    time.Time `json:"date"`
+	CalendarYear                            string    `json:"calendarYear"`
+	Period                                  string    `json:"period"`
+	GrowthRevenue                           float64   `json:"growthRevenue"`
+	GrowthCostOfRevenue                     float64   `json:"growthCostOfRevenue"`
+	GrowthGrossProfit                       float64   `json:"growthGrossProfit"`
+	GrowthGrossProfitRatio                  float64   `json:"growthGrossProfitRatio"`
+	GrowthResearchAndDevelopmentExpenses    float64   `json:"growthResearchAndDevelopmentExpenses"`
+	GrowthGeneralAndAdministrativeExpenses  float64   `json:"growthGeneralAndAdministrativeExpenses"`
+	GrowthSellingAndMarketingExpenses       float64   `json:"growthSellingAndMarketingExpenses"`
+	GrowthOtherExpenses                     float64   `json:"growthOtherExpenses"`
+	GrowthOperatingExpenses                 float64   `json:"growthOperatingExpenses"`
+	GrowthCostAndExpenses                   float64   `json:"growthCostAndExpenses"`
+	GrowthInterestExpense                   float64   `json:"growthInterestExpense"`
+	GrowthDepreciationAndAmortization       float64   `json:"growthDepreciationAndAmortization"`
+	GrowthEBITDA                            float64   `json:"growthEBITDA"`
+	GrowthEBITDARatio                       float64   `json:"growthEBITDARatio"`
+	GrowthOperatingIncome                   float64   `json:"growthOperatingIncome"`
+	GrowthOperatingIncomeRatio              float64   `json:"growthOperatingIncomeRatio"`
+	GrowthTotalOtherIncomeExpensesNet       float64   `json:"growthTotalOtherIncomeExpensesNet"`
+	GrowthIncomeBeforeTax                   float64   `json:"growthIncomeBeforeTax"`
+	GrowthIncomeBeforeTaxRatio              float64   `json:"growthIncomeBeforeTaxRatio"`
+	GrowthIncomeTaxExpense                  float64   `json:"growthIncomeTaxExpense"`
+	GrowthNetIncome                         float64   `json:"growthNetIncome"`
+	GrowthNetIncomeRatio                    float64   `json:"growthNetIncomeRatio"`
+	GrowthEPS                               float64   `json:"growthEPS"`
+	GrowthEPSDiluted                        float64   `json:"growthEPSDiluted"`
+	GrowthWeightedAverageShsOut             float64   `json:"growthWeightedAverageShsOut"`
+	GrowthWeightedAverageShsOutDil          float64   `json:"growthWeightedAverageShsOutDil"`
 }
 
-// GetIncomeStatementGrowthBulk retrieves growth data for income statements across multiple companies
-func (c *Client) GetIncomeStatementGrowthBulk(params IncomeStatementGrowthBulkParams) ([]IncomeStatementGrowthBulkResponse, error) {
-	// Validate required parameters
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
-	}
-	if params.Period == "" {
-		return nil, fmt.Errorf("period parameter is required")
+// BulkIncomeStatementGrowth retrieves income statement growth data for multiple companies
+func (c *Client) BulkIncomeStatementGrowth(params BulkIncomeStatementGrowthParams) ([]BulkIncomeStatementGrowthResponse, error) {
+	urlParams := map[string]string{
+		"year":   fmt.Sprintf("%d", params.Year),
+		"period": params.Period,
 	}
 
-	// Build the URL
-	baseURL := c.BaseURL + "/income-statement-growth-bulk"
-	u, err := url.Parse(baseURL)
+	var result []BulkIncomeStatementGrowthResponse
+	err := c.doRequest(c.BaseURL+"/bulk-income-statement-growth", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []IncomeStatementGrowthBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk income statement growth: %w", err)
 	}
 
 	return result, nil

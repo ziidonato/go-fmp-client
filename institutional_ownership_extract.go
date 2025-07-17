@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // InstitutionalOwnershipExtractParams represents the parameters for the Institutional Ownership Extract API
@@ -13,20 +14,22 @@ type InstitutionalOwnershipExtractParams struct {
 
 // InstitutionalOwnershipExtractResponse represents the response from the Institutional Ownership Extract API
 type InstitutionalOwnershipExtractResponse struct {
-	Date          string `json:"date"`
-	FilingDate    string `json:"filingDate"`
-	AcceptedDate  string `json:"acceptedDate"`
-	CIK           string `json:"cik"`
-	SecurityCusip string `json:"securityCusip"`
-	Symbol        string `json:"symbol"`
-	NameOfIssuer  string `json:"nameOfIssuer"`
-	Shares        int64  `json:"shares"`
-	TitleOfClass  string `json:"titleOfClass"`
-	SharesType    string `json:"sharesType"`
-	PutCallShare  string `json:"putCallShare"`
-	Value         int64  `json:"value"`
-	Link          string `json:"link"`
-	FinalLink     string `json:"finalLink"`
+	CIK           string    `json:"cik"`
+	Date          time.Time `json:"date"`
+	FilingDate    time.Time `json:"filingDate"`
+	AcceptedDate  time.Time `json:"acceptedDate"`
+	InvestorName  string    `json:"investorName"`
+	Symbol        string    `json:"symbol"`
+	SecurityName  string    `json:"securityName"`
+	TypeOfSecurity string   `json:"typeOfSecurity"`
+	SecurityCusip string    `json:"securityCusip"`
+	SharesType    SharesType `json:"sharesType"`
+	PutCallShare  string    `json:"putCallShare"`
+	InvestmentDiscretion string `json:"investmentDiscretion"`
+	OtherManager  string    `json:"otherManager"`
+	Sole          int64     `json:"sole"`
+	Shared        int64     `json:"shared"`
+	None          int64     `json:"none"`
 }
 
 // InstitutionalOwnershipExtract retrieves detailed data from SEC filings for institutional ownership

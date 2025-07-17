@@ -2,32 +2,31 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// CompanyProfileCIKParams represents the parameters for the Company Profile by CIK API
+// CompanyProfileCIKParams represents the parameters for the Company Profile CIK API
 type CompanyProfileCIKParams struct {
-	CIK string `json:"cik"` // Required: Central Index Key (e.g., "320193")
+	CIK string `json:"cik"` // Required: Company CIK number (e.g., "0000320193")
 }
 
-// CompanyProfileCIKResponse represents the response from the Company Profile by CIK API
+// CompanyProfileCIKResponse represents the response from the Company Profile CIK API
 type CompanyProfileCIKResponse struct {
 	Symbol            string  `json:"symbol"`
 	Price             float64 `json:"price"`
-	MarketCap         int64   `json:"marketCap"`
 	Beta              float64 `json:"beta"`
-	LastDividend      float64 `json:"lastDividend"`
+	VolAvg            int64   `json:"volAvg"`
+	MarketCap         int64   `json:"mktCap"`
+	LastDiv           float64 `json:"lastDiv"`
 	Range             string  `json:"range"`
-	Change            float64 `json:"change"`
-	ChangePercentage  float64 `json:"changePercentage"`
-	Volume            int64   `json:"volume"`
-	AverageVolume     int64   `json:"averageVolume"`
+	Changes           float64 `json:"changes"`
 	CompanyName       string  `json:"companyName"`
 	Currency          string  `json:"currency"`
 	CIK               string  `json:"cik"`
 	ISIN              string  `json:"isin"`
 	CUSIP             string  `json:"cusip"`
-	ExchangeFullName  string  `json:"exchangeFullName"`
-	Exchange          string  `json:"exchange"`
+	Exchange          Exchange  `json:"exchange"`
+	ExchangeShortName string  `json:"exchangeShortName"`
 	Industry          string  `json:"industry"`
 	Website           string  `json:"website"`
 	Description       string  `json:"description"`
@@ -40,12 +39,14 @@ type CompanyProfileCIKResponse struct {
 	City              string  `json:"city"`
 	State             string  `json:"state"`
 	Zip               string  `json:"zip"`
+	DCFDiff           float64 `json:"dcfDiff"`
+	DCF               float64 `json:"dcf"`
 	Image             string  `json:"image"`
-	IPODate           string  `json:"ipoDate"`
+	IPODate           time.Time  `json:"ipoDate"`
 	DefaultImage      bool    `json:"defaultImage"`
-	IsETF             bool    `json:"isEtf"`
+	IsEtf             bool    `json:"isEtf"`
 	IsActivelyTrading bool    `json:"isActivelyTrading"`
-	IsADR             bool    `json:"isAdr"`
+	IsAdr             bool    `json:"isAdr"`
 	IsFund            bool    `json:"isFund"`
 }
 

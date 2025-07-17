@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// IndustryPESnapshotResponse represents the response from the industry PE snapshot API
+// IndustryPESnapshotResponse represents the response from the Industry PE Snapshot API
 type IndustryPESnapshotResponse struct {
 	Date     string  `json:"date"`
 	Industry string  `json:"industry"`
@@ -12,24 +12,22 @@ type IndustryPESnapshotResponse struct {
 	PE       float64 `json:"pe"`
 }
 
-// GetIndustryPESnapshot retrieves price-to-earnings (P/E) ratios for different industries
+// GetIndustryPESnapshot retrieves the price-to-earnings (P/E) ratios for various industries
 func (c *Client) GetIndustryPESnapshot(date, exchange, industry string) ([]IndustryPESnapshotResponse, error) {
 	if date == "" {
-		return nil, fmt.Errorf("date is required")
+		return nil, fmt.Errorf("date parameter is required")
 	}
 
-	params := map[string]string{
-		"date": date,
-	}
+	url := fmt.Sprintf("%s/industries-pe/%s", c.BaseURL, date)
+	params := map[string]string{}
 
 	if exchange != "" {
 		params["exchange"] = exchange
 	}
+
 	if industry != "" {
 		params["industry"] = industry
 	}
-
-	url := c.BaseURL + "/industry-pe-snapshot"
 
 	var result []IndustryPESnapshotResponse
 	err := c.doRequest(url, params, &result)

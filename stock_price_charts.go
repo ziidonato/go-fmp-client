@@ -2,28 +2,35 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// DailyPriceChartParams represents the parameters for daily stock price chart APIs
-type DailyPriceChartParams struct {
+// StockPriceChartsParams represents the parameters for the Stock Price Charts API
+type StockPriceChartsParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
-	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
+	From   *string `json:"from"`   // Optional: Start date (YYYY-MM-DD format)
+	To     *string `json:"to"`     // Optional: End date (YYYY-MM-DD format)
 }
 
-// DailyPriceChartResponse represents the response from daily stock price chart APIs
-type DailyPriceChartResponse struct {
-	Symbol   string  `json:"symbol"`
-	Date     string  `json:"date"`
-	AdjOpen  float64 `json:"adjOpen"`
-	AdjHigh  float64 `json:"adjHigh"`
-	AdjLow   float64 `json:"adjLow"`
+// StockPriceChartsResponse represents the response from the Stock Price Charts API
+type StockPriceChartsResponse struct {
+	Date     time.Time  `json:"date"`
+	Open     float64 `json:"open"`
+	Low      float64 `json:"low"`
+	High     float64 `json:"high"`
+	Close    float64 `json:"close"`
 	AdjClose float64 `json:"adjClose"`
 	Volume   int64   `json:"volume"`
+	UnadjustedVolume int64 `json:"unadjustedVolume"`
+	Change   float64 `json:"change"`
+	ChangePercent float64 `json:"changePercent"`
+	Vwap     float64 `json:"vwap"`
+	Label    string  `json:"label"`
+	ChangeOverTime float64 `json:"changeOverTime"`
 }
 
 // UnadjustedStockPriceChart retrieves stock price and volume data without adjustments for stock splits
-func (c *Client) UnadjustedStockPriceChart(params DailyPriceChartParams) ([]DailyPriceChartResponse, error) {
+func (c *Client) UnadjustedStockPriceChart(params StockPriceChartsParams) ([]StockPriceChartsResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
@@ -41,7 +48,7 @@ func (c *Client) UnadjustedStockPriceChart(params DailyPriceChartParams) ([]Dail
 	}
 
 	url := c.BaseURL + "/historical-price-eod/non-split-adjusted"
-	var result []DailyPriceChartResponse
+	var result []StockPriceChartsResponse
 	if err := c.doRequest(url, urlParams, &result); err != nil {
 		return nil, err
 	}
@@ -49,7 +56,7 @@ func (c *Client) UnadjustedStockPriceChart(params DailyPriceChartParams) ([]Dail
 }
 
 // DividendAdjustedPriceChart retrieves stock price and volume data with dividend adjustments
-func (c *Client) DividendAdjustedPriceChart(params DailyPriceChartParams) ([]DailyPriceChartResponse, error) {
+func (c *Client) DividendAdjustedPriceChart(params StockPriceChartsParams) ([]StockPriceChartsResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
@@ -66,7 +73,7 @@ func (c *Client) DividendAdjustedPriceChart(params DailyPriceChartParams) ([]Dai
 		urlParams["to"] = *params.To
 	}
 
-	var result []DailyPriceChartResponse
+	var result []StockPriceChartsResponse
 	err := c.doRequest(c.BaseURL+"/historical-price-eod/dividend-adjusted", urlParams, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)
