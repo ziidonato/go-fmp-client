@@ -9,12 +9,12 @@ import (
 type IndustryPerformanceSnapshotResponse struct {
 	Date time.Time `json:"date"`
 	Industry      string  `json:"industry"`
-	Exchange      string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
 }
 
 // IndustryPerformanceSnapshot retrieves detailed performance data by industry
-func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([]IndustryPerformanceSnapshotResponse, error) {
+func (c *Client) IndustryPerformanceSnapshot(date string, exchange Exchange, industry string) ([]IndustryPerformanceSnapshotResponse, error) {
 	if date == "" {
 		return nil, fmt.Errorf("date is required")
 	}
@@ -28,7 +28,7 @@ func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([
 	url := c.BaseURL + "/industry-performance-snapshot"
 	params := map[string]string{
 		"date":     date,
-		"exchange": exchange,
+		"exchange": string(exchange),
 		"industry": industry,
 	}
 	var result []IndustryPerformanceSnapshotResponse

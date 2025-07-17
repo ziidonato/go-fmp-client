@@ -17,8 +17,8 @@ type COTAnalysisResponse struct {
 	Symbol                       string  `json:"symbol"`
 	Date time.Time `json:"date"`
 	Name                         string  `json:"name"`
-	Sector                       string  `json:"sector"`
-	Exchange                     string  `json:"exchange"`
+	Sector Sector `json:"sector"`
+	Exchange Exchange `json:"exchange"`
 	CurrentLongMarketSituation   float64 `json:"currentLongMarketSituation"`
 	CurrentShortMarketSituation  float64 `json:"currentShortMarketSituation"`
 	MarketSituation MarketSituation `json:"marketSituation"`

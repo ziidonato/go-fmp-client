@@ -5,7 +5,7 @@ type ForexListResponse struct {
 	Symbol            string `json:"symbol"`
 	Name              string `json:"name"`
 	Currency Currency `json:"currency"`
-	StockExchange     string `json:"stockExchange"`
+	StockExchange Exchange `json:"stockExchange"`
 	ExchangeShortName string `json:"exchangeShortName"`
 }
 

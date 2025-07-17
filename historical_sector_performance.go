@@ -8,8 +8,8 @@ import (
 // HistoricalSectorPerformanceResponse represents the response from the historical market sector performance API
 type HistoricalSectorPerformanceResponse struct {
 	Date time.Time `json:"date"`
-	Sector        string  `json:"sector"`
-	Exchange      string  `json:"exchange"`
+	Sector Sector `json:"sector"`
+	Exchange Exchange `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
 }
 
@@ -20,7 +20,7 @@ func (c *Client) HistoricalSectorPerformance(sector, from, to, exchange string) 
 	}
 
 	params := map[string]string{
-		"sector": sector,
+		"sector": string(sector),
 	}
 
 	if from != "" {

@@ -4,8 +4,8 @@ package go_fmp
 type IndexListResponse struct {
 	Symbol   string `json:"symbol"`
 	Name     string `json:"name"`
-	Exchange string `json:"exchange"`
-	Currency string `json:"currency"`
+	Exchange Exchange `json:"exchange"`
+	Currency Currency `json:"currency"`
 }
 
 // GetIndexList retrieves a comprehensive list of stock market indexes across global exchanges

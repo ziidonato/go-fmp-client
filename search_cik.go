@@ -16,8 +16,8 @@ type SearchCIKResponse struct {
 	CompanyName      string `json:"companyName"`
 	CIK              string `json:"cik"`
 	ExchangeFullName string `json:"exchangeFullName"`
-	Exchange         string `json:"exchange"`
-	Currency         string `json:"currency"`
+	Exchange Exchange `json:"exchange"`
+	Currency Currency `json:"currency"`
 }
 
 // SearchCIK retrieves the Central Index Key (CIK) for publicly traded companies

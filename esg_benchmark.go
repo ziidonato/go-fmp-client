@@ -12,7 +12,7 @@ type ESGBenchmarkParams struct {
 // ESGBenchmarkResponse represents the response from the ESG Benchmark Comparison API
 type ESGBenchmarkResponse struct {
 	FiscalYear         int     `json:"fiscalYear"`
-	Sector             string  `json:"sector"`
+	Sector Sector `json:"sector"`
 	EnvironmentalScore float64 `json:"environmentalScore"`
 	SocialScore        float64 `json:"socialScore"`
 	GovernanceScore    float64 `json:"governanceScore"`

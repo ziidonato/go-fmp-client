@@ -9,7 +9,7 @@ import (
 type HistoricalIndustryPerformanceResponse struct {
 	Date time.Time `json:"date"`
 	Industry      string  `json:"industry"`
-	Exchange      string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
 }
 

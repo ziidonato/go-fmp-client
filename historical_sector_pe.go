@@ -8,8 +8,8 @@ import (
 // HistoricalSectorPEResponse represents the response from the historical sector PE API
 type HistoricalSectorPEResponse struct {
 	Date time.Time `json:"date"`
-	Sector   string  `json:"sector"`
-	Exchange string  `json:"exchange"`
+	Sector Sector `json:"sector"`
+	Exchange Exchange `json:"exchange"`
 	PE       float64 `json:"pe"`
 }
 
@@ -20,7 +20,7 @@ func (c *Client) GetHistoricalSectorPE(sector, from, to, exchange string) ([]His
 	}
 
 	params := map[string]string{
-		"sector": sector,
+		"sector": string(sector),
 	}
 
 	if from != "" {

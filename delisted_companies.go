@@ -15,7 +15,7 @@ type DelistedCompaniesParams struct {
 type DelistedCompaniesResponse struct {
 	Symbol       string `json:"symbol"`
 	CompanyName  string `json:"companyName"`
-	Exchange     string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	IPODate time.Time `json:"ipoDate"`
 	DelistedDate time.Time `json:"delistedDate"`
 }

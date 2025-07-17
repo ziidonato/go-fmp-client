@@ -9,7 +9,7 @@ import (
 type CompanyScreenerParams struct {
 	MarketCapMoreThan      *int64   `json:"marketCapMoreThan"`      // Optional: Minimum market cap
 	MarketCapLowerThan     *int64   `json:"marketCapLowerThan"`     // Optional: Maximum market cap
-	Sector                 *string  `json:"sector"`                 // Optional: Sector filter (e.g., "Technology")
+	Sector *Sector `json:"sector"`                 // Optional: Sector filter (e.g., "Technology")
 	Industry               *string  `json:"industry"`               // Optional: Industry filter (e.g., "Consumer Electronics")
 	BetaMoreThan           *float64 `json:"betaMoreThan"`           // Optional: Minimum beta
 	BetaLowerThan          *float64 `json:"betaLowerThan"`          // Optional: Maximum beta
@@ -19,7 +19,7 @@ type CompanyScreenerParams struct {
 	DividendLowerThan      *float64 `json:"dividendLowerThan"`      // Optional: Maximum dividend
 	VolumeMoreThan         *int64   `json:"volumeMoreThan"`         // Optional: Minimum volume
 	VolumeLowerThan        *int64   `json:"volumeLowerThan"`        // Optional: Maximum volume
-	Exchange               *string  `json:"exchange"`               // Optional: Exchange filter (e.g., "NASDAQ")
+	Exchange *Exchange `json:"exchange"`               // Optional: Exchange filter (e.g., "NASDAQ")
 	Country *Country `json:"country"`                // Optional: Country filter (e.g., "US")
 	IsETF                  *bool    `json:"isEtf"`                  // Optional: ETF filter
 	IsFund                 *bool    `json:"isFund"`                 // Optional: Fund filter
@@ -33,13 +33,13 @@ type CompanyScreenerResponse struct {
 	Symbol             string  `json:"symbol"`
 	CompanyName        string  `json:"companyName"`
 	MarketCap          int64   `json:"marketCap"`
-	Sector             string  `json:"sector"`
+	Sector Sector `json:"sector"`
 	Industry           string  `json:"industry"`
 	Beta               float64 `json:"beta"`
 	Price              float64 `json:"price"`
 	LastAnnualDividend float64 `json:"lastAnnualDividend"`
 	Volume             int64   `json:"volume"`
-	Exchange           string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	ExchangeShortName  string  `json:"exchangeShortName"`
 	Country Country `json:"country"`
 	IsETF              bool    `json:"isEtf"`

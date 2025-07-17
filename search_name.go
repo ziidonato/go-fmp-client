@@ -8,16 +8,16 @@ import (
 type SearchNameParams struct {
 	Query    string  `json:"query"`    // Required: Search query (e.g., "AA")
 	Limit    *int    `json:"limit"`    // Optional: Number of results to return (default: 50)
-	Exchange *string `json:"exchange"` // Optional: Exchange filter (e.g., "NASDAQ")
+	Exchange *Exchange `json:"exchange"` // Optional: Exchange filter (e.g., "NASDAQ")
 }
 
 // SearchNameResponse represents the response from the Company Name Search API
 type SearchNameResponse struct {
 	Symbol           string `json:"symbol"`
 	Name             string `json:"name"`
-	Currency         string `json:"currency"`
+	Currency Currency `json:"currency"`
 	ExchangeFullName string `json:"exchangeFullName"`
-	Exchange         string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 }
 
 // SearchName searches for ticker symbols, company names, and exchange details for equity securities and ETFs

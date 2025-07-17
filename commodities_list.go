@@ -4,7 +4,7 @@ package go_fmp
 type CommoditiesListResponse struct {
 	Symbol     string  `json:"symbol"`
 	Name       string  `json:"name"`
-	Exchange   *string `json:"exchange"`
+	Exchange *Exchange `json:"exchange"`
 	TradeMonth string  `json:"tradeMonth"`
 	Currency Currency `json:"currency"`
 }

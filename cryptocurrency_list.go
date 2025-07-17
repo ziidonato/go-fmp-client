@@ -5,7 +5,7 @@ type CryptocurrencyListResponse struct {
 	Symbol       string  `json:"symbol"`
 	Name         string  `json:"name"`
 	Currency Currency `json:"currency"`
-	Exchange     *string `json:"exchange"`
+	Exchange *Exchange `json:"exchange"`
 	ExchangeName *string `json:"exchangeName"`
 }
 

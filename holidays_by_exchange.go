@@ -8,7 +8,7 @@ import (
 type HolidaysByExchangeResponse struct {
 	// Note: The exact structure will depend on the actual API response
 	// This is a placeholder structure that should be updated based on actual response
-	Exchange string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	// Add other fields as needed based on actual API response
 }
 
@@ -21,7 +21,7 @@ func (c *Client) HolidaysByExchange(exchange string) ([]HolidaysByExchangeRespon
 	url := c.BaseURL + "/holidays-by-exchange"
 
 	var result []HolidaysByExchangeResponse
-	if err := c.doRequest(url, map[string]string{"exchange": exchange}, &result); err != nil {
+	if err := c.doRequest(url, map[string]string{"exchange": string(exchange)}, &result); err != nil {
 		return nil, err
 	}
 	return result, nil

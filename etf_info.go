@@ -31,7 +31,7 @@ type ETFInfoResponse struct {
 	AvgVolume             int64            `json:"avgVolume"`
 	InceptionDate time.Time `json:"inceptionDate"`
 	NAV                   float64          `json:"nav"`
-	NAVCurrency           string           `json:"navCurrency"`
+	NAVCurrency Currency `json:"navCurrency"`
 	HoldingsCount         int              `json:"holdingsCount"`
 	UpdatedAt time.Time `json:"updatedAt"`
 	SectorsList           []SectorExposure `json:"sectorsList"`

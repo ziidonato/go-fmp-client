@@ -21,7 +21,7 @@ type SearchExchangeVariantsResponse struct {
 	Range             string  `json:"range"`
 	Changes           float64 `json:"changes"`
 	CompanyName       string  `json:"companyName"`
-	Currency          string  `json:"currency"`
+	Currency Currency `json:"currency"`
 	CIK               string  `json:"cik"`
 	ISIN              string  `json:"isin"`
 	CUSIP             string  `json:"cusip"`

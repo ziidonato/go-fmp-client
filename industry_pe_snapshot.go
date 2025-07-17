@@ -9,12 +9,12 @@ import (
 type IndustryPESnapshotResponse struct {
 	Date time.Time `json:"date"`
 	Industry string  `json:"industry"`
-	Exchange string  `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 	PE       float64 `json:"pe"`
 }
 
 // GetIndustryPESnapshot retrieves price-to-earnings (P/E) ratios for different industries
-func (c *Client) GetIndustryPESnapshot(date, exchange, industry string) ([]IndustryPESnapshotResponse, error) {
+func (c *Client) GetIndustryPESnapshot(date string, exchange Exchange, industry string) ([]IndustryPESnapshotResponse, error) {
 	if date == "" {
 		return nil, fmt.Errorf("date is required")
 	}

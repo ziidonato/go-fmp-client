@@ -2,7 +2,7 @@ package go_fmp
 
 // MarketRiskPremiumResponse represents the response from the Market Risk Premium API
 type MarketRiskPremiumResponse struct {
-	Country            string  `json:"country"`
+	Country Country `json:"country"`
 	CountryRiskPremium float64 `json:"countryRiskPremium"`
 }
 

@@ -8,7 +8,7 @@ import (
 type NasdaqConstituentResponse struct {
 	Symbol         string `json:"symbol"`
 	Name           string `json:"name"`
-	Sector         string `json:"sector"`
+	Sector Sector `json:"sector"`
 	SubSector      string `json:"subSector"`
 	HeadQuarter    string `json:"headQuarter"`
 	DateFirstAdded time.Time `json:"dateFirstAdded"`

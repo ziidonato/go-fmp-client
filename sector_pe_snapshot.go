@@ -8,13 +8,13 @@ import (
 // SectorPESnapshotResponse represents the response from the sector PE snapshot API
 type SectorPESnapshotResponse struct {
 	Date time.Time `json:"date"`
-	Sector   string  `json:"sector"`
-	Exchange string  `json:"exchange"`
+	Sector Sector `json:"sector"`
+	Exchange Exchange `json:"exchange"`
 	PE       float64 `json:"pe"`
 }
 
 // GetSectorPESnapshot retrieves the price-to-earnings (P/E) ratios for various sectors
-func (c *Client) GetSectorPESnapshot(date, exchange, sector string) ([]SectorPESnapshotResponse, error) {
+func (c *Client) GetSectorPESnapshot(date string, exchange Exchange, sector Sector) ([]SectorPESnapshotResponse, error) {
 	if date == "" {
 		return nil, fmt.Errorf("date is required")
 	}

@@ -14,7 +14,7 @@ type CompanyNotesResponse struct {
 	CIK      string `json:"cik"`
 	Symbol   string `json:"symbol"`
 	Title    string `json:"title"`
-	Exchange string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 }
 
 // CompanyNotes retrieves detailed information about company-issued notes

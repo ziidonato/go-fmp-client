@@ -12,7 +12,7 @@ type ETFSectorWeightingsParams struct {
 // ETFSectorWeightingsResponse represents the response from the ETF Sector Weighting API
 type ETFSectorWeightingsResponse struct {
 	Symbol           string  `json:"symbol"`
-	Sector           string  `json:"sector"`
+	Sector Sector `json:"sector"`
 	WeightPercentage float64 `json:"weightPercentage"`
 }
 

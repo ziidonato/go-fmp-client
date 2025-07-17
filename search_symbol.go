@@ -8,16 +8,16 @@ import (
 type SearchSymbolParams struct {
 	Query    string  `json:"query"`    // Required: Search query (e.g., "AAPL")
 	Limit    *int    `json:"limit"`    // Optional: Number of results to return (default: 50)
-	Exchange *string `json:"exchange"` // Optional: Exchange filter (e.g., "NASDAQ")
+	Exchange *Exchange `json:"exchange"` // Optional: Exchange filter (e.g., "NASDAQ")
 }
 
 // SearchSymbolResponse represents the response from the Stock Symbol Search API
 type SearchSymbolResponse struct {
 	Symbol           string `json:"symbol"`
 	Name             string `json:"name"`
-	Currency         string `json:"currency"`
+	Currency Currency `json:"currency"`
 	ExchangeFullName string `json:"exchangeFullName"`
-	Exchange         string `json:"exchange"`
+	Exchange Exchange `json:"exchange"`
 }
 
 // SearchSymbol searches for stock symbols by query across multiple global markets

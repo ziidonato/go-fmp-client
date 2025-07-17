@@ -8,13 +8,13 @@ import (
 // SectorPerformanceSnapshotResponse represents the response from the market sector performance snapshot API
 type SectorPerformanceSnapshotResponse struct {
 	Date time.Time `json:"date"`
-	Sector        string  `json:"sector"`
-	Exchange      string  `json:"exchange"`
+	Sector Sector `json:"sector"`
+	Exchange Exchange `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
 }
 
 // GetSectorPerformanceSnapshot retrieves a snapshot of sector performance
-func (c *Client) GetSectorPerformanceSnapshot(date, exchange, sector string) ([]SectorPerformanceSnapshotResponse, error) {
+func (c *Client) GetSectorPerformanceSnapshot(date string, exchange Exchange, sector Sector) ([]SectorPerformanceSnapshotResponse, error) {
 	if date == "" {
 		return nil, fmt.Errorf("date is required")
 	}
