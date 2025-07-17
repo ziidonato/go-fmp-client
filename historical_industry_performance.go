@@ -1,12 +1,13 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // HistoricalIndustryPerformanceResponse represents the response from the historical industry performance API
 type HistoricalIndustryPerformanceResponse struct {
-	Date          string  `json:"date"`
+	Date time.Time `json:"date"`
 	Industry      string  `json:"industry"`
 	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`

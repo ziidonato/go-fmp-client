@@ -1,13 +1,17 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 // HistoricalIndexResponse represents the response from the historical index constituent change APIs
 // (S&P 500, Nasdaq, Dow Jones)
 type HistoricalIndexResponse struct {
-	DateAdded       string `json:"dateAdded"`
+	DateAdded time.Time `json:"dateAdded"`
 	AddedSecurity   string `json:"addedSecurity"`
 	RemovedTicker   string `json:"removedTicker"`
 	RemovedSecurity string `json:"removedSecurity"`
-	Date            string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol          string `json:"symbol"`
 	Reason          string `json:"reason"`
 }

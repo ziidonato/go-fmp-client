@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,19 +11,19 @@ import (
 // IncomeStatementBulkParams represents the parameters for the Bulk Income Statement API
 type IncomeStatementBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+	Period Period `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
 }
 
 // IncomeStatementBulkResponse represents the response from the Bulk Income Statement API
 type IncomeStatementBulkResponse struct {
-	Date                                    string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                  string `json:"symbol"`
 	ReportedCurrency                        string `json:"reportedCurrency"`
 	CIK                                     string `json:"cik"`
 	FilingDate                              string `json:"filingDate"`
 	AcceptedDate                            string `json:"acceptedDate"`
 	FiscalYear                              string `json:"fiscalYear"`
-	Period                                  string `json:"period"`
+	Period Period `json:"period"`
 	Revenue                                 string `json:"revenue"`
 	CostOfRevenue                           string `json:"costOfRevenue"`
 	GrossProfit                             string `json:"grossProfit"`

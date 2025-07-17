@@ -17,7 +17,7 @@ type GradesConsensusResponse struct {
 	Hold       int    `json:"hold"`
 	Sell       int    `json:"sell"`
 	StrongSell int    `json:"strongSell"`
-	Consensus  string `json:"consensus"`
+	Consensus GradeConsensus `json:"consensus"`
 }
 
 // GradesConsensus retrieves an overall view of analyst ratings for individual stock symbols

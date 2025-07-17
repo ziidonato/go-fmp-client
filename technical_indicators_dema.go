@@ -15,7 +15,7 @@ type TechnicalIndicatorDEMAResponse struct {
 }
 
 // GetTechnicalIndicatorDEMA retrieves double exponential moving average technical indicator
-func (c *Client) GetTechnicalIndicatorDEMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorDEMAResponse, error) {
+func (c *Client) GetTechnicalIndicatorDEMA(symbol string, periodLength int, timeframe Timeframe) ([]TechnicalIndicatorDEMAResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -8,13 +9,13 @@ import (
 type EnterpriseValuesParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
 }
 
 // EnterpriseValuesResponse represents the response from the Enterprise Values API
 type EnterpriseValuesResponse struct {
 	Symbol                      string  `json:"symbol"`
-	Date                        string  `json:"date"`
+	Date time.Time `json:"date"`
 	StockPrice                  float64 `json:"stockPrice"`
 	NumberOfShares              int64   `json:"numberOfShares"`
 	MarketCapitalization        int64   `json:"marketCapitalization"`

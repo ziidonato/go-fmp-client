@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // GradesParams represents the parameters for the Stock Grades API
@@ -11,12 +12,12 @@ type GradesParams struct {
 
 // GradesResponse represents the response from the Stock Grades API
 type GradesResponse struct {
-	Symbol         string `json:"symbol"`
-	Date           string `json:"date"`
-	GradingCompany string `json:"gradingCompany"`
-	PreviousGrade  string `json:"previousGrade"`
-	NewGrade       string `json:"newGrade"`
-	Action         string `json:"action"`
+	Symbol         string      `json:"symbol"`
+	Date           time.Time   `json:"date"`
+	GradingCompany string      `json:"gradingCompany"`
+	PreviousGrade  string      `json:"previousGrade"`
+	NewGrade       string      `json:"newGrade"`
+	Action         GradeAction `json:"action"`
 }
 
 // Grades retrieves the latest stock grades from top analysts and financial institutions

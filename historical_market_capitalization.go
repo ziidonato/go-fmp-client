@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -15,7 +16,7 @@ type HistoricalMarketCapitalizationParams struct {
 // HistoricalMarketCapitalizationResponse represents the response from the Historical Market Cap API
 type HistoricalMarketCapitalizationResponse struct {
 	Symbol    string `json:"symbol"`
-	Date      string `json:"date"`
+	Date time.Time `json:"date"`
 	MarketCap int64  `json:"marketCap"`
 }
 

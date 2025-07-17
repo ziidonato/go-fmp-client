@@ -2,7 +2,7 @@ package go_fmp
 
 // InsiderTradingTransactionTypeResponse represents the response from the insider trading transaction type API
 type InsiderTradingTransactionTypeResponse struct {
-	TransactionType string `json:"transactionType"`
+	TransactionType TransactionType `json:"transactionType"`
 }
 
 // InsiderTradingTransactionType retrieves all available transaction types for insider trading data

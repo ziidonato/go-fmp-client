@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -8,19 +9,19 @@ import (
 type CashFlowStatementAsReportedParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "annual,quarter"
 }
 
 // CashFlowStatementAsReportedResponse represents the response from the Cash Flow Statement As Reported API
 type CashFlowStatementAsReportedResponse struct {
-	Date                                   string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                 string `json:"symbol"`
-	ReportedCurrency                       string `json:"reportedCurrency"`
+	ReportedCurrency ReportedCurrency `json:"reportedCurrency"`
 	CIK                                    string `json:"cik"`
-	FilingDate                             string `json:"filingDate"`
-	AcceptedDate                           string `json:"acceptedDate"`
+	FilingDate time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	FiscalYear                             string `json:"fiscalYear"`
-	Period                                 string `json:"period"`
+	Period Period `json:"period"`
 	NetIncome                              int64  `json:"netIncome"`
 	DepreciationAndAmortization            int64  `json:"depreciationAndAmortization"`
 	DeferredIncomeTax                      int64  `json:"deferredIncomeTax"`

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -12,7 +13,7 @@ type InstitutionalOwnershipHolderPerformanceSummaryParams struct {
 
 // InstitutionalOwnershipHolderPerformanceSummaryResponse represents the response from the Institutional Ownership Holder Performance Summary API
 type InstitutionalOwnershipHolderPerformanceSummaryResponse struct {
-	Date                                               string  `json:"date"`
+	Date time.Time `json:"date"`
 	CIK                                                string  `json:"cik"`
 	InvestorName                                       string  `json:"investorName"`
 	PortfolioSize                                      int     `json:"portfolioSize"`

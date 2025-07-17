@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // ForexChart1MinParams represents the parameters for the 1-Minute Forex Chart API
@@ -17,12 +18,12 @@ type ForexChart1HourParams = ForexChart1MinParams
 
 // ForexChart1MinResponse represents the response from the 1-Minute Forex Chart API
 type ForexChart1MinResponse struct {
-	Date   string  `json:"date"`
-	Open   float64 `json:"open"`
-	Low    float64 `json:"low"`
-	High   float64 `json:"high"`
-	Close  float64 `json:"close"`
-	Volume int64   `json:"volume"`
+	Date   time.Time `json:"date"`
+	Open   float64   `json:"open"`
+	Low    float64   `json:"low"`
+	High   float64   `json:"high"`
+	Close  float64   `json:"close"`
+	Volume int64     `json:"volume"`
 }
 
 type ForexChart5MinResponse = ForexChart1MinResponse

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -17,7 +18,7 @@ type CryptocurrencyChart1HourParams = CryptocurrencyChart1MinParams
 
 // CryptocurrencyChart1MinResponse represents the response from the 1-Minute Cryptocurrency Chart API
 type CryptocurrencyChart1MinResponse struct {
-	Date   string  `json:"date"`
+	Date time.Time `json:"date"`
 	Open   float64 `json:"open"`
 	Low    float64 `json:"low"`
 	High   float64 `json:"high"`

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 // DCFBulkResponse represents the response from the DCF Bulk API
 type DCFBulkResponse struct {
 	Symbol     string `json:"symbol"`
-	Date       string `json:"date"`
+	Date time.Time `json:"date"`
 	DCF        string `json:"dcf"`
 	StockPrice string `json:"Stock Price"`
 }

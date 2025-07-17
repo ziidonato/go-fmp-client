@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,11 +15,11 @@ type HistoricalEmployeeCountParams struct {
 type HistoricalEmployeeCountResponse struct {
 	Symbol         string `json:"symbol"`
 	CIK            string `json:"cik"`
-	AcceptanceTime string `json:"acceptanceTime"`
+	AcceptanceTime time.Time `json:"acceptanceTime"`
 	PeriodOfReport string `json:"periodOfReport"`
 	CompanyName    string `json:"companyName"`
-	FormType       string `json:"formType"`
-	FilingDate     string `json:"filingDate"`
+	FormType FormType `json:"formType"`
+	FilingDate time.Time `json:"filingDate"`
 	EmployeeCount  int    `json:"employeeCount"`
 	Source         string `json:"source"`
 }

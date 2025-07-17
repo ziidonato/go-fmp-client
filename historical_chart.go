@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 	"strconv"
 )
@@ -15,7 +16,7 @@ type HistoricalChartParams struct {
 
 // HistoricalChartResponse represents the response from the Historical Chart APIs
 type HistoricalChartResponse struct {
-	Date   string  `json:"date"`
+	Date time.Time `json:"date"`
 	Open   float64 `json:"open"`
 	Low    float64 `json:"low"`
 	High   float64 `json:"high"`

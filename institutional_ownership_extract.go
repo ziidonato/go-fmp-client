@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -13,9 +14,9 @@ type InstitutionalOwnershipExtractParams struct {
 
 // InstitutionalOwnershipExtractResponse represents the response from the Institutional Ownership Extract API
 type InstitutionalOwnershipExtractResponse struct {
-	Date          string `json:"date"`
-	FilingDate    string `json:"filingDate"`
-	AcceptedDate  string `json:"acceptedDate"`
+	Date time.Time `json:"date"`
+	FilingDate time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	CIK           string `json:"cik"`
 	SecurityCusip string `json:"securityCusip"`
 	Symbol        string `json:"symbol"`

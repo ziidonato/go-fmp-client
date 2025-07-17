@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type DailyPriceChartParams struct {
 // DailyPriceChartResponse represents the response from daily stock price chart APIs
 type DailyPriceChartResponse struct {
 	Symbol   string  `json:"symbol"`
-	Date     string  `json:"date"`
+	Date time.Time `json:"date"`
 	AdjOpen  float64 `json:"adjOpen"`
 	AdjHigh  float64 `json:"adjHigh"`
 	AdjLow   float64 `json:"adjLow"`

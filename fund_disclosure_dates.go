@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -12,7 +13,7 @@ type FundDisclosureDatesParams struct {
 
 // FundDisclosureDatesResponse represents the response from the Fund & ETF Disclosures by Date API
 type FundDisclosureDatesResponse struct {
-	Date    string `json:"date"`
+	Date time.Time `json:"date"`
 	Year    int    `json:"year"`
 	Quarter int    `json:"quarter"`
 }

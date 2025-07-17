@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // InstitutionalOwnershipLatestParams represents the parameters for the Institutional Ownership Latest API
@@ -12,12 +13,12 @@ type InstitutionalOwnershipLatestParams struct {
 
 // InstitutionalOwnershipLatestResponse represents the response from the Institutional Ownership Latest API
 type InstitutionalOwnershipLatestResponse struct {
-	CIK          string `json:"cik"`
-	Name         string `json:"name"`
-	Date         string `json:"date"`
-	FilingDate   string `json:"filingDate"`
-	AcceptedDate string `json:"acceptedDate"`
-	FormType     string `json:"formType"`
+	CIK          string    `json:"cik"`
+	Name         string    `json:"name"`
+	Date         time.Time `json:"date"`
+	FilingDate   time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
+	FormType     FormType  `json:"formType"`
 	Link         string `json:"link"`
 	FinalLink    string `json:"finalLink"`
 }

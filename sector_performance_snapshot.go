@@ -1,12 +1,13 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // SectorPerformanceSnapshotResponse represents the response from the market sector performance snapshot API
 type SectorPerformanceSnapshotResponse struct {
-	Date          string  `json:"date"`
+	Date time.Time `json:"date"`
 	Sector        string  `json:"sector"`
 	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`

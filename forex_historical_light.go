@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type ForexHistoricalLightParams struct {
 // ForexHistoricalLightResponse represents the response from the Historical Forex Light Chart API
 type ForexHistoricalLightResponse struct {
 	Symbol string  `json:"symbol"`
-	Date   string  `json:"date"`
+	Date time.Time `json:"date"`
 	Price  float64 `json:"price"`
 	Volume int64   `json:"volume"`
 }

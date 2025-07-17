@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // MarketCapitalizationBatchParams represents the parameters for the Batch Market Cap API
@@ -11,9 +12,9 @@ type MarketCapitalizationBatchParams struct {
 
 // MarketCapitalizationBatchResponse represents the response from the Batch Market Cap API
 type MarketCapitalizationBatchResponse struct {
-	Symbol    string `json:"symbol"`
-	Date      string `json:"date"`
-	MarketCap int64  `json:"marketCap"`
+	Symbol    string    `json:"symbol"`
+	Date      time.Time `json:"date"`
+	MarketCap int64     `json:"marketCap"`
 }
 
 // MarketCapitalizationBatch retrieves market capitalization data for multiple companies in a single request

@@ -1,5 +1,9 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 import "fmt"
 
 // CashFlowStatementTTMParams represents the parameters for the Cash Flow Statement TTM API
@@ -10,14 +14,14 @@ type CashFlowStatementTTMParams struct {
 
 // CashFlowStatementTTMResponse represents the response from the Cash Flow Statement TTM API
 type CashFlowStatementTTMResponse struct {
-	Date                                   string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                 string `json:"symbol"`
-	ReportedCurrency                       string `json:"reportedCurrency"`
+	ReportedCurrency ReportedCurrency `json:"reportedCurrency"`
 	CIK                                    string `json:"cik"`
-	FilingDate                             string `json:"filingDate"`
-	AcceptedDate                           string `json:"acceptedDate"`
+	FilingDate time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	FiscalYear                             string `json:"fiscalYear"`
-	Period                                 string `json:"period"`
+	Period Period `json:"period"`
 	NetIncome                              int64  `json:"netIncome"`
 	DepreciationAndAmortization            int64  `json:"depreciationAndAmortization"`
 	DeferredIncomeTax                      int64  `json:"deferredIncomeTax"`

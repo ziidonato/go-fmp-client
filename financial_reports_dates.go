@@ -13,7 +13,7 @@ type FinancialReportsDatesParams struct {
 type FinancialReportsDatesResponse struct {
 	Symbol     string `json:"symbol"`
 	FiscalYear int    `json:"fiscalYear"`
-	Period     string `json:"period"`
+	Period Period `json:"period"`
 	LinkXlsx   string `json:"linkXlsx"`
 	LinkJson   string `json:"linkJson"`
 }

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type InstitutionalOwnershipIndustrySummaryParams struct {
 type InstitutionalOwnershipIndustrySummaryResponse struct {
 	IndustryTitle string `json:"industryTitle"`
 	IndustryValue int64  `json:"industryValue"`
-	Date          string `json:"date"`
+	Date time.Time `json:"date"`
 }
 
 // InstitutionalOwnershipIndustrySummary retrieves industry performance summary

@@ -1,9 +1,13 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 // EarningsTranscriptListResponse represents the response from the Earnings Transcript List API
 type EarningsTranscriptListResponse struct {
 	Symbol string `json:"symbol"`
-	Date   string `json:"date"`
+	Date time.Time `json:"date"`
 }
 
 // EarningsTranscriptList retrieves earnings transcripts for all transcripts from a time period

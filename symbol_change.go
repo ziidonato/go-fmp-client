@@ -1,5 +1,9 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 import "fmt"
 
 // SymbolChangeParams represents the parameters for the Symbol Changes List API
@@ -10,7 +14,7 @@ type SymbolChangeParams struct {
 
 // SymbolChangeResponse represents the response from the Symbol Changes List API
 type SymbolChangeResponse struct {
-	Date        string `json:"date"`
+	Date time.Time `json:"date"`
 	CompanyName string `json:"companyName"`
 	OldSymbol   string `json:"oldSymbol"`
 	NewSymbol   string `json:"newSymbol"`

@@ -15,7 +15,7 @@ type TechnicalIndicatorEMAResponse struct {
 }
 
 // GetTechnicalIndicatorEMA retrieves exponential moving average technical indicator
-func (c *Client) GetTechnicalIndicatorEMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorEMAResponse, error) {
+func (c *Client) GetTechnicalIndicatorEMA(symbol string, periodLength int, timeframe Timeframe) ([]TechnicalIndicatorEMAResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

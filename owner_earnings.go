@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -15,8 +16,8 @@ type OwnerEarningsResponse struct {
 	Symbol                 string  `json:"symbol"`
 	ReportedCurrency       string  `json:"reportedCurrency"`
 	FiscalYear             string  `json:"fiscalYear"`
-	Period                 string  `json:"period"`
-	Date                   string  `json:"date"`
+	Period Period `json:"period"`
+	Date time.Time `json:"date"`
 	AveragePPE             float64 `json:"averagePPE"`
 	MaintenanceCapex       int64   `json:"maintenanceCapex"`
 	OwnersEarnings         int64   `json:"ownersEarnings"`

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 	"strconv"
 )
@@ -8,7 +9,7 @@ import (
 // SearchStockNewsResponse represents the response from the search stock news API
 type SearchStockNewsResponse struct {
 	Symbol        string `json:"symbol"`
-	PublishedDate string `json:"publishedDate"`
+	PublishedDate time.Time `json:"publishedDate"`
 	Publisher     string `json:"publisher"`
 	Title         string `json:"title"`
 	Image         string `json:"image"`

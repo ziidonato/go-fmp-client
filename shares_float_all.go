@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -13,7 +14,7 @@ type SharesFloatAllParams struct {
 // SharesFloatAllResponse represents the response from the All Shares Float API
 type SharesFloatAllResponse struct {
 	Symbol            string  `json:"symbol"`
-	Date              string  `json:"date"`
+	Date time.Time `json:"date"`
 	FreeFloat         float64 `json:"freeFloat"`
 	FloatShares       int64   `json:"floatShares"`
 	OutstandingShares int64   `json:"outstandingShares"`

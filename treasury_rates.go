@@ -1,8 +1,12 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 // TreasuryRatesResponse represents the response from the Treasury Rates API
 type TreasuryRatesResponse struct {
-	Date      string  `json:"date"`
+	Date      time.Time `json:"date"`
 	BC_1MONTH float64 `json:"BC_1MONTH"`
 	BC_2MONTH float64 `json:"BC_2MONTH"`
 	BC_3MONTH float64 `json:"BC_3MONTH"`

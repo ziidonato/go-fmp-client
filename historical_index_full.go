@@ -1,13 +1,14 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // HistoricalIndexFullResponse represents the response from the historical index full chart API
 type HistoricalIndexFullResponse struct {
 	Symbol        string  `json:"symbol"`
-	Date          string  `json:"date"`
+	Date time.Time `json:"date"`
 	Open          float64 `json:"open"`
 	High          float64 `json:"high"`
 	Low           float64 `json:"low"`

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -13,7 +14,7 @@ type GradesHistoricalParams struct {
 // GradesHistoricalResponse represents the response from the Historical Stock Grades API
 type GradesHistoricalResponse struct {
 	Symbol                   string `json:"symbol"`
-	Date                     string `json:"date"`
+	Date time.Time `json:"date"`
 	AnalystRatingsBuy        int    `json:"analystRatingsBuy"`
 	AnalystRatingsHold       int    `json:"analystRatingsHold"`
 	AnalystRatingsSell       int    `json:"analystRatingsSell"`

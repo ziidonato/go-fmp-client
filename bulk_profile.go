@@ -44,7 +44,7 @@ type ProfileBulkResponse struct {
 	State             string `json:"state"`
 	Zip               string `json:"zip"`
 	Image             string `json:"image"`
-	IPODate           string `json:"ipoDate"`
+	IPODate time.Time `json:"ipoDate"`
 	DefaultImage      string `json:"defaultImage"`
 	IsETF             string `json:"isEtf"`
 	IsActivelyTrading string `json:"isActivelyTrading"`

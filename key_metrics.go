@@ -2,22 +2,23 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // KeyMetricsParams represents the parameters for the Key Metrics API
 type KeyMetricsParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
 }
 
 // KeyMetricsResponse represents the response from the Key Metrics API
 type KeyMetricsResponse struct {
-	Symbol                                 string  `json:"symbol"`
-	Date                                   string  `json:"date"`
-	FiscalYear                             string  `json:"fiscalYear"`
-	Period                                 string  `json:"period"`
-	ReportedCurrency                       string  `json:"reportedCurrency"`
+	Symbol                                 string           `json:"symbol"`
+	Date                                   time.Time        `json:"date"`
+	FiscalYear                             string           `json:"fiscalYear"`
+	Period                                 Period           `json:"period"`
+	ReportedCurrency                       ReportedCurrency `json:"reportedCurrency"`
 	MarketCap                              int64   `json:"marketCap"`
 	EnterpriseValue                        int64   `json:"enterpriseValue"`
 	EvToSales                              float64 `json:"evToSales"`
@@ -80,7 +81,7 @@ func (c *Client) KeyMetrics(params KeyMetricsParams) ([]KeyMetricsResponse, erro
 	}
 
 	if params.Period != "" {
-		urlParams["period"] = params.Period
+		urlParams["period"] = string(params.Period)
 	}
 
 	var result []KeyMetricsResponse

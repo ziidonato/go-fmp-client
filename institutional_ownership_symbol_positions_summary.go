@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -15,7 +16,7 @@ type InstitutionalOwnershipSymbolPositionsSummaryParams struct {
 type InstitutionalOwnershipSymbolPositionsSummaryResponse struct {
 	Symbol                   string  `json:"symbol"`
 	CIK                      string  `json:"cik"`
-	Date                     string  `json:"date"`
+	Date time.Time `json:"date"`
 	InvestorsHolding         int     `json:"investorsHolding"`
 	LastInvestorsHolding     int     `json:"lastInvestorsHolding"`
 	InvestorsHoldingChange   int     `json:"investorsHoldingChange"`

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,12 +12,12 @@ type ESGDisclosuresParams struct {
 
 // ESGDisclosuresResponse represents the response from the ESG Investment Search API
 type ESGDisclosuresResponse struct {
-	Date               string  `json:"date"`
-	AcceptedDate       string  `json:"acceptedDate"`
+	Date time.Time `json:"date"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	Symbol             string  `json:"symbol"`
 	CIK                string  `json:"cik"`
 	CompanyName        string  `json:"companyName"`
-	FormType           string  `json:"formType"`
+	FormType FormType `json:"formType"`
 	EnvironmentalScore float64 `json:"environmentalScore"`
 	SocialScore        float64 `json:"socialScore"`
 	GovernanceScore    float64 `json:"governanceScore"`

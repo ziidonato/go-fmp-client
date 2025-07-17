@@ -1,13 +1,14 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // RevenueProductSegmentationParams represents the parameters for the Revenue Product Segmentation API
 type RevenueProductSegmentationParams struct {
 	Symbol    string `json:"symbol"`    // Required: Stock symbol (e.g., "AAPL")
-	Period    string `json:"period"`    // Optional: Period type - "annual,quarter"
+	Period Period `json:"period"`    // Optional: Period type - "annual,quarter"
 	Structure string `json:"structure"` // Optional: Structure type - "flat"
 }
 
@@ -15,9 +16,9 @@ type RevenueProductSegmentationParams struct {
 type RevenueProductSegmentationResponse struct {
 	Symbol           string                 `json:"symbol"`
 	FiscalYear       int                    `json:"fiscalYear"`
-	Period           string                 `json:"period"`
+	Period Period `json:"period"`
 	ReportedCurrency *string                `json:"reportedCurrency"`
-	Date             string                 `json:"date"`
+	Date time.Time `json:"date"`
 	Data             map[string]interface{} `json:"data"`
 }
 

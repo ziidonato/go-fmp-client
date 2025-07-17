@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -8,19 +9,19 @@ import (
 type IncomeStatementParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
 }
 
 // IncomeStatementResponse represents the response from the Income Statement API
 type IncomeStatementResponse struct {
-	Date                                    string  `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                  string  `json:"symbol"`
-	ReportedCurrency                        string  `json:"reportedCurrency"`
+	ReportedCurrency ReportedCurrency `json:"reportedCurrency"`
 	CIK                                     string  `json:"cik"`
-	FilingDate                              string  `json:"filingDate"`
-	AcceptedDate                            string  `json:"acceptedDate"`
+	FilingDate time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	FiscalYear                              string  `json:"fiscalYear"`
-	Period                                  string  `json:"period"`
+	Period Period `json:"period"`
 	Revenue                                 int64   `json:"revenue"`
 	CostOfRevenue                           int64   `json:"costOfRevenue"`
 	GrossProfit                             int64   `json:"grossProfit"`

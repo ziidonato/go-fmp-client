@@ -1,11 +1,15 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 import "fmt"
 
 // AnalystEstimatesParams represents the parameters for the Financial Estimates API
 type AnalystEstimatesParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Period string `json:"period"` // Required: Period type - "annual" or "quarter"
+	Period Period `json:"period"` // Required: Period type - "annual" or "quarter"
 	Page   *int   `json:"page"`   // Optional: Page number (default: 0)
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
 }
@@ -13,7 +17,7 @@ type AnalystEstimatesParams struct {
 // AnalystEstimatesResponse represents the response from the Financial Estimates API
 type AnalystEstimatesResponse struct {
 	Symbol             string  `json:"symbol"`
-	Date               string  `json:"date"`
+	Date time.Time `json:"date"`
 	RevenueLow         int64   `json:"revenueLow"`
 	RevenueHigh        int64   `json:"revenueHigh"`
 	RevenueAvg         int64   `json:"revenueAvg"`
@@ -52,7 +56,7 @@ func (c *Client) AnalystEstimates(params AnalystEstimatesParams) ([]AnalystEstim
 
 	urlParams := map[string]string{
 		"symbol": params.Symbol,
-		"period": params.Period,
+		"period": string(params.Period),
 	}
 
 	if params.Page != nil {

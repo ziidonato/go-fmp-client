@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,8 +15,8 @@ type ExecutiveCompensationResponse struct {
 	CIK                       string `json:"cik"`
 	Symbol                    string `json:"symbol"`
 	CompanyName               string `json:"companyName"`
-	FilingDate                string `json:"filingDate"`
-	AcceptedDate              string `json:"acceptedDate"`
+	FilingDate time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	NameAndPosition           string `json:"nameAndPosition"`
 	Year                      int    `json:"year"`
 	Salary                    int    `json:"salary"`

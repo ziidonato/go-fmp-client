@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -9,13 +10,13 @@ import (
 
 // EODBulkParams represents the parameters for the EOD Bulk API
 type EODBulkParams struct {
-	Date string `json:"date"` // Required: date (e.g., "2024-10-22")
+	Date time.Time `json:"date"` // Required: date (e.g., "2024-10-22")
 }
 
 // EODBulkResponse represents the response from the EOD Bulk API
 type EODBulkResponse struct {
 	Symbol   string `json:"symbol"`
-	Date     string `json:"date"`
+	Date time.Time `json:"date"`
 	Open     string `json:"open"`
 	Low      string `json:"low"`
 	High     string `json:"high"`

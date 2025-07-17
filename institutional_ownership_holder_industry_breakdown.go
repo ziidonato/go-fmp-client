@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -13,7 +14,7 @@ type InstitutionalOwnershipHolderIndustryBreakdownParams struct {
 
 // InstitutionalOwnershipHolderIndustryBreakdownResponse represents the response from the Institutional Ownership Holder Industry Breakdown API
 type InstitutionalOwnershipHolderIndustryBreakdownResponse struct {
-	Date                     string  `json:"date"`
+	Date time.Time `json:"date"`
 	CIK                      string  `json:"cik"`
 	InvestorName             string  `json:"investorName"`
 	IndustryTitle            string  `json:"industryTitle"`

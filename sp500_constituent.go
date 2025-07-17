@@ -1,5 +1,9 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 // SP500ConstituentResponse represents the response from the S&P 500 index API
 type SP500ConstituentResponse struct {
 	Symbol         string `json:"symbol"`
@@ -7,7 +11,7 @@ type SP500ConstituentResponse struct {
 	Sector         string `json:"sector"`
 	SubSector      string `json:"subSector"`
 	HeadQuarter    string `json:"headQuarter"`
-	DateFirstAdded string `json:"dateFirstAdded"`
+	DateFirstAdded time.Time `json:"dateFirstAdded"`
 	CIK            string `json:"cik"`
 	Founded        string `json:"founded"`
 }

@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,9 +12,9 @@ type CrowdfundingOfferingsSearchParams struct {
 
 // CrowdfundingOfferingsSearchResponse represents the response from the Crowdfunding Campaign Search API
 type CrowdfundingOfferingsSearchResponse struct {
-	CIK  string  `json:"cik"`
-	Name string  `json:"name"`
-	Date *string `json:"date"`
+	CIK  string     `json:"cik"`
+	Name string     `json:"name"`
+	Date *time.Time `json:"date"`
 }
 
 // CrowdfundingOfferingsSearch searches for crowdfunding campaigns by company name, campaign name, or platform

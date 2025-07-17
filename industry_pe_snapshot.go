@@ -1,12 +1,13 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // IndustryPESnapshotResponse represents the response from the industry PE snapshot API
 type IndustryPESnapshotResponse struct {
-	Date     string  `json:"date"`
+	Date time.Time `json:"date"`
 	Industry string  `json:"industry"`
 	Exchange string  `json:"exchange"`
 	PE       float64 `json:"pe"`

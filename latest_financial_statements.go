@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // LatestFinancialStatementsParams represents the parameters for the Latest Financial Statements API
@@ -12,11 +13,11 @@ type LatestFinancialStatementsParams struct {
 
 // LatestFinancialStatementsResponse represents the response from the Latest Financial Statements API
 type LatestFinancialStatementsResponse struct {
-	Symbol       string `json:"symbol"`
-	CalendarYear int    `json:"calendarYear"`
-	Period       string `json:"period"`
-	Date         string `json:"date"`
-	DateAdded    string `json:"dateAdded"`
+	Symbol       string    `json:"symbol"`
+	CalendarYear int       `json:"calendarYear"`
+	Period       Period    `json:"period"`
+	Date         time.Time `json:"date"`
+	DateAdded    time.Time `json:"dateAdded"`
 }
 
 // LatestFinancialStatements retrieves the latest financial statements data

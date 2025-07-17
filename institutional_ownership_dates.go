@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,7 +12,7 @@ type InstitutionalOwnershipDatesParams struct {
 
 // InstitutionalOwnershipDatesResponse represents the response from the Institutional Ownership Dates API
 type InstitutionalOwnershipDatesResponse struct {
-	Date    string `json:"date"`
+	Date time.Time `json:"date"`
 	Year    int    `json:"year"`
 	Quarter int    `json:"quarter"`
 }

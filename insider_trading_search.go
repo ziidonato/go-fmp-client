@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -8,9 +9,9 @@ import (
 type InsiderTradingSearchResponse struct {
 	Symbol          string  `json:"symbol"`
 	FilingDate      string  `json:"filingDate"`
-	TransactionDate string  `json:"transactionDate"`
+	TransactionDate time.Time `json:"transactionDate"`
 	ReportingCik    string  `json:"reportingCik"`
-	TransactionType string  `json:"transactionType"`
+	TransactionType TransactionType `json:"transactionType"`
 	SecuritiesOwned float64 `json:"securitiesOwned"`
 	CompanyName     string  `json:"companyName"`
 	ReportingName   string  `json:"reportingName"`

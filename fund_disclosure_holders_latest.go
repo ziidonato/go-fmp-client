@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,12 +12,12 @@ type FundDisclosureHoldersLatestParams struct {
 
 // FundDisclosureHoldersLatestResponse represents the response from the Mutual Fund & ETF Disclosure API
 type FundDisclosureHoldersLatestResponse struct {
-	CIK           string  `json:"cik"`
-	Holder        string  `json:"holder"`
-	Shares        int64   `json:"shares"`
-	DateReported  string  `json:"dateReported"`
-	Change        int64   `json:"change"`
-	WeightPercent float64 `json:"weightPercent"`
+	CIK           string    `json:"cik"`
+	Holder        string    `json:"holder"`
+	Shares        int64     `json:"shares"`
+	DateReported  time.Time `json:"dateReported"`
+	Change        int64     `json:"change"`
+	WeightPercent float64   `json:"weightPercent"`
 }
 
 // FundDisclosureHoldersLatest retrieves the latest disclosures from mutual funds and ETFs

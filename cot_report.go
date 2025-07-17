@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type COTReportParams struct {
 // COTReportResponse represents the response from the COT Report API
 type COTReportResponse struct {
 	Symbol                      string  `json:"symbol"`
-	Date                        string  `json:"date"`
+	Date time.Time `json:"date"`
 	Name                        string  `json:"name"`
 	Sector                      string  `json:"sector"`
 	MarketAndExchangeNames      string  `json:"marketAndExchangeNames"`

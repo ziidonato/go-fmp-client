@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type CrowdfundingOfferingsLatestParams struct {
 type CrowdfundingOfferingsLatestResponse struct {
 	CIK                                       string  `json:"cik"`
 	CompanyName                               string  `json:"companyName"`
-	Date                                      string  `json:"date"`
+	Date time.Time `json:"date"`
 	FilingDate                                string  `json:"filingDate"`
 	AcceptedDate                              string  `json:"acceptedDate"`
 	FormType                                  string  `json:"formType"`

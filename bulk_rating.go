@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 // RatingBulkResponse represents the response from the Rating Bulk API
 type RatingBulkResponse struct {
 	Symbol                  string `json:"symbol"`
-	Date                    string `json:"date"`
+	Date time.Time `json:"date"`
 	Rating                  string `json:"rating"`
 	DiscountedCashFlowScore string `json:"discountedCashFlowScore"`
 	ReturnOnEquityScore     string `json:"returnOnEquityScore"`

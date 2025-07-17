@@ -1,12 +1,13 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // HistoricalSectorPEResponse represents the response from the historical sector PE API
 type HistoricalSectorPEResponse struct {
-	Date     string  `json:"date"`
+	Date time.Time `json:"date"`
 	Sector   string  `json:"sector"`
 	Exchange string  `json:"exchange"`
 	PE       float64 `json:"pe"`

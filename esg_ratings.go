@@ -16,8 +16,8 @@ type ESGRatingsResponse struct {
 	CompanyName   string `json:"companyName"`
 	Industry      string `json:"industry"`
 	FiscalYear    int    `json:"fiscalYear"`
-	ESGRiskRating string `json:"ESGRiskRating"`
-	IndustryRank  string `json:"industryRank"`
+	ESGRiskRating ESGRiskRating `json:"ESGRiskRating"`
+	IndustryRank IndustryRank `json:"industryRank"`
 }
 
 // ESGRatings retrieves comprehensive ESG ratings for companies and funds

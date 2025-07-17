@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -13,7 +14,7 @@ type RatingsHistoricalParams struct {
 // RatingsHistoricalResponse represents the response from the Historical Ratings API
 type RatingsHistoricalResponse struct {
 	Symbol                  string `json:"symbol"`
-	Date                    string `json:"date"`
+	Date time.Time `json:"date"`
 	Rating                  string `json:"rating"`
 	OverallScore            int    `json:"overallScore"`
 	DiscountedCashFlowScore int    `json:"discountedCashFlowScore"`

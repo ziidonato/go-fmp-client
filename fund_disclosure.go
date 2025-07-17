@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -15,7 +16,7 @@ type FundDisclosureParams struct {
 // FundDisclosureResponse represents the response from the Mutual Fund Disclosures API
 type FundDisclosureResponse struct {
 	CIK                 string  `json:"cik"`
-	Date                string  `json:"date"`
+	Date time.Time `json:"date"`
 	AcceptedDate        string  `json:"acceptedDate"`
 	Symbol              string  `json:"symbol"`
 	Name                string  `json:"name"`
@@ -28,12 +29,12 @@ type FundDisclosureResponse struct {
 	CurCd               string  `json:"cur_cd"`
 	ValUsd              float64 `json:"valUsd"`
 	PctVal              float64 `json:"pctVal"`
-	PayoffProfile       string  `json:"payoffProfile"`
-	AssetCat            string  `json:"assetCat"`
+	PayoffProfile PayoffProfile `json:"payoffProfile"`
+	AssetCat AssetCategory `json:"assetCat"`
 	IssuerCat           string  `json:"issuerCat"`
 	InvCountry          string  `json:"invCountry"`
 	IsRestrictedSec     string  `json:"isRestrictedSec"`
-	FairValLevel        string  `json:"fairValLevel"`
+	FairValLevel FairValueLevel `json:"fairValLevel"`
 	IsCashCollateral    string  `json:"isCashCollateral"`
 	IsNonCashCollateral string  `json:"isNonCashCollateral"`
 	IsLoanByFund        string  `json:"isLoanByFund"`

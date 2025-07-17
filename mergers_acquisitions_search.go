@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -17,7 +18,7 @@ type MergersAcquisitionsSearchResponse struct {
 	TargetedCompanyName string `json:"targetedCompanyName"`
 	TargetedCIK         string `json:"targetedCik"`
 	TargetedSymbol      string `json:"targetedSymbol"`
-	TransactionDate     string `json:"transactionDate"`
+	TransactionDate time.Time `json:"transactionDate"`
 	AcceptedDate        string `json:"acceptedDate"`
 	Link                string `json:"link"`
 }

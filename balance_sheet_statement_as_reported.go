@@ -1,24 +1,28 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 import "fmt"
 
 // BalanceSheetStatementAsReportedParams represents the parameters for the Balance Sheet Statement As Reported API
 type BalanceSheetStatementAsReportedParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "annual,quarter"
 }
 
 // BalanceSheetStatementAsReportedResponse represents the response from the Balance Sheet Statement As Reported API
 type BalanceSheetStatementAsReportedResponse struct {
-	Date                                    string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                  string `json:"symbol"`
-	ReportedCurrency                        string `json:"reportedCurrency"`
+	ReportedCurrency ReportedCurrency `json:"reportedCurrency"`
 	CIK                                     string `json:"cik"`
-	FilingDate                              string `json:"filingDate"`
-	AcceptedDate                            string `json:"acceptedDate"`
+	FilingDate time.Time `json:"filingDate"`
+	AcceptedDate time.Time `json:"acceptedDate"`
 	FiscalYear                              string `json:"fiscalYear"`
-	Period                                  string `json:"period"`
+	Period Period `json:"period"`
 	CashAndCashEquivalents                  int64  `json:"cashAndCashEquivalents"`
 	ShortTermInvestments                    int64  `json:"shortTermInvestments"`
 	CashAndShortTermInvestments             int64  `json:"cashAndShortTermInvestments"`

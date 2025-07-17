@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -8,16 +9,16 @@ import (
 type RatiosParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 1000 records per request)
-	Period string `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
+	Period Period `json:"period"` // Optional: Period type - "Q1,Q2,Q3,Q4,FY,annual,quarter"
 }
 
 // RatiosResponse represents the response from the Financial Ratios API
 type RatiosResponse struct {
 	Symbol                                  string  `json:"symbol"`
-	Date                                    string  `json:"date"`
+	Date time.Time `json:"date"`
 	FiscalYear                              string  `json:"fiscalYear"`
-	Period                                  string  `json:"period"`
-	ReportedCurrency                        string  `json:"reportedCurrency"`
+	Period Period `json:"period"`
+	ReportedCurrency ReportedCurrency `json:"reportedCurrency"`
 	GrossProfitMargin                       float64 `json:"grossProfitMargin"`
 	EbitMargin                              float64 `json:"ebitMargin"`
 	EbitdaMargin                            float64 `json:"ebitdaMargin"`

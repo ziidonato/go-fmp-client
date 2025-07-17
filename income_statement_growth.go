@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type IncomeStatementGrowthParams struct {
 // IncomeStatementGrowthResponse represents the response from the Income Statement Growth API
 type IncomeStatementGrowthResponse struct {
 	Symbol                                    string  `json:"symbol"`
-	Date                                      string  `json:"date"`
+	Date time.Time `json:"date"`
 	FiscalYear                                string  `json:"fiscalYear"`
 	Period                                    string  `json:"period"`
 	ReportedCurrency                          string  `json:"reportedCurrency"`

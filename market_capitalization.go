@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // MarketCapitalizationParams represents the parameters for the Company Market Cap API
@@ -11,9 +12,9 @@ type MarketCapitalizationParams struct {
 
 // MarketCapitalizationResponse represents the response from the Company Market Cap API
 type MarketCapitalizationResponse struct {
-	Symbol    string `json:"symbol"`
-	Date      string `json:"date"`
-	MarketCap int64  `json:"marketCap"`
+	Symbol    string    `json:"symbol"`
+	Date      time.Time `json:"date"`
+	MarketCap int64     `json:"marketCap"`
 }
 
 // MarketCapitalization retrieves the market capitalization for a specific company on any given date

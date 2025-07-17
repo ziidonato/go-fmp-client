@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,19 +11,19 @@ import (
 // CashFlowStatementBulkParams represents the parameters for the Cash Flow Statement Bulk API
 type CashFlowStatementBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+	Period Period `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
 }
 
 // CashFlowStatementBulkResponse represents the response from the Cash Flow Statement Bulk API
 type CashFlowStatementBulkResponse struct {
-	Date                                   string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                 string `json:"symbol"`
 	ReportedCurrency                       string `json:"reportedCurrency"`
 	CIK                                    string `json:"cik"`
 	FilingDate                             string `json:"filingDate"`
 	AcceptedDate                           string `json:"acceptedDate"`
 	FiscalYear                             string `json:"fiscalYear"`
-	Period                                 string `json:"period"`
+	Period Period `json:"period"`
 	NetIncome                              string `json:"netIncome"`
 	DepreciationAndAmortization            string `json:"depreciationAndAmortization"`
 	DeferredIncomeTax                      string `json:"deferredIncomeTax"`

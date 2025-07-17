@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,7 +12,7 @@ type IndexChartParams struct {
 }
 
 type Index1MinChartResponse struct {
-	Date   string  `json:"date"`
+	Date time.Time `json:"date"`
 	Open   float64 `json:"open"`
 	Low    float64 `json:"low"`
 	High   float64 `json:"high"`

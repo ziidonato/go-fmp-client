@@ -1,25 +1,26 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // BalanceSheetBulkParams represents the parameters for the Bulk Balance Sheet Statement API
 type BalanceSheetBulkParams struct {
 	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+	Period Period `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
 }
 
 // BalanceSheetBulkResponse represents the response from the Bulk Balance Sheet Statement API
 type BalanceSheetBulkResponse struct {
-	Date                                    string `json:"date"`
+	Date time.Time `json:"date"`
 	Symbol                                  string `json:"symbol"`
 	ReportedCurrency                        string `json:"reportedCurrency"`
 	CIK                                     string `json:"cik"`
 	FilingDate                              string `json:"filingDate"`
 	AcceptedDate                            string `json:"acceptedDate"`
 	FiscalYear                              string `json:"fiscalYear"`
-	Period                                  string `json:"period"`
+	Period Period `json:"period"`
 	CashAndCashEquivalents                  string `json:"cashAndCashEquivalents"`
 	ShortTermInvestments                    string `json:"shortTermInvestments"`
 	CashAndShortTermInvestments             string `json:"cashAndShortTermInvestments"`
@@ -87,7 +88,7 @@ func (c *Client) BalanceSheetBulk(params BalanceSheetBulkParams) ([]BalanceSheet
 
 	urlParams := map[string]string{
 		"year":   params.Year,
-		"period": params.Period,
+		"period": string(params.Period),
 	}
 
 	var result []BalanceSheetBulkResponse

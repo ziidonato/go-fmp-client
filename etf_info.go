@@ -21,7 +21,7 @@ type ETFInfoResponse struct {
 	Name                  string           `json:"name"`
 	Description           string           `json:"description"`
 	ISIN                  string           `json:"isin"`
-	AssetClass            string           `json:"assetClass"`
+	AssetClass AssetClass `json:"assetClass"`
 	SecurityCusip         string           `json:"securityCusip"`
 	Domicile              string           `json:"domicile"`
 	Website               string           `json:"website"`
@@ -29,11 +29,11 @@ type ETFInfoResponse struct {
 	ExpenseRatio          float64          `json:"expenseRatio"`
 	AssetsUnderManagement int64            `json:"assetsUnderManagement"`
 	AvgVolume             int64            `json:"avgVolume"`
-	InceptionDate         string           `json:"inceptionDate"`
+	InceptionDate time.Time `json:"inceptionDate"`
 	NAV                   float64          `json:"nav"`
 	NAVCurrency           string           `json:"navCurrency"`
 	HoldingsCount         int              `json:"holdingsCount"`
-	UpdatedAt             string           `json:"updatedAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 	SectorsList           []SectorExposure `json:"sectorsList"`
 }
 

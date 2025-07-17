@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -14,7 +15,7 @@ type ForexHistoricalFullParams struct {
 // ForexHistoricalFullResponse represents the response from the Historical Forex Full Chart API
 type ForexHistoricalFullResponse struct {
 	Symbol        string  `json:"symbol"`
-	Date          string  `json:"date"`
+	Date time.Time `json:"date"`
 	Open          float64 `json:"open"`
 	High          float64 `json:"high"`
 	Low           float64 `json:"low"`

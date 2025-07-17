@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,7 +12,7 @@ type DowJonesConstituentResponse struct {
 	Sector         string `json:"sector"`
 	SubSector      string `json:"subSector"`
 	HeadQuarter    string `json:"headQuarter"`
-	DateFirstAdded string `json:"dateFirstAdded"`
+	DateFirstAdded time.Time `json:"dateFirstAdded"`
 	CIK            string `json:"cik"`
 	Founded        string `json:"founded"`
 }

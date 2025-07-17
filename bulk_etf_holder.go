@@ -22,7 +22,7 @@ type ETFHolderBulkResponse struct {
 	CUSIP            string `json:"cusip"`
 	ISIN             string `json:"isin"`
 	MarketValue      string `json:"marketValue"`
-	LastUpdated      string `json:"lastUpdated"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }
 
 // ETFHolderBulk retrieves detailed information about assets and shares held by ETFs

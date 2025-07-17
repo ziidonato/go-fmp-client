@@ -1,5 +1,9 @@
 package go_fmp
 
+import (
+	"time"
+)
+
 // NasdaqConstituentResponse represents the response from the Nasdaq index API
 type NasdaqConstituentResponse struct {
 	Symbol         string `json:"symbol"`
@@ -7,7 +11,7 @@ type NasdaqConstituentResponse struct {
 	Sector         string `json:"sector"`
 	SubSector      string `json:"subSector"`
 	HeadQuarter    string `json:"headQuarter"`
-	DateFirstAdded string `json:"dateFirstAdded"`
+	DateFirstAdded time.Time `json:"dateFirstAdded"`
 	CIK            string `json:"cik"`
 	Founded        string `json:"founded"`
 }

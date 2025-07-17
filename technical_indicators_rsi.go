@@ -15,7 +15,7 @@ type TechnicalIndicatorRSIResponse struct {
 }
 
 // GetTechnicalIndicatorRSI retrieves relative strength index technical indicator
-func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorRSIResponse, error) {
+func (c *Client) GetTechnicalIndicatorRSI(symbol string, periodLength int, timeframe Timeframe) ([]TechnicalIndicatorRSIResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

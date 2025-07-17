@@ -1,13 +1,14 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
 // HistoricalIndexLightResponse represents the response from the historical index light chart API
 type HistoricalIndexLightResponse struct {
 	Symbol string  `json:"symbol"`
-	Date   string  `json:"date"`
+	Date time.Time `json:"date"`
 	Price  float64 `json:"price"`
 	Volume int64   `json:"volume"`
 }

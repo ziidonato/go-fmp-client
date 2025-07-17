@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -11,11 +12,11 @@ type EconomicIndicatorsParams struct {
 
 // EconomicIndicatorsResponse represents the response from the Economic Indicators API
 type EconomicIndicatorsResponse struct {
-	Date        string  `json:"date"`
+	Date time.Time `json:"date"`
 	Name        string  `json:"name"`
 	Value       float64 `json:"value"`
-	Unit        string  `json:"unit"`
-	Period      string  `json:"period"`
+	Unit Units `json:"unit"`
+	Period Period `json:"period"`
 	Source      string  `json:"source"`
 	Description string  `json:"description"`
 }

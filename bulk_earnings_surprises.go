@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -15,10 +16,10 @@ type EarningsSurprisesBulkParams struct {
 // EarningsSurprisesBulkResponse represents the response from the Earnings Surprises Bulk API
 type EarningsSurprisesBulkResponse struct {
 	Symbol       string `json:"symbol"`
-	Date         string `json:"date"`
+	Date time.Time `json:"date"`
 	EPSActual    string `json:"epsActual"`
 	EPSEstimated string `json:"epsEstimated"`
-	LastUpdated  string `json:"lastUpdated"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }
 
 // GetEarningsSurprisesBulk retrieves bulk data on annual earnings surprises

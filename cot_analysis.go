@@ -15,20 +15,20 @@ type COTAnalysisParams struct {
 // COTAnalysisResponse represents the response from the COT Analysis By Dates API
 type COTAnalysisResponse struct {
 	Symbol                       string  `json:"symbol"`
-	Date                         string  `json:"date"`
+	Date time.Time `json:"date"`
 	Name                         string  `json:"name"`
 	Sector                       string  `json:"sector"`
 	Exchange                     string  `json:"exchange"`
 	CurrentLongMarketSituation   float64 `json:"currentLongMarketSituation"`
 	CurrentShortMarketSituation  float64 `json:"currentShortMarketSituation"`
-	MarketSituation              string  `json:"marketSituation"`
+	MarketSituation MarketSituation `json:"marketSituation"`
 	PreviousLongMarketSituation  float64 `json:"previousLongMarketSituation"`
 	PreviousShortMarketSituation float64 `json:"previousShortMarketSituation"`
-	PreviousMarketSituation      string  `json:"previousMarketSituation"`
+	PreviousMarketSituation MarketSituation `json:"previousMarketSituation"`
 	NetPostion                   int     `json:"netPostion"`
 	PreviousNetPosition          int     `json:"previousNetPosition"`
 	ChangeInNetPosition          float64 `json:"changeInNetPosition"`
-	MarketSentiment              string  `json:"marketSentiment"`
+	MarketSentiment MarketSentiment `json:"marketSentiment"`
 	ReversalTrend                bool    `json:"reversalTrend"`
 }
 

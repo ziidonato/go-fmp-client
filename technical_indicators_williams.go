@@ -15,7 +15,7 @@ type TechnicalIndicatorWilliamsResponse struct {
 }
 
 // GetTechnicalIndicatorWilliams retrieves Williams %R technical indicator
-func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorWilliamsResponse, error) {
+func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, timeframe Timeframe) ([]TechnicalIndicatorWilliamsResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}

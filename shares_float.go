@@ -1,6 +1,7 @@
 package go_fmp
 
 import (
+	"time"
 	"fmt"
 )
 
@@ -12,7 +13,7 @@ type SharesFloatParams struct {
 // SharesFloatResponse represents the response from the Company Share Float & Liquidity API
 type SharesFloatResponse struct {
 	Symbol            string  `json:"symbol"`
-	Date              string  `json:"date"`
+	Date time.Time `json:"date"`
 	FreeFloat         float64 `json:"freeFloat"`
 	FloatShares       int64   `json:"floatShares"`
 	OutstandingShares int64   `json:"outstandingShares"`
