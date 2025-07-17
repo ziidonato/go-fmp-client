@@ -2,19 +2,23 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // InstitutionalOwnershipIndustrySummaryParams represents the parameters for the Institutional Ownership Industry Summary API
 type InstitutionalOwnershipIndustrySummaryParams struct {
-	Year    string `json:"year"`    // Required: Year (e.g., "2023")
-	Quarter string `json:"quarter"` // Required: Quarter (e.g., "3")
+	Industry string  `json:"industry"` // Required: Industry name (e.g., "Software")
+	Page     *int    `json:"page"`     // Optional: Page number (default: 0)
 }
 
 // InstitutionalOwnershipIndustrySummaryResponse represents the response from the Institutional Ownership Industry Summary API
 type InstitutionalOwnershipIndustrySummaryResponse struct {
-	IndustryTitle string `json:"industryTitle"`
-	IndustryValue int64  `json:"industryValue"`
-	Date          string `json:"date"`
+	Industry string    `json:"industry"`
+	Date     time.Time `json:"date"`
+	Holdings int       `json:"holdings"`
+	Holders  int       `json:"holders"`
+	Shares   float64   `json:"shares"`
+	Value    float64   `json:"value"`
 }
 
 // InstitutionalOwnershipIndustrySummary retrieves industry performance summary

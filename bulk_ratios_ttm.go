@@ -1,118 +1,86 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
 )
 
-// RatiosTTMBulkResponse represents the response from the Ratios TTM Bulk API
-type RatiosTTMBulkResponse struct {
-	Symbol                                     string `json:"symbol"`
-	GrossProfitMarginTTM                       string `json:"grossProfitMarginTTM"`
-	EBITMarginTTM                              string `json:"ebitMarginTTM"`
-	EBITDAMarginTTM                            string `json:"ebitdaMarginTTM"`
-	OperatingProfitMarginTTM                   string `json:"operatingProfitMarginTTM"`
-	PretaxProfitMarginTTM                      string `json:"pretaxProfitMarginTTM"`
-	ContinuousOperationsProfitMarginTTM        string `json:"continuousOperationsProfitMarginTTM"`
-	NetProfitMarginTTM                         string `json:"netProfitMarginTTM"`
-	BottomLineProfitMarginTTM                  string `json:"bottomLineProfitMarginTTM"`
-	ReceivablesTurnoverTTM                     string `json:"receivablesTurnoverTTM"`
-	PayablesTurnoverTTM                        string `json:"payablesTurnoverTTM"`
-	InventoryTurnoverTTM                       string `json:"inventoryTurnoverTTM"`
-	FixedAssetTurnoverTTM                      string `json:"fixedAssetTurnoverTTM"`
-	AssetTurnoverTTM                           string `json:"assetTurnoverTTM"`
-	CurrentRatioTTM                            string `json:"currentRatioTTM"`
-	QuickRatioTTM                              string `json:"quickRatioTTM"`
-	SolvencyRatioTTM                           string `json:"solvencyRatioTTM"`
-	CashRatioTTM                               string `json:"cashRatioTTM"`
-	PriceToEarningsRatioTTM                    string `json:"priceToEarningsRatioTTM"`
-	PriceToEarningsGrowthRatioTTM              string `json:"priceToEarningsGrowthRatioTTM"`
-	ForwardPriceToEarningsGrowthRatioTTM       string `json:"forwardPriceToEarningsGrowthRatioTTM"`
-	PriceToBookRatioTTM                        string `json:"priceToBookRatioTTM"`
-	PriceToSalesRatioTTM                       string `json:"priceToSalesRatioTTM"`
-	PriceToFreeCashFlowRatioTTM                string `json:"priceToFreeCashFlowRatioTTM"`
-	PriceToOperatingCashFlowRatioTTM           string `json:"priceToOperatingCashFlowRatioTTM"`
-	DebtToAssetsRatioTTM                       string `json:"debtToAssetsRatioTTM"`
-	DebtToEquityRatioTTM                       string `json:"debtToEquityRatioTTM"`
-	DebtToCapitalRatioTTM                      string `json:"debtToCapitalRatioTTM"`
-	LongTermDebtToCapitalRatioTTM              string `json:"longTermDebtToCapitalRatioTTM"`
-	FinancialLeverageRatioTTM                  string `json:"financialLeverageRatioTTM"`
-	WorkingCapitalTurnoverRatioTTM             string `json:"workingCapitalTurnoverRatioTTM"`
-	OperatingCashFlowRatioTTM                  string `json:"operatingCashFlowRatioTTM"`
-	OperatingCashFlowSalesRatioTTM             string `json:"operatingCashFlowSalesRatioTTM"`
-	FreeCashFlowOperatingCashFlowRatioTTM      string `json:"freeCashFlowOperatingCashFlowRatioTTM"`
-	DebtServiceCoverageRatioTTM                string `json:"debtServiceCoverageRatioTTM"`
-	InterestCoverageRatioTTM                   string `json:"interestCoverageRatioTTM"`
-	ShortTermOperatingCashFlowCoverageRatioTTM string `json:"shortTermOperatingCashFlowCoverageRatioTTM"`
-	OperatingCashFlowCoverageRatioTTM          string `json:"operatingCashFlowCoverageRatioTTM"`
-	CapitalExpenditureCoverageRatioTTM         string `json:"capitalExpenditureCoverageRatioTTM"`
-	DividendPaidAndCapexCoverageRatioTTM       string `json:"dividendPaidAndCapexCoverageRatioTTM"`
-	DividendPayoutRatioTTM                     string `json:"dividendPayoutRatioTTM"`
-	DividendYieldTTM                           string `json:"dividendYieldTTM"`
-	EnterpriseValueTTM                         string `json:"enterpriseValueTTM"`
-	RevenuePerShareTTM                         string `json:"revenuePerShareTTM"`
-	NetIncomePerShareTTM                       string `json:"netIncomePerShareTTM"`
-	InterestDebtPerShareTTM                    string `json:"interestDebtPerShareTTM"`
-	CashPerShareTTM                            string `json:"cashPerShareTTM"`
-	BookValuePerShareTTM                       string `json:"bookValuePerShareTTM"`
-	TangibleBookValuePerShareTTM               string `json:"tangibleBookValuePerShareTTM"`
-	ShareholdersEquityPerShareTTM              string `json:"shareholdersEquityPerShareTTM"`
-	OperatingCashFlowPerShareTTM               string `json:"operatingCashFlowPerShareTTM"`
-	CapexPerShareTTM                           string `json:"capexPerShareTTM"`
-	FreeCashFlowPerShareTTM                    string `json:"freeCashFlowPerShareTTM"`
-	NetIncomePerEBTTTM                         string `json:"netIncomePerEBTTTM"`
-	EBTPerEbitTTM                              string `json:"ebtPerEbitTTM"`
-	PriceToFairValueTTM                        string `json:"priceToFairValueTTM"`
-	DebtToMarketCapTTM                         string `json:"debtToMarketCapTTM"`
-	EffectiveTaxRateTTM                        string `json:"effectiveTaxRateTTM"`
-	EnterpriseValueMultipleTTM                 string `json:"enterpriseValueMultipleTTM"`
-	DividendPerShareTTM                        string `json:"dividendPerShareTTM"`
+// BulkRatiosTTMParams represents the parameters for the Bulk Ratios TTM API
+type BulkRatiosTTMParams struct {
+	Date string `json:"date"` // Required: date (e.g., "2024-10-22")
 }
 
-// GetRatiosTTMBulk retrieves trailing twelve months financial ratios for stocks
-func (c *Client) GetRatiosTTMBulk() ([]RatiosTTMBulkResponse, error) {
-	// Build the URL
-	baseURL := c.BaseURL + "/ratios-ttm-bulk"
-	u, err := url.Parse(baseURL)
+// BulkRatiosTTMResponse represents the response from the Bulk Ratios TTM API
+type BulkRatiosTTMResponse struct {
+	Symbol                              string  `json:"symbol"`
+	DividendYielTTM                     float64 `json:"dividendYielTTM"`
+	DividendYielPercentageTTM           float64 `json:"dividendYielPercentageTTM"`
+	PeRatioTTM                          float64 `json:"peRatioTTM"`
+	PegRatioTTM                         float64 `json:"pegRatioTTM"`
+	PayoutRatioTTM                      float64 `json:"payoutRatioTTM"`
+	CurrentRatioTTM                     float64 `json:"currentRatioTTM"`
+	QuickRatioTTM                       float64 `json:"quickRatioTTM"`
+	CashRatioTTM                        float64 `json:"cashRatioTTM"`
+	DaysOfSalesOutstandingTTM           float64 `json:"daysOfSalesOutstandingTTM"`
+	DaysOfInventoryOutstandingTTM       float64 `json:"daysOfInventoryOutstandingTTM"`
+	OperatingCycleTTM                   float64 `json:"operatingCycleTTM"`
+	DaysOfPayablesOutstandingTTM        float64 `json:"daysOfPayablesOutstandingTTM"`
+	CashConversionCycleTTM              float64 `json:"cashConversionCycleTTM"`
+	GrossProfitMarginTTM                float64 `json:"grossProfitMarginTTM"`
+	OperatingProfitMarginTTM            float64 `json:"operatingProfitMarginTTM"`
+	PretaxProfitMarginTTM               float64 `json:"pretaxProfitMarginTTM"`
+	NetProfitMarginTTM                  float64 `json:"netProfitMarginTTM"`
+	EffectiveTaxRateTTM                 float64 `json:"effectiveTaxRateTTM"`
+	ReturnOnAssetsTTM                   float64 `json:"returnOnAssetsTTM"`
+	ReturnOnEquityTTM                   float64 `json:"returnOnEquityTTM"`
+	ReturnOnCapitalEmployedTTM          float64 `json:"returnOnCapitalEmployedTTM"`
+	NetIncomePerEBTTTM                  float64 `json:"netIncomePerEBTTTM"`
+	EbtPerEbitTTM                       float64 `json:"ebtPerEbitTTM"`
+	EbitPerRevenueTTM                   float64 `json:"ebitPerRevenueTTM"`
+	DebtRatioTTM                        float64 `json:"debtRatioTTM"`
+	DebtEquityRatioTTM                  float64 `json:"debtEquityRatioTTM"`
+	LongTermDebtToCapitalizationTTM     float64 `json:"longTermDebtToCapitalizationTTM"`
+	TotalDebtToCapitalizationTTM        float64 `json:"totalDebtToCapitalizationTTM"`
+	InterestCoverageTTM                 float64 `json:"interestCoverageTTM"`
+	CashFlowToDebtRatioTTM              float64 `json:"cashFlowToDebtRatioTTM"`
+	CompanyEquityMultiplierTTM          float64 `json:"companyEquityMultiplierTTM"`
+	ReceivablesTurnoverTTM              float64 `json:"receivablesTurnoverTTM"`
+	PayablesTurnoverTTM                 float64 `json:"payablesTurnoverTTM"`
+	InventoryTurnoverTTM                float64 `json:"inventoryTurnoverTTM"`
+	FixedAssetTurnoverTTM               float64 `json:"fixedAssetTurnoverTTM"`
+	AssetTurnoverTTM                    float64 `json:"assetTurnoverTTM"`
+	OperatingCashFlowPerShareTTM        float64 `json:"operatingCashFlowPerShareTTM"`
+	FreeCashFlowPerShareTTM             float64 `json:"freeCashFlowPerShareTTM"`
+	CashPerShareTTM                     float64 `json:"cashPerShareTTM"`
+	OperatingCashFlowSalesRatioTTM      float64 `json:"operatingCashFlowSalesRatioTTM"`
+	FreeCashFlowOperatingCashFlowRatioTTM float64 `json:"freeCashFlowOperatingCashFlowRatioTTM"`
+	CashFlowCoverageRatiosTTM           float64 `json:"cashFlowCoverageRatiosTTM"`
+	ShortTermCoverageRatiosTTM          float64 `json:"shortTermCoverageRatiosTTM"`
+	CapitalExpenditureCoverageRatioTTM  float64 `json:"capitalExpenditureCoverageRatioTTM"`
+	DividendPaidAndCapexCoverageRatioTTM float64 `json:"dividendPaidAndCapexCoverageRatioTTM"`
+	PriceBookValueRatioTTM              float64 `json:"priceBookValueRatioTTM"`
+	PriceToBookRatioTTM                 float64 `json:"priceToBookRatioTTM"`
+	PriceToSalesRatioTTM                float64 `json:"priceToSalesRatioTTM"`
+	PriceEarningsRatioTTM               float64 `json:"priceEarningsRatioTTM"`
+	PriceToFreeCashFlowsRatioTTM        float64 `json:"priceToFreeCashFlowsRatioTTM"`
+	PriceToOperatingCashFlowsRatioTTM   float64 `json:"priceToOperatingCashFlowsRatioTTM"`
+	PriceCashFlowRatioTTM               float64 `json:"priceCashFlowRatioTTM"`
+	PriceEarningsToGrowthRatioTTM       float64 `json:"priceEarningsToGrowthRatioTTM"`
+	PriceSalesRatioTTM                  float64 `json:"priceSalesRatioTTM"`
+	EnterpriseValueMultipleTTM          float64 `json:"enterpriseValueMultipleTTM"`
+	PriceFairValueTTM                   float64 `json:"priceFairValueTTM"`
+	DividendPerShareTTM                 float64 `json:"dividendPerShareTTM"`
+}
+
+// BulkRatiosTTM retrieves trailing twelve months financial ratios for multiple stocks
+func (c *Client) BulkRatiosTTM(params BulkRatiosTTMParams) ([]BulkRatiosTTMResponse, error) {
+	urlParams := map[string]string{
+		"date": params.Date,
+	}
+
+	var result []BulkRatiosTTMResponse
+	err := c.doRequest(c.BaseURL+"/bulk-ratios-ttm", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q := u.Query()
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []RatiosTTMBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk ratios TTM: %w", err)
 	}
 
 	return result, nil

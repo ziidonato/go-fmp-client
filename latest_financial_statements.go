@@ -2,21 +2,22 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // LatestFinancialStatementsParams represents the parameters for the Latest Financial Statements API
 type LatestFinancialStatementsParams struct {
-	Page  *int `json:"page"`  // Optional: Page number (default: 0)
-	Limit *int `json:"limit"` // Optional: Number of results (Maximum 250 records per request)
+	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Type   string `json:"type"`   // Required: Financial statement type - either "income", "balance", or "cash"
 }
 
 // LatestFinancialStatementsResponse represents the response from the Latest Financial Statements API
 type LatestFinancialStatementsResponse struct {
 	Symbol       string `json:"symbol"`
-	CalendarYear int    `json:"calendarYear"`
-	Period       string `json:"period"`
-	Date         string `json:"date"`
-	DateAdded    string `json:"dateAdded"`
+	Type         string `json:"type"`
+	Date         time.Time `json:"date"`
+	DateAdded    time.Time `json:"dateAdded"`
+	InformationS map[string]interface{} `json:"informationS"`
 }
 
 // LatestFinancialStatements retrieves the latest financial statements data

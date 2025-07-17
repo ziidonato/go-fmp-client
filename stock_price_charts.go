@@ -2,24 +2,31 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// DailyPriceChartParams represents the parameters for daily stock price chart APIs
-type DailyPriceChartParams struct {
+// StockPriceChartsParams represents the parameters for the Stock Price Charts API
+type StockPriceChartsParams struct {
 	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	From   *string `json:"from"`   // Optional: Start date (e.g., "2025-01-10")
-	To     *string `json:"to"`     // Optional: End date (e.g., "2025-04-10")
+	From   *string `json:"from"`   // Optional: Start date (YYYY-MM-DD format)
+	To     *string `json:"to"`     // Optional: End date (YYYY-MM-DD format)
 }
 
-// DailyPriceChartResponse represents the response from daily stock price chart APIs
-type DailyPriceChartResponse struct {
-	Symbol   string  `json:"symbol"`
-	Date     string  `json:"date"`
-	AdjOpen  float64 `json:"adjOpen"`
-	AdjHigh  float64 `json:"adjHigh"`
-	AdjLow   float64 `json:"adjLow"`
+// StockPriceChartsResponse represents the response from the Stock Price Charts API
+type StockPriceChartsResponse struct {
+	Date     time.Time  `json:"date"`
+	Open     float64 `json:"open"`
+	Low      float64 `json:"low"`
+	High     float64 `json:"high"`
+	Close    float64 `json:"close"`
 	AdjClose float64 `json:"adjClose"`
 	Volume   int64   `json:"volume"`
+	UnadjustedVolume int64 `json:"unadjustedVolume"`
+	Change   float64 `json:"change"`
+	ChangePercent float64 `json:"changePercent"`
+	Vwap     float64 `json:"vwap"`
+	Label    string  `json:"label"`
+	ChangeOverTime float64 `json:"changeOverTime"`
 }
 
 // UnadjustedStockPriceChart retrieves stock price and volume data without adjustments for stock splits

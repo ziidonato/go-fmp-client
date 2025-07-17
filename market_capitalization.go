@@ -2,18 +2,19 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// MarketCapitalizationParams represents the parameters for the Company Market Cap API
+// MarketCapitalizationParams represents the parameters for the Market Capitalization API
 type MarketCapitalizationParams struct {
 	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
 }
 
-// MarketCapitalizationResponse represents the response from the Company Market Cap API
+// MarketCapitalizationResponse represents the response from the Market Capitalization API
 type MarketCapitalizationResponse struct {
-	Symbol    string `json:"symbol"`
-	Date      string `json:"date"`
-	MarketCap int64  `json:"marketCap"`
+	Symbol    string    `json:"symbol"`
+	Date      time.Time `json:"date"`
+	MarketCap float64   `json:"marketCap"`
 }
 
 // MarketCapitalization retrieves the market capitalization for a specific company on any given date

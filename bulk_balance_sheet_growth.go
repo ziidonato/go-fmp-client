@@ -1,133 +1,74 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// BalanceSheetGrowthBulkParams represents the parameters for the Balance Sheet Growth Bulk API
-type BalanceSheetGrowthBulkParams struct {
-	Year   string `json:"year"`   // Required: year (e.g., "2024")
-	Period string `json:"period"` // Required: period (Q1,Q2,Q3,Q4,FY)
+// BulkBalanceSheetGrowthParams represents the parameters for the Bulk Balance Sheet Growth API
+type BulkBalanceSheetGrowthParams struct {
+	Year   int    `json:"year"`   // Required: year (e.g., 2023)
+	Period string `json:"period"` // Required: period ("annual" or "quarterly")
 }
 
-// BalanceSheetGrowthBulkResponse represents the response from the Balance Sheet Growth Bulk API
-type BalanceSheetGrowthBulkResponse struct {
-	Symbol                                        string `json:"symbol"`
-	Date                                          string `json:"date"`
-	FiscalYear                                    string `json:"fiscalYear"`
-	Period                                        string `json:"period"`
-	ReportedCurrency                              string `json:"reportedCurrency"`
-	GrowthCashAndCashEquivalents                  string `json:"growthCashAndCashEquivalents"`
-	GrowthShortTermInvestments                    string `json:"growthShortTermInvestments"`
-	GrowthCashAndShortTermInvestments             string `json:"growthCashAndShortTermInvestments"`
-	GrowthNetReceivables                          string `json:"growthNetReceivables"`
-	GrowthInventory                               string `json:"growthInventory"`
-	GrowthOtherCurrentAssets                      string `json:"growthOtherCurrentAssets"`
-	GrowthTotalCurrentAssets                      string `json:"growthTotalCurrentAssets"`
-	GrowthPropertyPlantEquipmentNet               string `json:"growthPropertyPlantEquipmentNet"`
-	GrowthGoodwill                                string `json:"growthGoodwill"`
-	GrowthIntangibleAssets                        string `json:"growthIntangibleAssets"`
-	GrowthGoodwillAndIntangibleAssets             string `json:"growthGoodwillAndIntangibleAssets"`
-	GrowthLongTermInvestments                     string `json:"growthLongTermInvestments"`
-	GrowthTaxAssets                               string `json:"growthTaxAssets"`
-	GrowthOtherNonCurrentAssets                   string `json:"growthOtherNonCurrentAssets"`
-	GrowthTotalNonCurrentAssets                   string `json:"growthTotalNonCurrentAssets"`
-	GrowthOtherAssets                             string `json:"growthOtherAssets"`
-	GrowthTotalAssets                             string `json:"growthTotalAssets"`
-	GrowthAccountPayables                         string `json:"growthAccountPayables"`
-	GrowthShortTermDebt                           string `json:"growthShortTermDebt"`
-	GrowthTaxPayables                             string `json:"growthTaxPayables"`
-	GrowthDeferredRevenue                         string `json:"growthDeferredRevenue"`
-	GrowthOtherCurrentLiabilities                 string `json:"growthOtherCurrentLiabilities"`
-	GrowthTotalCurrentLiabilities                 string `json:"growthTotalCurrentLiabilities"`
-	GrowthLongTermDebt                            string `json:"growthLongTermDebt"`
-	GrowthDeferredRevenueNonCurrent               string `json:"growthDeferredRevenueNonCurrent"`
-	GrowthDeferredTaxLiabilitiesNonCurrent        string `json:"growthDeferredTaxLiabilitiesNonCurrent"`
-	GrowthOtherNonCurrentLiabilities              string `json:"growthOtherNonCurrentLiabilities"`
-	GrowthTotalNonCurrentLiabilities              string `json:"growthTotalNonCurrentLiabilities"`
-	GrowthOtherLiabilities                        string `json:"growthOtherLiabilities"`
-	GrowthTotalLiabilities                        string `json:"growthTotalLiabilities"`
-	GrowthPreferredStock                          string `json:"growthPreferredStock"`
-	GrowthCommonStock                             string `json:"growthCommonStock"`
-	GrowthRetainedEarnings                        string `json:"growthRetainedEarnings"`
-	GrowthAccumulatedOtherComprehensiveIncomeLoss string `json:"growthAccumulatedOtherComprehensiveIncomeLoss"`
-	GrowthOthertotalStockholdersEquity            string `json:"growthOthertotalStockholdersEquity"`
-	GrowthTotalStockholdersEquity                 string `json:"growthTotalStockholdersEquity"`
-	GrowthMinorityInterest                        string `json:"growthMinorityInterest"`
-	GrowthTotalEquity                             string `json:"growthTotalEquity"`
-	GrowthTotalLiabilitiesAndStockholdersEquity   string `json:"growthTotalLiabilitiesAndStockholdersEquity"`
-	GrowthTotalInvestments                        string `json:"growthTotalInvestments"`
-	GrowthTotalDebt                               string `json:"growthTotalDebt"`
-	GrowthNetDebt                                 string `json:"growthNetDebt"`
-	GrowthAccountsReceivables                     string `json:"growthAccountsReceivables"`
-	GrowthOtherReceivables                        string `json:"growthOtherReceivables"`
-	GrowthPrepaids                                string `json:"growthPrepaids"`
-	GrowthTotalPayables                           string `json:"growthTotalPayables"`
-	GrowthOtherPayables                           string `json:"growthOtherPayables"`
-	GrowthAccruedExpenses                         string `json:"growthAccruedExpenses"`
-	GrowthCapitalLeaseObligationsCurrent          string `json:"growthCapitalLeaseObligationsCurrent"`
-	GrowthAdditionalPaidInCapital                 string `json:"growthAdditionalPaidInCapital"`
-	GrowthTreasuryStock                           string `json:"growthTreasuryStock"`
+// BulkBalanceSheetGrowthResponse represents the response from the Bulk Balance Sheet Growth API
+type BulkBalanceSheetGrowthResponse struct {
+	Symbol                                        string    `json:"symbol"`
+	Date                                          time.Time `json:"date"`
+	CalendarYear                                  string    `json:"calendarYear"`
+	Period                                        string    `json:"period"`
+	GrowthCashAndCashEquivalents                  float64   `json:"growthCashAndCashEquivalents"`
+	GrowthShortTermInvestments                    float64   `json:"growthShortTermInvestments"`
+	GrowthCashAndShortTermInvestments             float64   `json:"growthCashAndShortTermInvestments"`
+	GrowthNetReceivables                          float64   `json:"growthNetReceivables"`
+	GrowthInventory                               float64   `json:"growthInventory"`
+	GrowthOtherCurrentAssets                      float64   `json:"growthOtherCurrentAssets"`
+	GrowthTotalCurrentAssets                      float64   `json:"growthTotalCurrentAssets"`
+	GrowthPropertyPlantEquipmentNet               float64   `json:"growthPropertyPlantEquipmentNet"`
+	GrowthGoodwill                                float64   `json:"growthGoodwill"`
+	GrowthIntangibleAssets                        float64   `json:"growthIntangibleAssets"`
+	GrowthGoodwillAndIntangibleAssets             float64   `json:"growthGoodwillAndIntangibleAssets"`
+	GrowthLongTermInvestments                     float64   `json:"growthLongTermInvestments"`
+	GrowthTaxAssets                               float64   `json:"growthTaxAssets"`
+	GrowthOtherNonCurrentAssets                   float64   `json:"growthOtherNonCurrentAssets"`
+	GrowthTotalNonCurrentAssets                   float64   `json:"growthTotalNonCurrentAssets"`
+	GrowthOtherAssets                             float64   `json:"growthOtherAssets"`
+	GrowthTotalAssets                             float64   `json:"growthTotalAssets"`
+	GrowthAccountPayables                         float64   `json:"growthAccountPayables"`
+	GrowthShortTermDebt                           float64   `json:"growthShortTermDebt"`
+	GrowthTaxPayables                             float64   `json:"growthTaxPayables"`
+	GrowthDeferredRevenue                         float64   `json:"growthDeferredRevenue"`
+	GrowthOtherCurrentLiabilities                 float64   `json:"growthOtherCurrentLiabilities"`
+	GrowthTotalCurrentLiabilities                 float64   `json:"growthTotalCurrentLiabilities"`
+	GrowthLongTermDebt                            float64   `json:"growthLongTermDebt"`
+	GrowthDeferredRevenueNonCurrent               float64   `json:"growthDeferredRevenueNonCurrent"`
+	GrowthDeferredTaxLiabilitiesNonCurrent        float64   `json:"growthDeferredTaxLiabilitiesNonCurrent"`
+	GrowthOtherNonCurrentLiabilities              float64   `json:"growthOtherNonCurrentLiabilities"`
+	GrowthTotalNonCurrentLiabilities              float64   `json:"growthTotalNonCurrentLiabilities"`
+	GrowthOtherLiabilities                        float64   `json:"growthOtherLiabilities"`
+	GrowthTotalLiabilities                        float64   `json:"growthTotalLiabilities"`
+	GrowthCommonStock                             float64   `json:"growthCommonStock"`
+	GrowthRetainedEarnings                        float64   `json:"growthRetainedEarnings"`
+	GrowthAccumulatedOtherComprehensiveIncomeLoss float64   `json:"growthAccumulatedOtherComprehensiveIncomeLoss"`
+	GrowthOtherTotalStockholdersEquity            float64   `json:"growthOthertotalStockholdersEquity"`
+	GrowthTotalStockholdersEquity                 float64   `json:"growthTotalStockholdersEquity"`
+	GrowthTotalLiabilitiesAndStockholdersEquity   float64   `json:"growthTotalLiabilitiesAndStockholdersEquity"`
+	GrowthTotalInvestments                        float64   `json:"growthTotalInvestments"`
+	GrowthTotalDebt                               float64   `json:"growthTotalDebt"`
+	GrowthNetDebt                                 float64   `json:"growthNetDebt"`
 }
 
-// GetBalanceSheetGrowthBulk retrieves growth data across multiple companies' balance sheets
-func (c *Client) GetBalanceSheetGrowthBulk(params BalanceSheetGrowthBulkParams) ([]BalanceSheetGrowthBulkResponse, error) {
-	// Validate required parameters
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
-	}
-	if params.Period == "" {
-		return nil, fmt.Errorf("period parameter is required")
+// BulkBalanceSheetGrowth retrieves balance sheet growth data for multiple companies
+func (c *Client) BulkBalanceSheetGrowth(params BulkBalanceSheetGrowthParams) ([]BulkBalanceSheetGrowthResponse, error) {
+	urlParams := map[string]string{
+		"year":   fmt.Sprintf("%d", params.Year),
+		"period": params.Period,
 	}
 
-	// Build the URL
-	baseURL := c.BaseURL + "/balance-sheet-statement-growth-bulk"
-	u, err := url.Parse(baseURL)
+	var result []BulkBalanceSheetGrowthResponse
+	err := c.doRequest(c.BaseURL+"/bulk-balance-sheet-growth", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add query parameters
-	q := u.Query()
-	q.Set("year", params.Year)
-	q.Set("period", params.Period)
-	u.RawQuery = q.Encode()
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []BalanceSheetGrowthBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk balance sheet growth: %w", err)
 	}
 
 	return result, nil

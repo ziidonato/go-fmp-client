@@ -2,18 +2,19 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// MarketCapitalizationBatchParams represents the parameters for the Batch Market Cap API
+// MarketCapitalizationBatchParams represents the parameters for the Market Capitalization Batch API
 type MarketCapitalizationBatchParams struct {
-	Symbols string `json:"symbols"` // Required: Comma-separated stock symbols (e.g., "AAPL,MSFT,GOOG")
+	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL,MSFT")
 }
 
-// MarketCapitalizationBatchResponse represents the response from the Batch Market Cap API
+// MarketCapitalizationBatchResponse represents the response from the Market Capitalization Batch API
 type MarketCapitalizationBatchResponse struct {
-	Symbol    string `json:"symbol"`
-	Date      string `json:"date"`
-	MarketCap int64  `json:"marketCap"`
+	Symbol    string    `json:"symbol"`
+	Date      time.Time `json:"date"`
+	MarketCap float64   `json:"marketCap"`
 }
 
 // MarketCapitalizationBatch retrieves market capitalization data for multiple companies in a single request

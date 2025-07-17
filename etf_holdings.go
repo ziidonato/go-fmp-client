@@ -2,25 +2,27 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// ETFHoldingsParams represents the parameters for the ETF & Fund Holdings API
+// ETFHoldingsParams represents the parameters for the ETF Holdings API
 type ETFHoldingsParams struct {
-	Symbol string `json:"symbol"` // Required: ETF/Fund symbol (e.g., "SPY")
+	Symbol string  `json:"symbol"` // Required: ETF symbol (e.g., "SPY")
+	Page   *int    `json:"page"`   // Optional: Page number (default: 0)
 }
 
-// ETFHoldingsResponse represents the response from the ETF & Fund Holdings API
+// ETFHoldingsResponse represents the response from the ETF Holdings API
 type ETFHoldingsResponse struct {
-	Symbol           string  `json:"symbol"`
-	Asset            string  `json:"asset"`
-	Name             string  `json:"name"`
-	ISIN             string  `json:"isin"`
-	SecurityCusip    string  `json:"securityCusip"`
-	SharesNumber     int64   `json:"sharesNumber"`
-	WeightPercentage float64 `json:"weightPercentage"`
-	MarketValue      float64 `json:"marketValue"`
-	UpdatedAt        string  `json:"updatedAt"`
-	Updated          string  `json:"updated"`
+	Symbol           string    `json:"symbol"`
+	Asset            string    `json:"asset"`
+	Name             string    `json:"name"`
+	CUSIP            string    `json:"cusip"`
+	ISIN             string    `json:"isin"`
+	SharesNumber     int64     `json:"sharesNumber"`
+	WeightPercentage float64   `json:"weightPercentage"`
+	MarketValue      float64   `json:"marketValue"`
+	UpdatedAt        time.Time `json:"updatedAt"`
+	Updated          string    `json:"updated"`
 }
 
 // ETFHoldings retrieves a detailed breakdown of the assets held within ETFs and mutual funds

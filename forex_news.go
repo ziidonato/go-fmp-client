@@ -3,18 +3,18 @@ package go_fmp
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
-// ForexNewsResponse represents the response from the forex news API
+// ForexNewsResponse represents the response from the Forex News API
 type ForexNewsResponse struct {
-	Symbol        string `json:"symbol"`
-	PublishedDate string `json:"publishedDate"`
-	Publisher     string `json:"publisher"`
-	Title         string `json:"title"`
-	Image         string `json:"image"`
-	Site          string `json:"site"`
-	Text          string `json:"text"`
-	URL           string `json:"url"`
+	Symbol        string    `json:"symbol"`
+	PublishedDate time.Time `json:"publishedDate"`
+	Title         string    `json:"title"`
+	Image         string    `json:"image"`
+	Site          string    `json:"site"`
+	Text          string    `json:"text"`
+	URL           string    `json:"url"`
 }
 
 // GetForexNews retrieves the latest forex news articles

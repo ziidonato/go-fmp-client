@@ -1,67 +1,46 @@
 package go_fmp
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 )
 
-// RatingBulkResponse represents the response from the Rating Bulk API
-type RatingBulkResponse struct {
-	Symbol                  string `json:"symbol"`
-	Date                    string `json:"date"`
-	Rating                  string `json:"rating"`
-	DiscountedCashFlowScore string `json:"discountedCashFlowScore"`
-	ReturnOnEquityScore     string `json:"returnOnEquityScore"`
-	ReturnOnAssetsScore     string `json:"returnOnAssetsScore"`
-	DebtToEquityScore       string `json:"debtToEquityScore"`
-	PriceToEarningsScore    string `json:"priceToEarningsScore"`
-	PriceToBookScore        string `json:"priceToBookScore"`
+// BulkRatingParams represents the parameters for the Bulk Rating API
+type BulkRatingParams struct {
+	Date string `json:"date"` // Required: date (e.g., "2024-10-22")
 }
 
-// GetRatingBulk retrieves comprehensive rating data for multiple stocks
-func (c *Client) GetRatingBulk() ([]RatingBulkResponse, error) {
-	// Build the URL
-	baseURL := c.BaseURL + "/rating-bulk"
-	u, err := url.Parse(baseURL)
+// BulkRatingResponse represents the response from the Bulk Rating API
+type BulkRatingResponse struct {
+	Symbol                   string `json:"symbol"`
+	Date                    time.Time `json:"date"`
+	Rating                  string `json:"rating"`
+	RatingScore             float64 `json:"ratingScore"`
+	RatingRecommendation    string `json:"ratingRecommendation"`
+	DCFScore                float64 `json:"dcfScore"`
+	DCFRecommendation       string `json:"dcfRecommendation"`
+	ROEScore                float64 `json:"roeScore"`
+	ROERecommendation       string `json:"roeRecommendation"`
+	ROAScore                float64 `json:"roaScore"`
+	ROARecommendation       string `json:"roaRecommendation"`
+	DEScore                 float64 `json:"deScore"`
+	DERecommendation        string `json:"deRecommendation"`
+	PEScore                 float64 `json:"peScore"`
+	PERecommendation        string `json:"peRecommendation"`
+	PBScore                 float64 `json:"pbScore"`
+	PBRecommendation        string `json:"pbRecommendation"`
+}
+
+// BulkRating retrieves bulk stock ratings for a specific date
+func (c *Client) BulkRating(params BulkRatingParams) ([]BulkRatingResponse, error) {
+	urlParams := map[string]string{
+		"date": params.Date,
+	}
+
+	var result []BulkRatingResponse
+	err := c.doRequest(c.BaseURL+"/bulk-rating", urlParams, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing URL: %w", err)
-	}
-
-	// Add API key if available
-	if c.APIKey != "" {
-		q := u.Query()
-		q.Set("apikey", c.APIKey)
-		u.RawQuery = q.Encode()
-	}
-
-	// Create the request
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	// Set headers
-	req.Header.Set("User-Agent", "fmp-go-client")
-	req.Header.Set("Accept", "application/json")
-
-	// Make the request
-	resp, err := c.HTTPClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Check response status
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	// Parse the response
-	var result []RatingBulkResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return nil, fmt.Errorf("error decoding response: %w", err)
+		return nil, fmt.Errorf("failed to get bulk rating: %w", err)
 	}
 
 	return result, nil
