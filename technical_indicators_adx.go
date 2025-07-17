@@ -15,7 +15,7 @@ type TechnicalIndicatorADXResponse struct {
 }
 
 // GetTechnicalIndicatorADX retrieves average directional index technical indicator
-func (c *Client) GetTechnicalIndicatorADX(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorADXResponse, error) {
+func (c *Client) GetTechnicalIndicatorADX(symbol string, periodLength int, timeframe TimeFrame) ([]TechnicalIndicatorADXResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
@@ -32,7 +32,7 @@ func (c *Client) GetTechnicalIndicatorADX(symbol string, periodLength int, timef
 	err := c.doRequest(url, map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
+		"timeframe":    timeframe.String(),
 	}, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)

@@ -115,3 +115,26 @@ const (
 	TypeOfOwnerTenPercentOwner TypeOfOwner = "10% owner"
 	TypeOfOwnerOther          TypeOfOwner = "other"
 )
+
+// TimeFrame represents timeframes for technical indicators
+// e.g., 1min, 5min, 15min, 30min, 1hour, 4hour, daily, weekly, monthly
+// These are typical for FMP technical indicator endpoints
+//
+type TimeFrame string
+
+const (
+	TimeFrame1Min    TimeFrame = "1min"
+	TimeFrame5Min    TimeFrame = "5min"
+	TimeFrame15Min   TimeFrame = "15min"
+	TimeFrame30Min   TimeFrame = "30min"
+	TimeFrame1Hour   TimeFrame = "1hour"
+	TimeFrame4Hour   TimeFrame = "4hour"
+	TimeFrameDaily   TimeFrame = "daily"
+	TimeFrameWeekly  TimeFrame = "weekly"
+	TimeFrameMonthly TimeFrame = "monthly"
+)
+
+// String converts TimeFrame to string for API calls
+func (tf TimeFrame) String() string {
+	return string(tf)
+}

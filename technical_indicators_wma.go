@@ -15,7 +15,7 @@ type TechnicalIndicatorWMAResponse struct {
 }
 
 // GetTechnicalIndicatorWMA retrieves weighted moving average technical indicator
-func (c *Client) GetTechnicalIndicatorWMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorWMAResponse, error) {
+func (c *Client) GetTechnicalIndicatorWMA(symbol string, periodLength int, timeframe TimeFrame) ([]TechnicalIndicatorWMAResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
@@ -30,7 +30,7 @@ func (c *Client) GetTechnicalIndicatorWMA(symbol string, periodLength int, timef
 	params := map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
+		"timeframe":    timeframe.String(),
 	}
 	var result []TechnicalIndicatorWMAResponse
 	if err := c.doRequest(url, params, &result); err != nil {

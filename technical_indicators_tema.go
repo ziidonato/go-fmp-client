@@ -15,7 +15,7 @@ type TechnicalIndicatorTEMAResponse struct {
 }
 
 // GetTechnicalIndicatorTEMA retrieves triple exponential moving average technical indicator
-func (c *Client) GetTechnicalIndicatorTEMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorTEMAResponse, error) {
+func (c *Client) GetTechnicalIndicatorTEMA(symbol string, periodLength int, timeframe TimeFrame) ([]TechnicalIndicatorTEMAResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
@@ -30,7 +30,7 @@ func (c *Client) GetTechnicalIndicatorTEMA(symbol string, periodLength int, time
 	params := map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
+		"timeframe":    timeframe.String(),
 	}
 	var result []TechnicalIndicatorTEMAResponse
 	if err := c.doRequest(url, params, &result); err != nil {

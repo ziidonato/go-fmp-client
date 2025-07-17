@@ -15,7 +15,7 @@ type TechnicalIndicatorWilliamsResponse struct {
 }
 
 // GetTechnicalIndicatorWilliams retrieves Williams %R technical indicator
-func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorWilliamsResponse, error) {
+func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, timeframe TimeFrame) ([]TechnicalIndicatorWilliamsResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
@@ -30,7 +30,7 @@ func (c *Client) GetTechnicalIndicatorWilliams(symbol string, periodLength int, 
 	params := map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
+		"timeframe":    timeframe.String(),
 	}
 	var result []TechnicalIndicatorWilliamsResponse
 	if err := c.doRequest(url, params, &result); err != nil {

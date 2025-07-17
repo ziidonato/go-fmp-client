@@ -15,7 +15,7 @@ type TechnicalIndicatorStandardDeviationResponse struct {
 }
 
 // GetTechnicalIndicatorStandardDeviation retrieves standard deviation technical indicator
-func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorStandardDeviationResponse, error) {
+func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLength int, timeframe TimeFrame) ([]TechnicalIndicatorStandardDeviationResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
@@ -30,7 +30,7 @@ func (c *Client) GetTechnicalIndicatorStandardDeviation(symbol string, periodLen
 	params := map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
+		"timeframe":    timeframe.String(),
 	}
 	var result []TechnicalIndicatorStandardDeviationResponse
 	if err := c.doRequest(url, params, &result); err != nil {

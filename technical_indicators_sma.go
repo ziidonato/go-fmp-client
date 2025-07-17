@@ -15,7 +15,7 @@ type TechnicalIndicatorSMAResponse struct {
 }
 
 // GetTechnicalIndicatorSMA retrieves simple moving average technical indicator
-func (c *Client) GetTechnicalIndicatorSMA(symbol string, periodLength int, timeframe string) ([]TechnicalIndicatorSMAResponse, error) {
+func (c *Client) GetTechnicalIndicatorSMA(symbol string, periodLength int, timeframe TimeFrame) ([]TechnicalIndicatorSMAResponse, error) {
 	if symbol == "" {
 		return nil, fmt.Errorf("symbol is required")
 	}
@@ -30,7 +30,7 @@ func (c *Client) GetTechnicalIndicatorSMA(symbol string, periodLength int, timef
 	params := map[string]string{
 		"symbol":       symbol,
 		"periodLength": strconv.Itoa(periodLength),
-		"timeframe":    timeframe,
+		"timeframe":    timeframe.String(),
 	}
 	var result []TechnicalIndicatorSMAResponse
 	if err := c.doRequest(url, params, &result); err != nil {
