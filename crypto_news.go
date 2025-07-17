@@ -3,18 +3,19 @@ package go_fmp
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
-// CryptoNewsResponse represents the response from the crypto news API
+// CryptoNewsResponse represents the response from the Crypto News API
 type CryptoNewsResponse struct {
-	Symbol        string `json:"symbol"`
-	PublishedDate string `json:"publishedDate"`
+	Symbol        string    `json:"symbol"`
+	PublishedDate time.Time `json:"publishedDate"`
 	Publisher     string `json:"publisher"`
-	Title         string `json:"title"`
-	Image         string `json:"image"`
-	Site          string `json:"site"`
-	Text          string `json:"text"`
-	URL           string `json:"url"`
+	Title         string    `json:"title"`
+	Image         string    `json:"image"`
+	Site          string    `json:"site"`
+	Text          string    `json:"text"`
+	URL           string    `json:"url"`
 }
 
 // GetCryptoNews retrieves the latest cryptocurrency news

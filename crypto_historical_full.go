@@ -5,23 +5,23 @@ import (
 	"time"
 )
 
-// StockPriceVolumeDataParams represents the parameters for the Stock Price Volume Data API
-type StockPriceVolumeDataParams struct {
-	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+// CryptoHistoricalFullParams represents the parameters for the Crypto Historical Full API
+type CryptoHistoricalFullParams struct {
+	Symbol string  `json:"symbol"` // Required: Crypto symbol (e.g., "BTCUSD")
 	From   *string `json:"from"`   // Optional: Start date (YYYY-MM-DD format)
 	To     *string `json:"to"`     // Optional: End date (YYYY-MM-DD format)
 }
 
-// StockPriceVolumeDataResponse represents the response from the Stock Price Volume Data API
-type StockPriceVolumeDataResponse struct {
+// CryptoHistoricalFullResponse represents the response from the Crypto Historical Full API
+type CryptoHistoricalFullResponse struct {
 	Date          time.Time  `json:"date"`
 	Open          float64 `json:"open"`
-	High          float64 `json:"high"`
 	Low           float64 `json:"low"`
+	High          float64 `json:"high"`
 	Close         float64 `json:"close"`
 	AdjClose      float64 `json:"adjClose"`
-	Volume        int64   `json:"volume"`
-	UnadjustedVol int64   `json:"unadjustedVolume"`
+	Volume        float64 `json:"volume"`
+	UnadjustedVolume float64 `json:"unadjustedVolume"`
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	Vwap          float64 `json:"vwap"`
@@ -29,8 +29,8 @@ type StockPriceVolumeDataResponse struct {
 	ChangeOverTime float64 `json:"changeOverTime"`
 }
 
-// StockPriceVolumeData retrieves full price and volume data for any stock symbol
-func (c *Client) StockPriceVolumeData(params StockPriceVolumeDataParams) ([]StockPriceVolumeDataResponse, error) {
+// CryptoHistoricalFull retrieves comprehensive historical price data for cryptocurrencies
+func (c *Client) CryptoHistoricalFull(params CryptoHistoricalFullParams) ([]CryptoHistoricalFullResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
@@ -47,10 +47,12 @@ func (c *Client) StockPriceVolumeData(params StockPriceVolumeDataParams) ([]Stoc
 		urlParams["to"] = *params.To
 	}
 
-	url := c.BaseURL + "/historical-price-eod/full"
-	var result []StockPriceVolumeDataResponse
-	if err := c.doRequest(url, urlParams, &result); err != nil {
+	url := fmt.Sprintf("%s/historical-price-full/%s", c.BaseURL, params.Symbol)
+	var result []CryptoHistoricalFullResponse
+	err := c.doRequest(url, urlParams, &result)
+	if err != nil {
 		return nil, err
 	}
+
 	return result, nil
 }

@@ -3,18 +3,19 @@ package go_fmp
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
 // SearchForexNewsResponse represents the response from the search forex news API
 type SearchForexNewsResponse struct {
-	Symbol        string `json:"symbol"`
-	PublishedDate string `json:"publishedDate"`
-	Publisher     string `json:"publisher"`
-	Title         string `json:"title"`
-	Image         string `json:"image"`
-	Site          string `json:"site"`
-	Text          string `json:"text"`
-	URL           string `json:"url"`
+	Symbol        string    `json:"symbol"`
+	PublishedDate time.Time `json:"publishedDate"`
+	Publisher     string    `json:"publisher"`
+	Title         string    `json:"title"`
+	Image         string    `json:"image"`
+	Site          string    `json:"site"`
+	Text          string    `json:"text"`
+	URL           string    `json:"url"`
 }
 
 // SearchForexNews searches for foreign exchange news by symbol

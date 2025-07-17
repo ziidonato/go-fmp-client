@@ -23,17 +23,16 @@ type InstitutionalOwnershipIndustrySummaryResponse struct {
 
 // InstitutionalOwnershipIndustrySummary retrieves industry performance summary
 func (c *Client) InstitutionalOwnershipIndustrySummary(params InstitutionalOwnershipIndustrySummaryParams) ([]InstitutionalOwnershipIndustrySummaryResponse, error) {
-	if params.Year == "" {
-		return nil, fmt.Errorf("year parameter is required")
-	}
-
-	if params.Quarter == "" {
-		return nil, fmt.Errorf("quarter parameter is required")
+	if params.Industry == "" {
+		return nil, fmt.Errorf("industry parameter is required")
 	}
 
 	urlParams := map[string]string{
-		"year":    params.Year,
-		"quarter": params.Quarter,
+		"industry": params.Industry,
+	}
+
+	if params.Page != nil {
+		urlParams["page"] = fmt.Sprintf("%d", *params.Page)
 	}
 
 	var result []InstitutionalOwnershipIndustrySummaryResponse

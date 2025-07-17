@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // DCFValuationParams represents the parameters for the DCF Valuation API
@@ -11,10 +12,10 @@ type DCFValuationParams struct {
 
 // DCFValuationResponse represents the response from the DCF Valuation API
 type DCFValuationResponse struct {
-	Symbol     string  `json:"symbol"`
-	Date       string  `json:"date"`
-	DCF        float64 `json:"dcf"`
-	StockPrice float64 `json:"Stock Price"`
+	Symbol     string    `json:"symbol"`
+	Date       time.Time `json:"date"`
+	DCF        float64   `json:"dcf"`
+	StockPrice float64   `json:"stockPrice"`
 }
 
 // DCFValuation estimates the intrinsic value of a company using discounted cash flow analysis

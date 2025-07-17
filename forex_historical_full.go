@@ -2,27 +2,31 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// ForexHistoricalFullParams represents the parameters for the Historical Forex Full Chart API
+// ForexHistoricalFullParams represents the parameters for the Forex Historical Full API
 type ForexHistoricalFullParams struct {
-	Symbol string  `json:"symbol"` // Required: Forex symbol (e.g., "EURUSD")
-	From   *string `json:"from"`   // Optional: Start date (e.g., "2024-01-01")
-	To     *string `json:"to"`     // Optional: End date (e.g., "2024-03-01")
+	Symbol string  `json:"symbol"` // Required: Forex pair symbol (e.g., "EURUSD")
+	From   *string `json:"from"`   // Optional: Start date (YYYY-MM-DD format)
+	To     *string `json:"to"`     // Optional: End date (YYYY-MM-DD format)
 }
 
-// ForexHistoricalFullResponse represents the response from the Historical Forex Full Chart API
+// ForexHistoricalFullResponse represents the response from the Forex Historical Full API
 type ForexHistoricalFullResponse struct {
-	Symbol        string  `json:"symbol"`
-	Date          string  `json:"date"`
+	Date          time.Time  `json:"date"`
 	Open          float64 `json:"open"`
-	High          float64 `json:"high"`
 	Low           float64 `json:"low"`
+	High          float64 `json:"high"`
 	Close         float64 `json:"close"`
+	AdjClose      float64 `json:"adjClose"`
 	Volume        int64   `json:"volume"`
+	UnadjustedVolume int64 `json:"unadjustedVolume"`
 	Change        float64 `json:"change"`
 	ChangePercent float64 `json:"changePercent"`
 	Vwap          float64 `json:"vwap"`
+	Label         string  `json:"label"`
+	ChangeOverTime float64 `json:"changeOverTime"`
 }
 
 // ForexHistoricalFull retrieves comprehensive historical end-of-day forex price data for currency pairs

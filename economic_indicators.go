@@ -2,6 +2,7 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
 // EconomicIndicatorsParams represents the parameters for the Economic Indicators API
@@ -11,13 +12,11 @@ type EconomicIndicatorsParams struct {
 
 // EconomicIndicatorsResponse represents the response from the Economic Indicators API
 type EconomicIndicatorsResponse struct {
-	Date        string  `json:"date"`
-	Name        string  `json:"name"`
+	Date        time.Time  `json:"date"`
 	Value       float64 `json:"value"`
-	Unit        string  `json:"unit"`
+	Name        string  `json:"name"`
+	Country     string  `json:"country"`
 	Period      string  `json:"period"`
-	Source      string  `json:"source"`
-	Description string  `json:"description"`
 }
 
 // EconomicIndicators retrieves real-time and historical economic data for key indicators

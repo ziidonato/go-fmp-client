@@ -1,6 +1,9 @@
 package go_fmp
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // BalanceSheetStatementTTMParams represents the parameters for the Balance Sheet Statement TTM API
 type BalanceSheetStatementTTMParams struct {
@@ -10,66 +13,60 @@ type BalanceSheetStatementTTMParams struct {
 
 // BalanceSheetStatementTTMResponse represents the response from the Balance Sheet Statement TTM API
 type BalanceSheetStatementTTMResponse struct {
-	Date                                    string `json:"date"`
+	Date                                    time.Time `json:"date"`
 	Symbol                                  string `json:"symbol"`
 	ReportedCurrency                        string `json:"reportedCurrency"`
 	CIK                                     string `json:"cik"`
-	FilingDate                              string `json:"filingDate"`
-	AcceptedDate                            string `json:"acceptedDate"`
-	FiscalYear                              string `json:"fiscalYear"`
+	FilingDate                              time.Time `json:"filingDate"`
+	AcceptedDate                            time.Time `json:"acceptedDate"`
+	CalendarYear                            string `json:"calendarYear"`
 	Period                                  string `json:"period"`
-	CashAndCashEquivalents                  int64  `json:"cashAndCashEquivalents"`
-	ShortTermInvestments                    int64  `json:"shortTermInvestments"`
-	CashAndShortTermInvestments             int64  `json:"cashAndShortTermInvestments"`
-	NetReceivables                          int64  `json:"netReceivables"`
-	AccountsReceivables                     int64  `json:"accountsReceivables"`
-	OtherReceivables                        int64  `json:"otherReceivables"`
-	Inventory                               int64  `json:"inventory"`
-	Prepaids                                int64  `json:"prepaids"`
-	OtherCurrentAssets                      int64  `json:"otherCurrentAssets"`
-	TotalCurrentAssets                      int64  `json:"totalCurrentAssets"`
-	PropertyPlantEquipmentNet               int64  `json:"propertyPlantEquipmentNet"`
-	Goodwill                                int64  `json:"goodwill"`
-	IntangibleAssets                        int64  `json:"intangibleAssets"`
-	GoodwillAndIntangibleAssets             int64  `json:"goodwillAndIntangibleAssets"`
-	LongTermInvestments                     int64  `json:"longTermInvestments"`
-	TaxAssets                               int64  `json:"taxAssets"`
-	OtherNonCurrentAssets                   int64  `json:"otherNonCurrentAssets"`
-	TotalNonCurrentAssets                   int64  `json:"totalNonCurrentAssets"`
-	OtherAssets                             int64  `json:"otherAssets"`
-	TotalAssets                             int64  `json:"totalAssets"`
-	TotalPayables                           int64  `json:"totalPayables"`
-	AccountPayables                         int64  `json:"accountPayables"`
-	OtherPayables                           int64  `json:"otherPayables"`
-	AccruedExpenses                         int64  `json:"accruedExpenses"`
-	ShortTermDebt                           int64  `json:"shortTermDebt"`
-	CapitalLeaseObligationsCurrent          int64  `json:"capitalLeaseObligationsCurrent"`
-	TaxPayables                             int64  `json:"taxPayables"`
-	DeferredRevenue                         int64  `json:"deferredRevenue"`
-	OtherCurrentLiabilities                 int64  `json:"otherCurrentLiabilities"`
-	TotalCurrentLiabilities                 int64  `json:"totalCurrentLiabilities"`
-	LongTermDebt                            int64  `json:"longTermDebt"`
-	DeferredRevenueNonCurrent               int64  `json:"deferredRevenueNonCurrent"`
-	DeferredTaxLiabilitiesNonCurrent        int64  `json:"deferredTaxLiabilitiesNonCurrent"`
-	OtherNonCurrentLiabilities              int64  `json:"otherNonCurrentLiabilities"`
-	TotalNonCurrentLiabilities              int64  `json:"totalNonCurrentLiabilities"`
-	OtherLiabilities                        int64  `json:"otherLiabilities"`
-	CapitalLeaseObligations                 int64  `json:"capitalLeaseObligations"`
-	TotalLiabilities                        int64  `json:"totalLiabilities"`
-	TreasuryStock                           int64  `json:"treasuryStock"`
-	PreferredStock                          int64  `json:"preferredStock"`
-	CommonStock                             int64  `json:"commonStock"`
-	RetainedEarnings                        int64  `json:"retainedEarnings"`
-	AdditionalPaidInCapital                 int64  `json:"additionalPaidInCapital"`
-	AccumulatedOtherComprehensiveIncomeLoss int64  `json:"accumulatedOtherComprehensiveIncomeLoss"`
-	OtherTotalStockholdersEquity            int64  `json:"otherTotalStockholdersEquity"`
-	TotalStockholdersEquity                 int64  `json:"totalStockholdersEquity"`
-	TotalEquity                             int64  `json:"totalEquity"`
-	MinorityInterest                        int64  `json:"minorityInterest"`
-	TotalLiabilitiesAndTotalEquity          int64  `json:"totalLiabilitiesAndTotalEquity"`
-	TotalInvestments                        int64  `json:"totalInvestments"`
-	TotalDebt                               int64  `json:"totalDebt"`
-	NetDebt                                 int64  `json:"netDebt"`
+	CashAndCashEquivalentsTTM               float64 `json:"cashAndCashEquivalentsTTM"`
+	ShortTermInvestmentsTTM                 float64 `json:"shortTermInvestmentsTTM"`
+	CashAndShortTermInvestmentsTTM          float64 `json:"cashAndShortTermInvestmentsTTM"`
+	NetReceivablesTTM                       float64 `json:"netReceivablesTTM"`
+	InventoryTTM                            float64 `json:"inventoryTTM"`
+	OtherCurrentAssetsTTM                   float64 `json:"otherCurrentAssetsTTM"`
+	TotalCurrentAssetsTTM                   float64 `json:"totalCurrentAssetsTTM"`
+	PropertyPlantEquipmentNetTTM            float64 `json:"propertyPlantEquipmentNetTTM"`
+	GoodwillTTM                             float64 `json:"goodwillTTM"`
+	IntangibleAssetsTTM                     float64 `json:"intangibleAssetsTTM"`
+	GoodwillAndIntangibleAssetsTTM          float64 `json:"goodwillAndIntangibleAssetsTTM"`
+	LongTermInvestmentsTTM                  float64 `json:"longTermInvestmentsTTM"`
+	TaxAssetsTTM                            float64 `json:"taxAssetsTTM"`
+	OtherNonCurrentAssetsTTM                float64 `json:"otherNonCurrentAssetsTTM"`
+	TotalNonCurrentAssetsTTM                float64 `json:"totalNonCurrentAssetsTTM"`
+	OtherAssetsTTM                          float64 `json:"otherAssetsTTM"`
+	TotalAssetsTTM                          float64 `json:"totalAssetsTTM"`
+	AccountPayablesTTM                      float64 `json:"accountPayablesTTM"`
+	ShortTermDebtTTM                        float64 `json:"shortTermDebtTTM"`
+	TaxPayablesTTM                          float64 `json:"taxPayablesTTM"`
+	DeferredRevenueTTM                      float64 `json:"deferredRevenueTTM"`
+	OtherCurrentLiabilitiesTTM              float64 `json:"otherCurrentLiabilitiesTTM"`
+	TotalCurrentLiabilitiesTTM              float64 `json:"totalCurrentLiabilitiesTTM"`
+	LongTermDebtTTM                         float64 `json:"longTermDebtTTM"`
+	DeferredRevenueNonCurrentTTM            float64 `json:"deferredRevenueNonCurrentTTM"`
+	DeferredTaxLiabilitiesNonCurrentTTM     float64 `json:"deferredTaxLiabilitiesNonCurrentTTM"`
+	OtherNonCurrentLiabilitiesTTM           float64 `json:"otherNonCurrentLiabilitiesTTM"`
+	TotalNonCurrentLiabilitiesTTM           float64 `json:"totalNonCurrentLiabilitiesTTM"`
+	OtherLiabilitiesTTM                     float64 `json:"otherLiabilitiesTTM"`
+	CapitalLeaseObligationsTTM              float64 `json:"capitalLeaseObligationsTTM"`
+	TotalLiabilitiesTTM                     float64 `json:"totalLiabilitiesTTM"`
+	PreferredStockTTM                       float64 `json:"preferredStockTTM"`
+	CommonStockTTM                          float64 `json:"commonStockTTM"`
+	RetainedEarningsTTM                     float64 `json:"retainedEarningsTTM"`
+	AccumulatedOtherComprehensiveIncomeLossTTM float64 `json:"accumulatedOtherComprehensiveIncomeLossTTM"`
+	OtherTotalStockholdersEquityTTM         float64 `json:"otherTotalStockholdersEquityTTM"`
+	TotalStockholdersEquityTTM              float64 `json:"totalStockholdersEquityTTM"`
+	TotalLiabilitiesAndStockholdersEquityTTM float64 `json:"totalLiabilitiesAndStockholdersEquityTTM"`
+	MinorityInterestTTM                     float64 `json:"minorityInterestTTM"`
+	TotalEquityTTM                          float64 `json:"totalEquityTTM"`
+	TotalLiabilitiesAndTotalEquityTTM       float64 `json:"totalLiabilitiesAndTotalEquityTTM"`
+	TotalInvestmentsTTM                     float64 `json:"totalInvestmentsTTM"`
+	TotalDebtTTM                            float64 `json:"totalDebtTTM"`
+	NetDebtTTM                              float64 `json:"netDebtTTM"`
+	Link                                    string `json:"link"`
+	FinalLink                               string `json:"finalLink"`
 }
 
 // BalanceSheetStatementTTM retrieves trailing twelve months balance sheet statement data for a specific stock symbol

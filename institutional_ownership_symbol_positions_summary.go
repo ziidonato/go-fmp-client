@@ -7,8 +7,10 @@ import (
 
 // InstitutionalOwnershipSymbolPositionsSummaryParams represents the parameters for the Institutional Ownership Symbol Positions Summary API
 type InstitutionalOwnershipSymbolPositionsSummaryParams struct {
-	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Page   *int    `json:"page"`   // Optional: Page number (default: 0)
+	Symbol  string  `json:"symbol"`  // Required: Stock symbol (e.g., "AAPL")
+	Year    string  `json:"year"`    // Required: Year (e.g., "2024")
+	Quarter string  `json:"quarter"` // Required: Quarter (e.g., "Q1")
+	Page    *int    `json:"page"`    // Optional: Page number (default: 0)
 }
 
 // InstitutionalOwnershipSymbolPositionsSummaryResponse represents the response from the Institutional Ownership Symbol Positions Summary API

@@ -22,17 +22,21 @@ type LatestFinancialStatementsResponse struct {
 
 // LatestFinancialStatements retrieves the latest financial statements data
 func (c *Client) LatestFinancialStatements(params LatestFinancialStatementsParams) ([]LatestFinancialStatementsResponse, error) {
-	urlParams := map[string]string{}
-
-	if params.Page != nil {
-		urlParams["page"] = fmt.Sprintf("%d", *params.Page)
+	if params.Symbol == "" {
+		return nil, fmt.Errorf("symbol parameter is required")
 	}
 
-	if params.Limit != nil {
-		if *params.Limit > 250 {
-			return nil, fmt.Errorf("limit cannot exceed 250")
-		}
-		urlParams["limit"] = fmt.Sprintf("%d", *params.Limit)
+	if params.Type == "" {
+		return nil, fmt.Errorf("type parameter is required")
+	}
+
+	if params.Type != "income" && params.Type != "balance" && params.Type != "cash" {
+		return nil, fmt.Errorf("type must be either 'income', 'balance', or 'cash'")
+	}
+
+	urlParams := map[string]string{
+		"symbol": params.Symbol,
+		"type":   params.Type,
 	}
 
 	var result []LatestFinancialStatementsResponse

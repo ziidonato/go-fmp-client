@@ -1,7 +1,6 @@
 package go_fmp
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -22,13 +21,23 @@ type TreasuryRatesResponse struct {
 	Year30    float64 `json:"year30"`
 }
 
-// TreasuryRates retrieves real-time and historical Treasury rates for all maturities
-func (c *Client) TreasuryRates() ([]TreasuryRatesResponse, error) {
+// TreasuryRates retrieves U.S. Treasury rates data
+func (c *Client) TreasuryRates(from, to string) ([]TreasuryRatesResponse, error) {
+	urlParams := map[string]string{}
+
+	if from != "" {
+		urlParams["from"] = from
+	}
+
+	if to != "" {
+		urlParams["to"] = to
+	}
+
 	var result []TreasuryRatesResponse
-	err := c.doRequest(c.BaseURL+"/treasury-rates", map[string]string{}, &result)
+	err := c.doRequest(c.BaseURL+"/treasury", urlParams, &result)
 	if err != nil {
 		return nil, err
 	}
 
-	return result, err
+	return result, nil
 }

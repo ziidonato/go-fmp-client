@@ -13,6 +13,11 @@ const (
 	PeriodFY       Period = "FY"
 )
 
+// String converts Period to string for API calls
+func (p Period) String() string {
+	return string(p)
+}
+
 // TransactionType represents insider trading transaction types
 type TransactionType string
 

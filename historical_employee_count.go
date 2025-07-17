@@ -2,25 +2,26 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// HistoricalEmployeeCountParams represents the parameters for the Company Historical Employee Count API
+// HistoricalEmployeeCountParams represents the parameters for the Historical Employee Count API
 type HistoricalEmployeeCountParams struct {
-	Symbol string `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
-	Limit  *int   `json:"limit"`  // Optional: Number of results (Maximum 10000 records per request)
+	Symbol string  `json:"symbol"` // Required: Stock symbol (e.g., "AAPL")
+	Limit  *int    `json:"limit"`  // Optional: Number of records to return
 }
 
-// HistoricalEmployeeCountResponse represents the response from the Company Historical Employee Count API
+// HistoricalEmployeeCountResponse represents the response from the Historical Employee Count API
 type HistoricalEmployeeCountResponse struct {
-	Symbol         string `json:"symbol"`
-	CIK            string `json:"cik"`
-	AcceptanceTime string `json:"acceptanceTime"`
-	PeriodOfReport string `json:"periodOfReport"`
-	CompanyName    string `json:"companyName"`
-	FormType       string `json:"formType"`
-	FilingDate     string `json:"filingDate"`
-	EmployeeCount  int    `json:"employeeCount"`
-	Source         string `json:"source"`
+	Symbol               string    `json:"symbol"`
+	CIK                  string    `json:"cik"`
+	AcceptanceTime       string    `json:"acceptanceTime"`
+	PeriodOfReport       string    `json:"periodOfReport"`
+	CompanyName          string    `json:"companyName"`
+	FormType             FormType  `json:"formType"`
+	FilingDate           time.Time `json:"filingDate"`
+	EmployeeCount        int       `json:"employeeCount"`
+	Source               string    `json:"source"`
 }
 
 // HistoricalEmployeeCount retrieves historical employee count data for a company based on specific reporting periods

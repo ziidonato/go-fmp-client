@@ -30,7 +30,7 @@ type StockPriceChartsResponse struct {
 }
 
 // UnadjustedStockPriceChart retrieves stock price and volume data without adjustments for stock splits
-func (c *Client) UnadjustedStockPriceChart(params DailyPriceChartParams) ([]DailyPriceChartResponse, error) {
+func (c *Client) UnadjustedStockPriceChart(params StockPriceChartsParams) ([]StockPriceChartsResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
@@ -48,7 +48,7 @@ func (c *Client) UnadjustedStockPriceChart(params DailyPriceChartParams) ([]Dail
 	}
 
 	url := c.BaseURL + "/historical-price-eod/non-split-adjusted"
-	var result []DailyPriceChartResponse
+	var result []StockPriceChartsResponse
 	if err := c.doRequest(url, urlParams, &result); err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *Client) UnadjustedStockPriceChart(params DailyPriceChartParams) ([]Dail
 }
 
 // DividendAdjustedPriceChart retrieves stock price and volume data with dividend adjustments
-func (c *Client) DividendAdjustedPriceChart(params DailyPriceChartParams) ([]DailyPriceChartResponse, error) {
+func (c *Client) DividendAdjustedPriceChart(params StockPriceChartsParams) ([]StockPriceChartsResponse, error) {
 	if params.Symbol == "" {
 		return nil, fmt.Errorf("symbol parameter is required")
 	}
@@ -73,7 +73,7 @@ func (c *Client) DividendAdjustedPriceChart(params DailyPriceChartParams) ([]Dai
 		urlParams["to"] = *params.To
 	}
 
-	var result []DailyPriceChartResponse
+	var result []StockPriceChartsResponse
 	err := c.doRequest(c.BaseURL+"/historical-price-eod/dividend-adjusted", urlParams, &result)
 	if err != nil {
 		return nil, fmt.Errorf("error making request: %w", err)

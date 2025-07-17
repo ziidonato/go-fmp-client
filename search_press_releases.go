@@ -3,18 +3,18 @@ package go_fmp
 import (
 	"fmt"
 	"strconv"
+	"time"
 )
 
-// SearchPressReleasesResponse represents the response from the search press releases API
+// SearchPressReleasesResponse represents the response from the Search Press Releases API
 type SearchPressReleasesResponse struct {
-	Symbol        string `json:"symbol"`
-	PublishedDate string `json:"publishedDate"`
-	Publisher     string `json:"publisher"`
-	Title         string `json:"title"`
-	Image         string `json:"image"`
-	Site          string `json:"site"`
-	Text          string `json:"text"`
-	URL           string `json:"url"`
+	Symbol        string    `json:"symbol"`
+	PublishedDate time.Time `json:"publishedDate"`
+	Title         string    `json:"title"`
+	Image         string    `json:"image"`
+	Site          string    `json:"site"`
+	Text          string    `json:"text"`
+	URL           string    `json:"url"`
 }
 
 // SearchPressReleases searches for company press releases by symbol

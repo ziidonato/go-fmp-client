@@ -4,35 +4,34 @@ import (
 	"fmt"
 )
 
-// IndustryPerformanceSnapshotResponse represents the response from the industry performance snapshot API
+// IndustryPerformanceSnapshotResponse represents the response from the Industry Performance Snapshot API
 type IndustryPerformanceSnapshotResponse struct {
 	Date          string  `json:"date"`
 	Industry      string  `json:"industry"`
-	Exchange      string  `json:"exchange"`
 	AverageChange float64 `json:"averageChange"`
 }
 
-// IndustryPerformanceSnapshot retrieves detailed performance data by industry
+// IndustryPerformanceSnapshot retrieves industry performance snapshot for a specific date
 func (c *Client) IndustryPerformanceSnapshot(date, exchange, industry string) ([]IndustryPerformanceSnapshotResponse, error) {
 	if date == "" {
-		return nil, fmt.Errorf("date is required")
-	}
-	if exchange == "" {
-		return nil, fmt.Errorf("exchange is required")
-	}
-	if industry == "" {
-		return nil, fmt.Errorf("industry is required")
+		return nil, fmt.Errorf("date parameter is required")
 	}
 
-	url := c.BaseURL + "/industry-performance-snapshot"
-	params := map[string]string{
-		"date":     date,
-		"exchange": exchange,
-		"industry": industry,
+	url := fmt.Sprintf("%s/industries-performance/%s", c.BaseURL, date)
+	params := map[string]string{}
+
+	if exchange != "" {
+		params["exchange"] = exchange
 	}
+
+	if industry != "" {
+		params["industry"] = industry
+	}
+
 	var result []IndustryPerformanceSnapshotResponse
 	if err := c.doRequest(url, params, &result); err != nil {
 		return nil, err
 	}
+
 	return result, nil
 }

@@ -1,17 +1,38 @@
 package go_fmp
 
+import (
+	"fmt"
+	"time"
+)
+
 // EarningsTranscriptListResponse represents the response from the Earnings Transcript List API
 type EarningsTranscriptListResponse struct {
-	Symbol string `json:"symbol"`
-	Date   string `json:"date"`
+	Symbol string    `json:"symbol"`
+	Date   time.Time `json:"date"`
+	Quarter int      `json:"quarter"`
+	Year    int      `json:"year"`
 }
 
-// EarningsTranscriptList retrieves earnings transcripts for all transcripts from a time period
-func (c *Client) EarningsTranscriptList() ([]EarningsTranscriptListResponse, error) {
-	url := c.BaseURL + "/earnings-transcript-list"
+// EarningsTranscriptList retrieves a list of available earnings transcripts
+func (c *Client) EarningsTranscriptList(year, quarter string) ([]EarningsTranscriptListResponse, error) {
+	if year == "" {
+		return nil, fmt.Errorf("year parameter is required")
+	}
+
+	if quarter == "" {
+		return nil, fmt.Errorf("quarter parameter is required")
+	}
+
+	urlParams := map[string]string{
+		"year":    year,
+		"quarter": quarter,
+	}
+
 	var result []EarningsTranscriptListResponse
-	if err := c.doRequest(url, nil, &result); err != nil {
+	err := c.doRequest(c.BaseURL+"/earning_call_transcript", urlParams, &result)
+	if err != nil {
 		return nil, err
 	}
+
 	return result, nil
 }

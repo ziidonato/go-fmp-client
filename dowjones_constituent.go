@@ -2,18 +2,19 @@ package go_fmp
 
 import (
 	"fmt"
+	"time"
 )
 
-// DowJonesConstituentResponse represents the response from the Dow Jones API
+// DowJonesConstituentResponse represents the response from the Dow Jones Constituent API
 type DowJonesConstituentResponse struct {
-	Symbol         string `json:"symbol"`
-	Name           string `json:"name"`
-	Sector         string `json:"sector"`
-	SubSector      string `json:"subSector"`
-	HeadQuarter    string `json:"headQuarter"`
-	DateFirstAdded string `json:"dateFirstAdded"`
-	CIK            string `json:"cik"`
-	Founded        string `json:"founded"`
+	Symbol         string    `json:"symbol"`
+	Name           string    `json:"name"`
+	Sector         string    `json:"sector"`
+	SubSector      string    `json:"subSector"`
+	HeadQuarter    string    `json:"headQuarter"`
+	DateFirstAdded time.Time `json:"dateFirstAdded"`
+	CIK            string    `json:"cik"`
+	Founded        string    `json:"founded"`
 }
 
 // GetDowJonesConstituent retrieves data on the Dow Jones Industrial Average

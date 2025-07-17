@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// SectorPESnapshotResponse represents the response from the sector PE snapshot API
+// SectorPESnapshotResponse represents the response from the Sector PE Snapshot API
 type SectorPESnapshotResponse struct {
 	Date     string  `json:"date"`
 	Sector   string  `json:"sector"`
@@ -12,30 +12,28 @@ type SectorPESnapshotResponse struct {
 	PE       float64 `json:"pe"`
 }
 
-// GetSectorPESnapshot retrieves the price-to-earnings (P/E) ratios for various sectors
+// GetSectorPESnapshot retrieves a snapshot of sector price-to-earnings ratios
 func (c *Client) GetSectorPESnapshot(date, exchange, sector string) ([]SectorPESnapshotResponse, error) {
 	if date == "" {
-		return nil, fmt.Errorf("date is required")
+		return nil, fmt.Errorf("date parameter is required")
 	}
 
-	params := map[string]string{
-		"date": date,
-	}
+	url := fmt.Sprintf("%s/sectors-pe/%s", c.BaseURL, date)
+	params := map[string]string{}
 
 	if exchange != "" {
 		params["exchange"] = exchange
 	}
+
 	if sector != "" {
 		params["sector"] = sector
 	}
 
-	url := c.BaseURL + "/sector-pe-snapshot"
-
 	var result []SectorPESnapshotResponse
 	err := c.doRequest(url, params, &result)
 	if err != nil {
-		return nil, fmt.Errorf("error making request: %w", err)
+		return nil, err
 	}
 
-	return result, err
+	return result, nil
 }

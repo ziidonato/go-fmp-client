@@ -19,12 +19,12 @@ type MarketCapitalizationBatchResponse struct {
 
 // MarketCapitalizationBatch retrieves market capitalization data for multiple companies in a single request
 func (c *Client) MarketCapitalizationBatch(params MarketCapitalizationBatchParams) ([]MarketCapitalizationBatchResponse, error) {
-	if params.Symbols == "" {
-		return nil, fmt.Errorf("symbols parameter is required")
+	if params.Symbol == "" {
+		return nil, fmt.Errorf("symbol parameter is required")
 	}
 
 	urlParams := map[string]string{
-		"symbols": params.Symbols,
+		"symbol": params.Symbol,
 	}
 
 	var result []MarketCapitalizationBatchResponse
