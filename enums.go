@@ -78,3 +78,20 @@ const (
 	CountryDE CountryType = "DE"
 	CountryJP CountryType = "JP"
 )
+
+// CurrencyType represents currency codes
+// Example values: "USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "SEK", "NZD"
+type CurrencyType string
+
+const (
+	CurrencyUSD CurrencyType = "USD"
+	CurrencyEUR CurrencyType = "EUR"
+	CurrencyGBP CurrencyType = "GBP"
+	CurrencyJPY CurrencyType = "JPY"
+	CurrencyAUD CurrencyType = "AUD"
+	CurrencyCAD CurrencyType = "CAD"
+	CurrencyCHF CurrencyType = "CHF"
+	CurrencyCNY CurrencyType = "CNY"
+	CurrencySEK CurrencyType = "SEK"
+	CurrencyNZD CurrencyType = "NZD"
+)
