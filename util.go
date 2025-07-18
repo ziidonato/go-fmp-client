@@ -3,6 +3,7 @@ package fmp_client
 import (
 	"fmt"
 	"reflect"
+	"time"
 )
 
 // StructToMap converts a struct to a map[string]string using field names as keys.
@@ -27,7 +28,14 @@ func StructToMap(params interface{}) map[string]string {
 			}
 			value = value.Elem()
 		}
-		result[key] = fmt.Sprintf("%v", value.Interface())
+		
+		// Handle time.Time specially
+		if value.Type() == reflect.TypeOf(time.Time{}) {
+			timeVal := value.Interface().(time.Time)
+			result[key] = timeVal.Format("2006-01-02")
+		} else {
+			result[key] = fmt.Sprintf("%v", value.Interface())
+		}
 	}
 	return result
 }
