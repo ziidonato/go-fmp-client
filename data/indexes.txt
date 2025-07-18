@@ -1,0 +1,651 @@
+Indexes
+Stock Market Indexes List API
+
+Retrieve a comprehensive list of stock market indexes across global exchanges using the FMP Stock Market Indexes List API. This API provides essential information such as the symbol, name, exchange, and currency for each index, helping analysts and investors keep track of various market benchmarks.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/index-list
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+[
+	{
+		"symbol": "^TTIN",
+		"name": "S&P/TSX Capped Industrials Index",
+		"exchange": "TSX",
+		"currency": "CAD"
+	}
+]
+Index Quote API
+USA Flag
+
+Access real-time stock index quotes with the Stock Index Quote API. Stay updated with the latest price changes, daily highs and lows, volume, and other key metrics for major stock indices around the world.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/quote?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+[
+	{
+		"symbol": "^GSPC",
+		"name": "S&P 500",
+		"price": 6037.88,
+		"changePercentage": 0.7225,
+		"change": 43.3101,
+		"volume": 3054209000,
+		"dayLow": 5990.87,
+		"dayHigh": 6042.48,
+		"yearHigh": 6128.18,
+		"yearLow": 4920.31,
+		"marketCap": null,
+		"priceAvg50": 5992.1245,
+		"priceAvg200": 5634.6694,
+		"exchange": "INDEX",
+		"open": 5998.14,
+		"previousClose": 5994.57,
+		"timestamp": 1738705513
+	}
+]
+Index Short Quote API
+USA Flag
+
+Access concise stock index quotes with the Stock Index Short Quote API. This API provides a snapshot of the current price, change, and volume for stock indexes, making it ideal for users who need a quick overview of market movements.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/quote-short?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+[
+	{
+		"symbol": "^GSPC",
+		"price": 6037.88,
+		"change": 43.3101,
+		"volume": 3054209000
+	}
+]
+All Index Quotes API
+
+The All Index Quotes API provides real-time quotes for a wide range of stock indexes, from major market benchmarks to niche indexes. This API allows users to track market performance across multiple indexes in a single request, giving them a broad view of the financial markets.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/batch-index-quotes
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+short
+
+boolean
+
+true
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+[
+	{
+		"symbol": "^DJBGIE",
+		"price": 4277.52,
+		"change": -15.7,
+		"volume": 0
+	}
+]
+Historical Index Light Chart API
+
+Retrieve end-of-day historical prices for stock indexes using the Historical Price Data API. This API provides essential data such as date, price, and volume, enabling detailed analysis of price movements over time.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-price-eod/light?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+from
+
+date
+
+2025-01-10
+
+to
+
+date
+
+2025-04-10
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+[
+	{
+		"symbol": "^GSPC",
+		"date": "2025-02-04",
+		"price": 6037.89,
+		"volume": 3020009000
+	}
+]
+Historical Index Full Chart API
+
+Access full historical end-of-day prices for stock indexes using the Detailed Historical Price Data API. This API provides comprehensive information, including open, high, low, close prices, volume, and additional metrics for detailed financial analysis.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+from
+
+date
+
+2025-01-10
+
+to
+
+date
+
+2025-04-10
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+[
+	{
+		"symbol": "^GSPC",
+		"date": "2025-02-04",
+		"open": 5998.14,
+		"high": 6042.48,
+		"low": 5990.87,
+		"close": 6037.89,
+		"volume": 3020009000,
+		"change": 39.75,
+		"changePercent": 0.66271,
+		"vwap": 6017.345
+	}
+]
+1-Minute Interval Index Price API
+
+Retrieve 1-minute interval intraday data for stock indexes using the Intraday 1-Minute Price Data API. This API provides granular price information, helping users track short-term price movements and trading volume within each minute.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-chart/1min?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+from
+
+date
+
+2024-01-01
+
+to
+
+date
+
+2024-03-01
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+[
+	{
+		"date": "2025-02-04 15:59:00",
+		"open": 6040.47,
+		"low": 6037.08,
+		"high": 6041.71,
+		"close": 6037.08,
+		"volume": 70033000
+	}
+]
+5-Minute Interval Index Price API
+
+Retrieve 5-minute interval intraday price data for stock indexes using the Intraday 5-Minute Price Data API. This API provides crucial insights into price movements and trading volume within 5-minute windows, ideal for traders who require short-term data.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-chart/5min?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+from
+
+date
+
+2024-01-01
+
+to
+
+date
+
+2024-03-01
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+[
+	{
+		"date": "2025-02-04 15:55:00",
+		"open": 6038.16,
+		"low": 6037.02,
+		"high": 6041.71,
+		"close": 6037.08,
+		"volume": 179921000
+	}
+]
+1-Hour Interval Index Price API
+
+Access 1-hour interval intraday data for stock indexes using the Intraday 1-Hour Price Data API. This API provides detailed price movements and volume within hourly intervals, making it ideal for tracking medium-term market trends during the trading day.
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-chart/1hour?symbol=^GSPC
+
+Parameters
+
+Query Parameter
+
+Type
+
+Example
+
+symbol*
+
+string
+
+^GSPC
+
+from
+
+date
+
+2024-01-01
+
+to
+
+date
+
+2024-03-01
+
+(*) Required
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+[
+	{
+		"date": "2025-02-04 15:30:00",
+		"open": 6030.14,
+		"low": 6030.14,
+		"high": 6041.71,
+		"close": 6037.88,
+		"volume": 930623000
+	}
+]
+S&P 500 Index API
+
+Access detailed data on the S&P 500 index using the S&P 500 Index API. Track the performance and key information of the companies that make up this major stock market index.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/sp500-constituent
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+[
+	{
+		"symbol": "APO",
+		"name": "Apollo Global Management",
+		"sector": "Financial Services",
+		"subSector": "Asset Management - Global",
+		"headQuarter": "New York City, New York",
+		"dateFirstAdded": "2024-12-23",
+		"cik": "0001858681",
+		"founded": "1990"
+	}
+]
+Nasdaq Index API
+
+Access comprehensive data for the Nasdaq index with the Nasdaq Index API. Monitor real-time movements and track the historical performance of companies listed on this prominent stock exchange.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/nasdaq-constituent
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+[
+	{
+		"symbol": "AAPL",
+		"name": "Apple Inc.",
+		"sector": "Technology",
+		"subSector": "Consumer Electronics",
+		"headQuarter": "Cupertino, CA",
+		"dateFirstAdded": null,
+		"cik": "0000320193",
+		"founded": "1976-04-01"
+	}
+]
+Dow Jones API
+
+Access data on the Dow Jones Industrial Average using the Dow Jones API. Track current values, analyze trends, and get detailed information about the companies that make up this important stock index.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/dowjones-constituent
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+[
+	{
+		"symbol": "NVDA",
+		"name": "Nvidia",
+		"sector": "Technology",
+		"subSector": "Semiconductors",
+		"headQuarter": "Santa Clara, CA",
+		"dateFirstAdded": "2024-11-08",
+		"cik": "0001045810",
+		"founded": "1993-04-05"
+	}
+]
+Historical S&P 500 API
+
+Retrieve historical data for the S&P 500 index using the Historical S&P 500 API. Analyze past changes in the index, including additions and removals of companies, to understand trends and performance over time.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-sp500-constituent
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+[
+	{
+		"dateAdded": "December 23, 2024",
+		"addedSecurity": "Workday, Inc.",
+		"removedTicker": "AMTM",
+		"removedSecurity": "Amentum",
+		"date": "2024-12-22",
+		"symbol": "WDAY",
+		"reason": "Market capitalization change."
+	}
+]
+Historical Nasdaq API
+
+Access historical data for the Nasdaq index using the Historical Nasdaq API. Analyze changes in the index composition and view how it has evolved over time, including company additions and removals.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-nasdaq-constituent
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+[
+	{
+		"dateAdded": "December 23, 2024",
+		"addedSecurity": "Axon Enterprise Inc.",
+		"removedTicker": "SMCI",
+		"removedSecurity": "Super Micro Computer Inc",
+		"date": "2024-12-22",
+		"symbol": "AXON",
+		"reason": "Annual Re-ranking"
+	}
+]
+Historical Dow Jones API
+
+Access historical data for the Dow Jones Industrial Average using the Historical Dow Jones API. Analyze changes in the index’s composition and study its performance across different periods.
+ 
+
+Endpoint:
+
+https://financialmodelingprep.com/stable/historical-dowjones-constituent
+Response
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+[
+	{
+		"dateAdded": "November 8, 2024",
+		"addedSecurity": "Nvidia",
+		"removedTicker": "INTC",
+		"removedSecurity": "Intel Corporation",
+		"date": "2024-11-07",
+		"symbol": "NVDA",
+		"reason": "Market capitalization change"
+	}
+]
