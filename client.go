@@ -19,7 +19,7 @@ type Client struct {
 }
 
 // NewClient creates a new Client. If httpClient is nil, http.DefaultClient is used.
-func NewClient(httpClient HTTPClient, apiKey string, baseURL string) (*Client, error) {
+func NewClient(baseURL string, apiKey string, httpClient HTTPClient) (*Client, error) {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
 	}

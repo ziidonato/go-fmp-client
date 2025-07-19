@@ -149,7 +149,7 @@ type InstitutionalHolderResponse struct {
 }
 
 // CIKListResponse represents CIK list entry.
-type CIKListResponse struct {
+type Form13FCIKListResponse struct {
 	// CIK is the Central Index Key.
 	CIK string `json:"cik"`
 	// Name is the institution name.
@@ -225,10 +225,10 @@ func (c *Client) InstitutionalHolderPortfolio(params InstitutionalHolderParams) 
 // Returns institutions that file Form 13F.
 //
 // Endpoint: /institutional-ownership/cik-list
-func (c *Client) Form13FCIKList() ([]CIKListResponse, error) {
+func (c *Client) Form13FCIKList() ([]Form13FCIKListResponse, error) {
 	pathName := "/institutional-ownership/cik-list"
 
-	var result []CIKListResponse
+	var result []Form13FCIKListResponse
 	err := c.doRequest(pathName, nil, &result)
 	return result, err
 }

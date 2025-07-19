@@ -1,7 +1,5 @@
 package fmp_client
 
-import "time"
-
 // MarketPerformanceSnapshotParams represents parameters for snapshot endpoints.
 type MarketPerformanceSnapshotParams struct {
 	// Date is the date for the snapshot (required).

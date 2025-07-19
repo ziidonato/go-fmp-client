@@ -35,7 +35,7 @@ type FinancialStatementSymbolResponse struct {
 }
 
 // CIKListResponse represents a CIK entry.
-type CIKListResponse struct {
+type DirectoryCIKListResponse struct {
 	// CIK is the Central Index Key with leading zeros.
 	CIK string `json:"cik"`
 	// CompanyName is the registered company name.
@@ -142,11 +142,11 @@ func (c *Client) FinancialStatementSymbolList() ([]FinancialStatementSymbolRespo
 // Returns Central Index Keys for SEC-registered entities.
 //
 // Endpoint: /cik-list
-func (c *Client) CIKList(params CIKListParams) ([]CIKListResponse, error) {
+func (c *Client) CIKList(params CIKListParams) ([]DirectoryCIKListResponse, error) {
 	queryParams := StructToMap(params)
 	pathName := "/cik-list"
 
-	var result []CIKListResponse
+	var result []DirectoryCIKListResponse
 	err := c.doRequest(pathName, queryParams, &result)
 	return result, err
 }
