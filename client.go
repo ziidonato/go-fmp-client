@@ -42,13 +42,11 @@ func NewClient(baseURL string, apiKey string, httpClient HTTPClient) (*Client, e
 
 func (c *Client) test() error {
 	// doRequest expects a result interface, but for a test we can use a dummy variable
-	var body map[string]any
-	if err := c.doRequest("https://financialmodelingprep.com/api/v3/quote/AAPL", map[string]string{"apikey": c.apiKey}, &body); err != nil {
+	_, err := c.StockQuoteShort(QuoteParams{
+		Symbol: "AAPL",
+	})
+	if err != nil {
 		return fmt.Errorf("failed to perform test request: %v", err)
-	}
-
-	if body["error"] != nil {
-		return fmt.Errorf("failed to perform test request: %v", body["error"])
 	}
 
 	return nil
